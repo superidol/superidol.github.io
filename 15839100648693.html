@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+    MAC 安装好后的一些配置 - 
+    
+    </title>
+    
+    
+    
+    <link href="atom.xml" rel="alternate" title="" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/style.css">
+    
+</head>
+  <body>
+
+
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                          <a class="button-square" href="index.html">
+<svg class="svg-inline--fa fa-home fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg>
+                            </a>
+                        
+                         
+                        
+                        
+                        
+                        
+                      
+                      <a class="button-square" href="atom.xml" target="_blank" title="RSS">
+                              <svg class="svg-inline--fa fa-rss fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+                      </a>
+
+              
+                       
+                         
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+ 
+<div class="container">
+  <article class="post-container">
+    <header class="post-header">
+        <h1 class="post-title">MAC 安装好后的一些配置</h1>
+        <p class="post-date">
+                <span>Posted <time datetime="2020/03/11" itemprop="datePublished">2020/03/11</time></span>
+            </p>
+    </header>
+
+    <div class="post-content clearfix">
+<h1 id="toc_0">改变vim配色：安装colorscheme</h1>
+
+<blockquote>
+<ol>
+<li>在当前用户目录 ~/ 下的 .vim 目录(如果没有，mkdir ~/.vim进行新建该目录)。在 ~/.vim/ 下新建一个叫 colors 的目录，将配色方案.vim文件便放到该目录下。</li>
+<li>编辑vim的配置文件.vimrc  (vi .vimrc)在其中添加下面2行</li>
+</ol>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">set t_Co=256 
+colorscheme desert
+</code></pre>
+
+<h1 id="toc_1">使用 Solarized 配色方案的方法</h1>
+
+<pre class="line-numbers"><code class="language-text">$ git clone git://github.com/altercation/solarized.git
+</code></pre>
+
+<blockquote>
+<ul>
+<li>Terminal 的话，在 solarized/osx-terminal.app-colors-solarized 下双击 Solarized Dark ansi.terminal 和 Solarized Light ansi.terminal 就会自动导入两种配色方案 Dark 和 Light 到 Terminal.app 里。</li>
+<li>iTerm2 的话，到 solarized/iterm2-colors-solarized 下双击 Solarized Dark.itermcolors 和 Solarized Light.itermcolors 两个文件就可以把配置文件导入到 iTerm 里。</li>
+<li>vim </li>
+</ul>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">    $ cd solarized
+    $ cd vim-colors-solarized/colors
+    $ mkdir -p ~/.vim/colors
+    $ cp solarized.vim ~/.vim/colors/
+    $ vi ~/.vimrc
+    syntax on
+    set background=dark
+    colorscheme solarized
+</code></pre>
+
+<h1 id="toc_2">Mac 访达标题栏显示详细目录</h1>
+
+<pre class="line-numbers"><code class="language-text">defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
+killall Finder
+</code></pre>
+
+<h1 id="toc_3">禁止.DS_Store生成</h1>
+
+<p>打开 “终端”，执行下列命令，重启Mac生效：</p>
+
+<pre class="line-numbers"><code class="language-text">defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+</code></pre>
+
+<h1 id="toc_4">恢复.DS_Store生成</h1>
+
+<pre class="line-numbers"><code class="language-text">defaults delete com.apple.desktopservices DSDontWriteNetworkStores
+</code></pre>
+
+<h1 id="toc_5">删除现有的.DS_Store</h1>
+
+<blockquote>
+<p>对已经生成的文件还需要你手动删除：</p>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">sudo find / -name &quot;.DS_Store&quot; -depth -exec rm {} \;
+</code></pre>
+
+<h1 id="toc_6">Mac Launchpad(启动台）图标大小调整</h1>
+
+<blockquote>
+<p>1 、调整每一列显示图标数量，10表示每一列显示10个，比较不错，可根据个人喜好进行设置。 <br/>
+<code>defaults write com.apple.dock springboard-rows -int 10</code><br/>
+2、调整多少行显示图标数量 <br/>
+<code>defaults write com.apple.dock springboard-rows -int 8</code><br/>
+3、重置Launchpad<br/>
+<code>defaults write com.apple.dock ResetLaunchPad -bool TRUE</code><br/>
+4、重启Dock<br/>
+<code>killall Dock</code><br/>
+恢复默认设置的方法。<br/>
+ 以下是恢复默认大小的命令（在Terminal执行即可）：</p>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">defaults write com.apple.dock springboard-rows Default
+defaults write com.apple.dock springboard-columns Default
+defaults write com.apple.dock ResetLaunchPad -bool TRUE
+killall Dock
+</code></pre>
+
+    </div>
+    <footer class="post-footer clearfix">
+      
+           
+      
+        
+    </footer>
+     <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div><!-- end comments wrap -->
+  </article>
+ </div><!-- end-->
+
+
+
+    <footer class="footer">
+            <div class="container">
+                <div class="site-footer-wrapper">
+                        <a class="button-square" href="index.html">
+<svg class="svg-inline--fa fa-home fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg>
+                            </a>
+                        
+                         
+                        
+                        
+                        
+                        
+                      
+                      <a class="button-square" href="atom.xml" target="_blank" title="RSS">
+                              <svg class="svg-inline--fa fa-rss fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"></path></svg><!-- <i class="fas fa-rss fa-lg"></i> -->
+                      </a>
+
+              
+                       
+                                                
+                </div>
+                <div class="site-menu-wrapper">
+                  &nbsp;<span>|</span>&nbsp;
+                  
+                    <a target="self" class="" href="index.html">Home</a>
+                    &nbsp;<span>|</span>&nbsp;
+                  
+                    <a target="_self" class="" href="archives.html">Archives</a>
+                    &nbsp;<span>|</span>&nbsp;
+                                             
+                </div>
+
+                <p class="footer-copyright">
+                        Copyright &copy; 2019
+                        Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+                        Theme used <a target="_blank" href="https://blog.timac.org">Timac</a>.
+                </p>
+            </div>
+        </footer>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+        
+      
+  
+    
+
+
+    </body>
+</html>
