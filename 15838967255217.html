@@ -1,0 +1,636 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Linux vim 编辑器的神级配置 vimrc - 
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; </span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Linux vim 编辑器的神级配置 vimrc</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2020/03/11</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">使用的配置</h2>
+
+<pre class="line-numbers"><code class="language-linux">https://github.com/amix/vimrc
+</code></pre>
+
+<h2 id="toc_1">安装很简单</h2>
+
+<pre class="line-numbers"><code class="language-linux">git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+</code></pre>
+
+<h2 id="toc_2">ack 插件</h2>
+
+<p>常用命令</p>
+
+<pre class="line-numbers"><code class="language-linux">系统需要安装 ack-grep, ubuntu安装命令：sudo apt-get install ack-grep
+</code></pre>
+
+<ol>
+<li>全局查找文件(ctrlp插件)<br/>
+  <code>ctrl + f</code>  --打开全局文件搜索面板<br/>
+  <code>Esc</code> --退出全局文件搜索面板</li>
+<li>tab(标签)相关<br/>
+  <code>gt</code> --后一个标签<br/>
+  <code>gT</code> --前一个标签<br/>
+  <code>num</code> + gt --跳转至第num个标签<br/>
+  <code>,tl</code> --上一次的标签<br/>
+  <code>:q</code> --关闭标签<br/>
+  <code>:Te</code> --新建标签，并打开当前文件目录<br/>
+  <code>,tn</code> --新建空白标签</li>
+<li>目录树(NERD_tree插件)<br/>
+  <code>,nn</code> --打开目录树<br/>
+  <code>,nn</code> --关闭目录树</li>
+<li>窗口相关<br/>
+  <code>ctrl + w + q</code> --关闭窗口<br/>
+  <code>:q</code> --关闭窗口，窗口只有一个tab的情况<br/>
+  <code>ctrl + w + w</code> --切换窗口<br/>
+  <code>:sp</code> --竖直方向上拆分当前窗口<br/>
+  <code>:vsp</code> --水平方向上拆分当前窗口</li>
+<li>如何打开一个工程<br/>
+  在某个工程的根目录下输入打开vim，则该vim窗口的文件操作默认为整个工程，比如全局搜索文件或字段</li>
+<li>全局搜索字段(ack插件)<br/>
+  <code>,g</code> --打开全局字段搜索面板，默认大小写敏感，-i 不区分大小写，-w 全词匹配<br/>
+  <code>q</code> --退出全局字段搜索面板</li>
+<li>当前文件所在的目录<br/>
+  <code>:E</code> --打开当前目录，一般用于切换当前目录的文件<br/>
+  <code>:Te</code> --新建标签并打开当前目录，一般用于打开当前目录下的其它文件<br/></li>
+<li>查看最近打开的文件列表<br/>
+  <code>,f</code> --打开面板<br/>
+  <code>q</code> --退出面板</li>
+<li>当前文件下搜索<br/>
+  <code>*</code>--按下即可搜索光标所在的单词或当前选中的内容，不区分大小写<br/>
+  <code>gd</code> --光标移动至单词，按下即可搜索该单词，区分大小写<br/>
+  <code>/</code> --输入单词向下搜索<br/>
+  <code>?</code> --输入单词向上搜索，一般用于查log，配合G跳转至文件底部使</li>
+<li>显示行修改标志<br/>
+  <code>,d</code> --显示与不显示逐一切换</li>
+<li>光标停留的位置记录<br/>
+  <code>ctrl + o</code> --上一个时间点光标停留的位置<br/>
+  <code>ctrl + i</code> --下一个时间点光标停留的位置</li>
+<li>文件刷新，即重新载入<br/>
+  <code>:e</code> --重新载入<br/>
+  <code>:e!</code> --放弃当前修改，强制重新载入<br/>
+  <code>:e file_dir</code> --载入 file_dir 路径下的某个文件</li>
+<li>粘贴0号寄存器的内容<br/>
+  <code>ctrl + r + 0</code> --比如y复制选中的内容后粘贴到命令输入框</li>
+<li>折叠命令<br/>
+  <code>za</code> --打开或关闭当前折叠<br/>
+  <code>zM</code> --关闭所有折叠<br/>
+  <code>zR</code> --打开所有折叠</li>
+<li>跳出双引号继续编辑<br/>
+  有些时候输入完字符串需要移动光标至双引号外继续输入<br/>
+  <code>&quot;</code> --在 &quot; 处输入 &quot; ，即可将光标跳转至当前双引号之外</li>
+<li>文件路径<br/>
+  <code>:f</code> --查看当前文件路径</li>
+<li>变量名补全<br/>
+  <code>ctrl + n</code> --自动补全变量名，再次输入匹配下一个</li>
+<li>代码块补全，只需输入部分代码，然后按tab键<br/>
+  lua为例：<br/>
+  <code>if + tab</code> --if代码块<br/>
+  <code>forp + tab</code> --for i,v in pairs() do end 代码块<br/>
+  <code>fori + tab</code> --for i,v in ipairs() do end 代码块<br/>
+  <code>fun + tab</code> --函数模板代码块</li>
+<li>代码检错<br/>
+  <code>:ALEToggle</code> --启动检错</li>
+<li>代码注释<br/>
+  <code>gcc</code> --注释当前行，再次输入则撤销注释<br/>
+  <code>num + gcc</code> --注释num行<br/>
+  <code>gc</code> --注释选中部分</li>
+<li>取消搜索高亮<br/>
+  <code>:nohl</code></li>
+<li>多窗口显示<br/>
+  <code>:sp</code> --水平切分窗口<br/>
+  <code>:vsp</code> --垂直切分窗口<br/>
+## vim 编辑相关</li>
+<li>范围命令
+<code>w</code> --光标所在的位置至单词末尾的部分或一个单词，包括单词后的空格
+<code>iw</code> --光标所在位置的一个单词，不包括单词后的空格
+<code>aw</code> --光标所在位置的一个单词，包括单词后的空格
+<code>b</code> --与 w 相反
+<code>e</code> --end of word，至单词结尾
+<code>$</code> --至当前行结尾
+<code>0</code> --至当前行开头</li>
+<li>操作命令
+<code>d</code>: delete
+<code>dd</code> --删除当前行
+<code>diw</code> --删除光标所在单词
+<code>dw</code> --正向删除一个单词（光标后的部分）
+<code>db</code> --逆向删除一个单词（光标前的部分）
+<code>d$</code> --删除光标所在的位置至本行末尾
+<code>d0</code> --删除光标所在的位置至本行首部
+<code>c</code>: change, 与 d 的区别只在于操作后进入插入状态
+<code>y</code>: yank, 与 d 的区别在于跟范围命令组合后全部为复制操作</li>
+<li>操作命令（少与范围命令组合）
+<code>~</code> --大小写字母转换
+<code>s</code> --删除一个字母，删除后进入插入模式
+<code>x</code> --删除一个字母，删除后处于命令模式
+<code>r</code> --即replace，修改替换一个字母，并且替换过后仍然处于命令模式
+<code>R</code> --修改替换无限多个在字母</li>
+</ol>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15838967255194.html" 
+          title="Previous Post: Docker 必备可视化工具 Portainer">&laquo; Docker 必备可视化工具 Portainer</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15838967255242.html" 
+          title="Next Post: 使用Docker搭建MySQL服务">使用Docker搭建MySQL服务 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1></h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15998025630555.html">高效 PyCharm 使用技巧</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025630642.html">群晖NAS安装配置typecho博客教程</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025630684.html">Linux vim 编辑器的神级配置 vimrc</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025630725.html">正则表达式工具 RegexBuddy 使用指南</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025630768.html">使用Docker搭建MySQL服务</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>
