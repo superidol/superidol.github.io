@@ -1,0 +1,1206 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  <p align="center"> - 
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; </span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1><p align="center"></h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2020/09/11</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <pre class="line-numbers"><code class="language-text">&lt;br/&gt;
+&lt;a href=&quot;https://github.com/ziishaned/learn-regex&quot;&gt;
+    &lt;img src=&quot;https://i.imgur.com/bYwl7Vf.png&quot; alt=&quot;Learn Regex&quot;&gt;
+&lt;/a&gt;
+&lt;br /&gt;&lt;br /&gt;
+&lt;p&gt;
+    &lt;a href=&quot;https://twitter.com/ziishaned&quot;&gt;
+        &lt;img src=&quot;https://img.shields.io/twitter/follow/ziishaned.svg?style=social&quot; /&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://github.com/ziishaned&quot;&gt;
+        &lt;img src=&quot;https://img.shields.io/github/followers/ziishaned.svg?label=Follow%20%40ziishaned&amp;style=social&quot; /&gt;
+    &lt;/a&gt;
+&lt;/p&gt;
+</code></pre>
+</p>
+<h2 id="toc_0">Translations:</h2>
+
+<ul>
+<li><a href="media/15998025629422/README.md">English</a></li>
+<li><a href="media/15998025629422/README-es.md">Español</a></li>
+<li><a href="media/15998025629422/README-fr.md">Français</a></li>
+<li><a href="media/15998025629422/README-pt_BR.md">Português do Brasil</a></li>
+<li><a href="media/15998025629422/README-cn.md">中文版</a></li>
+<li><a href="media/15998025629422/README-ja.md">日本語</a></li>
+<li><a href="media/15998025629422/README-ko.md">한국어</a></li>
+<li><a href="media/15998025629422/README-tr.md">Turkish</a></li>
+<li><a href="media/15998025629422/README-gr.md">Greek</a></li>
+<li><a href="media/15998025629422/README-hu.md">Magyar</a></li>
+<li><a href="media/15998025629422/README-pl.md">Polish</a></li>
+<li><a href="media/15998025629422/README-ru.md">Русский</a></li>
+<li><a href="media/15998025629422/README-vn.md">Tiếng Việt</a></li>
+<li><a href="media/15998025629422/README-fa.md">فارسی</a></li>
+</ul>
+
+<h2 id="toc_1">Что такое Регулярное выражение?</h2>
+
+<blockquote>
+<p>Регулярное выражение - это группа букв или символов, которая используется для поиска определенного шаблона в тексте.</p>
+</blockquote>
+
+<p>Регулярное выражение - это шаблон, сопоставляемый с искомой строкой слева направо.<br/>
+Термин «Регулярное выражение» сложно произносить каждый раз, поэтому, обычно, вы будете сталкиваться с сокращениями &quot;регэкспы&quot; или &quot;регулярки&quot;.<br/>
+Регулярные выражения используются для замен текста внутри строк, валидации форм,<br/>
+извлечений подстрок по определенным шаблонам и множества других вещей.</p>
+
+<p>Представьте, что вы пишете приложение и хотите установить правила, по которым пользователь выбирает свой юзернейм. Мы хотим, чтобы имя пользователя содержало буквы, цифры, подчеркивания и дефисы. Мы также хотим ограничить количество символов в имени пользователя, чтобы оно не выглядело безобразно.<br/>
+Для этого, используем следующее регулярное выражение:</p>
+
+<p><br/><br/><br/>
+<p align="center"><br/>
+  <img src="../img/regexp-ru.png" alt="Regular expression"><br/>
+</p></p>
+
+<p>Регулярное выражения выше может принимать строки <code>john_doe</code>,<code>jo-hn_doe</code> и <code>john12_as</code>.<br/>
+Оно не валидирует <code>Jo</code>, поскольку эта строка содержит заглавные буквы, а также она слишком короткая.</p>
+
+<h2 id="toc_2">Содержание</h2>
+
+<ul>
+<li><a href="#1-%D1%81%D0%BE%D0%B2%D0%BF%D0%B0%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F">Совпадения</a></li>
+<li><a href="#2-%D0%BC%D0%B5%D1%82%D0%B0%D1%81%D0%B8%D0%BC%D0%B2%D0%BE%D0%BB%D1%8B">Метасимволы</a>
+<ul>
+<li><a href="#21-%D1%82%D0%BE%D1%87%D0%BA%D0%B0">Точка</a></li>
+<li><a href="#22-%D0%BD%D0%B0%D0%B1%D0%BE%D1%80-%D1%81%D0%B8%D0%BC%D0%B2%D0%BE%D0%BB%D0%BE%D0%B2">Набор символов</a></li>
+<li><a href="#221-%D0%BE%D1%82%D1%80%D0%B8%D1%86%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0%D0%B1%D0%BE%D1%80%D0%B0-%D1%81%D0%B8%D0%BC%D0%B2%D0%BE%D0%BB%D0%BE%D0%B2">Отрицание набора символов</a></li>
+<li><a href="#23-%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%B5%D0%BD%D0%B8%D1%8F">Повторения</a></li>
+<li><a href="#231-%D0%B7%D0%B2%D1%91%D0%B7%D0%B4%D0%BE%D1%87%D0%BA%D0%B0">Звёздочка</a></li>
+<li><a href="#232-%D0%BF%D0%BB%D1%8E%D1%81">Плюс</a></li>
+<li><a href="#233-%D0%B7%D0%BD%D0%B0%D0%BA-%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D0%B0">Знак вопроса</a></li>
+<li><a href="#24-%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%BD%D1%8B%D0%B5-%D1%81%D0%BA%D0%BE%D0%B1%D0%BA%D0%B8">Фигурные скобки</a></li>
+<li><a href="#25-%D1%81%D0%BA%D0%BE%D0%B1%D0%BE%D1%87%D0%BD%D1%8B%D0%B5-%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D1%8B">Скобочные группы</a></li>
+<li><a href="#26-%D0%B0%D0%BB%D1%8C%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%86%D0%B8%D1%8F">Альтернация</a></li>
+<li><a href="#27-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">Экранирование</a></li>
+<li><a href="#28-%D1%8F%D0%BA%D0%BE%D1%80%D1%8F">Якоря</a></li>
+<li><a href="#281-%D0%BA%D0%B0%D1%80%D0%B5%D1%82%D0%BA%D0%B0">Каретка</a></li>
+<li><a href="#282-%D0%B4%D0%BE%D0%BB%D0%BB%D0%B0%D1%80">Доллар</a></li>
+</ul></li>
+<li><a href="#3-%D0%BD%D0%B0%D0%B1%D0%BE%D1%80%D1%8B-%D1%81%D0%BE%D0%BA%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8-%D0%B4%D0%B8%D0%B0%D0%BF%D0%B0%D0%B7%D0%BE%D0%BD%D1%8B">Наборы сокращений и диапазоны</a></li>
+<li><a href="#4-%D0%BE%D0%BF%D0%B5%D1%80%D0%B5%D0%B6%D0%B0%D1%8E%D1%89%D0%B8%D0%B5-%D0%B8-%D1%80%D0%B5%D1%82%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Опережающие и ретроспективные проверки</a>
+<ul>
+<li><a href="#41-%D0%BF%D0%BE%D0%BB%D0%BE%D0%B6%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B5%D0%B6%D0%B0%D1%8E%D1%89%D0%B5%D0%B5-%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5">Положительное опережающее условие</a></li>
+<li><a href="#42-%D0%BE%D1%82%D1%80%D0%B8%D1%86%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5-%D0%BE%D0%BF%D0%B5%D1%80%D0%B5%D0%B6%D0%B0%D1%8E%D1%89%D0%B5%D0%B5-%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5">Отрицательное опережающее условие</a></li>
+<li><a href="#43-%D0%BF%D0%BE%D0%BB%D0%BE%D0%B6%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5-%D1%80%D0%B5%D1%82%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D0%B5-%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5">Положительное ретроспективное условие</a></li>
+<li><a href="#44-%D0%BE%D1%82%D1%80%D0%B8%D1%86%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5-%D1%80%D0%B5%D1%82%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D0%B5-%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5">Отрицательное ретроспективное условие</a></li>
+</ul></li>
+<li><a href="#5-%D1%84%D0%BB%D0%B0%D0%B3%D0%B8">Флаги</a>
+<ul>
+<li><a href="#51-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA-%D0%B1%D0%B5%D0%B7-%D1%83%D1%87%D0%B5%D1%82%D0%B0-%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0">Поиск без учета регистра</a></li>
+<li><a href="#52-%D0%B3%D0%BB%D0%BE%D0%B1%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA">Глобальный поиск</a></li>
+<li><a href="#53-%D0%BC%D1%83%D0%BB%D1%8C%D1%82%D0%B8%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%BE%D0%B2%D1%8B%D0%B9-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA">Мультистроковый поиск</a></li>
+</ul></li>
+<li><a href="#6-%D0%B6%D0%B0%D0%B4%D0%BD%D1%8B%D0%B5-vs-%D0%BB%D0%B5%D0%BD%D0%B8%D0%B2%D1%8B%D0%B5-%D0%BA%D0%B2%D0%B0%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%82%D0%BE%D1%80%D1%8B">Жадные vs ленивые квантификаторы</a></li>
+</ul>
+
+<h2 id="toc_3">1. Совпадения.</h2>
+
+<p>В сущности, регулярное выражение - это просто набор символов, который мы используем для поиска в тексте.<br/>
+Например, регулярное выражение <code>the</code> состоит из буквы <code>t</code>, за которой следует буква <code>h</code>, за которой следует буква <code>e</code>.</p>
+
+<pre>
+"the" => The fat cat sat on <a href="#learn-regex"><strong>the</strong></a> mat.
+</pre>
+
+<p><a href="https://regex101.com/r/dmRygT/1">Запустить регулярное выражение</a></p>
+
+<p>Регулярное выражение <code>123</code> соответствует строке <code>123</code>. Регулярное выражение сопоставляется с входной строкой, сравнивая<br/>
+каждый символ в регулярном выражении с каждым символом во входной строке по одному символу за другим. Регулярные выражения<br/>
+обычно чувствительны к регистру, поэтому регулярное выражение <code>The</code> не будет соответствовать строке <code>the</code>.</p>
+
+<pre>
+"The" => <a href="#learn-regex"><strong>The</strong></a> fat cat sat on the mat.
+</pre>
+
+<p><a href="https://regex101.com/r/1paXsy/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_4">2. Метасимволы</h2>
+
+<p>Метасимволы это блоки, из которых строятся регулярные выражения. Метасимволы не означают что-то сами по себе,<br/>
+вместо этого они интерпретируются для распознавания специальных групп символов. Некоторые метасимволы имеют<br/>
+особые обозначения и пишутся в квадратных скобках. Существуют следующие метасимволы:</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">Метасимволы</th>
+<th>Описание</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center">.</td>
+<td>Точка соответствует любому отдельному символу, кроме разрыва строки.</td>
+</tr>
+<tr>
+<td style="text-align: center">[ ]</td>
+<td>Класс символов. Находить любые символы заключенные в квадратных скобках.</td>
+</tr>
+<tr>
+<td style="text-align: center">[^ ]</td>
+<td>Отрицание класа символов. Находить любые символы не заключенные в квадратных скобках.</td>
+</tr>
+<tr>
+<td style="text-align: center">*</td>
+<td>Находить 0 или более повторений предыдущего символа.</td>
+</tr>
+<tr>
+<td style="text-align: center">+</td>
+<td>Находить 1 или более повторений предыдущего символа.</td>
+</tr>
+<tr>
+<td style="text-align: center">?</td>
+<td>Сделать предыдущий символ необязательным.</td>
+</tr>
+<tr>
+<td style="text-align: center">{n,m}</td>
+<td>Скобки. Находить по крайней мере &quot;n&quot; но не более чем &quot;m&quot; повторений предыдущего символа.</td>
+</tr>
+<tr>
+<td style="text-align: center">(xyz)</td>
+<td>Группа символов. Находить только символы xyz в указанном порядке.</td>
+</tr>
+<tr>
+<td style="text-align: center">&#124;</td>
+<td>Чередование. Находить либо буквы до, либо буквы после символа.</td>
+</tr>
+<tr>
+<td style="text-align: center">&#92;</td>
+<td>Экранирование. Позволяет находить зарезервированные символы: <code><a href=""> </a> { } . * + ? ^ $ \ &#124;</code></td>
+</tr>
+<tr>
+<td style="text-align: center">^</td>
+<td>Обозначает начало пользовательского ввода.</td>
+</tr>
+<tr>
+<td style="text-align: center">$</td>
+<td>Обозначает конец пользовательского ввода.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_5">2.1 Точка</h2>
+
+<p>Точка <code>.</code> это простейший пример метасимвола. Метасимвол <code>.</code><br/>
+находит любой отдельный символ. Точка не будет находить символы перехода или перевода строки.<br/>
+Например, регулярное выражение <code>.ar</code> обозначает: любой символ, за которым следуют буквы <code>a</code> и <code>r</code>.</p>
+
+<pre>
+".ar" => The <a href="#learn-regex"><strong>car</strong></a> <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
+</pre>
+
+<p><a href="https://regex101.com/r/xc9GkU/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_6">2.2 Набор символов.</h2>
+
+<p>Набор символов также называется классом символов. Квадратные скобки используются<br/>
+для определения набора символов. Дефис используется для указания диапазона символов.<br/>
+Порядок следования символов, заданный в квадратных скобках, не важен. Например,<br/>
+регулярное выражение <code>[Tt]he</code> обозначает заглавную <code>T</code> или строчную <code>t</code>, за которой следуют буквы <code>h</code> и <code>e</code>.</p>
+
+<pre>
+"[Tt]he" => <a href="#learn-regex"><strong>The</strong></a> car parked in <a href="#learn-regex"><strong>the</strong></a> garage.
+</pre>
+
+<p><a href="https://regex101.com/r/2ITLQ4/1">Запустить регулярное выражение</a></p>
+
+<p>Точка внутри набора символов, однако, обозначает непосредственно точку, как символ.<br/>
+Регулярное выражение <code>ar[.]</code> обозначает строчную <code>a</code>, за которой следует <code>r</code>, за которой следует <code>.</code> (символ точки).</p>
+
+<pre>
+"ar[.]" => A garage is a good place to park a c<a href="#learn-regex"><strong>ar.</strong></a>
+</pre>
+
+<p><a href="https://regex101.com/r/wL3xtE/1">Запустить регулярное выражение</a></p>
+
+<h3 id="toc_7">2.2.1 Отрицание набора символов</h3>
+
+<p>Знак вставки <code>^</code> обозначает начало строки, однако, когда вы вписываете его после открытия квадратных скобок, он отрицает набор символов.<br/>
+Например, регулярное выражение <code>[^c]ar</code> обозначает любой символ, кроме <code>c</code>, за которым следуют буквы <code>a</code> и <code>r</code>.</p>
+
+<pre>
+"[^c]ar" => The car <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
+</pre>
+
+<p><a href="https://regex101.com/r/nNNlq3/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_8">2.3 Повторения</h2>
+
+<p>Символы <code>+</code>, <code>*</code> или <code>?</code> используются для обозначения того, как сколько раз появляется какой-либо подшаблон.<br/>
+Данные метасимволы могут вести себя по-разному, в зависимости от ситуации.</p>
+
+<h3 id="toc_9">2.3.1 Звёздочка</h3>
+
+<p>Символ <code>*</code> обозначает ноль или более повторений предыдущего совпадения.<br/>
+Регулярное выражение <code>a*</code> означает ноль или более повторений предыдущего<br/>
+строчного символа <code>a</code>. Если же символ появляется после набора или класса символов,<br/>
+он находит повторения всего набора символов. Например, регулярное выражение <code>[a-z]*</code><br/>
+означает любое количество строчных букв в строке.</p>
+
+<pre>
+"[a-z]*" => T<a href="#learn-regex"><strong>he</strong></a> <a href="#learn-regex"><strong>car</strong></a> <a href="#learn-regex"><strong>parked</strong></a> <a href="#learn-regex"><strong>in</strong></a> <a href="#learn-regex"><strong>the</strong></a> <a href="#learn-regex"><strong>garage</strong></a> #21.
+</pre>
+
+<p><a href="https://regex101.com/r/7m8me5/1">Запустить регулярное выражение</a></p>
+
+<p>Символы можно комбинировать, так, например, символ <code>*</code> может использоваться с метасимволом <code>.</code><br/>
+для поиска одной строки с произвольным содержанием <code>.*</code>. Символ <code>*</code> может использоваться<br/>
+с символом пробела <code>\s</code>, чтобы находить строки с символами пробела. Например, выражение<br/>
+<code>\s*cat\s*</code> означает: ноль или более пробелов, за которыми следует слово <code>cat</code>,<br/>
+за которым следует ноль или более символов пробела.</p>
+
+<pre>
+"\s*cat\s*" => The fat<a href="#learn-regex"><strong> cat </strong></a>sat on the con<a href="#learn-regex"><strong>cat</strong></a>enation.
+</pre>
+
+<p><a href="https://regex101.com/r/gGrwuz/1">Запустить регулярное выражение</a></p>
+
+<h3 id="toc_10">2.3.2 Плюс</h3>
+
+<p>Символ <code>+</code> соответствует одному или более повторению предыдущего символа. Например,<br/>
+регулярное выражение <code>c.+t</code> означает строчную <code>c</code>, за которой следует по крайней мере один символ,<br/>
+следом за которым идёт символ <code>t</code>. Стоит уточнить, что в данном шаблоне, <code>t</code> является последним <code>t</code> в предложении.</p>
+
+<pre>
+"c.+t" => The fat <a href="#learn-regex"><strong>cat sat on the mat</strong></a>.
+</pre>
+
+<p><a href="https://regex101.com/r/Dzf9Aa/1">Запустить регулярное выражение</a></p>
+
+<h3 id="toc_11">2.3.3 Знак вопроса</h3>
+
+<p>В регулярном выражении метасимвол <code>?</code> делает предыдущий символ необязательным.<br/>
+Этот символ соответствует нулю или одному экземпляру предыдущего символа.<br/>
+Например, регулярное выражение <code>[T]?he</code> означает необязательную заглавную букву <code>T</code>, за которой следуют символы <code>h</code> и <code>e</code>.</p>
+
+<pre>
+"[T]he" => <a href="#learn-regex"><strong>The</strong></a> car is parked in the garage.
+</pre>
+
+<p><a href="https://regex101.com/r/cIg9zm/1">Запустить регулярное выражение</a></p>
+
+<pre>
+"[T]?he" => <a href="#learn-regex"><strong>The</strong></a> car is parked in t<a href="#learn-regex"><strong>he</strong></a> garage.
+</pre>
+
+<p><a href="https://regex101.com/r/kPpO2x/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_12">2.4 Фигурные скобки</h2>
+
+<p>В фигурных скобках, которые также называются квантификаторами, указывается,<br/>
+сколько раз символ или группа символов могут повторяться. Например, регулярное выражение<br/>
+<code>[0-9]{2,3}</code> означает совпадение не менее 2 но не более 3 цифр в диапазоне от 0 до 9.</p>
+
+<pre>
+"[0-9]{2,3}" => The number was 9.<a href="#learn-regex"><strong>999</strong></a>7 but we rounded it off to <a href="#learn-regex"><strong>10</strong></a>.0.
+</pre>
+
+<p><a href="https://regex101.com/r/juM86s/1">Запустить регулярное выражение</a></p>
+
+<p>Уберём второй номер (цифру 3), тогда, регулярное выражение <code>[0-9]{2,}</code> будет означать<br/>
+совпадение 2 или более цифр. Если мы также удалим запятую, то регулярное выражение<br/>
+<code>[0-9]{3}</code> будет означать совпадение точно с 3 цифрами.</p>
+
+<pre>
+"[0-9]{2,}" => The number was 9.<a href="#learn-regex"><strong>9997</strong></a> but we rounded it off to <a href="#learn-regex"><strong>10</strong></a>.0.
+</pre>
+
+<p><a href="https://regex101.com/r/Gdy4w5/1">Запустить регулярное выражение</a></p>
+
+<pre>
+"[0-9]{3}" => The number was 9.<a href="#learn-regex"><strong>999</strong></a>7 but we rounded it off to 10.0.
+</pre>
+
+<p><a href="https://regex101.com/r/Sivu30/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_13">2.5 Скобочные группы</h2>
+
+<p>Скобочные группы это группы подшаблонов, которые написаны в круглых скобках<br/>
+<code>(...)</code>. Как мы уже говорили ранее в регулярном выражении, если мы поставим квантификатор<br/>
+после символа, он будет повторять предыдущий символ. Но если мы поставим квантификатор после<br/>
+скобочной группы, он будет искать всю группу. Например, регулярное выражение <code>(ab)*</code> соответствует<br/>
+нулю или более повторений символа &quot;ab&quot;. Мы также можем использовать метасимвол чередования <code>|</code><br/>
+внутри скобочной группы. Например, регулярное выражение <code>(c|g|p)ar</code> означает поиск одной из строчных букв <code>c</code>,<br/>
+<code>g</code> или <code>p</code>, за которыми следуют буквы <code>a</code> и <code>r</code>.</p>
+
+<pre>
+"(c|g|p)ar" => The <a href="#learn-regex"><strong>car</strong></a> is <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
+</pre>
+
+<p><a href="https://regex101.com/r/tUxrBG/1">Запустить регулярное выражение</a></p>
+
+<p>Обратите внимание, что скобочные группы не только находят, но и захватывают символы для использования на родительском языке.<br/>
+Родительским языком может быть python, javascript или практически любой язык, который реализует использование регулярных выражений как параметров функций.</p>
+
+<h3 id="toc_14">2.5.1 Не запоминающие скобочные группы</h3>
+
+<p>Бывает так, что группу определить нужно, а вот запоминать их содержимое в массиве не требуется.<br/>
+Подобный трюк осуществляется при помощи зарезервированной комбинации <code>?:</code><br/>
+в круглых скобках <code>(...)</code>. Например, регулярное выражение <code>(?:c|g|p)ar</code> будет находить такие же шаблоны как и<br/>
+<code>(c|g|p)ar</code>, однако скобочная группа при этом создана не будет.</p>
+
+<pre>
+"(?:c|g|p)ar" => The <a href="#learn-regex"><strong>car</strong></a> is <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
+</pre>
+
+<p><a href="https://regex101.com/r/Rm7Me8/1">Запустить регулярное выражение</a></p>
+
+<p>Не запоминающиеся группы пригодиться, когда они используются в функциях поиска и замены<br/>
+или в сочетании со скобочными группами, например, для предпросмотра при создании скобочной группы или другого вида выходных данных,<br/>
+смотрите также <a href="#4-%D0%BE%D0%BF%D0%B5%D1%80%D0%B5%D0%B6%D0%B0%D1%8E%D1%89%D0%B8%D0%B5-%D0%B8-%D1%80%D0%B5%D1%82%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">4. Опережающие и ретроспективные проверки</a>.</p>
+
+<h2 id="toc_15">2.6 Альтернация</h2>
+
+<p>В регулярных выражениях, вертикальная черта <code>|</code> используется для определения альтернации (чередования).<br/>
+Альтернация по своей сути похожа на оператор ИЛИ между логическими выражениями. Может создаться впечатление, что<br/>
+чередование это то же самое, что и определение набора символов. Однако, большая разница между ними в том, что<br/>
+набор символов работает на уровне конкретных символов, в то время как альтернация работает на уровне выражений.<br/>
+Например, регулярное выражение <code>(T|t)he|car</code> объединяет два шаблона (заглавная <code>T</code> ИЛИ строчная <code>t</code>, с продолжением из <code>h</code> и <code>e</code>) и шаблон<br/>
+(строчная <code>c</code>, затем строчная <code>a</code>, за которой следует строчная <code>r</code>). Таким образом, в поиске будет участвовать любой из данных шаблонов,<br/>
+по аналогии с логической операцией ИЛИ в программировании и алгебре выражений.</p>
+
+<pre>
+"(T|t)he|car" => <a href="#learn-regex"><strong>The</strong></a> <a href="#learn-regex"><strong>car</strong></a> is parked in <a href="#learn-regex"><strong>the</strong></a> garage.
+</pre>
+
+<p><a href="https://regex101.com/r/fBXyX0/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_16">2.7 Экранирование спецсимволов</h2>
+
+<p>Обратный слэш <code>\</code> используется в регулярных выражениях для экранирования следующего символа.<br/>
+Это позволяет формировать шаблоны с поиском зарезервированных символов, таких как <code>{ } [ ] / \ + * . $ ^ | ?</code>.<br/>
+Для использования спецсимвола в шаблоне необходимо указать символ <code>\</code> перед ним.</p>
+
+<p>Как упомянуто выше, символ <code>.</code> является зарезервированным и соответствует любому значению, кроме символа новой строки.<br/>
+Бывают ситуации, когда необходимо найти точку в предложении, для таких случаев применимо экранирование. Рассмотрим выражение<br/>
+<code>(f|c|m)at\.?</code>, что соответствует следующему шаблону: строчный символ <code>f</code>, <code>c</code> или <code>m</code>, за которым следует строчные буквы <code>a</code> и <code>t</code>, с опциональной <code>.</code> точкой в конце.</p>
+
+<pre>
+"(f|c|m)at\.?" => The <a href="#learn-regex"><strong>fat</strong></a> <a href="#learn-regex"><strong>cat</strong></a> sat on the <a href="#learn-regex"><strong>mat.</strong></a>
+</pre>
+
+<p><a href="https://regex101.com/r/DOc5Nu/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_17">2.8 Якоря</h2>
+
+<p>Понятие якорей в регулярных выражениях используется для обозначения проверок, является ли<br/>
+соответствующий символ начальным или конечным символом входной строки. Якоря бывают двух типов:<br/>
+Первый тип - Каретка <code>^</code>, проверяет, является ли соответствующий символ начальным символом в тексте.<br/>
+Второй тип - Доллар <code>$</code>, проверяет, является ли соответствующий символ последним символом входной строки.</p>
+
+<h3 id="toc_18">2.8.1 Каретка</h3>
+
+<p>Символ каретки <code>^</code> используется для проверки, является ли соответствующий символ первым символом входной строки.<br/>
+Если мы применяем следующее регулярное выражение <code>^a</code> (если a является начальным символом) для строки <code>abc</code>,<br/>
+совпадение будет соответствовать букве <code>a</code>. Если же мы используем регулярное выражение <code>^b</code> на той же строке,<br/>
+мы не получим совпадения, поскольку во входящей строке <code>abc</code> &quot;b&quot; не является первым символом. Рассмотрим другое<br/>
+регулярное выражение: <code>^(T|t)he</code>, обозначающее заглавную <code>T</code> или строчную <code>t</code> как первый символ, за которым следуют<br/>
+символы букв <code>h</code> и <code>e</code>. Cоответственно:</p>
+
+<pre>
+"(T|t)he" => <a href="#learn-regex"><strong>The</strong></a> car is parked in <a href="#learn-regex"><strong>the</strong></a> garage.
+</pre>
+
+<p><a href="https://regex101.com/r/5ljjgB/1">Запустить регулярное выражение</a></p>
+
+<pre>
+"^(T|t)he" => <a href="#learn-regex"><strong>The</strong></a> car is parked in the garage.
+</pre>
+
+<p><a href="https://regex101.com/r/jXrKne/1">Запустить регулярное выражение</a></p>
+
+<h3 id="toc_19">2.8.2 Доллар</h3>
+
+<p>Символ доллара <code>$</code> используется для проверки, является ли соответствующий символ<br/>
+последним символом входной строки. Например, регулярное выражение <code>(at\.)$</code> последовательность из<br/>
+строчной <code>a</code>, строчной <code>t</code>, и точки <code>.</code>, ключевой момент в том, что благодаря доллару этот шаблон будет<br/>
+находить совпадения только в том случае, если будет наблюдаться в конце строки. Например:</p>
+
+<pre>
+"(at\.)" => The fat c<a href="#learn-regex"><strong>at.</strong></a> s<a href="#learn-regex"><strong>at.</strong></a> on the m<a href="#learn-regex"><strong>at.</strong></a>
+</pre>
+
+<p><a href="https://regex101.com/r/y4Au4D/1">Запустить регулярное выражение</a></p>
+
+<pre>
+"(at\.)$" => The fat cat. sat. on the m<a href="#learn-regex"><strong>at.</strong></a>
+</pre>
+
+<p><a href="https://regex101.com/r/t0AkOd/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_20">3. Наборы сокращений и диапазоны</h2>
+
+<p>Регулярные выражения предоставляют сокращения для часто используемых наборов символов,<br/>
+которые предлагают удобные сокращения для часто используемых регулярных выражений.<br/>
+Наборы сокращенных символов следующие:</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">Сокращение</th>
+<th>Описание</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center">.</td>
+<td>Любой символ кроме символа новой строки</td>
+</tr>
+<tr>
+<td style="text-align: center">\w</td>
+<td>Поиск буквенно-цифрового диапазона символов: <code>[a-zA-Z0-9_]</code></td>
+</tr>
+<tr>
+<td style="text-align: center">\W</td>
+<td>Поиск не буквенно-цифрового диапазона символов: <code>[^\w]</code></td>
+</tr>
+<tr>
+<td style="text-align: center">\d</td>
+<td>Поиск цифр: <code>[0-9]</code></td>
+</tr>
+<tr>
+<td style="text-align: center">\D</td>
+<td>Поиск всего, что не является цифрой: <code>[^\d]</code></td>
+</tr>
+<tr>
+<td style="text-align: center">\s</td>
+<td>Поиск пробелов и символов начала строки: <code>[\t\n\f\r\p{Z}]</code></td>
+</tr>
+<tr>
+<td style="text-align: center">\S</td>
+<td>Поиск всего кроме пробелов и символов начала строки: <code>[^\s]</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_21">4. Опережающие и ретроспективные проверки</h2>
+
+<p>Опережающие и ретроспективные проверки (в английской литературе lookbehind, lookahead) это особый вид<br/>
+<strong><em>не запоминающих скобочных групп</em></strong> (находящих совпадения, но не добавляющих в массив).<br/>
+Данные проверки используются, мы знаем, что шаблон предшествует или сопровождается другим шаблоном.<br/>
+Например, мы хотим получить получить цену в долларах <code>$</code>, из следующей входной строки<br/>
+<code>$4.44 and $10.88</code>. Для этого используем следующее регулярное выражение <code>(?&lt;=\$)[0-9\.]*</code>, означающее<br/>
+получение всех дробных (с точкой <code>.</code>) цифр, которым предшествует знак доллара <code>$</code>. Существуют<br/>
+следующие виды проверок:</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">Символ</th>
+<th>Описание</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center">?=</td>
+<td>Положительное опережающее условие</td>
+</tr>
+<tr>
+<td style="text-align: center">?!</td>
+<td>Отрицательное опережающее условие</td>
+</tr>
+<tr>
+<td style="text-align: center">?&lt;=</td>
+<td>Положительное ретроспективное условие</td>
+</tr>
+<tr>
+<td style="text-align: center">?&lt;!</td>
+<td>Отрицательное ретроспективное условие</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_22">4.1 Положительное опережающее условие</h3>
+
+<p>Положительное опережающее утверждение (assert) означает, что за первой частью выражения должно следовать<br/>
+опережающее выражение (lookahead expression). (по аналогии с условиями, if (..) then (..)).<br/>
+Возвращенное совпадение содержит только текст, который соответствует первой части выражения.<br/>
+Для определения положительного опережающего условия используются круглые скобки. В этих скобках используется<br/>
+знак вопроса со знаком равенства: <code>(?=...)</code>. Опережающее выражение, записывается в скобках после знака равенства.<br/>
+Рассмотрим пример регулярного выражения: <code>(T|t)he(?=\sfat)</code>, обозначающее опциональное наличие строчной <code>t</code> или заглавной <code>T</code>,<br/>
+следом буквы <code>h</code> и <code>e</code>. В скобках, мы определяем положительное опережающее условие, которое сообщает движку регулярных выражений<br/>
+информацию о том, что после шаблона <code>The</code> или <code>the</code> будет следовать слово <code>fat</code>.</p>
+
+<pre>
+"(T|t)he(?=\sfat)" => <a href="#learn-regex"><strong>The</strong></a> fat cat sat on the mat.
+</pre>
+
+<p><a href="https://regex101.com/r/IDDARt/1">Запустить регулярное выражение</a></p>
+
+<h3 id="toc_23">4.2 Отрицательное опережающее условие</h3>
+
+<p>Отрицательное опережающее условие работает по обратному принципу: используется, когда нам нужно получить<br/>
+все совпадения из входной строки, за которыми НЕ следует определенный шаблон. Отрицательное опережающее условие<br/>
+определяется таким же образом, как и позитивное, с той лишь разницей, что вместо равенства <code>=</code> мы ставим<br/>
+восклицательный знак <code>!</code> (отрицание) например: <code>(?!...)</code>. Рассмотрим выражение <code>(T|t)he(?!\sfat)</code>, в котором мы<br/>
+находим все <code>The</code> или <code>the</code> слова из входной строки, за которыми не следует слово <code>fat</code>.</p>
+
+<pre>
+"(T|t)he(?!\sfat)" => The fat cat sat on <a href="#learn-regex"><strong>the</strong></a> mat.
+</pre>
+
+<p><a href="https://regex101.com/r/V32Npg/1">Запустить регулярное выражение</a></p>
+
+<h3 id="toc_24">4.3 Положительное ретроспективное условие</h3>
+
+<p>Положительное ретроспективное условие используется чтобы найти все совпадения, которым предшествует<br/>
+определенный шаблон. Условие определяется как <code>(?&lt;=...)</code>. Например, выражение <code>(?&lt;=(T|t)he\s)(fat|mat)</code> означает,<br/>
+найти все слова <code>fat</code> или <code>mat</code> из входной строки, которым предшествует слово <code>The</code> или <code>the</code>.</p>
+
+<pre>
+"(?<=(T|t)he\s)(fat|mat)" => The <a href="#learn-regex"><strong>fat</strong></a> cat sat on the <a href="#learn-regex"><strong>mat</strong></a>.
+</pre>
+
+<p><a href="https://regex101.com/r/avH165/1">Запустить регулярное выражение</a></p>
+
+<h3 id="toc_25">4.4 Отрицательное ретроспективное условие</h3>
+
+<p>Отрицательное ретроспективное условие используется чтобы найти все совпадения, которым НЕ предшествует<br/>
+определенный шаблон. Условие определяется как <code>(?&lt;!...)</code>. Например, выражение <code>(?&lt;!(T|t)he\s)(cat)</code> означает<br/>
+найти все слова <code>cat</code> из входной строки, которым не предшествует определенный артикль <code>The</code> или <code>the</code>.</p>
+
+<pre>
+"(?&lt;!(T|t)he\s)(cat)" => The cat sat on <a href="#learn-regex"><strong>cat</strong></a>.
+</pre>
+
+<p><a href="https://regex101.com/r/8Efx5G/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_26">5. Флаги</h2>
+
+<p>Флаги, также называемые модификаторами, изменяют вывод регулярного выражения.<br/>
+Эти флаги могут быть использованы в любом порядке или комбинации, и являются<br/>
+неотъемлемой частью регулярных выражений.</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">Флаг</th>
+<th>Описание</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center">i</td>
+<td>Поиск без учета регистра</td>
+</tr>
+<tr>
+<td style="text-align: center">g</td>
+<td>Глобальный поиск: поиск шаблона во всем входном тексте</td>
+</tr>
+<tr>
+<td style="text-align: center">m</td>
+<td>Мультистроковый поиск: Якоря применяются к каждой строке.</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_27">5.1 Поиск без учета регистра</h3>
+
+<p>Модификатор <code>i</code> используется для поиска без учета регистра. Например, регулярное выражение<br/>
+<code>/The/gi</code> означает заглавную <code>T</code> следом строчные <code>h</code> и <code>e</code>. В конце регулярного выражения флаг <code>i</code>,<br/>
+указывающий движку регулярных выражений игнорировать регистр. Помимо <code>i</code>, для поиска шаблона во<br/>
+всем входном тексте, использован флаг <code>g</code>.</p>
+
+<pre>
+"The" => <a href="#learn-regex"><strong>The</strong></a> fat cat sat on the mat.
+</pre>
+
+<p><a href="https://regex101.com/r/dpQyf9/1">Запустить регулярное выражение</a></p>
+
+<pre>
+"/The/gi" => <a href="#learn-regex"><strong>The</strong></a> fat cat sat on <a href="#learn-regex"><strong>the</strong></a> mat.
+</pre>
+
+<p><a href="https://regex101.com/r/ahfiuh/1">Запустить регулярное выражение</a></p>
+
+<h3 id="toc_28">5.2 Глобальный поиск</h3>
+
+<p>Модификатор <code>g</code> используется для выполнения глобального сопоставления (найти все совпадения, а не останавливаться после первого).<br/>
+Например, регулярное выражение <code>/.(at)/g</code> означает любой символ кроме символа новой строки, следом строчная <code>a</code>, далее строчная <code>t</code>.<br/>
+Из-за использования флага <code>g</code> в конце регулярного выражения, теперь оно найдет все совпадения во входной строке, а не остановится на первом<br/>
+(что является поведением по умолчанию).</p>
+
+<pre>
+"/.(at)/" => The <a href="#learn-regex"><strong>fat</strong></a> cat sat on the mat.
+</pre>
+
+<p><a href="https://regex101.com/r/jnk6gM/1">Запустить регулярное выражение</a></p>
+
+<pre>
+"/.(at)/g" => The <a href="#learn-regex"><strong>fat</strong></a> <a href="#learn-regex"><strong>cat</strong></a> <a href="#learn-regex"><strong>sat</strong></a> on the <a href="#learn-regex"><strong>mat</strong></a>.
+</pre>
+
+<p><a href="https://regex101.com/r/dO1nef/1">Запустить регулярное выражение</a></p>
+
+<h3 id="toc_29">5.3 Мультистроковый поиск</h3>
+
+<p>Модификатор <code>m</code> используется для многострочного поиска. Как мы обсуждали ранее,<br/>
+якоря <code>(^, $)</code> используются для проверки, является ли шаблон началом или концом входной строки.<br/>
+Но если мы хотим, чтобы якоря работали в каждой строке, мы используем флаг <code>m</code>. Например,<br/>
+регулярное выражение <code>/at(.)?$/gm</code> означает строчную <code>a</code>, следом строчная <code>t</code> и любой<br/>
+символ кроме начала новой строки, идущий опционально (не обязательно). Из-за флага <code>m</code> механизм<br/>
+регулярных выражений будет искать данный шаблон в конце каждой строки в тексте.</p>
+
+<pre>
+"/.at(.)?$/" => The fat
+                cat sat
+                on the <a href="#learn-regex"><strong>mat.</strong></a>
+</pre>
+
+<p><a href="https://regex101.com/r/hoGMkP/1">Запустить регулярное выражение</a></p>
+
+<pre>
+"/.at(.)?$/gm" => The <a href="#learn-regex"><strong>fat</strong></a>
+                  cat <a href="#learn-regex"><strong>sat</strong></a>
+                  on the <a href="#learn-regex"><strong>mat.</strong></a>
+</pre>
+
+<p><a href="https://regex101.com/r/E88WE2/1">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_30">6. Жадные vs ленивые квантификаторы</h2>
+
+<p>По умолчанию регулярное выражение выполняет жадное сопоставление, то есть оно будет<br/>
+искать совпадения как можно дольше. Мы можем использовать <code>?</code> для ленивого поиска, который<br/>
+будет стремиться быть как можно более коротким по времени.</p>
+
+<pre>
+"/(.*at)/" => <a href="#learn-regex"><strong>The fat cat sat on the mat</strong></a>. </pre>
+
+<p><a href="https://regex101.com/r/AyAdgJ/1">Запустить регулярное выражение</a></p>
+
+<pre>
+"/(.*?at)/" => <a href="#learn-regex"><strong>The fat</strong></a> cat sat on the mat. </pre>
+
+<p><a href="https://regex101.com/r/AyAdgJ/2">Запустить регулярное выражение</a></p>
+
+<h2 id="toc_31">Содействие</h2>
+
+<ul>
+<li>Вы можете открыть пулл реквест с улучшением</li>
+<li>Обсуждать идеи в issues</li>
+<li>Распространять ссылку на репозиторий</li>
+<li>Получить обратную связь через <a href="https://twitter.com/ziishaned"><img src="https://img.shields.io/twitter/url/https/twitter.com/ziishaned.svg?style=social&amp;label=Follow%20%40ziishaned" alt="Twitter URL"/></a></li>
+</ul>
+
+<h2 id="toc_32">Лицензия</h2>
+
+<p>MIT &copy; <a href="https://twitter.com/ziishaned">Zeeshan Ahmad</a></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15998025629329.html" 
+          title="Previous Post: <p align="center">">&laquo; <p align="center"></a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15998025629523.html" 
+          title="Next Post: <p align="center">"><p align="center"> &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1></h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15998025630555.html">高效 PyCharm 使用技巧</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025630642.html">群晖NAS安装配置typecho博客教程</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025630684.html">Linux vim 编辑器的神级配置 vimrc</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025630725.html">正则表达式工具 RegexBuddy 使用指南</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025630768.html">使用Docker搭建MySQL服务</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>

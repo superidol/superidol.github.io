@@ -198,6 +198,94 @@ defaults write com.apple.dock ResetLaunchPad -bool TRUE
 killall Dock
 </code></pre>
 
+<h1 id="toc_7">MAC 安装好后的一些配置</h1>
+
+<h1 id="toc_8">改变vim配色：安装colorscheme</h1>
+
+<blockquote>
+<ol>
+<li>在当前用户目录 ~/ 下的 .vim 目录(如果没有，mkdir ~/.vim进行新建该目录)。在 ~/.vim/ 下新建一个叫 colors 的目录，将配色方案.vim文件便放到该目录下。</li>
+<li>编辑vim的配置文件.vimrc  (vi .vimrc)在其中添加下面2行</li>
+</ol>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">set t_Co=256 
+colorscheme desert
+</code></pre>
+
+<h1 id="toc_9">使用 Solarized 配色方案的方法</h1>
+
+<pre class="line-numbers"><code class="language-text">$ git clone git://github.com/altercation/solarized.git
+</code></pre>
+
+<blockquote>
+<ul>
+<li>Terminal 的话，在 solarized/osx-terminal.app-colors-solarized 下双击 Solarized Dark ansi.terminal 和 Solarized Light ansi.terminal 就会自动导入两种配色方案 Dark 和 Light 到 Terminal.app 里。</li>
+<li>iTerm2 的话，到 solarized/iterm2-colors-solarized 下双击 Solarized Dark.itermcolors 和 Solarized Light.itermcolors 两个文件就可以把配置文件导入到 iTerm 里。</li>
+<li>vim </li>
+</ul>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">    $ cd solarized
+    $ cd vim-colors-solarized/colors
+    $ mkdir -p ~/.vim/colors
+    $ cp solarized.vim ~/.vim/colors/
+    $ vi ~/.vimrc
+    syntax on
+    set background=dark
+    colorscheme solarized
+</code></pre>
+
+<h1 id="toc_10">Mac 访达标题栏显示详细目录</h1>
+
+<pre class="line-numbers"><code class="language-text">defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
+killall Finder
+</code></pre>
+
+<h1 id="toc_11">禁止.DS_Store生成</h1>
+
+<p>打开 “终端”，执行下列命令，重启Mac生效：</p>
+
+<pre class="line-numbers"><code class="language-text">defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+</code></pre>
+
+<h1 id="toc_12">恢复.DS_Store生成</h1>
+
+<pre class="line-numbers"><code class="language-text">defaults delete com.apple.desktopservices DSDontWriteNetworkStores
+</code></pre>
+
+<h1 id="toc_13">删除现有的.DS_Store</h1>
+
+<blockquote>
+<p>对已经生成的文件还需要你手动删除：</p>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">sudo find / -name &quot;.DS_Store&quot; -depth -exec rm {} \;
+</code></pre>
+
+<h1 id="toc_14">Mac Launchpad(启动台）图标大小调整</h1>
+
+<blockquote>
+<p>1 、调整每一列显示图标数量，10表示每一列显示10个，比较不错，可根据个人喜好进行设置。 <br/>
+<code>defaults write com.apple.dock springboard-rows -int 10</code><br/>
+2、调整多少行显示图标数量 <br/>
+<code>defaults write com.apple.dock springboard-rows -int 8</code><br/>
+3、重置Launchpad<br/>
+<code>defaults write com.apple.dock ResetLaunchPad -bool TRUE</code><br/>
+4、重启Dock<br/>
+<code>killall Dock</code><br/>
+恢复默认设置的方法。<br/>
+ 以下是恢复默认大小的命令（在Terminal执行即可）：</p>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">defaults write com.apple.dock springboard-rows Default
+defaults write com.apple.dock springboard-columns Default
+defaults write com.apple.dock ResetLaunchPad -bool TRUE
+killall Dock
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/jin-zheng-en.jpeg" alt="金正恩"/></p>
+
 
     
 
@@ -282,33 +370,55 @@ killall Dock
 	      
 		      
 			      <li class="post">
-			        <a href="15888113173570.html">無損剪輯的軟件 LosslessCut 使用教程</a>
+			        <a href="15998025630555.html">高效 PyCharm 使用技巧</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15840825572155.html">根据剩余价值理论，工人创造了剩余价值，那么亏损也是工人创造的吗？</a>
+			        <a href="15998025630642.html">群晖NAS安装配置typecho博客教程</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15839100648693.html">MAC 安装好后的一些配置</a>
+			        <a href="15998025630684.html">Linux vim 编辑器的神级配置 vimrc</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15838967255137.html">Python之platform模块</a>
+			        <a href="15998025630725.html">正则表达式工具 RegexBuddy 使用指南</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15838967255194.html">Docker 必备可视化工具 Portainer</a>
+			        <a href="15998025630768.html">使用Docker搭建MySQL服务</a>
 			      </li>
 		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
 		  
 		      
 		  
