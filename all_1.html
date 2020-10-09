@@ -96,485 +96,22 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15998025631113.html">
+                <a class="clearlink" href="15998025628736.html">
                 
-                  <h1>VS Code 代码编辑器入门指南：核心组件与概念</h1>
+                  <h1>Pandas 学习图谱</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">什么是代码编辑器</h2>
+                        	<p>在学习 Pandas 的过程中，整理了一份学习图谱，希望也能够帮助到同样想入门 pandas 的同学。</p>
 
-<p>如果此前对「代码编辑器」没有任何概念，我们可以和文本编辑器（写作工具）进行类比，就是<strong>为了更好更方便进行代码编写开发</strong>的工具。</p>
+<p>Pandas 是基于 Numpy 的一种工具,该工具是为了解决数据分析任务而创建的。Pandas 纳入了大量库和一些标准的数据模型，提供了高效地操作大型数据集所需的工具。pandas 提供了大量快速便捷地处理数据的函数和方法，是使 Python 成为强大而高效的数据分析环境的重要因素之一。</p>
 
-<p>提到代码编辑器，不少「工龄」较长的程序员第一反应都会是 Notepad++，这款代码编辑器发布于 2003 年并更新至今，非常经典。因为使用惯性和轻量的特点它目前依旧很受欢迎。不过在 2020 年的今天，有更多好用的代码编辑器值得向你推荐。目前比较受欢迎的代码编辑器主要有 <a href="https://code.visualstudio.com/">VS Code</a>、<a href="https://atom.io/">Atom</a> 和 <a href="https://www.sublimetext.com/">Sublime text</a> 。它们各有特点也都有不少死忠粉，新手在初期都可以尝试。</p>
+<p>构建和处理两个或更多个维数组是一项繁琐的任务，用户在编写函数时要考虑数据集的方向。 但是使用Pandas数据结构，减少了用户的思考。例如，使用表格数据(DataFrame)，在语义上更有用于考虑索引(行)和列，而不是轴0和轴1。</p>
 
-<p>另外你或许还经常人提起 IDE (Intergreated Development Environment)，和代码编辑器相比 IDE 更关注开箱即用的体验、对代码的智能理解和对大型项目的支持，因此相对「笨重」；代码编辑器则更加轻量，侧重于文件，对于语言和工作流的支持也更自由。</p>
+<p>Pandas 两个重要的数据结构，Seriers 和 DataFrame，多个 Seriers 组成了 DataFrame，就像 ndArray 一样，是我们使用 pandas 操作数据的基本数据结构。我们在掌握了 Pandas 的数据之后，重点关注各种数据分析的方法，以工具的角度来学习 Pandas，将常用的方法整理出来，后面用到时查找即可。</p>
 
-<h2 id="toc_1">为什么选择 VS Code</h2>
-
-<blockquote>
-<p>Visual Studio Code（简称 VS Code）是一个由微软开发，同时支持 Windows 、 Linux 和 macOS 等操作系统且开放源代码的代码编辑器，它支持测试，并内置了 Git 版本控制功能，同时也具有开发环境功能，例如代码补全（类似于 IntelliSense）、代码片段和代码重构等。该编辑器支持用户个性化配置，例如改变主题颜色、键盘快捷方式等各种属性和参数，同时还在编辑器中内置了扩展程序管理的功能。 ——维基百科</p>
-</blockquote>
-
-<p>瑞士计算机科学家 Erich Gamma （《设计模式》作者、 Eclipse 主要开发者之一） 2011 年从 IBM 来到微软后起初负责组建团队开发一款线上开发工具（Manaco），后来他们在这个工具的基础上开发了如今的 VS Code 并于 2015 年发布。VS Code 定位为一个 <strong>高性能轻量级的编辑器</strong>，为了保证主进程的稳定，插件系统运行在主进程之外，所有个性化功能都由插件系统完成，在 IDE 和编辑器之间找到一个比较理想的平衡。</p>
-
-<p>在微软所有开源项目中，VS Code 是目前最受欢迎的一个。经过不同工具之间的比较，我最终选择 VS Code 的原因包括：</p>
-
-<ul>
-<li>完全免费且开源，更新迭代稳定</li>
-<li>跨平台编辑器，满足日常在不同系统中的使用</li>
-<li>占用系统资源比较少，大文件打开速度快</li>
-<li>插件丰富，扩展性极强</li>
-<li>使用人数多且社区活跃，碰到问题和需求容易找到解决方案</li>
-</ul>
-
-<h2 id="toc_2">从 0 到 1 开始使用 VS Code</h2>
-
-<h3 id="toc_3">下载与安装</h3>
-
-<p>VS Code 有两个不同版本：稳定版（Stable）每月更新；预览版（Insiders）每个工作日更新。两个版本可同时安装互不影响，在 <a href="https://code.visualstudio.com/Download">官网</a> 即可选择自己需要的平台和版本，本文使用的版本为稳定版 1.44.1。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182244.png" alt="img"/></p>
-
-<p>客户端安装完成后，如希望通过终端启动 VS Code，可以按下 <code>shift+command+p</code> 调出命令面板，在搜索框内输入<code>shell command</code> 后找到并点击「Shell Command: Install &#39;code&#39; command in PATH」即可。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182245.png" alt="img"/></p>
-
-<p>VS Code 默认是英文界面，这里<strong>并不建议</strong>把默认语言修改为中文，因为在学习大量英文相关教程和说明时使用英文界面或许更容易操作。另外，VS Code 绝大多数插件都没有汉化，使用起来会中英混杂。</p>
-
-<p>如果需要使用中文，依旧可以通过 <code>shift+command+p</code> 调取命令面板，然后在搜索框中输入 <code>display</code> 找到并点击「Configure Display Language」，这时会显示目前可以选择的语言或者安装其它语言。选择「Install additional languages...」后会跳转到相关语言插件，选择中文语言包安装并进行安装。安装完成后再次找到「Configure Display Language」后选择「zh-cn」后重启即可。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182246.png" alt="img"/></p>
-
-<h3 id="toc_4">欢迎界面</h3>
-
-<p>打开 VS Code 后，未修改默认配置的情况下首先会看到「欢迎页面」。如下图，欢迎页面有五部分内容。首次使用不妨先花点时间浏览「学习」部分内容，其中交互式演练场（interactive playground）是新手了解 VS Code 好资料。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182247.png" alt="img"/></p>
-
-<h3 id="toc_5">VS Code 主题与图标</h3>
-
-<p>在个性化设置部分点击「Color theme」可以选择一个你喜欢的主题。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182248.png" alt="img"/></p>
-
-<p>除了主题之外，你还可以为 VS Code 选择一套自己喜欢的文件图标。点击左下角的「设置」图标，选择「file icon theme」。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182249.png" alt="img"/></p>
-
-<p>然后选择「Install additional File icon theme...」会弹出可以安装的 icon 插件列表，例如 Material Icom Theme，点击安装后选择使用即可。</p>
-
-<h2 id="toc_6">核心概念与组件</h2>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182250.png" alt="img"/></p>
-
-<p>上面这张图展示了默认配置情况下 VS Code 的基本界面。</p>
-
-<ol>
-<li>编辑器：在这里码字写代码</li>
-<li>侧边栏：可以类比为 macOS 的扩展坞，姑且称为「组件坞」，这里会展示各种组件和插件图标。</li>
-<li>组件内容：击侧边栏不同的组件后这里会展示相应显示组件内容。</li>
-<li>面板：包括问题显示、输出、调试控制台和终端四个组件。问题面板会显示代码中的警告和问题，输出面板会呈现命令和插件的运行结果，调试控制台用来进行代码调试，终端则可以帮助我们直接在 VS Code 中进行命令行操作。</li>
-<li>状态栏：可以类比为 macOS 的菜单栏 + 通知中心，这里会展示和文档及项目相关的简单信息以及部分插件提供的信息。</li>
-</ol>
-
-<h3 id="toc_7">侧边栏及常用组件</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182251.png" alt="img"/></p>
-
-<p>默认情况下，侧边栏显示的五个组件分别是：资源管理器、跨文件搜索、源代码管理、启动和调试和扩展管理。随着后期安装插件的增多，侧边栏可以显示的组件数量也会越来越多，不过你可以通过右击侧边栏选择隐藏那些用不到的组件还可以拖动组件图标进行排序。</p>
-
-<p>侧边栏显示的默认组件中「资源管理器」和「跨文件搜索」就是字面功能，分别用来浏览管理文件和进行内容查找替换，我们会在下篇中配合具体应用场景进行更详细的介绍。源代码管理和调试分别用于 git 一系列操作和 debug，如果你并非程序员，没有这方面的需求也可以选择将其隐藏。</p>
-
-<h3 id="toc_8">扩展管理及插件</h3>
-
-<p>这一部分需要详细介绍「扩展管理」组件和「插件」这个概念。</p>
-
-<p>如文章开头所言，VS Code 中为了保证主进程的稳定所有个性化功能的实现都将通过插件来完成，在下文的应用场景部分我们也会用到大量插件。我们可以把插件理解为 macOS 中的应用，而扩展管理则是 VS Code 的应用商店。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182252.png" alt="img"/></p>
-
-<p>如上图，在组件显示部分可以看到已经安装的插件和推荐插件，所有你想找的东西都可以尝试在搜索框进行搜索。点击感兴趣的插件后会显示插件详情，其中包括详细介绍、作者和更新日志等内容。</p>
-
-<p>需要说明的是，由于 VS Code 的扩展插件数量实在过于庞大，在浏览插件的时候系统已提供了一些过滤操作，点击 <code>···</code> 可以选择只查看安装的插件或者流行的插件等等。</p>
-
-<p>更方便的是你还可以直接在插件搜索框中输入 <code>@</code> 来进行快速过滤。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182253.png" alt="img"/></p>
-
-<p>为了更方便的找到需要的插件，VS Code 支持按照类别进行查找，目前支持的类别如下图所示，包括语言支持、代码片段和主题等。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182254.png" alt="img"/></p>
-
-<p>目前在官方的插件商店中，我们可以看到共有 12 类 20000 余款插件。如果你想开发自己的插件，可以进一步参考 <a href="https://code.visualstudio.com/api">官方插件 API</a> 。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182255.png" alt="img"/></p>
-
-<h3 id="toc_9">命令面板</h3>
-
-<p>VS Code 作为一个代码编辑器，它本身有两个比较极客的设计思想。一个是基于文本（命令）的交互界面，另一个是基于文本的系统设置。基于文本的交互界面就是这里提到的命令面板，系统设置将会稍后介绍。</p>
-
-<p>命令面板的存在提供了一种全新的使用逻辑，熟练使用后可以极大提高效率，因此对命令面板有基本了解是上手 VS Code 的关键。其实在上文安装命令行启动以及设置中文支持时我们都用过它，<code>shift+command+p</code> 就是调用命令面板的一种基本方式。</p>
-
-<p>命令面板的高效在于其<strong>可以通过输入框中的第一个字符</strong>来触发不同功能。</p>
-
-<p>如下图所示，当你按下 <code>shift+command+p</code> 时，命令面板的输入框会自动出现一个 <code>&gt;</code> 它意味着此时命令面板认为你想要搜索相关命令并执行。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182256.png" alt="img"/></p>
-
-<p>当删除 <code>&gt;</code> 后会看到命令面板切换到了「访问最近文件」状态。如果你想在调用命令面板时直接访问最近文件，快捷键是 <code>command+p</code>。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182257.png" alt="img"/></p>
-
-<p>如果此时输入 <code>?</code> 会触发命令面板的「帮助」功能，我们可以看到支持哪些操作。下图中显示的切换文件、<code>&gt;</code>执行命令、<code>@</code>符号跳转等我们在后续的应用场景中都会提及。其他单词缩写也代表了对应的操作，例如<code>edt</code>接空格可以管理打开的编辑器，<code>term</code>接空格可以打开或管理终端。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182258.png" alt="img"/></p>
-
-<h3 id="toc_10">修改设置</h3>
-
-<p>在下篇介绍中，我们会涉及到更改默认设置的内容，因此有必要了解 VS Code 更改设置的方法。</p>
-
-<p>VS Code 目前已经有了比较完善的图形化设置界面，只需要使用 <code>command+,</code> 就可以调用。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182259.png" alt="img"/></p>
-
-<p>如上图所示，设置面板已经列出了用户常用配置内容，你可以寻找自己想要改变的东西，但是这里更加推荐直接在搜索框里搜索。此外，VS Code 的配置分为用户（User）和工作区（workspaces）两个层级，其中用户配置会对全局生效，工作区配置只会对当前所在的项目（目录）生效且优先级更高。</p>
-
-<p>除了图形化界面以外，VS Code 的所有配置其实都写在 json 格式的一个文本文件中。你可以非常方便的调出该文件进行设置，只需要在命令面板中输入<code>open sett</code> 然后选择 JSON 即可。如果是针对工作区的设置，json 文件将会保存在工作区<code>.vscode</code>目录下。</p>
-
-<p>在 json 文件中，你可以直接编写设置，也可以点击行号前的「笔形」图标查看可以更改的内容。之所以有必要了解如何通过配置文件更改设置是因为部分插件提供的复杂设置只能通过修改 json 文件完成。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182300.png" alt="img"/></p>
-
-<h3 id="toc_11">工作区</h3>
-
-<p>工作区（workspace）是另一个需要了解的核心概念，它对应在 VS Code 中如何进行文件管理。</p>
-
-<p>上文我们提到相比于 IDE 着重于项目管理，代码编辑器更加侧重于文件本身，VS Code 所有操作就是基于当前目录、子目录和其中的文件进行的。在下篇内容中我们会讲到很多操作和插件都会基于所在目录生成相关的配置文件，而这些文件通常都会被保存到所在目录的<code>.vscode</code>文件夹中。<code>.vscode</code> 文件夹中的各种配置决定了不同目录被打开时 VS Code 会启动哪些插件和配置。</p>
-
-<p>随着项目逐渐发展，单一文件夹往往无法满足我们的开发需求，VS Code 通过工作区这个概念解决了同时操作多个文件夹的问题。简而言之，当你使用 VS Code 打开一个文件夹后可以在命令面板中搜索运行 <code>add folder to workspace</code>，然后选择想要打开的其它文件夹，此时就会显示一个尚未保存的工作区。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182301.png" alt="img"/></p>
-
-<p>当所有文件夹添加完成后在命令面板执行 <code>save workspace as</code> 选择我们的工作区名字和要保存的位置，就可以对该工作区进行保存。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182302.png" alt="img"/></p>
-
-<p>这时我们会看到一个名字后缀为<code>code-workspace</code>的文件，其本质依旧是一个 json 格式的配置文件。其中包括了文件夹的相对路径以及针对工作区的其它设置。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182303.png" alt="img"/></p>
-
-<p>此外，记住两个目录切换的快捷键也会大大提高效率，<code>ctrl+r</code> 可以快速查看并切换最近打开的文件夹，<code>ctrl+w</code> 则可以快速在所有打开的 VS Code 窗口中进行切换。</p>
-
-<h3 id="toc_12">语言支持</h3>
-
-<p>作为一个代码编辑器，VS Code 提供了统一的 <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> 和 <a href="https://code.visualstudio.com/api/extension-guides/debugger-extension">Code Debugging Protocol API</a>，所有语言支持都能够借助这两个 API 在 VS Code 上得到类似 IDE 的开发和调试体验。</p>
-
-<p>程序员可能最关心的内容就是对编程语言的支持，但初学者最不需要担心的其实也是这部分内容。到目前为止常用的主流编程语言在 VS Code 中都得到了很不错的支持，你需要的往往只是安装对应语言插件和进行一点基本配置。这些语言包括基础的 Markdown 和 JSON，以 HTML、CSS 和 JavaScript 为代表的多种前端语言和以 Python、Java、Go、C#、PHP 等为代表的大量后端语言。对于一些在程序员群体中相对使用人数较少的编程语言，例如 R 和 Julia 等也都有插件提供支持。下图为官网展示的几个流行语言插件。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182304.png" alt="img"/></p>
-
-<p>如果想查看自己使用的编程语言是否支持，可以在 <a href="https://marketplace.visualstudio.com/">插件商店</a> 中查找。此外，当你用 VS Code 打开一个文件时，系统会根据文件名后缀自动提示你安装与之相关的语言插件，非常方面。</p>
-
-<p>这一部分我们也会在下篇中结合具体的应用场景进行介绍。</p>
-
-<h3 id="toc_13">常用快捷键</h3>
-
-<p>提倡使用使用快捷键，主要目的是提高效率尽量让双手不离开键盘。快捷键的使用开始看似是一件更浪费时间的事情，但是随着肌肉记忆和熟练度增加效率将会大大提高。</p>
-
-<p>如果你是从其它编辑器切换到 VS Code 完全可以移植之前熟悉的快捷键配置，比如 Vim, Atom 或者 sublime。如果是一个新手，下图是我自己日常用到的 VS Code 高频快捷键，供参考。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182305.png" alt="img"/></p>
-
-<p>如果需要查看所有快捷键，可以通过 ctrl+K ctrl+s 进入快捷键设置界面或者直接查看官方文档。</p>
-
-<ul>
-<li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf">windows 快捷键</a></li>
-<li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf">macOS 快捷键</a></li>
-</ul>
-
-<p>以上就是 VS Code 编辑器入门指南上篇的内容，介绍了什么是代码编辑器、为什么选择 VS Code 、从 0 到 1 开始使用 VS Code 以及上手 VS Code 需要了解的核心概念与组件。有了这些知识储备，在下篇中将会介绍 5 个 VS Code 实际应用场景，进而更好的了解 VS Code 的特性和插件。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025631155.html">
-                
-                  <h1>Python之platform模块</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>该模块用来访问平台相关属性。常见属性和方法</p>
-
-<p><strong>平台架构</strong></p>
-
-<pre class="line-numbers"><code class="language-text">platform.machine()
-</code></pre>
-
-<p>返回平台架构。若无法确定，则返回空字符串。</p>
-
-<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.machine()
-&#39;AMD64&#39;
-&gt;&gt;&gt; platform.machine()
-&#39;x86_64&#39;
-</code></pre>
-
-<p><strong>网络名称（主机名）</strong></p>
-
-<pre class="line-numbers"><code class="language-text">platform.node()
-</code></pre>
-
-<p>返回计算机的网络名称(可能未被完全限定！)。如果无法确定该值,则返回空字符串。</p>
-
-<pre class="line-numbers"><code class="language-text">#windows
-&gt;&gt;&gt; platform.node()
-&#39;office&#39;
-
-#linux
-&gt;&gt;&gt; platform.node()
-&#39;abcxx&#39;
-</code></pre>
-
-<p><strong>系统版本</strong></p>
-
-<pre class="line-numbers"><code class="language-text">platform.platform(aliased = 0,terse = 0)
-</code></pre>
-
-<p>如果aliased为True,则该函数将使用不同平台的别名来报告与其常用名称不同的系统名称,例如SunOS将被报告为Solaris。 system_alias()函数用于实现。<br/>
-将terse设置为True会导致该功能仅返回识别平台所需的绝对最小信息。</p>
-
-<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.platform()
-&#39;Windows-8.1-6.3.9600-SP0&#39;
-
-&gt;&gt;&gt; platform.platform(aliased=True)
-&#39;Windows-8.1-6.3.9600-SP0&#39;
-
-&gt;&gt;&gt; platform.platform(aliased=True,terse=True)
-&#39;Windows-8.1&#39;
-
-&gt;&gt;&gt; platform.platform(aliased=True,terse=False)
-&#39;Windows-8.1-6.3.9600-SP0&#39;
-
-#linux
-&gt;&gt;&gt; platform.platform()
-&#39;Linux-2.6.32-642.13.1.el6.x86_64-x86_64-with-centos-6.8-Final&#39;
-</code></pre>
-
-<p><strong>处理器名称</strong></p>
-
-<pre class="line-numbers"><code class="language-text">platform.processor()
-</code></pre>
-
-<p>返回处理器名称。</p>
-
-<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.processor()
-&#39;Intel64 Family 6 Model 60 Stepping 3, GenuineIntel&#39;` 
-
-#linux
-&gt;&gt;&gt; platform.processor()
-&#39;x86_64&#39;
-</code></pre>
-
-<p><strong>系统名称</strong></p>
-
-<pre class="line-numbers"><code class="language-text">platform.system()
-</code></pre>
-
-<p>返回系统/操作系统名称,例如“Linux”,“Windows”或“Java”。如果无法确定该值,则返回空字符串。</p>
-
-<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.system()
-&#39;Windows&#39;
-
-#linux
-&gt;&gt;&gt; platform.system()
-&#39;Linux&#39;
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025631194.html">
-                
-                  <h1>**Pycharm的调试功能**</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0"><strong>前言</strong></h2>
-
-<p>​   <strong>Debug调试，是一项学习编程人员的重要技能。只有当你学会 debug 了以后，才可以正确的知道程序的走向流程是如何的，今天就来给大家介绍一下 pycharm 中的 debug 功能！</strong></p>
-
-<h2 id="toc_1"><strong>debug的前世</strong></h2>
-
-<p>​   在正式讲解之前，先来了解下 debug 这个词的由来，就像我们初学Python 时，先要了解下它历史的由来。</p>
-
-<blockquote>
-<p>​ 1937年，美国青年霍华德·艾肯找到IBM公司为其投资200万美元研制计算机，第一台成品艾肯把它取名为：马克1号（mark1），又叫“自动序列受控计算机”，从这时起IBM公司由生产制表机，肉铺磅秤，咖啡研磨机等乱七八糟玩意儿行业，正式跨进“计算机”领地。为马克1号编制程序的是哈佛的一位女数学家葛丽斯·莫雷·霍波，有一天，她在调试程序时出现故障，拆开继电器后，发现有只飞蛾被夹扁在触点中间，从而“卡”住了机器的运行。于是，霍波诙谐的把程序故障统称为“臭虫（BUG）”，把排除程序故障叫DEBUG，而这奇怪的“称呼”，后来成为计算机领域的专业行话。从而debug意为排除程序故障的意思。<br/>
---百度百科</p>
-</blockquote>
-
-<p>​   看了上面的小故事，debug 一词的由来，是由 bug 词得来的，bug 是臭虫的意思，debug 就是解决臭虫。</p>
-
-<p>​   在如今的互联网时代，多少你肯定听说过 bug 这个词，比如什么什么软件又出 bug 了！说的就是软件在使用的过程中，程序出现了一些错误。故称之为 bug。</p>
-
-<p>​   <strong>而 debug 则是通过工具来对代码进行调试，一步步找出程序中出现 bug 的位置，也就是程序中具体错误代码的位置。</strong>就像故事中所说，debug过程就是在解决虫子一样。。</p>
-
-<h2 id="toc_2"><strong>pycharm 中的 debug 模式</strong></h2>
-
-<p>​   来步入今天的正题。首先，还是用示例说话，我们书写一段简短的代码，来帮我们完成今天要讲的内容。</p>
-
-<pre class="line-numbers"><code class="language-python">def sum_demo(x, y):
-    for _ in range(2):
-    x += 1
-    y += 1
-    result = x + y
-
-if __name__ == &#39;__main__&#39;:
-    result = sum_demo(1, 1)
-    print(result)
-</code></pre>
-
-<p>​   肉眼识别下，猜猜结果是多少呢？初学者可能没见过 for 循环中的下划线，在 Python 中是占位符的意思，因为单纯的循环两次而已，并不用到它的循环结果。最终 result 会输出 6 。</p>
-
-<p>在 pycharm 中，如何开启 debug 调试，一共有三种进入的方法，如下（下图均可点开放大观看）：</p>
-
-<p>​   方法一：</p>
-
-<p><img src="Pycharm%E7%9A%84%E8%B0%83%E8%AF%95%E5%8A%9F%E8%83%BD.assets384a2c7fcbba4fa192559fe11f9ffa91.jpg" alt="img"/></p>
-
-<p>​   方法二：</p>
-
-<p><img src="Pycharm%E7%9A%84%E8%B0%83%E8%AF%95%E5%8A%9F%E8%83%BD.assetsbe9f690ed0144dd394a3b901a574a6de.jpg" alt="img"/></p>
-
-<p>​   方法三：</p>
-
-<p><img src="Pycharm%E7%9A%84%E8%B0%83%E8%AF%95%E5%8A%9F%E8%83%BD.assets5362d3b132944103b3ce4ee9d9a8e898.jpg" alt="img"/></p>
-
-<p>​   有一种方法，就是 pycharm 导航栏处，有个run，点开以后即可看到 debug ，这里就不截图演示了。</p>
-
-<p>​   单纯的进入 debug 模式，你会发现，与正常的 run 去运行程序没有差异。差异就是 pycharm 的控制台部分，从 run 跑到了 debug 显示。</p>
-
-<p><img src="media/15998025631194/f57c00a5578e438b99186977063ef45c.jpg" alt="img"/></p>
-
-<p>​   接下来要讲的，才是 debug 中的重中之重，即断点调试！</p>
-
-<h2 id="toc_3"><strong>debug 的断点调试</strong></h2>
-
-<p>​   断点调试，英文 breakpoint。用大白话来解释下，断点调试其实就是在程序自动运行的过程中，你在代码某一处打上了断点，当程序跑到你设置的断点位置处，则会中断下来，此时你可以看到之前运行过的所有程序变量。来继续刚才的演示，pycharm 中如何设置断点。点击前：</p>
-
-<p><img src="media/15998025631194/2b69c23f3d5540b3b2aad1019c92eb7b.jpg" alt="img"/></p>
-
-<p>​   点击后，每行代码都设置上断点：</p>
-
-<p><img src="media/15998025631194/2eeda84be72d4050afc1b53b8b4019f5.jpg" alt="img"/></p>
-
-<p>​   设置完断点后，开启 debug 调试模式运行下，看到结果：</p>
-
-<p><img src="media/15998025631194/eb7efb81a4f74431813e45c35cabfc2d.jpg" alt="img"/></p>
-
-<p>​   看到了这么多新摆设，是不是有点怕了！不怕，咱们先来从控制台每个按钮讲起：</p>
-
-<p><img src="media/15998025631194/89109f6c373e4f1f8207489bd6ba1d8c.jpg" alt="img"/></p>
-
-<p>​   如果要是忘记中文意思的话，没有关系，鼠标指到按钮处，悬浮一会儿，会有英文提示的。继续再来说横排按钮：</p>
-
-<p><img src="media/15998025631194/643e7919e4404d378ad981b91a478a60.jpg" alt="img"/></p>
-
-<p>​   其中，横排最重要，经常用到的按钮，来解释一下，自己鼠标悬浮去看英文即可：</p>
-
-<p>​   <code>step over（F8快捷键）</code>：在单步执行时，在函数内遇到子函数时不会进入子函数内单步执行，而是将子函数整个执行完再停止，也就是把子函数整个作为一步。在不存在子函数的情况下是和step into效果一样的。简单的说就是，<strong>程序代码越过子函数，但子函数会执行，且不进入。</strong></p>
-
-<p>​   <code>step into（F7快捷键）</code>：在单步执行时，遇到子函数就进入并且继续单步执行，有的会跳到源代码里面去执行。</p>
-
-<p>​   <code>step into my code（Alt+Shift+F7快捷键）</code>：在单步执行时，遇到子函数就进入并且继续单步执行，不会进入到源码中。</p>
-
-<p>​   <code>step out（Shift+F8快捷键）</code>：假如进入了一个函数体中，你看了两行代码，不想看了，跳出当前函数体内，返回到调用此函数的地方，即使用此功能即可。</p>
-
-<p>​   <code>Resume program(F9快捷键)</code>：继续恢复程序，直接运行到下一断点处。以上四个功能，就是最常用的功能，一般操作步骤就是，<strong>设置好断点，debug运行，然后 F8 单步调试，遇到想进入的函数 F7 进去，想出来在 shift + F8，跳过不想看的地方，直接设置下一个断点，然后 F9 过去。</strong></p>
-
-<h2 id="toc_4"><strong>示例演示</strong></h2>
-
-<p>​   上面的基础概念明白了以后，直接用图片示例演示下：</p>
-
-<p><strong>1.设置初步断点</strong></p>
-
-<p><img src="media/15998025631194/48887ceff1ee4320a9cfcbc29a687725.jpg" alt="img"/></p>
-
-<p><strong>2.F7 进入函数</strong></p>
-
-<p><img src="media/15998025631194/047e27bba8064e088a8e35664b542ffb.jpg" alt="img"/></p>
-
-<p><strong>3.F8 单步调试，往下执行代码</strong></p>
-
-<p><img src="media/15998025631194/cfd7dba081484ab5a4cfdfde6667c06a.jpg" alt="img"/></p>
-
-<p>继续 F8 单步调试，往下执行代码：</p>
-
-<p><img src="media/15998025631194/836459703944478982352b097cf37f40.jpg" alt="img"/></p>
-
-<p>继续 F8 单步调试：</p>
-
-<p><img src="media/15998025631194/8c19393661834869bb354569522e1e5f.jpg" alt="img"/></p>
-
-<p>继续 F8 单步调试：</p>
-
-<p><img src="media/15998025631194/973b3367e75e42fe83a85e790b691cd8.jpg" alt="img"/></p>
-
-<p><img src="media/15998025631194/2b5e2461a0d14e33b8345c2b85831c6b.jpg" alt="img"/></p>
-
-<p><strong>4.看够了循环，想直接看最终 result 加完的结果，结果处打断点，直接 F9</strong></p>
-
-<p><img src="media/15998025631194/801f24e8285d4452b9e15100a166aa33.jpg" alt="img"/></p>
-
-<p>​   以上就是断点调试的全过程。看完之后，理解了吗~是不是顿时明白了断点调试的重要性，使用断点可以快速帮助我们理解程序中的各处逻辑！</p>
-
-<h2 id="toc_5"><strong>结语</strong></h2>
-
-<p>​   <strong>看到这里，基本的调试，相信你认真看完的话，已经可以上手使用了！但是要拓展的点还有很多，比如 pycharm 为什么在工程性的程序中颇受欢迎，因为它实在是太强大了。。。</strong></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193021.png" alt="img"/></p>
 
                         
                       </div>
@@ -735,305 +272,144 @@ if __name__ == &#39;__main__&#39;:
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15998025631366.html">
+                <a class="clearlink" href="15998025631194.html">
                 
-                  <h1>MWeb + Github Pages 搭建个人博客/静态网站</h1>
+                  <h1>Pycharm的调试功能</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">1、打开GitHub Pages</h2>
+                        	<h2 id="toc_0"><strong>前言</strong></h2>
 
-<p>链接<a href="https://pages.github.com/">https://pages.github.com/</a> ，可以直接按照上面的操作指引来操作</p>
+<p>​   <strong>Debug调试，是一项学习编程人员的重要技能。只有当你学会 debug 了以后，才可以正确的知道程序的走向流程是如何的，今天就来给大家介绍一下 pycharm 中的 debug 功能！</strong></p>
 
-<p>(1)创建 github repository</p>
+<h2 id="toc_1"><strong>debug的前世</strong></h2>
 
-<p>官网说明如下图，需要先注册登录GitHub，然后创建repository，命名方式为<a href="http://username.github.io/">http://username.github.io</a>，注意用户名(前后两个输入框)保持一致。</p>
-
-<p><img src="media/15998025631366/v2-2a7bdd7a71db76912f5c70db4b8e042e_720w.jpg" alt="img"/></p>
-
-<p>（2）git client</p>
-
-<p>我使用了桌面客户端（下载链接 <a href="https://desktop.github.com/">https://desktop.github.com</a> ）</p>
-
-<p><img src="media/15998025631366/v2-9029512a20bea6a74ff6e661b1ed554c_720w.jpg" alt="img"/></p>
-
-<p>（3）下载 GitHub desktop 并登录，选择你创建的repository，并点击clone按钮。然后就可以看到本地的克隆文件的路径。</p>
-
-<p><img src="media/15998025631366/v2-416a3d6414b387d21ea3dcc584960298_720w.jpg" alt="img"/></p>
-
-<p><img src="media/15998025631366/v2-02f99763a4d07e5120d6b16e0943756b_720w.jpg" alt="img"/></p>
-
-<h2 id="toc_1">2、下面先转到MWeb这里，下载并使用MWeb创建静态网页</h2>
-
-<p>MWeb是一个简单易用的markdown工具，还可以生成静态网站，不过要付费。</p>
-
-<p>（1）首先左下角新增静态网站分类</p>
-
-<p><img src="media/15998025631366/v2-f0d346f5cce89cfc883f55608ce7d9e5_720w.jpg" alt="img"/></p>
-
-<p>（2）对这个站点的名称、模版等进行设置</p>
-
-<p><img src="media/15998025631366/v2-f802de2a62db871c817d2e8206ff095e_720w.jpg" alt="img"/></p>
-
-<p>（3）在里面写一篇文章，然后选择生成网站</p>
-
-<p><img src="media/15998025631366/v2-47cbf01ada99ca1f078774154bef5dc5_720w.jpg" alt="img"/></p>
-
-<p>(4)生成网站后，还是在这个下拉菜单中选择“在finder中显示网站生成位置”，就会定位到本地文稿所在位置。</p>
-
-<p><img src="media/15998025631366/v2-186318f6b291d3874d16b8da45b575a1_720w.jpg" alt="img"/></p>
-
-<p>(5)将这里的所有文件复制到 github在本地的克隆文件中</p>
-
-<h2 id="toc_2">3、最后一步，文件上传与同步</h2>
-
-<p>打开GitHub desktop，左边栏中就是我们要同步的新增文件。点击左下的commit，然后点击右上角的push按钮。这样就OK了，你可以访问一下你的网站（<a href="http://username.github.io/">http://username.github.io</a>）看看效果了～</p>
-
-<p><img src="media/15998025631366/v2-89721201dd82fec5937c581099a43303_720w.jpg" alt="img"/></p>
-
-<p><img src="media/15998025631366/v2-d2dede1032356af70fa032dd52076aa3_720w.jpg" alt="img"/></p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025631446.html">
-                
-                  <h1>Git 常用技巧 （高级用法）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0"><strong>git 的一些「高级」用法</strong></h2>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312211952.jpg" alt=""/></p>
-
-<h2 id="toc_1"><strong>导航 —— 跳到之前的分支</strong></h2>
-
-<pre class="line-numbers"><code class="language-text">git checkout -
-</code></pre>
-
-<h2 id="toc_2"><strong>查看历史</strong></h2>
-
-<pre class="line-numbers"><code class="language-text"># 每个提交在一行内显示
-git log --oneline
-
-# 在所有提交日志中搜索包含「homepage」的提交
-git log --all --grep=&#39;homepage&#39;
-
-# 获取某人的提交日志
-git log --author=&quot;Maxence&quot;
-</code></pre>
-
-<h2 id="toc_3"><strong>之前重置了一个不想保留的提交，但是现在又想要回滚？</strong></h2>
-
-<pre class="line-numbers"><code class="language-text"># 获取所有操作历史
-git reflog
-
-# 重置到相应提交
-git reset HEAD@{4}
-# ……或者……
-git reset --hard &lt;提交的哈希值&gt;
-</code></pre>
-
-<h2 id="toc_4"><strong>我把本地仓库搞得一团糟，应该怎么清理？</strong></h2>
-
-<pre class="line-numbers"><code class="language-text">git fetch origin
-git checkout master
-git reset --hard origin/master
-</code></pre>
-
-<h2 id="toc_5"><strong>查看我的分支和 master 的不同</strong></h2>
-
-<pre class="line-numbers"><code class="language-text">git diff master..my-branch
-</code></pre>
-
-<h2 id="toc_6"><strong>定制提交</strong></h2>
-
-<pre class="line-numbers"><code class="language-text"># 编辑上次提交
-git commit --amend -m &quot;更好的提交日志&quot;
-
-# 在上次提交中附加一些内容，保持提交日志不变git add . &amp;&amp; git commit --amend --no-edit
-
-# 空提交 —— 可以用来重新触发 CI 构建
-git commit --allow-empty -m &quot;chore: re-trigger build&quot;
-</code></pre>
-
-<p>​   <strong>squash 提交</strong></p>
-
-<p>​   比方说我想要 rebase 最近 3 个提交：</p>
-
-<p>​   - git rebase -i HEAD~3<br/>
-​   - 保留第一行的 pick，剩余提交替换为 squash 或 s<br/>
-​   - 清理提交日志并保存（vi 编辑器中键入 :wq 即可保存）</p>
-
-<pre class="line-numbers"><code class="language-text">pick 64d26a1 feat: add index.js
-s 45f0259 fix: update index.js
-s 8b15b0a fix: typo in index.js
-</code></pre>
-
-<h2 id="toc_7"><strong>修正</strong></h2>
-
-<p>比方说想在提交 fed14a4c 加上一些内容。</p>
-
-<p><img src="Git%20%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7(%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95).assets/4a407484dfb44ea0ad31738ddf673099.jpg" alt=""/></p>
-
-<p><strong>git 提交分支</strong></p>
-
-<pre class="line-numbers"><code class="language-text">git add .
-git commit --fixup HEAD~1
-# 或者也可以用提交的哈希值（fed14a4c）替换 HEAD~1
-
-git rebase -i HEAD~3 --autosquash
-# 保存并退出文件（VI 中输入 `:wq`）
-</code></pre>
-
-<h2 id="toc_8"><strong>rebase 的时候在每个提交上执行命令</strong></h2>
-
-<p>如果特性很多，一个分支里可能有多个提交。如果测试失败了，你希望能找到导致测试失败的提交。这时候你可以使用 rebase --exec 命令在每个提交上执行命令。</p>
-
-<pre class="line-numbers"><code class="language-text"># 在最近 3 个提交上运行 `npm test` 命令
-git rebase HEAD~3 --exec &quot;npm test&quot;
-</code></pre>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312212414.jpg" alt=""/></p>
-
-<h2 id="toc_9"><strong>暂存</strong></h2>
-
-<p>​   暂存不止是 git stash 和 git stash pop ;)</p>
-
-<pre class="line-numbers"><code class="language-text"># 保存所有正在追踪的文件
-git stash save &quot;日志信息&quot;
-
-# 列出所有的暂存项
-git stash list
-
-# 获取并删除暂存项
-git stash apply stash@{1}
-git stash drop stash@{1}
-# ……或使用一条命令……
-git stash pop stash@{1}
-</code></pre>
-
-<h2 id="toc_10"><strong>清理</strong></h2>
-
-<pre class="line-numbers"><code class="language-text"># 移除远程仓库上不存在的分支
-git fetch -p
-
-# 移除所有包含 `greenkeeper` 的分支
-git fetch -p &amp;&amp; git branch --remote | fgrep greenkeeper | sed &#39;s/^.\{9\}//&#39; | xargs git push origin --delete
-</code></pre>
-
-<h2 id="toc_11"><strong>GitHub = Git + Hub</strong></h2>
-
-<p>我把 Hub 当成 git 的一个封装来用。你如果也想这么做，可以设置一个别名：alias git=&#39;hub&#39;</p>
-
-<pre class="line-numbers"><code class="language-text"># 打开浏览器访问仓库 url（仅限 GitHub 仓库）git browse
-</code></pre>
-
-<hr/>
-
-<h2 id="toc_12"><strong>额外福利：我最喜爱的 git 别名</strong></h2>
-
-<pre class="line-numbers"><code class="language-text">alias g=&#39;git&#39;
-alias glog=&#39;git log --oneline --decorate --graph&#39;
-alias gst=&#39;git status&#39;
-alias gp=&#39;git push&#39;
-alias ga=&#39;git add&#39;alias gc=&#39;git commit -v&#39;
-
-# 
-alias yolo=&#39;git push --force&#39;
-
-# 每周站会汇报工作时用
-git-standup() {
-    AUTHOR=${AUTHOR:=&quot;`git config user.name`&quot;}
-
-    since=yesterday
-    if [[ $(date +%u) == 1 ]] ; then
-        since=&quot;2 days ago&quot;
-    fi
-
-    git log --all --since &quot;$since&quot; --oneline --author=&quot;$AUTHOR&quot;
-}
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025631488.html">
-                
-                  <h1>Docker 必备可视化工具 Portainer</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>​   推荐使用 Portainer 作为 docker 容器的 GUI 管理方案。</p>
+<p>​   在正式讲解之前，先来了解下 debug 这个词的由来，就像我们初学Python 时，先要了解下它历史的由来。</p>
 
 <blockquote>
-<p>Portainer 是一个开源、轻量级 Docker 管理用户界面，基于 Docker API，提供状态显示面板、应用模板快速部署、容器镜像网络数据卷的基本操作（包括上传下载镜像，创建容器等操作）、事件日志显示、容器控制台操作、Swarm 集群和服务等集中管理和操作、登录用户管理和控制等功能。</p>
+<p>​ 1937年，美国青年霍华德·艾肯找到IBM公司为其投资200万美元研制计算机，第一台成品艾肯把它取名为：马克1号（mark1），又叫“自动序列受控计算机”，从这时起IBM公司由生产制表机，肉铺磅秤，咖啡研磨机等乱七八糟玩意儿行业，正式跨进“计算机”领地。为马克1号编制程序的是哈佛的一位女数学家葛丽斯·莫雷·霍波，有一天，她在调试程序时出现故障，拆开继电器后，发现有只飞蛾被夹扁在触点中间，从而“卡”住了机器的运行。于是，霍波诙谐的把程序故障统称为“臭虫（BUG）”，把排除程序故障叫DEBUG，而这奇怪的“称呼”，后来成为计算机领域的专业行话。从而debug意为排除程序故障的意思。<br/>
+--百度百科</p>
 </blockquote>
 
-<p>​   官方地址：<a href="https://portainer.io/install.html">https://portainer.io/install.html</a></p>
+<p>​   看了上面的小故事，debug 一词的由来，是由 bug 词得来的，bug 是臭虫的意思，debug 就是解决臭虫。</p>
 
-<h3 id="toc_0"><strong>安装命令：</strong></h3>
+<p>​   在如今的互联网时代，多少你肯定听说过 bug 这个词，比如什么什么软件又出 bug 了！说的就是软件在使用的过程中，程序出现了一些错误。故称之为 bug。</p>
 
-<pre class="line-numbers"><code class="language-text">docker volume create portainer_data
-docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+<p>​   <strong>而 debug 则是通过工具来对代码进行调试，一步步找出程序中出现 bug 的位置，也就是程序中具体错误代码的位置。</strong>就像故事中所说，debug过程就是在解决虫子一样。。</p>
+
+<h2 id="toc_2"><strong>pycharm 中的 debug 模式</strong></h2>
+
+<p>​   来步入今天的正题。首先，还是用示例说话，我们书写一段简短的代码，来帮我们完成今天要讲的内容。</p>
+
+<pre class="line-numbers"><code class="language-python">def sum_demo(x, y):
+    for _ in range(2):
+    x += 1
+    y += 1
+    result = x + y
+
+if __name__ == &#39;__main__&#39;:
+    result = sum_demo(1, 1)
+    print(result)
 </code></pre>
 
-<p>访问你的 IP:9000 即可进入容器管理页面。如果是本机的话访问地址就是: http:localhost:9000</p>
+<p>​   肉眼识别下，猜猜结果是多少呢？初学者可能没见过 for 循环中的下划线，在 Python 中是占位符的意思，因为单纯的循环两次而已，并不用到它的循环结果。最终 result 会输出 6 。</p>
 
-<h3 id="toc_1"><strong>运行效果:</strong></h3>
+<p>在 pycharm 中，如何开启 debug 调试，一共有三种进入的方法，如下（下图均可点开放大观看）：</p>
 
-<p><img src="media/15998025631488/993a4e5a14f245afa3db02f346af568a.jpg" alt="Docker 必备可视化工具 Portainer"/></p>
+<p>​   方法一：</p>
 
-<p><img src="media/15998025631488/817906ae46094355bba1950ee0230f25.jpg" alt="Docker 必备可视化工具 Portainer"/></p>
+<p><img src="Pycharm%E7%9A%84%E8%B0%83%E8%AF%95%E5%8A%9F%E8%83%BD.assets384a2c7fcbba4fa192559fe11f9ffa91.jpg" alt="img"/></p>
 
-<h3 id="toc_2">参考资料：</h3>
+<p>​   方法二：</p>
 
-<p>​   docker：轻量级图形页面管理之 Portainer: <a href="https://blog.51cto.com/ganbing/2083051">https://blog.51cto.com/ganbing/2083051</a></p>
+<p><img src="Pycharm%E7%9A%84%E8%B0%83%E8%AF%95%E5%8A%9F%E8%83%BD.assetsbe9f690ed0144dd394a3b901a574a6de.jpg" alt="img"/></p>
+
+<p>​   方法三：</p>
+
+<p><img src="Pycharm%E7%9A%84%E8%B0%83%E8%AF%95%E5%8A%9F%E8%83%BD.assets5362d3b132944103b3ce4ee9d9a8e898.jpg" alt="img"/></p>
+
+<p>​   有一种方法，就是 pycharm 导航栏处，有个run，点开以后即可看到 debug ，这里就不截图演示了。</p>
+
+<p>​   单纯的进入 debug 模式，你会发现，与正常的 run 去运行程序没有差异。差异就是 pycharm 的控制台部分，从 run 跑到了 debug 显示。</p>
+
+<p><img src="media/15998025631194/f57c00a5578e438b99186977063ef45c.jpg" alt="img"/></p>
+
+<p>​   接下来要讲的，才是 debug 中的重中之重，即断点调试！</p>
+
+<h2 id="toc_3"><strong>debug 的断点调试</strong></h2>
+
+<p>​   断点调试，英文 breakpoint。用大白话来解释下，断点调试其实就是在程序自动运行的过程中，你在代码某一处打上了断点，当程序跑到你设置的断点位置处，则会中断下来，此时你可以看到之前运行过的所有程序变量。来继续刚才的演示，pycharm 中如何设置断点。点击前：</p>
+
+<p><img src="media/15998025631194/2b69c23f3d5540b3b2aad1019c92eb7b.jpg" alt="img"/></p>
+
+<p>​   点击后，每行代码都设置上断点：</p>
+
+<p><img src="media/15998025631194/2eeda84be72d4050afc1b53b8b4019f5.jpg" alt="img"/></p>
+
+<p>​   设置完断点后，开启 debug 调试模式运行下，看到结果：</p>
+
+<p><img src="media/15998025631194/eb7efb81a4f74431813e45c35cabfc2d.jpg" alt="img"/></p>
+
+<p>​   看到了这么多新摆设，是不是有点怕了！不怕，咱们先来从控制台每个按钮讲起：</p>
+
+<p><img src="media/15998025631194/89109f6c373e4f1f8207489bd6ba1d8c.jpg" alt="img"/></p>
+
+<p>​   如果要是忘记中文意思的话，没有关系，鼠标指到按钮处，悬浮一会儿，会有英文提示的。继续再来说横排按钮：</p>
+
+<p><img src="media/15998025631194/643e7919e4404d378ad981b91a478a60.jpg" alt="img"/></p>
+
+<p>​   其中，横排最重要，经常用到的按钮，来解释一下，自己鼠标悬浮去看英文即可：</p>
+
+<p>​   <code>step over（F8快捷键）</code>：在单步执行时，在函数内遇到子函数时不会进入子函数内单步执行，而是将子函数整个执行完再停止，也就是把子函数整个作为一步。在不存在子函数的情况下是和step into效果一样的。简单的说就是，<strong>程序代码越过子函数，但子函数会执行，且不进入。</strong></p>
+
+<p>​   <code>step into（F7快捷键）</code>：在单步执行时，遇到子函数就进入并且继续单步执行，有的会跳到源代码里面去执行。</p>
+
+<p>​   <code>step into my code（Alt+Shift+F7快捷键）</code>：在单步执行时，遇到子函数就进入并且继续单步执行，不会进入到源码中。</p>
+
+<p>​   <code>step out（Shift+F8快捷键）</code>：假如进入了一个函数体中，你看了两行代码，不想看了，跳出当前函数体内，返回到调用此函数的地方，即使用此功能即可。</p>
+
+<p>​   <code>Resume program(F9快捷键)</code>：继续恢复程序，直接运行到下一断点处。以上四个功能，就是最常用的功能，一般操作步骤就是，<strong>设置好断点，debug运行，然后 F8 单步调试，遇到想进入的函数 F7 进去，想出来在 shift + F8，跳过不想看的地方，直接设置下一个断点，然后 F9 过去。</strong></p>
+
+<h2 id="toc_4"><strong>示例演示</strong></h2>
+
+<p>​   上面的基础概念明白了以后，直接用图片示例演示下：</p>
+
+<p><strong>1.设置初步断点</strong></p>
+
+<p><img src="media/15998025631194/48887ceff1ee4320a9cfcbc29a687725.jpg" alt="img"/></p>
+
+<p><strong>2.F7 进入函数</strong></p>
+
+<p><img src="media/15998025631194/047e27bba8064e088a8e35664b542ffb.jpg" alt="img"/></p>
+
+<p><strong>3.F8 单步调试，往下执行代码</strong></p>
+
+<p><img src="media/15998025631194/cfd7dba081484ab5a4cfdfde6667c06a.jpg" alt="img"/></p>
+
+<p>继续 F8 单步调试，往下执行代码：</p>
+
+<p><img src="media/15998025631194/836459703944478982352b097cf37f40.jpg" alt="img"/></p>
+
+<p>继续 F8 单步调试：</p>
+
+<p><img src="media/15998025631194/8c19393661834869bb354569522e1e5f.jpg" alt="img"/></p>
+
+<p>继续 F8 单步调试：</p>
+
+<p><img src="media/15998025631194/973b3367e75e42fe83a85e790b691cd8.jpg" alt="img"/></p>
+
+<p><img src="media/15998025631194/2b5e2461a0d14e33b8345c2b85831c6b.jpg" alt="img"/></p>
+
+<p><strong>4.看够了循环，想直接看最终 result 加完的结果，结果处打断点，直接 F9</strong></p>
+
+<p><img src="media/15998025631194/801f24e8285d4452b9e15100a166aa33.jpg" alt="img"/></p>
+
+<p>​   以上就是断点调试的全过程。看完之后，理解了吗~是不是顿时明白了断点调试的重要性，使用断点可以快速帮助我们理解程序中的各处逻辑！</p>
+
+<h2 id="toc_5"><strong>结语</strong></h2>
+
+<p>​   <strong>看到这里，基本的调试，相信你认真看完的话，已经可以上手使用了！但是要拓展的点还有很多，比如 pycharm 为什么在工程性的程序中颇受欢迎，因为它实在是太强大了。。。</strong></p>
 
                         
                       </div>
@@ -1059,886 +435,98 @@ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v porta
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15998025628475.html">
+                <a class="clearlink" href="15998025631155.html">
                 
-                  <h1>Anaconda + VSCode 最详细教程</h1>
+                  <h1>Python之platform模块</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">写在前面</h2>
+                        	<p>该模块用来访问平台相关属性。常见属性和方法</p>
 
-<p>为了录制这篇教程，我又把电脑上的 Python 卸载了🕹，重新安装 Anaconda 和 VSCode ，并录制动图。文章每个步骤介绍的很详细，只要跟着GIF动图一步一步操作就可以，适合零基础的朋友，通过这篇文章可以让你学会自己运行 Py 文件、以及一些发布出来的 Py 代码段，同时也是为了让更多人迈出学习 Python 的第一个门槛，后续也会写一些 Python 爬虫案例，用于工商信息查询、地址查询、快递查询等，所以为了这些工具，赶紧学起来吧📘。</p>
+<p><strong>平台架构</strong></p>
 
-<p>现在 Python 的广告可谓铺天盖地，文章、朋友圈、各种网页基本都能看到，虽然有些广告确实夸大了 Python 的作用，标题很雷人，但是无论如何也反映了一种趋势，未来编程思维很重要。而我们看待 Python 等编程语言应保持客观，能够帮到自己那就值得花点时间学习，入门之后才知道是不是自己的菜。</p>
-
-<h2 id="toc_1">「戏」说 Python</h2>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225635.png" alt="img"/></p>
-
-<h2 id="toc_2">写在前面</h2>
-
-<p>为了录制这篇教程，我又把电脑上的 Python 卸载了🕹，重新安装 Anaconda 和 VSCode ，并录制动图。文章每个步骤介绍的很详细，只要跟着GIF动图一步一步操作就可以，适合零基础的朋友，通过这篇文章可以让你学会自己运行 Py 文件、以及一些发布出来的 Py 代码段，因为封装成 EXE 不方便调试和更新，同时也是让更多人迈出学习 Python 的第一个门槛，后续也会写一些 Python 爬虫案例，用于工商信息查询、地址查询、快递查询等，所以为了这些工具，赶紧学起来吧📘。</p>
-
-<h2 id="toc_3">一、Anaconda 下载</h2>
-
-<p>Anaconda 可以看做Python的一个集成安装，安装它后就默认安装了python、IPython、集成开发环境Spyder和众多的包和模块，让你在管理环境和包时更加方便。</p>
-
-<p>可以选择从官网或清华源下载 Anaconda 安装包，<strong>清华源</strong>下载速度相对较快。</p>
-
-<p>安装的位数推荐32位，兼容性最强，也可以根据自己的系统位数选择安装。</p>
-
-<p>官网：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.anaconda.com%2Fproducts%2Findividual">https://www.anaconda.com/products/individual</a></p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225643.png" alt="img"/></p>
-
-<p>清华源：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmirrors.tuna.tsinghua.edu.cn%2Fanaconda%2Farchive%2F">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a></p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225646.png" alt="img"/></p>
-
-<h2 id="toc_4">二、Anaconda 安装</h2>
-
-<p>安装过程中三个注意的地方：</p>
-
-<ul>
-<li>勾选 <code>Alls Users</code></li>
-<li>勾选 <code>Add Anaconda to the system PATH environment variable</code></li>
-<li>如果之前没有安装 VSCode，可以在 Anaconda 安装过程中选择安装</li>
-</ul>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225654.gif" alt="img"/></p>
-
-<h2 id="toc_5">三、VSCode 下载安装</h2>
-
-<p>Anaconda 安装过程中 VSCode 有时候可能会出错，导致安装失败，这种情况下可以选择从 VSCode 官网下载安装。</p>
-
-<p>VSCode官网：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fcode.visualstudio.com%2FDownload%23">https://code.visualstudio.com/Download#</a></p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225658.png" alt="img"/></p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225700.gif" alt="img"/></p>
-
-<h2 id="toc_6">四、管理 conda</h2>
-
-<h3 id="toc_7">1. 查看 conda 版本</h3>
-
-<p>安装完成后按<code>Win+R</code>打开<code>cmd</code>终端，输入<code>conda --version</code></p>
-
-<p>如果正常输出了 conda 的版本，说明 Anaconda 成功安装了。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225704.gif" alt="img"/></p>
-
-<h3 id="toc_8">2. 添加国内源</h3>
-
-<ul>
-<li>查看现有源</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-text">conda config --show-sources
+<pre class="line-numbers"><code class="language-text">platform.machine()
 </code></pre>
 
-<ul>
-<li>添加国内清华源</li>
-</ul>
+<p>返回平台架构。若无法确定，则返回空字符串。</p>
 
-<pre class="line-numbers"><code class="language-text">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.machine()
+&#39;AMD64&#39;
+&gt;&gt;&gt; platform.machine()
+&#39;x86_64&#39;
 </code></pre>
 
-<ul>
-<li>删除默认源</li>
-</ul>
+<p><strong>网络名称（主机名）</strong></p>
 
-<pre class="line-numbers"><code class="language-text">conda config --remove channels defaults
+<pre class="line-numbers"><code class="language-text">platform.node()
 </code></pre>
 
-<ul>
-<li>设置搜索时显示通道地址</li>
-</ul>
+<p>返回计算机的网络名称(可能未被完全限定！)。如果无法确定该值,则返回空字符串。</p>
 
-<pre class="line-numbers"><code class="language-text">conda config --set show_channel_urls yes
+<pre class="line-numbers"><code class="language-text">#windows
+&gt;&gt;&gt; platform.node()
+&#39;office&#39;
+
+#linux
+&gt;&gt;&gt; platform.node()
+&#39;abcxx&#39;
 </code></pre>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225707.gif" alt="img"/></p>
+<p><strong>系统版本</strong></p>
 
-<h3 id="toc_9">3. 升级 conda</h3>
-
-<p>设置完国内源后，升级 conda 的速度会快很多，之后安装包时也会从国内源下载。</p>
-
-<pre class="line-numbers"><code class="language-text">conda update conda
+<pre class="line-numbers"><code class="language-text">platform.platform(aliased = 0,terse = 0)
 </code></pre>
 
-<p>升级时弹出<code>Proceed ([y]/n)?</code>时，选择<code>y</code>，确认升级。</p>
+<p>如果aliased为True,则该函数将使用不同平台的别名来报告与其常用名称不同的系统名称,例如SunOS将被报告为Solaris。 system_alias()函数用于实现。<br/>
+将terse设置为True会导致该功能仅返回识别平台所需的绝对最小信息。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225711.gif" alt="img"/></p>
+<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.platform()
+&#39;Windows-8.1-6.3.9600-SP0&#39;
 
-<h2 id="toc_10">五、环境管理</h2>
+&gt;&gt;&gt; platform.platform(aliased=True)
+&#39;Windows-8.1-6.3.9600-SP0&#39;
 
-<p><strong>可跳过，直接用默认环境</strong></p>
+&gt;&gt;&gt; platform.platform(aliased=True,terse=True)
+&#39;Windows-8.1&#39;
 
-<h3 id="toc_11">1. 查看 Python 版本</h3>
+&gt;&gt;&gt; platform.platform(aliased=True,terse=False)
+&#39;Windows-8.1-6.3.9600-SP0&#39;
 
-<pre class="line-numbers"><code class="language-text">python --version
+#linux
+&gt;&gt;&gt; platform.platform()
+&#39;Linux-2.6.32-642.13.1.el6.x86_64-x86_64-with-centos-6.8-Final&#39;
 </code></pre>
 
-<h3 id="toc_12">2. 创建环境</h3>
+<p><strong>处理器名称</strong></p>
 
-<p>上一步查到我电脑上的 Python 版本为 3.7.0 ，我想在这个版本基础上创建一个名为 [虚拟环境名] 的虚拟环境。</p>
-
-<pre class="line-numbers"><code class="language-text">conda create -n [虚拟环境名] python=3.7.0
+<pre class="line-numbers"><code class="language-text">platform.processor()
 </code></pre>
 
-<p>新的开发环境会被默认安装在你 conda 目录下的 envs 文件目录下。</p>
+<p>返回处理器名称。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225714.gif" alt="img"/></p>
+<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.processor()
+&#39;Intel64 Family 6 Model 60 Stepping 3, GenuineIntel&#39;` 
 
-<h3 id="toc_13">3. 激活环境</h3>
-
-<pre class="line-numbers"><code class="language-text">activate [虚拟环境名]
+#linux
+&gt;&gt;&gt; platform.processor()
+&#39;x86_64&#39;
 </code></pre>
 
-<h3 id="toc_14">4. 列出所有的环境</h3>
+<p><strong>系统名称</strong></p>
 
-<pre class="line-numbers"><code class="language-text">conda info -e
+<pre class="line-numbers"><code class="language-text">platform.system()
 </code></pre>
 
-<p>当前激活的环境会标<code>*</code>。</p>
+<p>返回系统/操作系统名称,例如“Linux”,“Windows”或“Java”。如果无法确定该值,则返回空字符串。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225718.png" alt="img"/></p>
+<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.system()
+&#39;Windows&#39;
 
-<h3 id="toc_15">5. 切换到另一个环境</h3>
-
-<pre class="line-numbers"><code class="language-text">activate [虚拟环境名]
+#linux
+&gt;&gt;&gt; platform.system()
+&#39;Linux&#39;
 </code></pre>
-
-<h3 id="toc_16">6. 注销当前环境（默认的环境是base）</h3>
-
-<pre class="line-numbers"><code class="language-text">deactivate
-虚拟环境激活后，在cmd中输入python，显示的就是一个新的环境。
-</code></pre>
-
-<h3 id="toc_17">7. 复制环境</h3>
-
-<pre class="line-numbers"><code class="language-text">conda create -n [虚拟环境名] --clone [参考环境名]
-
----常用 
-conda env --help    #查看帮助
-conda env list  #列出所有的虚拟环境
-conda list --name [虚拟环境名]   #查看指定虚拟环境下的package
-
-#创建
-conda create --name [虚拟环境名] [python的版本] [需要的包]
-conda create --name myenv
-conda create --name myenv python=2.7
-conda create --name myenv pytohon=2.7 numpy scipy
-
-#克隆
-conda create --name [虚拟环境名] -- clone [clone的环境]
-
-#创建一个和原python环境一样的虚拟环境
-conda create --name mybase --clone base
-
-
-
-</code></pre>
-
-<h3 id="toc_18">8. 删除环境</h3>
-
-<pre class="line-numbers"><code class="language-text">conda remove --name [虚拟环境名] -all
-</code></pre>
-
-<h2 id="toc_19">六、包管理</h2>
-
-<h3 id="toc_20">1. 查看已安装包</h3>
-
-<pre class="line-numbers"><code class="language-text">conda list
-</code></pre>
-
-<h3 id="toc_21">2. 使用 Conda 命令安装包</h3>
-
-<pre class="line-numbers"><code class="language-text">conda install beautifulsoup4
-</code></pre>
-
-<h3 id="toc_22">3. 通过 pip 命令来安装包</h3>
-
-<p>如果无法通过conda安装，可以用pip命令来安装包。</p>
-
-<pre class="line-numbers"><code class="language-text">pip install beautifulsoup4
-</code></pre>
-
-<h3 id="toc_23">4. 移除包</h3>
-
-<pre class="line-numbers"><code class="language-text">conda remove beautifulsoup4
-</code></pre>
-
-<h2 id="toc_24">七、VSCode 配置</h2>
-
-<h3 id="toc_25">1. 安装 Python 插件</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225724.png" alt="img"/></p>
-
-<h3 id="toc_26">2. 安装 Code Runner 插件</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225727.png" alt="img"/></p>
-
-<h3 id="toc_27">3. 安装中文插件（可选）</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225729.png" alt="img"/></p>
-
-<h3 id="toc_28">4. 指定路径（可跳过）</h3>
-
-<p>确定当前激活环境所在路径</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225732.png" alt="img"/></p>
-
-<p>然后在<code>File--&gt;Preferences--&gt;Settings--&gt;Extensions--&gt;Python--&gt;setting.json</code>添加下面的 Python 路径，这个路径和你设置的环境名称有关。</p>
-
-<pre class="line-numbers"><code class="language-text">&quot;python.pythonPath&quot; :&quot;D:\\anaconda3\\envs\\xiaolvshijie\\python.exe&quot;
-</code></pre>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225734.png" alt="img"/></p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225741.png" alt="img"/></p>
-
-<h2 id="toc_29">八、开始运行 Py 文件</h2>
-
-<p>运行代码前一定要按<code>Ctrl + S</code>保存，再右键选择<code>Run Code</code>或者用快捷键<code>Ctrl + Alt + N</code>执行代码。</p>
-
-<h3 id="toc_30">1. 运行简单代码测试</h3>
-
-<pre class="line-numbers"><code class="language-text">print(&#39;hello xiaolvshijie&#39;)
-</code></pre>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225744.gif" alt="img"/></p>
-
-<h3 id="toc_31">2. 运行 Py 文件</h3>
-
-<p>复制下面这段代码到编辑器中，<code>Ctrl + S</code>保存，再右键选择<code>Run Code</code>执行代码。</p>
-
-<pre class="line-numbers"><code class="language-python">import prettytable as pt
-
-tb = pt.PrettyTable()
-tb.field_names = [&#39;Author&#39;, &#39;wwcheng&#39;]
-tb.add_row([&#39;ID&#39;, &#39;xiaolvshijie&#39;])
-
-print(tb)
-</code></pre>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225753.gif" alt="img"/></p>
-
-<p>会出现报错提示：<code>ModuleNotFoundError: No module named &#39;prettytable&#39;</code></p>
-
-<p>意思是当前环境中缺少<code>prettytable</code>的包，你需要安装这个包。。</p>
-
-<p>我们可以用<code>conda install prettytable</code>或者<code>pip install prettytable</code>来安装这个包。</p>
-
-<p>如果不知道报错提示的意思，可以利用<strong>搜索引擎</strong>，百度一下你就知道，Python编程相关的问题网络上基本都能搜索到。</p>
-
-<h2 id="toc_32">结语</h2>
-
-<p>成功安装 Anaconda 和 VSCode 并运行上面测试代码后，你可以正常加入码农行业。。。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025628522.html">
-                
-                  <h1>Linux系统/etc目录和文件的介绍</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p><strong>Linux目录结构特点</strong></p>
-
-<ol>
-<li>linux系统的所有目录是一个有层次的倒着的梳妆目录结构。根是所有目录的顶点，linux目录一切从根开始。</li>
-<li>不听目录下的数据可以跨越不同的磁盘分区火不同的磁盘设备，设备可以随意挂载到任意目录上使用。</li>
-<li>所有的目录的是安装一定类型有龟裂的组织和命名的。</li>
-<li>没有挂载到目录上的磁盘，相当于没有门和串户的监狱，不能被使用。磁盘等设备de需要挂载菜能正常使用。</li>
-<li>盖章点是磁盘访问的人口，是一个目录</li>
-<li>相对路径与绝对路径</li>
-</ol>
-
-<p><strong>Linux目录结构</strong></p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# tree -L 1 /
-/
-├── bin             #普通用户的二进制命令
-├── boot            #系统内核及引导程序目录
-├── dev             #设备文件目录
-├── etc             #软件配置和启动程序目录
-├── home            #普通用户家目录
-├── lib             #库文件目录(命令、软件)
-├── lib64           #64位库文件目录(命令、软件)
-├── lost+found      #系统崩溃数据存放的目录
-├── media
-├── mnt             #设备临时挂载目录
-├── opt             #第三方程序
-├── proc            #操作系统进程和内核信息目录
-├── root            #root家目录
-├── sbin            #系统管理员命令
-├── selinux         
-├── srv
-├── sys
-├── tmp             #文件临时存放目录(回收站)
-├── usr             #应用程序目录
-└── var             #日志目录
-#查看命令的路径
-[root@test ~]# which ls
-alias ls=&#39;ls --color=auto&#39;
-    /bin/ls
-</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>目录</th>
-<th>说明</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/bin</td>
-<td>该目录为binaries,是常用二进制命令所在的目录。列入：ls、cp、mkdir、rm等命令；/bin目录和/usr/bin类似</td>
-</tr>
-<tr>
-<td>/boot</td>
-<td>Linux的内核级系统引导程序所需的文件目录，安装系统分区的时候一般单独分一个boot分区。</td>
-</tr>
-<tr>
-<td>/dev</td>
-<td>设备文件目录，比如声卡、磁盘、光驱等等外接设备。</td>
-</tr>
-<tr>
-<td>/etc</td>
-<td>(1)二进制软件安装包(yum,rpm)等的配置文件默认路径，例如:/etc/exports、/etc/fstab、/etc/resolv.conf (2)服务启动命令存放的目录，主要在/etc/init.d/下。例如：/etc/init.d/sshd、/etc/init.d/iptables</td>
-</tr>
-<tr>
-<td>/home</td>
-<td>普通用户家目录默认数据库存放目录</td>
-</tr>
-<tr>
-<td>/lib</td>
-<td>启动系统和运行命令所需要的共享库文件和内核模块存放目录，分为/lib和/lib64两种。</td>
-</tr>
-<tr>
-<td>/lost+found</td>
-<td>在ext3文件系统中，当系统意外崩溃或机器意外关机，会产生一些文件碎片在这里。当系统在开机启动过程中fsck工具会检查这里，并修复已经损坏的文件系统。当系统发生问题，可能会有文件被移到这个目录中，可能需要手工方式修复，移到文件到原来的位置上。</td>
-</tr>
-<tr>
-<td>/mnt</td>
-<td>一般是用于临时挂载存储设备的挂载点，比如有cdrom，u盘等目录。直接插入光驱无法使用，需要先挂载后使用。</td>
-</tr>
-<tr>
-<td>/opt</td>
-<td>表示的是可选择的意思，有邪软件包会被安装在这里，也就是自定义软件包。我们自己编译的软件包，就可以安装在这个目录；通过源码包安装的软件，可以通过./configure --prefix=/opt/指定目录。</td>
-</tr>
-<tr>
-<td>/proc</td>
-<td>操作系统运行时，进程信息及内核信息(cpu、硬盘信息、内存信息)存放在这里。/proc目录是虚拟文件系统的挂载点，proc并不是真正的文件系统，它的定义可以参见/etc/fstab。系统运行很多信息都在这个目录下。 /proc/loadavg #系统负载信息 /proc/meminfo #系统内存信息 /proc/cpuinfo #系统CPU信息 /proc/mounts #系统挂载信息</td>
-</tr>
-<tr>
-<td>/root</td>
-<td>Linux超级权限用户root的加目录:root类似win32管理员admininstrator</td>
-</tr>
-<tr>
-<td>/sbin</td>
-<td>大多是涉及系统管理的命令存放，是超级权限用户root的可执行命令存放地，这个目录和/usr/X11R6/sbin或/usr/loacl/sbin目录是相似的;系统级命令，一般最好要通过sudo让普通用户执行这些命令，常见命令有fdisk、reboot、fsck、halt</td>
-</tr>
-<tr>
-<td>/tmp</td>
-<td>临时文件目录，有时用户运行程序时候，会产生临时文件。/tmp就用来存放临时文件的，权限比较特殊。/var/tmp目录和这个目录相似，这个目录可以被用作Linux系统的回收站使用。</td>
-</tr>
-<tr>
-<td>/usr</td>
-<td>这是系统存放程序的目录，比如命令，帮助文件等。这个目录下有很多的文件和目录。当我们安装一个Linux官方提供的软件包时，安装在这里。 /user/local：默认软件安装目录 /usr/src:长袖源码目录</td>
-</tr>
-<tr>
-<td>/var</td>
-<td>日志目录</td>
-</tr>
-</tbody>
-</table>
-
-<hr/>
-
-<p><strong>Linux系统重要文件</strong></p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align: left">文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td style="text-align: left">/etc/sysconfig/network-scripts/ifcfg-eth0</td>
-<td style="text-align: center">网卡配置文件</td>
-</tr>
-</tbody>
-</table>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0 
-DEVICE=eth0 #第一块网卡逻辑设备名，第二块为eth1
-HWADDR=00:0c:29:6a:a3:b4 #以太网硬件地址MAC地址
-TYPE=Ethernet #上网类型，目前基本上是以太网
-UUID=282f8f61-2b18-4cdb-8ba5-62c8131abd20 #通用唯一识别码
-ONBOOT=yes  #开机启动激活网卡设备yes(启动) no(不启动)
-NM_CONTROLLED=yes #是否通过networkmanager管理网卡设备
-BOOTPROTO=none  #启动协议，获取配置方式，有none|bootp|dhcp 三个选项
-IPADDR=10.0.0.7 #IP地址
-NETMASK=255.255.255.0 #子网掩码
-DNS2=202.106.0.20   #DNS2
-GATEWAY=10.0.0.2    #网关
-DNS1=10.0.0.2       #DNS1
-USERCTL=no          #是否支持用户控制
-PEERDNS=yes         #网卡配置DNS 会覆盖/etc/resolv.conf文件的DNS
-IPV6INIT=no         #是否支持IPv6
-</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/resolv.conf</td>
-<td style="text-align: center">系统DNS客户端配置文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>DNS,全称Domain Name System，一个网站运行中起到至关重要的作用，它的主要作用是负责吧网站域名解析为对应的IP地址。</p>
-
-<p>DNS系统解析功能：</p>
-
-<ul>
-<li> (1)DNS 系统负责A记录解析，就是域名到IP。</li>
-<li> (2)设置CNAME别名记录，这别名解析功能常被CDN加速服务商应用</li>
-<li> (3)设置MX邮件记录，这个记录功能，在购买或搭建邮件服务时会经常被用到</li>
-<li> (4)设置PTR 记录，反向解析，即吧IP地址解析为对应域名和A记录的解析相反，邮寄服务等业务会用到</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/resolv.conf
-
-nameserver 10.0.0.2
-nameserver 202.106.0.20
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th style="text-align: left">文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td style="text-align: left">/etc/sysconfig/network</td>
-<td style="text-align: center">主机名配置文件</td>
-</tr>
-</tbody>
-</table>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/sysconfig/network
-NETWORKING=yes
-HOSTNAME=test
-</code></pre>
-
-<p>修改方法：</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/sysconfig/network
-NETWORKING=yes
-HOSTNAME=test1 #永久修改
-[root@test ~]# hostname test1 临时修改
-#企业环境永久修改生效需要重启服务器基本的是永久加上临时二个方法配合使用需要操作两次，为了不重启
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/rc.local</td>
-<td style="text-align: center">存放开机自启动程序命令文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>/etc/rc.local是用于存放开机自启动程序命令的文件(chkconfig常用来管理yum/rpm安装的程序服务的开机自启动)如果是开发的自己程序需要开机启动命令放入/etc/rc.local来实现开机自启动，Linux开机会吧/etc/rc.local里面的内容全部执行一遍。</p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/hosts</td>
-<td style="text-align: center">局域网或者本地DNS解析工具</td>
-</tr>
-</tbody>
-</table>
-
-<p>应用场景：</p>
-
-<ol>
-<li>域名对应服务所在的服务器出现IP变化时候</li>
-<li>进行本地测试</li>
-</ol>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/fstab</td>
-<td>配置开机实现设备自动挂载程序命令的文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>添加新的磁盘后实现开机自动挂载设备：cat /etc/fstab共六列如下：</p>
-
-<p>例：sysfs /sys sysfs defaults 0 0</p>
-
-<ol>
-<li>第一列sysfs (挂载的设备名称)</li>
-<li>第二列/sys(挂载的目录)</li>
-<li>第三列sysfs(挂载的文件系统格式)</li>
-<li>第四列defaults(挂载参数)</li>
-<li>第五列0(是否备份:0为不备份，1为备份)</li>
-<li>第六列0(是否开机做磁盘检测，0为不检测数字1,2的为检测磁盘)，工作场景通常的设为了，为了避免重启无法启动。</li>
-</ol>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/rc.loacl</td>
-<td>存放开机自启动程序命令文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>企业中主要应用：脚本和自主开发程序启动命令存放处，实现开机程序自动启动和运行。</p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/inittab</td>
-<td>系统运行级别的配置文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>0 - halt (Do NOT set initdefault to this)： (<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E5%85%B3%E6%9C%BA%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{关机模式}"/>)</p>
-
-<p>1 - Single user mode：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{单用户模式}"/>)</p>
-
-<p>2 - Multiuser, without NFS (The same as 3, if you do not have networking):(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E6%B2%A1%E6%9C%89%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9FNFS%E7%9A%84%E5%A4%9A%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{没有网络文件系统NFS的多用户模式}"/>)</p>
-
-<p>3 - Full multiuser mode：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E5%AE%8C%E6%95%B4%E7%9A%84%E5%A4%9A%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{完整的多用户模式}"/>)</p>
-
-<p>4 - unused：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E6%9C%AA%E4%BD%BF%E7%94%A8%7D" alt="\color{green}{未使用}"/>)</p>
-
-<p>5 - X11：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E6%A1%8C%E9%9D%A2%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{桌面模式}"/>)</p>
-
-<p>6 - reboot (Do NOT set initdefault to this)：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E9%87%8D%E5%90%AF%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{重启模式}"/>)</p>
-
-<p>查看当前的运行级别：runlevel</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# runlevel 
-N 3
-#N是上一次运行级别，3是当前运行级别
-</code></pre>
-
-<p>切换运行级别：</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# init 5
-[root@test ~]# runlevel 
-3 5
-#init 命令接后面的数字级别
-</code></pre>
-
-<p>开机启动流程图：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200909234025.png" alt="img"/></p>
-
-<p>Linux系统启动配置文件：</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/grub.conf 
-# grub.conf generated by anaconda
-#
-# Note that you do not have to rerun grub after making changes to this file
-# NOTICE:  You have a /boot partition.  This means that
-#          all kernel and initrd paths are relative to /boot/, eg.
-#          root (hd0,0)
-#          kernel /vmlinuz-version ro root=/dev/sda3
-#          initrd /initrd-[generic-]version.img
-#boot=/dev/sda
-default=0
-timeout=5
-splashimage=(hd0,0)/grub/splash.xpm.gz
-hiddenmenu
-title CentOS (2.6.32-754.30.2.el6.x86_64)
-    root (hd0,0)
-    kernel /vmlinuz-2.6.32-754.30.2.el6.x86_64 ro root=UUID=24219a66-7b4f-477e-b8c4-a008809c45f5 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet
-    initrd /initramfs-2.6.32-754.30.2.el6.x86_64.img
-title CentOS 6 (2.6.32-696.el6.x86_64)
-    root (hd0,0)
-    kernel /vmlinuz-2.6.32-696.el6.x86_64 ro root=UUID=24219a66-7b4f-477e-b8c4-a008809c45f5 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet
-    initrd /initramfs-2.6.32-696.el6.x86_64.img
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/profile及/etc/bashrc(~/.bashrc)</td>
-<td>配置系统的环境变量/别名文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>企业环境设置案例：</p>
-
-<pre class="line-numbers"><code class="language-shell">#环境变量设置：
-vim /etc/profile
-
-#set java environment
-JAVA_HOME=/usr/local/java/jdk1.8.0_161
-JRE_HOME=$JAVA_HOME/jre
-CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib/rt.jar
-PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-export JAVA_HOME JRE_HOME CLASS_PATH PATH
-#重新加载/etc/profile文件，让配置生效
-source /etc/profile
-#测试安装是否成功
-java -version
-
-#系统别名设置:
-# User specific aliases and functions
-
-alias rm=&#39;rm -i&#39;
-alias cp=&#39;cp -i&#39;
-alias mv=&#39;mv -i&#39;
-#让系统别名永久生效，需要配置到的文件
-</code></pre>
-
-<p>环境变量文件生效顺序图：/etc/bashrc &gt; ~/.bashrc &gt; ~/bash_profile &gt; /etc/profile</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200909234032.png" alt="img"/></p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/profile.d</td>
-<td>用户登录后执行的脚本所在目录</td>
-</tr>
-</tbody>
-</table>
-
-<ol>
-<li>在/etc/profile.d 目录中存放的是一些应用程序所需的启动脚本，而这些脚本文件是用来设置一些变量和运行一些初始化过程的。其中包括了颜色、语言、less、vim及which等命令的一些附加设置。</li>
-<li>/etc/profile.d 下的脚本之所以能自动执行，是因为在/etc/profile 中有一个for循环语句来调用这些脚本。</li>
-</ol>
-
-<pre class="line-numbers"><code class="language-shell">vi /etc/profile
-# /etc/profile
- 
-for i in /etc/profile.d/*.sh /etc/profile.d/sh.local ; do
-    if [ -r &quot;$i&quot; ]; then
-        if [ &quot;${-#*i}&quot; != &quot;$-&quot; ]; then
-            . &quot;$i&quot;
-        else
-            . &quot;$i&quot; &gt;/dev/null
-        fi
-    fi
-done
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/issue和/etc/issue.net</td>
-<td>配置在用户登录终端前显示信息的文件</td>
-</tr>
-</tbody>
-</table>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/issue
-CentOS release 6.10 (Final)
-Kernel \r on an \m
-.............................................................................
-[root@test ~]# cat /etc/issue.net 
-CentOS release 6.10 (Final)
-Kernel \r on an \m
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/init.d</td>
-<td>软件启动和程序所在的目录</td>
-</tr>
-</tbody>
-</table>
-
-<p>/etc/init.d目录在Linux系统中可是大名鼎鼎。它只负责一件事情，但却涉及到全系统。它包含系统中各种服务的start/stop脚本，从acpid到x11-common，其重要性可见一斑。在/etc/init.d的可执行程序的优先级会高于/etc/systemd/system/下的service文件，如果同时存在的话。</p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/motd</td>
-<td>配置用户登录系统之后显示提示内容的文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>配置案例：</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/motd 
-[root@test ~]# vim /etc/motd
-test computer
-</code></pre>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200909234041.png" alt="img"/></p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/redhat-release</td>
-<td>声明Red Hat版本和名称信息的文件</td>
-</tr>
-</tbody>
-</table>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/redhat-release 
-CentOS release 6.10 (Final)
-</code></pre>
-
-<p>禁止转载，如需转载请通过简信或评论联系作者。</p>
 
                         
                       </div>
@@ -2284,6 +872,2268 @@ product = reduce(lambda x, y: x * y, l) # 1*2*3*4*5 = 120
                 </div>
               </div><!-- article -->
         
+			<div class="article">
+                <a class="clearlink" href="15998025628862.html">
+                
+                  <h1>SSH 用法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>今天小编为大家分享一篇关于SSH 的介绍和使用方法的文章。本文从SSH是什么出发，讲述了SSH的基本用法，之后在远程登录、端口转发等多种场景下进行独立的讲述，希望能对大家有所帮助。</p>
+
+<h2 id="toc_0">1 <strong>什么是SSH？</strong></h2>
+
+<p>SSH是一种网络协议，用于计算机之间的加密登录。最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。</p>
+
+<h2 id="toc_1">2 <strong>SSH登录原理</strong></h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230528" alt="img"/></p>
+
+<h2 id="toc_2">3 <strong>SSH基本用法</strong></h2>
+
+<p>语法:</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -p 22 user@host
+</code></pre>
+
+<p>参数:-p：指定端口号。user：登录的用户名。host：登录的主机。</p>
+
+<p>默认的端口号为22，当端口号为22的时候，可以省略，直接使用如下方式:</p>
+
+<pre class="line-numbers"><code class="language-css">ssh user@host
+</code></pre>
+
+<p>此外，如果本地正在使用的用户名与远程登录的用户名一致，登录用户名也是可以省略的，即如下：</p>
+
+<pre class="line-numbers"><code class="language-undefined">ssh host
+</code></pre>
+
+<h2 id="toc_3">4 <strong>SSH远程登录实例</strong></h2>
+
+<p>现在我有两台linux虚拟机，上面安装都是centOS6.5，ip分别为192.168.13.135和192.168.13.138，如下图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230104" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230109" alt="img"/></p>
+
+<p>现在，我需要操作的是通过SSH在192.168.13.138上面，登录到192.168.13.135上面。首先，我们可以使用如下命令，查看两台机器是否启用了ssh。</p>
+
+<pre class="line-numbers"><code class="language-undefined">netstat -ntlp |grep ssh
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230118" alt="img"/></p>
+
+<p>使用如下命令进行连接。</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -p 22 root@192.168.13.135
+</code></pre>
+
+<p>若在本机上是首次登录该远程主机，则会出现如下界面。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230131" alt="img"/></p>
+
+<p>大致意思就是，无法确认host主机的真实性，只知道它的公钥指纹，问你还想继续连接吗？输入yes即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230142" alt="img"/></p>
+
+<p>然后输入密码，即可连接ok了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230154" alt="img"/></p>
+
+<p>要想退出，直接输入exit即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230201" alt="img"/></p>
+
+<h2 id="toc_4">5 <strong>SSH端口转发</strong></h2>
+
+<p>SSH 不仅仅能够自动加密和解密 SSH 客户端与服务端之间的网络数据，同时，SSH 还能够提供了一个非常有用的功能，那就是端口转发，即将TCP 端口的网络数据，转发到指定的主机某个端口上，在转发的同时会对数据进行相应的加密及解密。如果工作环境中的防火墙限制了一些网络端口的使用，但是允许 SSH 的连接，那么也是能够通过使用SSH转发后的端口进行通信。转发，主要分为本地转发与远程转发两种类型。</p>
+
+<h3 id="toc_5">1.转发的参数</h3>
+
+<pre class="line-numbers"><code class="language-undefined">-C：压缩数据
+-f ：后台认证用户/密码，通常和-N连用，不用登录到远程主机。
+-N ：不执行脚本或命令，通常与-f连用。
+-g ：在-L/-R/-D参数中，允许远程主机连接到建立的转发的端口，如果不加这个参数，只允许本地主机建立连接。
+-L : 本地端口:目标IP:目标端口
+-D : 动态端口转发
+-R : 远程端口转发
+-T ：不分配 TTY 只做代理用
+-q ：安静模式，不输出 错误/警告 信息
+</code></pre>
+
+<h3 id="toc_6">2.本地转发</h3>
+
+<p>有本地网络服务器的某个端口，转发到远程服务器某个端口。说白了就是，将发送到本地端口的请求，转发到目标端口。格式如下：ssh -L 本地网卡地址:本地端口:目标地址:目标端口 用户@目标地址。现在我们利用本地转发来解决一个问题，比如我们有两台机器，如下：centos A（192.168.13.139）centos B（192.168.13.142）</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230211" alt="img"/></p>
+
+<p>现在，centos B（192.168.13.142）机器上面安装了mysql，并设置了运行任何主机连接，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230224" alt="img"/></p>
+
+<p>此时，在centos A（192.168.13.139）上面是可以连上centos B（192.168.13.142）的mysql，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230229" alt="img"/></p>
+
+<p>那么，现在我开始centos B（192.168.13.142）限制不允许外部ip连接，仅仅让127.0.0.1连接，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230241" alt="img"/></p>
+
+<p>此时，centos A（192.168.13.139）上面怎么连接上centos B（192.168.13.142）的mysql呢？</p>
+
+<p>此时，我们还是使用上面的mysql连接方式，肯定会报错，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230253" alt="img"/></p>
+
+<p>当然在centos B（192.168.13.142）mysql还是可访问的。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230258" alt="img"/></p>
+
+<p>这个时候，我们就可以使用本地端口转发了，将本地的某个端口，映射到centos B（192.168.13.142）机器上面的，如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L 127.0.0.1:3306:127.0.0.1:3306 root@192.168.13.142
+</code></pre>
+
+<p>因为本地网卡地址是可以省略的，上面的转发，可以简写为：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L 3306:127.0.0.1:3306 root@192.168.13.142
+</code></pre>
+
+<p>当然，ssh连接的时候，若两台机器的用户名相同，也是可以省略的，即命令可以简写为：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L 3306:127.0.0.1:3306 192.168.13.14
+</code></pre>
+
+<p>上面的代码就是将本地的3306端口，转发到192.168.13.142的3306端口。因为centos B（192.168.13.142）上面的mysql使用的3606端口。当然，我们首先得看看本地的3306端口是否被占用，如被占用，可以使用其他的端口。</p>
+
+<p>数据流向如图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230316" alt="img"/></p>
+
+<p>首先，centos A（192.168.13.139）上的应用将数据发送到本地的127.0.0.1上面的3306端口。然后，centos A（192.168.13.139）将3306端口的数据，通过SSH转发到centos B（192.168.13.142）的3306端口。接着，centos B（192.168.13.142）将处理后的数据，原路返回给centos A（192.168.13.139）。如果是首次通过ssh连接cetosB该机器，则会提示确认公钥，并让你选择是否确定连接。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230321" alt="img"/></p>
+
+<p>此时，我们在centos A上面连接centos B上面的mysql，就可以这么写了。</p>
+
+<pre class="line-numbers"><code class="language-undefined">bin/mysql -h127.0.0.1 -uroot -p
+</code></pre>
+
+<p>如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230330" alt="img"/></p>
+
+<p>我们可以通过下面命令，在centosA查看ssh转发监听的进程。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230340" alt="img"/></p>
+
+<h3 id="toc_7">3.远程转发</h3>
+
+<p>由远程服务器的某个端口，转发到本地网络的服务器某个端口。说白了，就是将发送到远程端口的请求，转发到目标端口。格式如下：ssh -R 远程网卡地址:远程端口:目标地址:目标端口下面三台机器为例，如下：centos A（192.168.13.139）centos B（192.168.13.142）win7（10.18.78.135）假设，win7（10.18.78.135）与centos B（192.168.13.142）不能直接连接，但是win7（10.18.78.135）与centos A（192.168.13.139）可以连接centos B（192.168.13.142）也可以centos A（192.168.13.139）连接，那么，我们就可以在centos A（192.168.13.139）上面使用远程端口转发了，让win7（10.18.78.135）与centos B（192.168.13.142）进行通信。</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -R 127.0.0.1:80:10.18.78.135:80 root@192.168.13.142
+</code></pre>
+
+<p>即centos B（192.168.13.142）监听自己的80端口，然后将所有数据，由centos A（192.168.13.139）发给win7（10.18.78.135）。</p>
+
+<h2 id="toc_8">6 <strong>SSH的远程操作</strong></h2>
+
+<p>ssh远程操作，主要用于在远程的机器上面执行某个操作，格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh user@host &#39;command&#39;
+</code></pre>
+
+<p>案例1、在机器A（192.168.13.148）中查看机器B（192.168.13.149）的操作系统类型。在A机器上面执行如下代码：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh  dequan@192.168.13.149  &#39;uname -a&#39;
+</code></pre>
+
+<p>案例2、将机器A（192.168.13.148）中test文件夹复制到B机器（192.168.13.149）。在A机器上面，执行如下命令：</p>
+
+<pre class="line-numbers"><code class="language-bash">tar -cz test | ssh dequan@192.168.13.149 &#39;tar -xz&#39;
+</code></pre>
+
+<p>当然，我们也可以使用scp命令或rz命令，传输文件。案例3、在机器A（192.168.13.148）处查看B机器（192.168.13.149）是否监听了1080端口。在A机器上面，执行如下命令：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh dequan@192.168.13.149 &#39;netstat -tln |grep 1080&#39;
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230356" alt="img"/></p>
+
+<h2 id="toc_9">7 <strong>SSH的本地转发</strong></h2>
+
+<p>本地转发，说白了，就是把发到本地的某个端口请求，转发到远程的某台机器上面。格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L  [本地地址:]本地端口:远程地址:远程端口 远程用户@远程地址
+</code></pre>
+
+<p>案例1、在机器B（192.168.13.149）上面访问机器A（192.168.13.148）的服务。</p>
+
+<p>现在，我们在A机器上面，启动了Nginx服务，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230405" alt="img"/></p>
+
+<p>我们希望B机器也能够这样使用A机器上面的服务。需要把B机器上面80端口请求，转发到A机器上面。目前在B机器这样执行，是报错的，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230410" alt="img"/></p>
+
+<p>需要在B机器上面，执行如下代码：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -f -N -L 127.0.01:80:192.168.13.148:80 dequan@192.168.13.148
+</code></pre>
+
+<p>然后，在B机器上面，访问A机器的服务，就想访问自身的服务一样。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230421" alt="img"/></p>
+
+<h2 id="toc_10">8 <strong>SSH的远程转发</strong></h2>
+
+<p>远程转发，即把发给远程机器的某个端口请求，转发到本地的机器上面。格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -R [远程地址:]远程端口:本地地址:本地端口 远程用户@远程地址
+</code></pre>
+
+<p>在上面的案例中，我们也可以通过远程转发来实现。即在A机器上面执行如下代码：</p>
+
+<pre class="line-numbers"><code class="language-css">sudo ssh -f -N -R 8081:127.0.0.1:80 dequan@192.168.13.149
+</code></pre>
+
+<p>我们监听了B机器的8081端口，把该端口的请求，转发到A机器上面。可以在B机器上面看到，我们的监听，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230428" alt="img"/></p>
+
+<p>此时，执行如下命令，就会被转发到A机器的127.0.0.1的80端口，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230433" alt="img"/></p>
+
+<h3 id="toc_11">1、利用远程转发，实现代理功能</h3>
+
+<p>目前B机器，只能在自己127.0.0.1的80端口监听并转发，如何让B机器作为代理，转发其他机器的请求到A机器上面呢？比如，现在有一台机器C（192.168.13.143），C不能访问A，但是能够访问B。如何让C利用B来访问A呢？此时，需要将B的监听，由127.0.0.1:8081，改为0:0.0.0:8081，修改sshd的配置/etc/ssh/sshd_config。</p>
+
+<pre class="line-numbers"><code class="language-undefined"> vim /etc/ssh/sshd_config
+如果有
+GatewayPorts no
+改为
+GatewayPorts yes
+
+没有，添加即可
+然后重启sshd
+
+sudo service sshd restart
+</code></pre>
+
+<p>然后重新，设置动态转发，如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -f -g  -N -R 8081:127.0.0.1:80 dequan@192.168.13.149
+</code></pre>
+
+<p>可以看到，此时B机器，已经监听了0:0.0.0:8081</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230442" alt="img"/></p>
+
+<p>在C机器上面，我们通过curl模拟请求，利用B机器做代理，如下：</p>
+
+<pre class="line-numbers"><code class="language-css">curl -x 192.168.13.149:8081 127.0.0.1
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230449" alt="img"/></p>
+
+<p>当然，如果还有其他机器，也可以使用类似的方式，来请求A机器。</p>
+
+<h2 id="toc_12">9 <strong>SSH的动态转发</strong></h2>
+
+<p>对于SSH的本地转发和远程转发，都需要将本地端口和远程端口一一绑定，格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -D [本地地址:]本地端口号 远程用户@远程地址
+</code></pre>
+
+<p>比如，把发到B机器上面的请求，都转发到A机器上面，让A机器去执行请求。</p>
+
+<h2 id="toc_13">10 <strong>SSH存在的问题</strong></h2>
+
+<p>如果有人截获了登录请求，然后冒充远程主机，将伪造的公钥发给用户，那么用户很难辨别真伪。因为不像https协议，SSH协议的公钥是没有证书中心（CA）公证的，也就是说，都是自己签发的。可以设想，如果攻击者插在用户与远程主机之间（比如在公共的wifi区域），用伪造的公钥，获取用户的登录密码。再用这个密码登录远程主机，那么SSH的安全机制就荡然无存了。这种风险就是著名的&quot;中间人攻击&quot;（Man-in-the-middle attack）。</p>
+
+<h2 id="toc_14">11 <strong>总结</strong></h2>
+
+<p>本篇文章主要介绍了SSH的基本概念和实践中常用的一些方法，并没有涉及深层原理和优化的知识，在底层实现和协议具体内容还能继续深入研究。如果有什么疑问或建议，可以在下方留言。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025628906.html">
+                
+                  <h1>TCP/IP 解释</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>计算机网络是一门基础课程，但是老师所讲的东西无非起到一个抛砖引玉的作用。然而对于需要自学的人来说，无疑是更难的。前路漫漫～～</p>
+
+<p>计算机网络本来就是比较枯燥的，文章内容较多，建议读者耐心看完这篇文章，希望大家看完后都能有所收获。先把这篇文章的大致结构放上来。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190058" alt="img"/></p>
+
+<h1 id="toc_0">预备知识</h1>
+
+<hr/>
+
+<p>谢希仁的那本《计算机网络》是很多大学选择的计网教材，在第一章是一个概论，大致讲了计算机网络的发展，也可以说是每个人都必须了解的小常识。在这里，我就做一个总结概括，把它作为学习计网预备知识。</p>
+
+<h2 id="toc_1">互联网简史</h2>
+
+<ul>
+<li>第一阶段：20世纪50年代，数据通信技术与网络理论基础研究</li>
+<li>第二阶段：20世纪60年代，ARPANET与分组交换技术</li>
+<li>第三阶段：20世纪70年代中期，网络体系结构与网络协议的标准化</li>
+<li>第四阶段：20世纪90年代，互联网、高速网络、无线网络、移动互联网与网络安全技术发展</li>
+</ul>
+
+<h2 id="toc_2">互联网的发展</h2>
+
+<p><strong>「计算机网络的发展主要经历了下面的七个阶段。」</strong></p>
+
+<ul>
+<li><p><strong>「批处理」</strong>：为了让更多的人使用计算机，出现了批处理系统。所谓的批处理，是指事先把用户数程序数据装入卡带或者磁带，并由计算机按照一定顺序读取。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190102" alt="img"/></p></li>
+<li><p><strong>「分时系统」</strong>：批处理系统之后，又出现分时系统。它是指多个终端同时与计算机连接，允许多个用户同时使用计算机。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190104" alt="img"/></p></li>
+<li><p><strong>「计算机通信技术」</strong>：在分时系统中，我们看到了终端和计算机的连接，但这并不意味着计算机与计算机之间也已互联连接。随着计算机的数量普及，计算机之间的数据交互的便捷性越来越受到重视，最开始两个主机之间交互数据过程相当繁琐，因此计算机通信技术（计算机与计算机之间由通信线路连接）应运而生。人们可以很轻松的即时读取另一台计算机中的数据，从而极大地缩短了传输数据的时间。</p></li>
+<li><p><strong>「计算机网络的产生」</strong>：20世纪70年代，人们开始实验基于分组交换技术的计算机网络，并着手研究不同厂商的计算机之间相互通信的技术。到了80年代，一种能够互联多种计算机的网络应运而生。网络通信技术进入了发展的高速公路。</p></li>
+<li><p><strong>「互联网的普及」</strong>：进入20世纪90年代，随着计算机的价格降低、性能增强、各类应用纷纷冒头，计算机普及程度越来越高。面对这一趋势，各家厂商不仅要保证生产产品的自身互联性，还着力于让自己的网络技术不断与互联网技术（TCP/IP）兼容。</p></li>
+<li><p><strong>「互联网时代」</strong>：随着互联网的普及，现在，人们越来越离不开互联网了。生活、学习工作也都得依靠网络信息，万物互联的时代早就已经到来了。</p></li>
+<li><p><strong>「网络安全时代」</strong>：互联网给世界带来了颠覆性的改变，给人们日常生活带来了极大的便利，互联网呈现给现代人一个高度便捷的信息网络环境，在国家面前，犹如水电煤气一样，成为了国家必不可少的重要资源，随着万物互联，网络安全必定是国家安全最重要的一环。在互联网普及的初期，人们更关注单纯的连接性，注重不受任何限制的建立连接。但现在，人们不再满足与“单纯的连接”而是更为追求“安全的连接”。</p></li>
+</ul>
+
+<h2 id="toc_3">网络的性能指标</h2>
+
+<ul>
+<li><strong>「比特」</strong>：比特(bit)是计算机中数据量的单位，也是信息论中使用的信息量的单位。英文单词bit来源于binary digit，意思是一个“二进制数字”。网络技术中的速率指的是连接在计算机网络上的主机在数字信道上传送数据的速率，它也称为数据率(data rate)或比特率(bit rate)。</li>
+<li><strong>「带宽」</strong>：在计算机网络中，带宽用来表示网络的通信线路传送数据的能力，因此网络带宽表示单位时间内从网络中的某一点到另一点所能通过的“最高数据率”。这种意义的带宽的单位是比特/秒。</li>
+<li><strong>「吞吐量」</strong>：吞吐量(throughput)表示在单位时间内通过某个网络（或信道、接口）的数据量，他表示当前网络传输数据的能力。</li>
+<li>时延：</li>
+<li>1、<strong>「发送时延」</strong>：指主机或路由器发送数据帧所需要的时间，也就是从发送数据帧的第一个比特算起，到该帧的最后一个比特发送完毕所需要的时间。</li>
+<li>2、<strong>「传播时延」</strong>：指电磁波在信道中传播一定距离需要花费的时间。</li>
+<li><strong>「时延带宽积」</strong>：时延带宽积表示链路可容纳的比特数，因此，链路的时延带宽积又称为以比特为单位的链路长度。</li>
+<li><strong>「往返时间RTT」</strong>：往返时间RTT，表示从发送方发送数据开始，到发送方收到来自接收方的确认（接收方收到数据后便立即发送确认），总共经历的时间。往返时间一般就会包括分组在网络中的各种时延。</li>
+<li><strong>「利用率」</strong>：利用率可以分为信道利用率和网络利用率两种。信道利用率指出某信道有百分之几的时间是被利用的（有数据通过）。完全空闲的信道的利用率是零。网络的利用率则是全网络的信道利用率的加权平均值。信道利用率并非越高越好，这是因为，根据排队论的理论，当某信道的利用率增大时，该信道引起的时延也会迅速增加。信道或网络的利用率过高会产生非常大的时延。</li>
+</ul>
+
+<h2 id="toc_4">不能不知道的小常识</h2>
+
+<h3 id="toc_5">计算机网络的分类</h3>
+
+<p>按照<strong>「地理覆盖范围」</strong>来分类的话，计算机网络可以被分为一下三个部分：</p>
+
+<ul>
+<li><strong>「局域网」</strong>（Local Area NetWork，LAN），常见的办公室、宿舍或网吧中的网络就是局域网几米到10km以内。其特点是：连接范围窄，用户少，配置容易，连接速率高。</li>
+<li><strong>「城域网」</strong>（Metropolitan Area NetWork，MAN），用于将一个城市、一个地区的企业、机关或学校的局域网连接起来，实现区域内的资源共享</li>
+<li><strong>「广域网」</strong>：广域网（Wide Area Network，WAN），也称为远程网，不同城市间的LAN或者MAN网络互连，因为距离远，信息衰减比较严重，所以这种网络一般要租用专线，通过特殊协议进行连接，构成网状结构，广域网因为所连接的用户多，所以每个用户的连接速率一般较低。</li>
+</ul>
+
+<h3 id="toc_6">计算机网络的拓扑结构</h3>
+
+<ul>
+<li><p>总线结构</p>
+<p>：</p></li>
+<li><p>优点：费用较低，易于扩展，线路的利用率高；</p></li>
+<li><p>缺点：可靠性不高，维护困难，传输效率低。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190116" alt="img"/></p></li>
+<li><p>环形结构</p>
+<p>：</p></li>
+<li><p>优点：令牌控制，没有线路竞争，实时性强，传输控制容易；</p></li>
+<li><p>缺点：维护困难，可靠性不高</p></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190139" alt="img"/></p>
+
+<ul>
+<li>星型结构</li>
+<li>优点：可靠性高，方便管理，易于扩展，传输效率高.</li>
+<li>缺点：线路利用率低，中心节点需要很高的可靠性和冗余度。</li>
+</ul>
+
+<h2 id="toc_7">计算机有哪些结构</h2>
+
+<p>有三种不同的计算机网络分层模型：</p>
+
+<ul>
+<li><p><strong>「OSI七层模型」</strong></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190144" alt="img"/></p></li>
+<li><p><strong>「五层结构模型」</strong></p></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190150" alt="img"/></p>
+
+<ul>
+<li><strong>「TCP/IP分层结构模型」</strong></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190154" alt="img"/></p>
+
+<p>TCP/IP协议是当前互联网所遵循的协议，它并不是单纯地由TCP或者IP组成，而是由各层的协议一起组成的，构成我们通常说说的TCP/IP协议栈。但是为了更好的理解，后面文章也是按照五层协议来写的。</p>
+
+<h1 id="toc_8">物理层</h1>
+
+<hr/>
+
+<p>这边先给一个建议，大家在学习计算机网络的时候不应该把每个网络协议单独拿出来学习，应该明白它的产生原因以及在整个计算机网络的作用。</p>
+
+<h2 id="toc_9">数字信号与模拟信号</h2>
+
+<p>它的作用是：屏蔽不同的传输媒体和通信手段的差异。我们都知道，自然界的信号无非就是两种，一种是数字信号，另一种就是模拟信号。那么是什么模拟信号？什么又是数字信号呢？</p>
+
+<p>说白了，所谓的模拟信号就是连续变化的物理量，模拟信号其特点是幅度连续(连续的含义是在某一取值范围内可以取无限多个数值)。模拟信号，其信号波形在时间上也是连续的，因此它又是连续信号。我们对连续信号进行抽样，就会得到抽样信号，但抽象信号就是离散的（说着说着就说到了信号系统，看来补考对我的影响还是有的）。但数字信号是不同于模拟信号的，他在时间域上是离散的，它有两种不同状态的物理量，分别用“0”，“1”来表示。这就好像电灯开关一样，也有两种不同的状态。</p>
+
+<p>当然，数字信号与模拟信号是可以相互转换的，模拟信号通常使用PCM（脉冲编码调制）方法量化并转换为数字信号，PCM方法是使不同范围的模拟信号对应不同的二进制值。通常，数字信号通过载波相移得到模拟信号。</p>
+
+<h2 id="toc_10">物理层的传输媒介</h2>
+
+<p>我们大家都知道，数据在物理层传输的媒介是不一样的，工作在物理层的是<strong>「集线器」</strong>。不过，大致可以为一下两类：</p>
+
+<ul>
+<li><strong>「引导型传输媒介」</strong>：引导型传输媒体中又有不同的类别，比如同轴电缆、光缆、双绞线，其中双绞线根据是否屏蔽又可以继续细分。</li>
+<li><strong>「非引导型传输媒介」</strong>：非引导型传输媒介指的是无线电波在空间中的传播，利用不同的频段可以传输不同的信号。</li>
+</ul>
+
+<h2 id="toc_11">信道</h2>
+
+<p>说起信道，前面的基础篇提到过信道的利用率，但至于信道更详细的介绍，就没有提到，现在就来仔细看看。按照传输媒介可以分为三类：</p>
+
+<ul>
+<li><strong>「有线信道」</strong>：有线信道以导线为传输媒质，信号沿导线进行传输，信号的能量集中在导线附近，因此传输效率高，但是部署不够灵活。这一类信道使用的传输媒质包括用电线传输电信号的架空明线、电话线、双绞线、对称电缆和同轴电缆等等，还有传输经过调制的光脉冲信号的光导纤维。</li>
+<li><strong>「无线信道」</strong>：无线信道主要有以辐射无线电波为传输方式的无线电信道和在水下传播声波的水声信道等。无线电信号由发射机的天线辐射到整个自由空间上进行传播。不同频段的无线电波有不同的传播方式。</li>
+<li><strong>「存储信道」</strong>：在某种意义上，磁带、光盘、磁盘等数据存储媒质也可以被看作是一种通信信道。将数据写入存储媒质的过程即等效于发射机将信号传输到信道的过程，将数据从存储媒质读出的过程即等效于接收机从信道接收信号的过程。</li>
+</ul>
+
+<p>信道是传输信息的信道，信道容量描述了信道无差错地传输信息的最大能力，可以用来衡量信道的好坏。</p>
+
+<p>关于信道，还有一个重要的参数，那就是信噪比，信噪比越大，信道的容量也越大，这里的话给出著名的香农公式：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190202" alt="img"/></p>
+
+<p>其中，C为信道容量，B为带宽，S/N为信噪比。</p>
+
+<h2 id="toc_12">信道复用</h2>
+
+<p>我们知道，当没有数据进行传输的时候，信道是十分空闲的。但是在网络数据请求量大的时候，比如说最近的618，信息的传播速度就会受阻。那什么是信道的复用，复用就是重复使用的意思。信道的复用可以分为以下几个方面：</p>
+
+<ul>
+<li><strong>「时分复用」</strong>：所谓的时分复用，就是把做整个信道分为不同的时间。当采用时分复用时，所有用户在不同的时间占用同样的频带宽度（分时不分频）。时分复用可能会造成线路资源的浪费</li>
+<li><strong>「频分复用」</strong>：频分复用就是把信号分成不同的频率，当采用频分复用技术时，所有用户在同样的时间占用不同的带宽资源。当采用频分复用技术时，所有用户在同样的时间占用不同的带宽资源。</li>
+<li><strong>「统计时分复用」</strong>：所谓的统计时分复用系统，我们也可以称为异步的时分复用系统。它有一个类似缓冲的机制，当数据到达一定量的时候，才会转发，这大大提高了信道的利用率。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190207" alt="img"/></p>
+
+<h1 id="toc_13">数据链路层</h1>
+
+<hr/>
+
+<h2 id="toc_14">以太网帧</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190214" alt="img"/></p>
+
+<p>数据链路层接收来自网络层的IP数据报，通过一定的封装，让IP数据报能在数据链路层上传输。像这样，装好了的IP数据报，我们称之为以太网帧，也叫MAC帧。MAC帧由以下几个重要的部分组成：</p>
+
+<ul>
+<li><strong>「目的MAC地址」</strong>：MAC帧的目的地址占据6个字节，它标志了目标主机的地址。</li>
+<li><strong>「源MAC地址」</strong>：和目的地址一样，源地址也占据6个字节，它标志的源主机的地址。</li>
+<li><strong>「类型」</strong>：类型占据2个字节，它记录上层使用的协议0X0800表示IP协议。</li>
+<li><strong>「数据部分」</strong>：数据部分自然是来自上层的IP数据报。</li>
+<li><strong>「FCS」</strong>：FCS占据4个字节，它是用来进行差错检测的，如果一个MAC帧发生了错误，则不能发送到目的主机上。</li>
+</ul>
+
+<h2 id="toc_15">差错检测</h2>
+
+<p>为什么要进行差错检测？</p>
+
+<p>现实的通信链路都不会是理想的。这就是说，比特在传输的过程中可能会产生差错：1可能会变成0，0可能会变成1，这就叫做比特差错。在一段是时间内，传输错误的比特占所传输比特总数的比率成为误码率BER(Bit Error Rate)。误码率与信噪比有很大的关系，在实际通信中不可能使误码率下降到零。因此，为了保证数据传输的可靠性，在计算机网络传输数据时，必须采用各种差错检测措施。</p>
+
+<p>MAC帧在传播的过程中会产生差错，差错的产生是不可避免的。前面在以太网帧部分我们提到过差错检测序列FCS，根据FCS我们就可以知道这个MAC帧在传输的过程中是否出现了错误或者丢失。</p>
+
+<p>后面讲到传输层的时候我们也会提到差错检测，那么这两者到底有啥区别了？总结起来，可以用一句话概括：</p>
+
+<ul>
+<li>数据链路层的差错检测的目的是做到&quot;无比特差错&quot;。</li>
+<li>传输层的差错检测的目的是做到&quot;无传输差错&quot;。即弥补帧丢失、帧重复、帧失序。</li>
+</ul>
+
+<p>差错检测的方法主要有两种：奇偶校验法（PCC）和循环冗余校验CRC，PCC非常简单，不是这篇文章的重点，下面主要讲一下CRC循环冗余校验。</p>
+
+<p>循环冗余校验是一种根据传输或保存的数据而产生固定位数校验码的方法，主要用来检测或校验数据传输或者保存后可能出现的错误。生成的数字在传输或者储存之前计算出来并且附加到数据后面，然后接收端进行检验确定数据是否发生变化。</p>
+
+<p>通过CRC，我们可以计算出FCS冗余校验码，FCS位于MAC帧的尾部。通过FCS，我们就可以知道这个MAC帧是否发送了错误。</p>
+
+<h2 id="toc_16">适配器</h2>
+
+<p>说到适配器，其实完全可联想一下生活中的适配器。比如我们给手机充电的时候需要有电源适配器，电源适配器无非就是转换的作用，或者作为一个载体，实现能量的转移。实际上，电脑里的适配器也是一样。结合下面这张图来理解：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190219" alt="img"/></p>
+
+<p>我们都知道，数据在外部媒介中的传输方式是串行传输，然而计算机处理内部指令的时候，用的是并行的方式。怎样把串行传输的数据转换成并行传输呢？这就需要适配器了。适配器就像是起到了桥梁的作用，通过它，就可以轻松实现数据传输方式的转换。</p>
+
+<h2 id="toc_17">CAM表</h2>
+
+<p>我们都知道交换机，交换机是一种多端口的网桥，在数据链路层使用MAC地址转发数据。在交换机类不实际存储以一张表，叫做CAM表。这张表记录了主机的MAC地址以及对应的接口，看看下面的这张图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190223" alt="img"/></p>
+
+<p>有三台主机A，B，C和交换机连接在一起，最开始，CAM里没有存储任何信息。</p>
+
+<p>突然有一天，主机A（源MAC）想要给主机B（目的MAC）发送消息。这个时候，交换机就会检查自己的CAM表里是否存储了主机A的信息，交换机一看没有A的信息，就把A的信息写进自己的CAM表里。现在，交换机的CAM表变成了这样：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190227" alt="img"/></p>
+
+<p>这个时候，交换机的CAM表里已经存储了主机A的信息，但是主机A却想要给主机B发送信息。这可怎么办呢？<strong>「首先」</strong>，交换机会检查自己的CAM表里是否存在B的信息，<strong>「如果存在」</strong>，就直接把信息转发给B。<strong>「如果不存在」</strong>，那又怎么办呢？犹豫了一下，交换机又有了一个想法，它把主机A发给主机B的消息以广播的形式发给了所有连在它身上的主机。主机C也收到了这条消息，但是主机C检查了一下目的地址，不是发给自己的，就果断丢弃了这条消息。主机B收到了这条消息后，同样也检查了收件人（目的地址），发现是给自己的消息，于是就收下了这条消息。之后，交换机就更新了自己的CAM表，上面增加了一条信息：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190232" alt="img"/></p>
+
+<p>就这样，CAM表里存储了主机A，和主机B的信息。下一次，主机A想要给主机B发送信息的时候，交换机就不需要广播了。</p>
+
+<h2 id="toc_18">CSMA/CD协议</h2>
+
+<p>到目前为止CSMA/CD的使用已经相当少了，它的使用在下面两个地方：</p>
+
+<ul>
+<li>使用的是有线网络</li>
+<li>应用在10M/100M的半双工有线网络中</li>
+</ul>
+
+<p><strong>「使用CSMA/CD协议的的网络有以下三个特点：」</strong></p>
+
+<ul>
+<li><strong>「该网络是总线结构」</strong>，所有的计算机接在同一总线上，同一时间内，只允许一台计算机发送（或接收）消息，也就是采用半双工通信。</li>
+<li><strong>「载波监听」</strong>：在发送前、发送中都要不停地对信道进行监听，只有在信道是空闲的时候才能发送消息。</li>
+<li><strong>「碰撞检测」</strong>：主机会在发送消息前，发信息的过程中不断对进行信道检测，如果有两台主机同时发送消息，则消息传输立即停止。随机等待一段时间再进行发送消息，这就是退避算法。</li>
+</ul>
+
+<p><strong>「补充一下退避算法的特点：」</strong></p>
+
+<ul>
+<li><strong>「非坚持的CSMA」</strong>：线路忙，则等待一段时间，再监听；不忙时，立即发送；减少冲突，信道利用率降低</li>
+<li><strong>「1坚持的CSMA」</strong>：线路忙，继续侦听；不忙时，立即发送；信道利用率提高，冲突增大。</li>
+<li><strong>「P坚持的CSMA」</strong>：线路忙，继续侦听；不忙时，根据p概率进行发送，另外的1-p概率为继续侦听（p是一个指定概率值）。</li>
+</ul>
+
+<h1 id="toc_19">网络层</h1>
+
+<hr/>
+
+<h2 id="toc_20">IP协议</h2>
+
+<h3 id="toc_21">IP的概述</h3>
+
+<p>IP协议对应的是IP地址，那么什么是IP地址呢？</p>
+
+<p>维基百科上是这样解释的：</p>
+
+<blockquote>
+<p>❝</p>
+
+<p>IP地址（英语：IP Address, 全称：Internet Protocol Address），又译为网际协议地址、互联网协议地址。当设备连接网络，设备将被分配一个IP地址，用作标识。通过IP地址，设备间可以互相通讯，如果没有IP地址，我们将无法知道哪个设备是发送方，无法知道哪个是接收方。[2] IP地址有两个主要功能：标识设备或网络 和 寻址（英语：location addressing）。</p>
+
+<p>❞</p>
+</blockquote>
+
+<p>上面的一堆文字其实无非解释了两个点，总结如下：</p>
+
+<ul>
+<li>IP地址是用来标记主机的地址，没有IP地址就无法识别主机。（标志主机）</li>
+<li>因为唯一标记主机，所以可以用来在网络中查找主机。（寻址）</li>
+</ul>
+
+<p>现在想一下前面我们说到的MAC地址，MAC地址是一台主机的身份象征。一台主机从出厂以后，MAC地址就唯一确定了，无法更改（当然也可以通过软件修改，但是必须得确保同一局域网下不能有两台MAC地址相同的主机）。</p>
+
+<p><strong>「那么，为什么有了MAC地址，还需要IP地址？或者说是有了IP地址，还需要MAC地址？」</strong></p>
+
+<p>这其实也算是一个经典的问题了，网上也有不少答案，这里推荐两篇文章：</p>
+
+<ul>
+<li>有了 IP 地址，为什么还要用 MAC 地址？</li>
+<li>为什么有MAC地址，还要有IP地址？？</li>
+</ul>
+
+<p>看完上面两篇文章，我总结如下：</p>
+
+<ul>
+<li><strong>「历史原因：」</strong> 以太网诞生于因特网之前，在IP地址之前MAC地址就已经在使用了。两者结合使用，是为了不影响已存在的协议</li>
+<li><strong>「分层实现：」</strong> 对网路协议进行分层以后，数据链路层的实现不需要考虑数据之间的转发，网络层的实现不需要考数据链路层的影响。</li>
+<li><strong>「分工合作：」</strong> IP地址是会随着主机接入网络的不同而发生改变的，而MAC一般不会改变。这样的话，我们可以使用IP地址进行寻址，当数据报和目的主机处于同一网络时，就使用MAC地址进行数据交付。</li>
+</ul>
+
+<h3 id="toc_22">IP数据报</h3>
+
+<p>IP数据的样子是这样的：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190237" alt="img"/></p>
+
+<p>有几个重要的东西必须得进行说明一下：</p>
+
+<ul>
+<li><strong>「版本号」</strong>：占用4位二进制数，表示该IP数据报使用的IP协议版本。目前Internet中使用的主要是TCP/IP协议族中版本号为4的IP协议。</li>
+<li><strong>「头长度」</strong>：占用4位二进制位，此域指出整个报头的长度（包括选项），该长度是以32位二进制数为一个计数单位的，接收端通过此域可以计算出报头在何处结束及从何处开始读数据。普通IP数据报（没有任何选项）该字段的值是5（即20个字节的长度）。</li>
+<li><strong>「服务类型」</strong>：服务类型（TOS、type of service）：占用8位二进制位，用于规定本数据报的处理方式。</li>
+<li><strong>「生存时间（TTL，Time To Live）」</strong>：占用8位二进制位，它指定了数据报可以在网络中传输的最长时间。实际应用中把生存时间字段设置成了数据报可以经过的最大路由器数。TTL的初始值由源主机设置（通常为32、64、128或256），一旦经过一个处理它的路由器，它的值就减1。当该字段为0时，数据报就丢弃，并发送ICMP报文通知源主机，因此可以防止进入一个循环回路时，数据报无休止地传输下去。</li>
+<li><strong>「上层协议标识」</strong>：占用8位二进制位，IP协议可以承载各种上层协议，目标端根据协议标识就可以把收到的IP数据报送到TCP或UDP等处理此报文的上层协议了。</li>
+</ul>
+
+<p>关于IP数据报相对详细的文章可以看看这篇文章：IP数据报格式详解</p>
+
+<h3 id="toc_23">子网掩码与IP地址</h3>
+
+<p>前面说到IP地址的组成的时候，说到过网络号。常见的IP地址无非就是由网络地址和主机地址组成。那么什么是网络号？网络号就是计算机当前所在网络的名字，在这个网络下，又由许多的主机构成。那又该怎么计算网络号了？这时候，子网掩码派上了用场。</p>
+
+<p>通常，计算机的IP地址和子网掩码是成对出现的，通过子网掩码和IP地址进行对照就可以知道主机号和网络号。为了方便表示，子网掩码前面通常是连续的1，后面部分是连续的0，不能出现0和1交替的情况。</p>
+
+<p>请看下面的例子。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190243" alt="img"/></p>
+
+<p>现在已经知道了主机A的IP地址和子网掩码，把它们转化成二进制的形式。通过二进制对应子网掩码的1的部分对应IP地址的网络号，子网掩码为0的部分对应主机号。下面的这张图画的很清楚：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190246" alt="img"/></p>
+
+<h2 id="toc_24">ICMP协议</h2>
+
+<p>我们知道，IP协议是不可靠的传输协议，网络中进行可靠传输的是TCP协议，这个后面在讲传输层的时候会说到。那么，如果在消息没有送达的情况下，网络层是怎么解决的了？这个时候，就需要用到ICMP协议。什么是ICMP协议了？ICMP是网络控制报文协议(Internet Control Message Protocol, ICMP)。</p>
+
+<p>它的作用：更加有效地转发IP数据报作为IP数据报的数据部分，可以分为ICMP差错报文，和ICMP查询报文。差错报文是用来简单的报告错误的, 至于对于错误怎么处理是高层协议的职责。同时, 差错报文总是发送给最初的数据源(这是因为在ICMP数据报中唯一可以使用的就是源IP和目的IP)，查询报文总是成对出现。</p>
+
+<h2 id="toc_25">ARP协议</h2>
+
+<p>前面说到IP地址用来寻址，当目的地址和数据报处于同一网络时，MAC地址用来交付数据报。现在有一个问题，主机A要给主机B发送消息，消息经过一系列地转发，终于找到了主机B的IP地址。但是，我们都知道，数据在链路层的传输是需要MAC地址的，仅仅知道B的IP地址是无法进行通信的。请看下面这张图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190251" alt="img"/></p>
+
+<p>这个时候，ARP协议就派上用场了。ARP全称是地址解析协议（Address Resolution Protocol），其基本功能为透过目标设备的IP地址，查询目标设备的MAC地址，以保证通信的顺利进行，它是IPv4中网络层必不可少的协议。</p>
+
+<p><strong>「如同交换机工作在数据链路层一样，路由器是工作在网络层的。交换机有CAM表，路由器也有路由表。」</strong></p>
+
+<p>现在路由器要给主机B发送一条消息，必须得知道主机B的MAC地址才能进行通信。这个时候路由器会发送一个ARP请求，该请求是以广播的形式发送的，每一台连接到该路由器的主机都收到得到这条消息。但是只有主机B检查到自己的IP地址符合要求。于是主机B发送给路由器一条ARP响应，把自己的MAC的地址告诉了路由器。就像下面图示的那样：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190255" alt="img"/></p>
+
+<p>每次路由器发送一个ARP请求的时候，就会增加一条数据，这一条数据记录了IP地址对应的MAC地址，这样路由器下次再给该主机发送消息的时候就不用广播了。当然如同交换机的CAM表中的数据有生存了时间一样，路由表中的数据也有生存时间。试想一下，如果数据一直存在，那么路由器岂不是需要花大量的存储空间来缓存已经失效的数据。</p>
+
+<h2 id="toc_26">内部网关协议</h2>
+
+<p>互联网的路由选择协议主要有两种，分别是RIP和OSPF。下面具体介绍这两种协议。</p>
+
+<p><strong>「先介绍RIP协议」</strong>：</p>
+
+<ul>
+<li>路由信息协议（RIP） 是内部网关协议IGP中最先得到广泛使用的协议。RIP是一种分布式的基于距离矢量的路由选择协议，是因特网的标准协议，其最大优点就是实现简单，开销较小。</li>
+<li>基本算法：矢量距离算法（简称V－D算法）的思想是：网关周期性地向外广播路径刷新报文，主要内容是由若干（V，D）序偶组成的序偶表；（V，D）序偶中的V代表“向量”，标识网关可到达的信宿（网关或主机），D代表距离，指出该网关去往信宿V的距离；距离D按驿站的个数计。其他网关收到某网关的（V，D）报文后，据此按照最短路径原则对各自的路由表进行刷新。</li>
+<li>它只适用于小型的网络（15跳就达到极限），如果网络过于庞大，当网络出现故障时，要经过比较长的时间才能将此信息传送到所有的路由器。</li>
+</ul>
+
+<p><strong>「接下来说说什么是OSPF：」</strong></p>
+
+<ul>
+<li>基本定义：OSPF(Open Shortest Path First开放式最短路径优先）是一个内部网关协议(Interior Gateway Protocol，简称IGP），用于在单一自治系统（autonomous system,AS）内决策路由。</li>
+<li>基本算法：迪克斯加算法。主要是通过向邻居发送HELLO包来建立邻居关系，选取DR等。</li>
+</ul>
+
+<p>参考文章：计算机网络原理之RIP以及OSPF对比</p>
+
+<h2 id="toc_27">NAT协议</h2>
+
+<p>NAT技术其非常简单，那么NAT它的作用是什么呢？</p>
+
+<p>NAT（Network Address Translation，网络地址转换）是1994年提出的。当在专用网内部的一些主机本来已经分配到了本地IP地址（即仅在本专用网内使用的专用地址），但现在又想和因特网上的主机通信（并不需要加密）时，可使用NAT方法。</p>
+
+<p>这种方法需要在专用网连接到因特网的路由器上安装NAT软件。装有NAT软件的路由器叫做<strong>「NAT路由器」</strong>，<strong>「它至少有一个有效的外部全球IP地址」</strong>。这样，所有使用本地地址的主机在和外界通信时，都要在NAT路由器上将其本地地址转换成全球IP地址，才能和因特网连接。另外，这种通过使用少量的公有IP 地址代表较多的私有IP 地址的方式，<strong>「将有助于减缓可用的IP地址空间的枯竭」</strong>。</p>
+
+<p><strong>「简单来说，NAT技术就是实现局域网与互联网通信的一项协议。」</strong> NAT又可以分为三种不同的类型：</p>
+
+<ul>
+<li><strong>「静态NAT(Static NAT)：」</strong> 静态NAT设置起来最为简单和最容易实现的一种，内部网络中的每个主机都被永久映射成外部网络中的某个合法的地址。当一个内部主机必须被作为一个固定的外部地址访问时，通过静态NAT实现。</li>
+<li><strong>「动态地址NAT(Pooled NAT)：」</strong> 动态NAT则是在外部网络中定 义了一系列的合法地址（地址池），采用动态分配的方法映射到内部网络。动态NAT转换的工作过程是这样的，当有一个内部主机需要访问外网时，从公用IP地址池中取出一个可用的地址分配给该主机使用。当通信完成后，所获取的公用IP地址也被释放回地址池中。外部公用IP在被分配给一个内部主机通信使用时，该地址不能不能再次被分配给其他内部主机使用。</li>
+<li><strong>「网络地址端口转换NAPT（Port－Level NAT）：」</strong> NAPT是把内部地址映射到外部网络的一个IP地址的不同端口上。NAPT（Network Address Port Translation），即网络端口地址转换，可将多个内部地址映射为一个合法公网地址，但以不同的协议端口号与不同的内部地址相对应，也就是&lt;内部地址+内部端口&gt;与&lt;外部地址+外部端口&gt;之间的转换。</li>
+</ul>
+
+<p>参考文章【计算机网络】NAT：网络地址转换</p>
+
+<h2 id="toc_28">IPV6协议</h2>
+
+<p>我们前面说的IP地址其实是IPV4，那么，为什么已经有IPIV4了，还要来一个IPV4呢？原来是这样的，早在上个世纪，人们就预料到IPV4地址枯竭的一天，为了解决这个问题，开始了IPV6的研发。</p>
+
+<p><strong>「IPv6 (IP version 6)是为了根本解决IPv4地址耗尽的问题而被标准化的网际协议。」</strong> IPv4的地址长度为4个8位字节,即32比特。而IPv6的地址长度则是原来的4倍,即128比特,一般写成8个16位字节。可以看到，IPV6的地址是取之不尽，用之不竭的，那么现在为什么不把IPV4全部换成IPV6呢？</p>
+
+<p>从IPV4切换到IPV6极其耗时,需要将网络中所有主机和路由器的IP地址进行重新设置。当互联网广泛普及后,替换所有IP地址会是更为艰巨的任务。</p>
+
+<p>在现存的网络中，既有IPV4又有IPV6，那么它们之间是怎么通信的呢？有两种技术：<strong>「双协议栈」</strong>、<strong>「隧道技术」</strong>，下面分别进行介绍：</p>
+
+<ul>
+<li><strong>「双协议栈」</strong>：改变IP地址的首部，在首部进行转换的过程中，IPV6的首部的部分信息会丢失，而且这种转换的损失不可避免。</li>
+<li><strong>「隧道技术」</strong>：何谓隧道技术了？其实完全可以通过字面的意思理解。下面还是以画图的方式帮助大家理解。隧道技术说白了就是数据在传输的时候进行了另一种的封装与解封，如图数据由IPV6网络进入到IPV4的网络，需要把IPV6的数据包封装在IPV4的数据包里。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190300" alt="img"/></p>
+
+<h1 id="toc_29">传输层</h1>
+
+<hr/>
+
+<h2 id="toc_30">停止等待协议</h2>
+
+<p>什么是停止等待协议了？看完下面一张图你可能就懂了</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190304" alt="img"/></p>
+
+<p>停止等待协议可以由以下三个部分组成：</p>
+
+<ul>
+<li><strong>「无差错情况」</strong>：就像上面那个图一样，为了保证无差错的情况，主机A还要继续向主机B发送消息，就必须得到主机B的回复。</li>
+<li><strong>「出现差错」</strong>：如果出现差错，比如主机A一直没有收到主机B的回复，那么就会有一种机制，使得主机A把这条消息再一次发送给主机B。这中间涉及到一个<strong>「重传时间」</strong>的选择，这里得话，这个重传时间应该不小于RTT（主机A给主机B发送消息，主机B再给主机A发送消息的时间和）。</li>
+<li><strong>「确认丢失和确认迟到」</strong>：确认迟到和确认丢失，看看下面的这张图你可能就明白了</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190308" alt="img"/></p>
+
+<p>数据在传输过程中可能会出现丢失和迟到的情况，对于丢失的数据进行重传，对于迟到的数据不做处理。既然说到了停止等待协议，那我就不得不补充一下ARQ协议。是什么ARQ协议了？</p>
+
+<p>ARQ协议就是发送方不必收到对上一条消息的确认，一次可以发出多个分组，这样就提高了信道的利用，可以在某一时间内传送足够的数据量。</p>
+
+<h2 id="toc_31">UDP</h2>
+
+<p>UDP协议相对与TCP协议来说是相当简单的，传输层的重点自然也是TCP协议。下面先简单解释一下UDP协议。</p>
+
+<p><strong>「UDP具有以下特点：」</strong></p>
+
+<ul>
+<li>面向无连接的协议，进行不可靠的传输</li>
+<li>面向数据报</li>
+<li>没有拥塞控制</li>
+<li>UDP数据报首部开销小</li>
+<li>支持一对一，一对多，多对多，多对一的数据传输</li>
+</ul>
+
+<h2 id="toc_32">TCP</h2>
+
+<h3 id="toc_33">TCP概述</h3>
+
+<p><strong>「TCP是传输层的另一个协议，它具有以下特点：」</strong></p>
+
+<ul>
+<li>TCP协议是面向连接的传输层协议</li>
+<li>提供可靠交付</li>
+<li>使用全双工通信</li>
+<li>面向字节流</li>
+</ul>
+
+<h3 id="toc_34">TCP数据报</h3>
+
+<p>请看下面的这张图片（图片来源于网络）。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190323" alt="img"/></p>
+
+<p>这里的话对数据报的某些字段作一下解释：</p>
+
+<ul>
+<li><strong>「源端口」</strong>：发送主机的端口号</li>
+<li><strong>「目的端口」</strong>：接收主机的端口号</li>
+<li><strong>「序号」</strong>：在一个TCP连接中传送的字节流中的每一个字节都按顺序编号。字节流的起始序号必须在连接建立时设置。TCP数据报首部中的序号字段值则指的是本报文段所发送的数据的第一个字节的序号。</li>
+<li><strong>「确认号」</strong>：即期望收到对方下一个报文段的第一个数据字节的序号。若确认号为N，则表明：到序号N-1为止的所有数据都已正确收到。</li>
+<li><strong>「数据偏移」</strong>：它指出TCP报文段的数据起始处距离TCP报文段的起始处有多远。</li>
+<li><strong>「窗口」</strong>：窗口字段明确指出了现在允许对方发送的数据量。窗口值经常在动态变化着 窗口指的是发送本报文段的一方的接收窗口（而不是自己的发送窗口）。</li>
+<li><strong>「校验和」</strong>：检验和字段检验的范围包括首部和数据这两部分 在计算检验和时，要在TCP报文段的前面加上12字节的伪首部（同UDP）</li>
+<li><strong>「确认ACK」</strong>：仅当ACK=1时确认号字段才有效。当ACK=0时，确认号无效。TCP规定，在连接建立后所有传送的报文段都必须把ACK置1。</li>
+<li><strong>「推送PUSH」</strong>：当两个应用进程进行交互式的通信时，有时在一端的应用进程希望在键入一个命令后立即就能够收到对方的响应，而不再等到整个缓存都填满了后再向上交付。这时，发送方TCP把PSH置1，并立即创建一个报文段发送出去。接收方TCP收到PSH=1的报文段，就尽快地（即“推送”向前）交付接收应用进程。</li>
+<li><strong>「复位RST」</strong> ：当RST=1时，表明TCP连接中出现严重差错（如由于主机崩溃或其他原因），必须释放连接，然后再重新建立运输连接。</li>
+<li><strong>「SNY」</strong>：在连接建立时用来同步序号 当SYN=1而ACK=0时，表明这是一个连接请求报文段。</li>
+<li><strong>「FIN」</strong>：用来释放一个连接。</li>
+</ul>
+
+<h3 id="toc_35">滑动窗口</h3>
+
+<p>TCP进行数据发送，为了提高数据传输的效率，采用了一种叫做滑动窗口的机制来进行数据发送。</p>
+
+<p>下面是发送端滑动窗口的示意图，滑动窗口的大小是绿色部分和红色部分的序列长度。它工作的机制是这样的，一旦发送端收到一个确认，滑动窗口就会向右移动。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190328" alt="img"/></p>
+
+<h3 id="toc_36">流量控制</h3>
+
+<p>关于流量控制，用一句简短的话就可以概括。</p>
+
+<blockquote>
+<p>❝</p>
+
+<p>接收端会给发送端一个负反馈，通过这个负反馈可以控制发送端的滑动窗口的大小。</p>
+
+<p>❞</p>
+</blockquote>
+
+<p>下面可以看一下知乎上是怎么说的，我找了一条讲的最形象，可以结合着理解一下。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190337" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190341" alt="img"/></p>
+
+<p>知乎：TCP协议的滑动窗口具体是怎样控制流量的？</p>
+
+<h3 id="toc_37">拥塞控制</h3>
+
+<ul>
+<li><strong>「慢启动：」</strong> 慢启动值得就是一条TCP链接刚建立时不要一下发送大量数据导致网络拥塞激增，而是由小到大根据反馈逐渐增大拥塞窗口。</li>
+<li><strong>「拥塞避免：」</strong> 拥塞避免就是让滑动窗口缓慢增大，而不是像慢开始那样成倍增长。</li>
+<li><strong>「快重传：」</strong> 发送方只要一连收到三个重复确认就应当立即重传对方尚未收到的报文段，而不必继续等待设置的重传计时器到期。</li>
+<li><strong>「快恢复：」</strong> 快恢复具有下面两个特点</li>
+<li>当发送方连续收到三个重复确认时，就执行 “乘法减小” 算法，把慢开始门限减半。这是为了预防网络发生拥塞。注意，接下去不执行慢开始算法。</li>
+<li>执行快恢复算法时，改变滑动窗口的值，然后开始执行拥塞避免算法，使得拥塞窗口缓慢性增大。</li>
+</ul>
+
+<h3 id="toc_38">三次握手</h3>
+
+<p>三次握手与四次挥手可以说是面试常考的知识点了，不过在介绍三次握手之前，我觉得有必要了解一下<strong>「理想传输条件的共性」</strong>：</p>
+
+<ul>
+<li>传输信道不产生差错</li>
+<li>不管发送方以多快的速度发送数据，接收方总是能够及时接收数据。</li>
+</ul>
+
+<p>理想的情况终究是理想的，上述两种情况在实际环境是不可能发生的。那么，我们就来说说怎样使得我们的实际情况更加接近理想，这就是我们接下来要讲的三次握手。</p>
+
+<p>首先，三次握手和后面要讲的四次挥手都是针对TCP来说的，UDP是面向无连接的协议，不可能存在的三次握手与四次挥手。三次握手与四次挥手是为了更好进行可靠的传输，下面先看下面三次握手的流程图。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190347" alt="img"/></p>
+
+<p>既然是为了进行可靠的传输，无非是要保证客户端与服务器之间的数据发送和接收的正常进行。</p>
+
+<ul>
+<li><strong>「第一次握手」</strong>：Client 什么都不能确认；Server 确认了Client发送正常。</li>
+<li><strong>「第二次握手」</strong>：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己接收正常，Client发送正常。</li>
+<li><strong>「第三次握手」</strong>：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己发送、接收正常，对方发送接收正常。</li>
+</ul>
+
+<p>为什么需要进行第三次握手了？一句话，主要防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误。</p>
+
+<p>通过上面的三个步骤，Client和Server能够进行可靠的传输，缺一不可。</p>
+
+<h3 id="toc_39">四次挥手</h3>
+
+<p>既然理解了三次握手，想必四次挥手也没有啥难度，先把流程图附上。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190351" alt="img"/></p>
+
+<p>如同三次挥手一样，四次挥手也是为了可靠的传输。四次挥手就是Client和Server断开连接的过程，那么你可能会觉得，建立连接的过程需要三次到还可以理解，为啥连断开连接都需要四次。难道一次或者两次就不可以了吗？</p>
+
+<p>是这样的，既然三次握手的需要发送方和接收方确认，那么四次挥手也要得到发送方和接收方的确认。</p>
+
+<ul>
+<li><strong>「第一次挥手」</strong>：Client向Server发送断开的连接的请求。</li>
+<li><strong>「第二次挥手」</strong>：Server向Client发送断开连接的确认。Client收到以后，这个时候TCP进入了半连接的状态，从Client向Server发送数据的通道被关闭了。</li>
+<li><strong>「第三次挥手」</strong>：Server向Client发送一个断开连接的请求。</li>
+<li><strong>「第四次挥手」</strong>：Client向Server发送断开连接的确认。Server收到以后，这个时候TCP连接就完全断开了。</li>
+</ul>
+
+<p>也可以这样考虑，上面提到的问题。假如在第二次挥手的时候，Server在给Client发送ACK的同时，也发送了FIN的请求。那么如果，Server还在接收从Client传输过来的数据，则会因为Client的下一个ACK而关闭接收数据的通道，数据就会接收失败就像下面的这个图那样。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190355" alt="img"/></p>
+
+<p>这里推荐一篇文章，帮助大家更好理解TCP连接地建立和断开的过程：两张动图-彻底明白TCP的三次握手与四次挥手</p>
+
+<h2 id="toc_40">TCP与UDP的应用场景</h2>
+
+<p>至于TCP与UDP的关系，看完下面的这张图你可能就懂了（图片来源于网络）：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190400" alt="img"/></p>
+
+<p>TCP是可靠的传输，UDP是不可靠的传输，那为什么我们还需要使用不可靠的UDP进行数据传输呢？</p>
+
+<p>我们知道，UDP 在传送数据之前不需要先建立连接，远地主机在收到 UDP 报文后，不需要给出任何确认。虽然 UDP 不提供可靠交付，但在某些情况下 UDP 确是一种最有效的工作方式（一般用于即时通信），比如：QQ 语音、 QQ 视频 、直播等等。</p>
+
+<p>TCP 提供面向连接的服务。在传送数据之前必须先建立连接，数据传送结束后要释放连接。TCP 不提供广播或多播服务。由于 TCP 要提供可靠的，面向连接的运输服务（TCP的可靠体现在TCP在传递数据之前，会有三次握手来建立连接，而且在数据传递时，有确认、窗口、重传、拥塞控制机制，在数据传完后，还会断开连接用来节约系统资源），这一难以避免增加了许多开销，如确认，流量控制，计时器以及连接管理等。这不仅使协议数据单元的首部增大很多，还要占用许多处理机资源。TCP 一般用于文件传输、发送和接收邮件、远程登录等场景。</p>
+
+<h1 id="toc_41">应用层</h1>
+
+<hr/>
+
+<h2 id="toc_42">HTTP协议</h2>
+
+<p>关于HTTP的定义，可以看一下维基百科上是怎么说的：</p>
+
+<blockquote>
+<p>❝</p>
+
+<p>在网页浏览器的地址栏上显示HTTP网络协议的插图 HTTP是一个客户端（用户）和服务端（网站）之间请求和应答的标准，通常使用TCP协议。通过使用网页浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口（默认端口为80）。我们称这个客户端为用户代理程序（user agent）。应答的服务器上存储着一些资源，比如HTML文件和图像。我们称这个应答服务器为源服务器（origin server）。</p>
+
+<p>❞</p>
+</blockquote>
+
+<p>http协议现在已经广泛用于万维网，关于http，后面单独那个文章出来讲，不过现在得先说一下https。</p>
+
+<p>其实http和https是一种协议，只不过https经过了SSL（Secure Socket Layer，安全套接字层）或TLS（Transport Layer Security，传输层安全）的封装。单从这两个协议就可以知道，https安全的，而http是不安全的。</p>
+
+<h2 id="toc_43">FTP协议</h2>
+
+<p>FTP（File Transfer Protocol）文件传输协议，在TCP/IP协议族中属于应用层协议运行于TCP协议之上是一种可靠的传输协议，主要功能用于实现用户间文件分发共享，以及网络管理者在进行设备版本升级、日志下载和配置保存等业务操作时，均会使用到FTP功能。</p>
+
+<h2 id="toc_44">DNS协议</h2>
+
+<p>前面说到IP地址是用来定位主机的，但是我们在生活中是很难记住这些没有规律的IP地址，我们只知道网站的域名。那现在要怎么办了？</p>
+
+<p>于是DNS协议出现了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190405" alt="img"/></p>
+
+<p>DNS是域名解析协议，假如我们知道了域名，但是不知道服务器的IP地址，就需要用到DNS协议。</p>
+
+<h2 id="toc_45">DHCP协议</h2>
+
+<p>什么是DHCP协议了？还是看看维基上的定义</p>
+
+<blockquote>
+<p>❝</p>
+
+<p>动态主机设置协议（DHCP）是一种使网络管理员能够集中管理和自动分配IP网络地址的通信协议。在IP网络中，每个连接Internet的设备都需要分配唯一的IP地址。DHCP使网络管理员能从中心结点监控和分配IP地址。当某台计算机移到网络中的其它位置时，能自动收到新的IP地址。</p>
+
+<p>❞</p>
+</blockquote>
+
+<p>维基上已经解释的非常清楚了，DHCP的作用就是动态地给主机分配IP地址，大大减少了网络管理员的工作负担。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025631113.html">
+                
+                  <h1>VS Code 代码编辑器入门指南：核心组件与概念</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">什么是代码编辑器</h2>
+
+<p>如果此前对「代码编辑器」没有任何概念，我们可以和文本编辑器（写作工具）进行类比，就是<strong>为了更好更方便进行代码编写开发</strong>的工具。</p>
+
+<p>提到代码编辑器，不少「工龄」较长的程序员第一反应都会是 Notepad++，这款代码编辑器发布于 2003 年并更新至今，非常经典。因为使用惯性和轻量的特点它目前依旧很受欢迎。不过在 2020 年的今天，有更多好用的代码编辑器值得向你推荐。目前比较受欢迎的代码编辑器主要有 <a href="https://code.visualstudio.com/">VS Code</a>、<a href="https://atom.io/">Atom</a> 和 <a href="https://www.sublimetext.com/">Sublime text</a> 。它们各有特点也都有不少死忠粉，新手在初期都可以尝试。</p>
+
+<p>另外你或许还经常人提起 IDE (Intergreated Development Environment)，和代码编辑器相比 IDE 更关注开箱即用的体验、对代码的智能理解和对大型项目的支持，因此相对「笨重」；代码编辑器则更加轻量，侧重于文件，对于语言和工作流的支持也更自由。</p>
+
+<h2 id="toc_1">为什么选择 VS Code</h2>
+
+<blockquote>
+<p>Visual Studio Code（简称 VS Code）是一个由微软开发，同时支持 Windows 、 Linux 和 macOS 等操作系统且开放源代码的代码编辑器，它支持测试，并内置了 Git 版本控制功能，同时也具有开发环境功能，例如代码补全（类似于 IntelliSense）、代码片段和代码重构等。该编辑器支持用户个性化配置，例如改变主题颜色、键盘快捷方式等各种属性和参数，同时还在编辑器中内置了扩展程序管理的功能。 ——维基百科</p>
+</blockquote>
+
+<p>瑞士计算机科学家 Erich Gamma （《设计模式》作者、 Eclipse 主要开发者之一） 2011 年从 IBM 来到微软后起初负责组建团队开发一款线上开发工具（Manaco），后来他们在这个工具的基础上开发了如今的 VS Code 并于 2015 年发布。VS Code 定位为一个 <strong>高性能轻量级的编辑器</strong>，为了保证主进程的稳定，插件系统运行在主进程之外，所有个性化功能都由插件系统完成，在 IDE 和编辑器之间找到一个比较理想的平衡。</p>
+
+<p>在微软所有开源项目中，VS Code 是目前最受欢迎的一个。经过不同工具之间的比较，我最终选择 VS Code 的原因包括：</p>
+
+<ul>
+<li>完全免费且开源，更新迭代稳定</li>
+<li>跨平台编辑器，满足日常在不同系统中的使用</li>
+<li>占用系统资源比较少，大文件打开速度快</li>
+<li>插件丰富，扩展性极强</li>
+<li>使用人数多且社区活跃，碰到问题和需求容易找到解决方案</li>
+</ul>
+
+<h2 id="toc_2">从 0 到 1 开始使用 VS Code</h2>
+
+<h3 id="toc_3">下载与安装</h3>
+
+<p>VS Code 有两个不同版本：稳定版（Stable）每月更新；预览版（Insiders）每个工作日更新。两个版本可同时安装互不影响，在 <a href="https://code.visualstudio.com/Download">官网</a> 即可选择自己需要的平台和版本，本文使用的版本为稳定版 1.44.1。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182244.png" alt="img"/></p>
+
+<p>客户端安装完成后，如希望通过终端启动 VS Code，可以按下 <code>shift+command+p</code> 调出命令面板，在搜索框内输入<code>shell command</code> 后找到并点击「Shell Command: Install &#39;code&#39; command in PATH」即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182245.png" alt="img"/></p>
+
+<p>VS Code 默认是英文界面，这里<strong>并不建议</strong>把默认语言修改为中文，因为在学习大量英文相关教程和说明时使用英文界面或许更容易操作。另外，VS Code 绝大多数插件都没有汉化，使用起来会中英混杂。</p>
+
+<p>如果需要使用中文，依旧可以通过 <code>shift+command+p</code> 调取命令面板，然后在搜索框中输入 <code>display</code> 找到并点击「Configure Display Language」，这时会显示目前可以选择的语言或者安装其它语言。选择「Install additional languages...」后会跳转到相关语言插件，选择中文语言包安装并进行安装。安装完成后再次找到「Configure Display Language」后选择「zh-cn」后重启即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182246.png" alt="img"/></p>
+
+<h3 id="toc_4">欢迎界面</h3>
+
+<p>打开 VS Code 后，未修改默认配置的情况下首先会看到「欢迎页面」。如下图，欢迎页面有五部分内容。首次使用不妨先花点时间浏览「学习」部分内容，其中交互式演练场（interactive playground）是新手了解 VS Code 好资料。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182247.png" alt="img"/></p>
+
+<h3 id="toc_5">VS Code 主题与图标</h3>
+
+<p>在个性化设置部分点击「Color theme」可以选择一个你喜欢的主题。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182248.png" alt="img"/></p>
+
+<p>除了主题之外，你还可以为 VS Code 选择一套自己喜欢的文件图标。点击左下角的「设置」图标，选择「file icon theme」。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182249.png" alt="img"/></p>
+
+<p>然后选择「Install additional File icon theme...」会弹出可以安装的 icon 插件列表，例如 Material Icom Theme，点击安装后选择使用即可。</p>
+
+<h2 id="toc_6">核心概念与组件</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182250.png" alt="img"/></p>
+
+<p>上面这张图展示了默认配置情况下 VS Code 的基本界面。</p>
+
+<ol>
+<li>编辑器：在这里码字写代码</li>
+<li>侧边栏：可以类比为 macOS 的扩展坞，姑且称为「组件坞」，这里会展示各种组件和插件图标。</li>
+<li>组件内容：击侧边栏不同的组件后这里会展示相应显示组件内容。</li>
+<li>面板：包括问题显示、输出、调试控制台和终端四个组件。问题面板会显示代码中的警告和问题，输出面板会呈现命令和插件的运行结果，调试控制台用来进行代码调试，终端则可以帮助我们直接在 VS Code 中进行命令行操作。</li>
+<li>状态栏：可以类比为 macOS 的菜单栏 + 通知中心，这里会展示和文档及项目相关的简单信息以及部分插件提供的信息。</li>
+</ol>
+
+<h3 id="toc_7">侧边栏及常用组件</h3>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182251.png" alt="img"/></p>
+
+<p>默认情况下，侧边栏显示的五个组件分别是：资源管理器、跨文件搜索、源代码管理、启动和调试和扩展管理。随着后期安装插件的增多，侧边栏可以显示的组件数量也会越来越多，不过你可以通过右击侧边栏选择隐藏那些用不到的组件还可以拖动组件图标进行排序。</p>
+
+<p>侧边栏显示的默认组件中「资源管理器」和「跨文件搜索」就是字面功能，分别用来浏览管理文件和进行内容查找替换，我们会在下篇中配合具体应用场景进行更详细的介绍。源代码管理和调试分别用于 git 一系列操作和 debug，如果你并非程序员，没有这方面的需求也可以选择将其隐藏。</p>
+
+<h3 id="toc_8">扩展管理及插件</h3>
+
+<p>这一部分需要详细介绍「扩展管理」组件和「插件」这个概念。</p>
+
+<p>如文章开头所言，VS Code 中为了保证主进程的稳定所有个性化功能的实现都将通过插件来完成，在下文的应用场景部分我们也会用到大量插件。我们可以把插件理解为 macOS 中的应用，而扩展管理则是 VS Code 的应用商店。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182252.png" alt="img"/></p>
+
+<p>如上图，在组件显示部分可以看到已经安装的插件和推荐插件，所有你想找的东西都可以尝试在搜索框进行搜索。点击感兴趣的插件后会显示插件详情，其中包括详细介绍、作者和更新日志等内容。</p>
+
+<p>需要说明的是，由于 VS Code 的扩展插件数量实在过于庞大，在浏览插件的时候系统已提供了一些过滤操作，点击 <code>···</code> 可以选择只查看安装的插件或者流行的插件等等。</p>
+
+<p>更方便的是你还可以直接在插件搜索框中输入 <code>@</code> 来进行快速过滤。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182253.png" alt="img"/></p>
+
+<p>为了更方便的找到需要的插件，VS Code 支持按照类别进行查找，目前支持的类别如下图所示，包括语言支持、代码片段和主题等。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182254.png" alt="img"/></p>
+
+<p>目前在官方的插件商店中，我们可以看到共有 12 类 20000 余款插件。如果你想开发自己的插件，可以进一步参考 <a href="https://code.visualstudio.com/api">官方插件 API</a> 。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182255.png" alt="img"/></p>
+
+<h3 id="toc_9">命令面板</h3>
+
+<p>VS Code 作为一个代码编辑器，它本身有两个比较极客的设计思想。一个是基于文本（命令）的交互界面，另一个是基于文本的系统设置。基于文本的交互界面就是这里提到的命令面板，系统设置将会稍后介绍。</p>
+
+<p>命令面板的存在提供了一种全新的使用逻辑，熟练使用后可以极大提高效率，因此对命令面板有基本了解是上手 VS Code 的关键。其实在上文安装命令行启动以及设置中文支持时我们都用过它，<code>shift+command+p</code> 就是调用命令面板的一种基本方式。</p>
+
+<p>命令面板的高效在于其<strong>可以通过输入框中的第一个字符</strong>来触发不同功能。</p>
+
+<p>如下图所示，当你按下 <code>shift+command+p</code> 时，命令面板的输入框会自动出现一个 <code>&gt;</code> 它意味着此时命令面板认为你想要搜索相关命令并执行。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182256.png" alt="img"/></p>
+
+<p>当删除 <code>&gt;</code> 后会看到命令面板切换到了「访问最近文件」状态。如果你想在调用命令面板时直接访问最近文件，快捷键是 <code>command+p</code>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182257.png" alt="img"/></p>
+
+<p>如果此时输入 <code>?</code> 会触发命令面板的「帮助」功能，我们可以看到支持哪些操作。下图中显示的切换文件、<code>&gt;</code>执行命令、<code>@</code>符号跳转等我们在后续的应用场景中都会提及。其他单词缩写也代表了对应的操作，例如<code>edt</code>接空格可以管理打开的编辑器，<code>term</code>接空格可以打开或管理终端。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182258.png" alt="img"/></p>
+
+<h3 id="toc_10">修改设置</h3>
+
+<p>在下篇介绍中，我们会涉及到更改默认设置的内容，因此有必要了解 VS Code 更改设置的方法。</p>
+
+<p>VS Code 目前已经有了比较完善的图形化设置界面，只需要使用 <code>command+,</code> 就可以调用。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182259.png" alt="img"/></p>
+
+<p>如上图所示，设置面板已经列出了用户常用配置内容，你可以寻找自己想要改变的东西，但是这里更加推荐直接在搜索框里搜索。此外，VS Code 的配置分为用户（User）和工作区（workspaces）两个层级，其中用户配置会对全局生效，工作区配置只会对当前所在的项目（目录）生效且优先级更高。</p>
+
+<p>除了图形化界面以外，VS Code 的所有配置其实都写在 json 格式的一个文本文件中。你可以非常方便的调出该文件进行设置，只需要在命令面板中输入<code>open sett</code> 然后选择 JSON 即可。如果是针对工作区的设置，json 文件将会保存在工作区<code>.vscode</code>目录下。</p>
+
+<p>在 json 文件中，你可以直接编写设置，也可以点击行号前的「笔形」图标查看可以更改的内容。之所以有必要了解如何通过配置文件更改设置是因为部分插件提供的复杂设置只能通过修改 json 文件完成。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182300.png" alt="img"/></p>
+
+<h3 id="toc_11">工作区</h3>
+
+<p>工作区（workspace）是另一个需要了解的核心概念，它对应在 VS Code 中如何进行文件管理。</p>
+
+<p>上文我们提到相比于 IDE 着重于项目管理，代码编辑器更加侧重于文件本身，VS Code 所有操作就是基于当前目录、子目录和其中的文件进行的。在下篇内容中我们会讲到很多操作和插件都会基于所在目录生成相关的配置文件，而这些文件通常都会被保存到所在目录的<code>.vscode</code>文件夹中。<code>.vscode</code> 文件夹中的各种配置决定了不同目录被打开时 VS Code 会启动哪些插件和配置。</p>
+
+<p>随着项目逐渐发展，单一文件夹往往无法满足我们的开发需求，VS Code 通过工作区这个概念解决了同时操作多个文件夹的问题。简而言之，当你使用 VS Code 打开一个文件夹后可以在命令面板中搜索运行 <code>add folder to workspace</code>，然后选择想要打开的其它文件夹，此时就会显示一个尚未保存的工作区。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182301.png" alt="img"/></p>
+
+<p>当所有文件夹添加完成后在命令面板执行 <code>save workspace as</code> 选择我们的工作区名字和要保存的位置，就可以对该工作区进行保存。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182302.png" alt="img"/></p>
+
+<p>这时我们会看到一个名字后缀为<code>code-workspace</code>的文件，其本质依旧是一个 json 格式的配置文件。其中包括了文件夹的相对路径以及针对工作区的其它设置。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182303.png" alt="img"/></p>
+
+<p>此外，记住两个目录切换的快捷键也会大大提高效率，<code>ctrl+r</code> 可以快速查看并切换最近打开的文件夹，<code>ctrl+w</code> 则可以快速在所有打开的 VS Code 窗口中进行切换。</p>
+
+<h3 id="toc_12">语言支持</h3>
+
+<p>作为一个代码编辑器，VS Code 提供了统一的 <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> 和 <a href="https://code.visualstudio.com/api/extension-guides/debugger-extension">Code Debugging Protocol API</a>，所有语言支持都能够借助这两个 API 在 VS Code 上得到类似 IDE 的开发和调试体验。</p>
+
+<p>程序员可能最关心的内容就是对编程语言的支持，但初学者最不需要担心的其实也是这部分内容。到目前为止常用的主流编程语言在 VS Code 中都得到了很不错的支持，你需要的往往只是安装对应语言插件和进行一点基本配置。这些语言包括基础的 Markdown 和 JSON，以 HTML、CSS 和 JavaScript 为代表的多种前端语言和以 Python、Java、Go、C#、PHP 等为代表的大量后端语言。对于一些在程序员群体中相对使用人数较少的编程语言，例如 R 和 Julia 等也都有插件提供支持。下图为官网展示的几个流行语言插件。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182304.png" alt="img"/></p>
+
+<p>如果想查看自己使用的编程语言是否支持，可以在 <a href="https://marketplace.visualstudio.com/">插件商店</a> 中查找。此外，当你用 VS Code 打开一个文件时，系统会根据文件名后缀自动提示你安装与之相关的语言插件，非常方面。</p>
+
+<p>这一部分我们也会在下篇中结合具体的应用场景进行介绍。</p>
+
+<h3 id="toc_13">常用快捷键</h3>
+
+<p>提倡使用使用快捷键，主要目的是提高效率尽量让双手不离开键盘。快捷键的使用开始看似是一件更浪费时间的事情，但是随着肌肉记忆和熟练度增加效率将会大大提高。</p>
+
+<p>如果你是从其它编辑器切换到 VS Code 完全可以移植之前熟悉的快捷键配置，比如 Vim, Atom 或者 sublime。如果是一个新手，下图是我自己日常用到的 VS Code 高频快捷键，供参考。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182305.png" alt="img"/></p>
+
+<p>如果需要查看所有快捷键，可以通过 ctrl+K ctrl+s 进入快捷键设置界面或者直接查看官方文档。</p>
+
+<ul>
+<li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf">windows 快捷键</a></li>
+<li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf">macOS 快捷键</a></li>
+</ul>
+
+<p>以上就是 VS Code 编辑器入门指南上篇的内容，介绍了什么是代码编辑器、为什么选择 VS Code 、从 0 到 1 开始使用 VS Code 以及上手 VS Code 需要了解的核心概念与组件。有了这些知识储备，在下篇中将会介绍 5 个 VS Code 实际应用场景，进而更好的了解 VS Code 的特性和插件。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025631069.html">
+                
+                  <h1>Zotero 使用方法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>在官方网站中，有一篇文章专门替用户剖析了 <a href="https://www.zotero.org/why">为什么要使用 Zotero</a>。以下是我把其当做自己主力文献管理的几个主要原因：</p>
+
+<ul>
+<li>软件本身完全免费并且开源，不存在盗版问题</li>
+<li>注册后本身只包括 300M 空间同步，但支持 WebDAV 同步，例如 Dropbox 和坚果云等</li>
+<li>官方的反馈论坛比较活跃，有问题可以快速得到反馈</li>
+<li>从网站和期刊文章等提取保存出版物数据检索</li>
+<li>拖入 PDF 的出版物数据准确率高</li>
+<li>可以和 Word，LibreOffice 集成，方便文献进一步的使用管理</li>
+<li>强大的第三方插件系统</li>
+<li>每个条目下可以添加任意数量和格式的附件</li>
+</ul>
+
+<p>当然，使用一个工具首先要了解其上限和下限，Zotero 同样有着比较明显的短板：</p>
+
+<ul>
+<li>因为强大所以上手时略显复杂</li>
+<li>并不是一个完全基于 Web 的工具</li>
+<li>没有内置的 PDF 阅读工具</li>
+<li>没有适配于 iOS 和 Android 的官方应用程序</li>
+</ul>
+
+<h2 id="toc_0">Zotero 的使用和学习路径</h2>
+
+<p>最权威和最新的学习资料一定是 <a href="https://www.zotero.org/support/">官方文档</a>。目前有针对 Zotero 4 旧版本的 <a href="https://www.zotero.org/support/zh/start">中文说明</a>，如果英文吃力也可以参考。接下来我将按照下图的顺序介绍 Zotero 的使用和学习路径。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201615.png" alt="img"/>使用和学习路径</p>
+
+<h3 id="toc_1">添加内容到文献库</h3>
+
+<h4 id="toc_2"><strong>使用浏览器插件</strong></h4>
+
+<p>不同于一些工具，Zotero 的 <a href="https://www.zotero.org/download/">浏览器插件</a> 称得上可以「保存一切」。当所在的网页呈现出不同的内容时，Zotero 的插件会呈现出不同的图标。例如，如果打开的是 PDF，那么图标就会变成 PDF。</p>
+
+<p>如果一个网页内有多个文献元数据，可以检测到并同时保存多篇文章。即便是一篇博客，也可以直接保存。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201616.png" alt="img"/>针对博客的保存效果</p>
+
+<p><a href="https://raw.githubusercontent.com/fei0810/image-host/master/img/20190914163848.png"><br/>
+</a></p>
+
+<p>下图为直接保存博客网页后的效果，可以看到它也会抓取部分内容作为摘要进行显示。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201617.png" alt="img"/>博客保存详情</p>
+
+<p>如果你好奇 Zotero 支持导入的内容包括什么，可以参考下面这个截图。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201618.png" alt="img"/>支持保存内容</p>
+
+<h4 id="toc_3">使用各种标识符在应用内添加</h4>
+
+<p>对于添加文献或者书籍，如果我们知道了它对应的 ISBN，DOI 或 PubMed ID，就可以快速将项目通过标识符添加到库中。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201619.png" alt="img"/>利用标识符添加</p>
+
+<p>单击 Zotero 窗格中间列顶部的「按标识符添加项目」按钮，输入标识符后按 Enter。如果要一次输入多个标识符，在输入第一个标识符后按 Shift + Enter会进入多行模式，随后输入其余标识符（每行一个），并通过 Enter 换行。输入完成符后，再按 Shift + Enter 即可一次导入所有项目。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201620.png" alt="img"/>一次输入多个标识符</p>
+
+<h4 id="toc_4">本地 PDF 文件和各种附件直接拖入应用</h4>
+
+<p>如果你有已经下载好的 PDF 版本文献，只要直接拖入到应用中即可，Zotero 会自动识别 PDF 文档中的元数据。</p>
+
+<p>和大多数文献管理软件相比，Zotero 有一个非常大的优势就是支持将任意格式的附件添加到某个条目中，例如这里的附件可以是 Excel 格式的电子表格，可以是文献中提到的某一个网页地址，也可以是你自己和文献主题相关的电子实验记录，甚至你还可以将文章中提到的相关代码打包为压缩文件后进行添加。</p>
+
+<p>结合 WebDAV 的同步功能，我们还可以将这些相关资料在多个设备间进行同步，这样就极大的方便了我们对文献相关的各种资料进行整理。</p>
+
+<h4 id="toc_5">从其它工具导入</h4>
+
+<p>Zotero 支持从多种工具的数据导入，且支持的导入格式非常丰富。例如 Mendeley 的数据库，Endnote 的 XML 格式，以及常见的 RDF 和 RIS 格式等等。更多格式见下图截图。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201621.png" alt="img"/>数据库支持格式</p>
+
+<h4 id="toc_6">通过 feed 进行订阅</h4>
+
+<p>如果你是一个喜欢追文献的人，肯定有各种各样自己的方法，例如通过邮件订阅或者 RSS 等，而 Zotero 本身也为我们提供了一种非常方便的方法。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201622.png" alt="img"/>新建订阅</p>
+
+<p>点击 URL 后可以将一些杂志主页提供的 URL 地址直接添加到这里，并且进行更多高级设置，比如更新订阅时间和删除时间等等。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201623.png" alt="img"/>高级设置选项</p>
+
+<h3 id="toc_7">文献和笔记管理</h3>
+
+<h4 id="toc_8">集合与标签</h4>
+
+<p>集合可以理解为支持多个层级的文件夹，如下图在一个合集中新建一个子集。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201624.png" alt="img"/>新建分类</p>
+
+<p>除了按照目录分类以外，可以为每个文献添加若干个标签。这里建议标签的使用维度不和集合重合。例如，我有个一个叫做「lncRNA」的目录集合，就不应该再建立一个「lncRNA」的标签，这时的标签可以考虑应用维度或者重要性维度。如使用 P1、P2 和 P3 标注文献的重要性，使用「中期」「答辩」等标注一个文献的用途。</p>
+
+<p>每个标签可以设置对应颜色，这个色块也会自动显示在每一个条目的开头，方便查看，一目了然。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201625.png" alt="img"/></p>
+
+<h4 id="toc_9">搜索</h4>
+
+<p>在 Zotero 中，快速搜索支持如下图所示的三种粒度。需要说明的是，如果 PDF 文档已经建立过，通过「所有内容」进行搜索时是可以搜索到文档文本的。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201626.png" alt="img"/>三种搜索粒度</p>
+
+<p>除了快速搜索以外，Zotero 中还有一种高级搜索方法。高级搜索提供比快速搜索更多更精细的筛选条件，并允许保存搜索内容方便下次使用。</p>
+
+<p>运行高级搜索需要打开「高级搜索」窗口，单击中心窗格顶部的放大镜图标，然后就会进入高级搜索界面，搜索支持逻辑判断且可搜索的条目也非常之多。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201627.png" alt="img"/>高级搜索</p>
+
+<h4 id="toc_10">排序和关联</h4>
+
+<p>每个集合都支持显示若干需要的内容并且按照某种方式进行排序，且支持二次排序。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201628.png" alt="img"/>指定二次排序</p>
+
+<p>另外，不同的文献之间、文献和笔记之间都可以进行关联。我们可以方便地将关联性强的内容结合到一起。</p>
+
+<h4 id="toc_11">笔记</h4>
+
+<p>每一篇文献支持插入多个笔记。笔记支持的格式内容也非常丰富，例如引用和插入链接以及添加不同层级的标题都没有问题，而且笔记还可以和多篇文献进行关联。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201553.png" alt="img"/></p>
+
+<p>默认笔记本事是富文本编辑器，不支持 markdown 语法。但因为 Zotero 的插件和 Firefox 的插件格式相同，我们只需要把 Firefox 的 markdown here 插件稍加修改打包就可以导入 Zotero 中，从而使笔记支持 markdown。我已经将插件打包好，你可以 <a href="https://github.com/fei0810/markdownhere4zotero">点击链接</a>下载安装。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201629.gif" alt="img"/>markdown 效果</p>
+
+<h3 id="toc_12">生成引文和报告</h3>
+
+<p>无论使用 Endnote 还是使用 Mendeley 抑或使用 Zotero，一个非常重要的需求就是在平时写各种论文的过程中插入参考文献。Zotero 可以从哪些方便满足你的需求呢？</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201630.gif" alt="img"/>引用设置页面</p>
+
+<h4 id="toc_13">快速复制</h4>
+
+<p>如果你只希望在自己的博客或者笔记中插入一些文章而无需遵守严格的引用要求。那么 Zotero 本身提供了非常方便的快速复制方法。</p>
+
+<p>在设置中可以设置复制时需要的引文格式，然后只需要拖拽即可，非常自由。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201631.png" alt="img"/>单篇拖拽引用效果</p>
+
+<h4 id="toc_14">多篇文献右键多种导出</h4>
+
+<p>当你同时选择多篇文献时，也可以通过鼠标右键选择你需要导出的形式。例如 RTF 或者 HTML，当然，你也可以选择直接复制然后一步粘贴到位。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201632.png" alt="img"/>多篇拖拽引用效果</p>
+
+<h4 id="toc_15">在 Microsoft Word 中使用插件</h4>
+
+<p>通常安装软件的时候就会提示自动安装 Word 插件，如果因为各种原因前期没有安装，可以在设置的引用中进行安装，安装后重启 Word 即可。</p>
+
+<p>安装好之后 Word 中就会出现如下 Zotero 插件：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201633.gif" alt="img"/>word插件</p>
+
+<p>Word 中的 Zotero 选项卡包含以下内容：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201634.png" alt="img"/>Zetero 选项卡</p>
+
+<p>在正式插入引文之间，需要设置引文的格式和语言，通过管理样式可以轻松找到海量的引文格式。如果需要显示中文，则可以在语言选项中选择中文。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201635.png" alt="img"/>引用格式设置</p>
+
+<p>在需要添加引文的位置点击添加选项</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201636.png" alt="img"/>调出引用搜索</p>
+
+<p>在出现的搜索框中可以使用各种方式来快速搜索自己需要插入的文献，例如作者姓名。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201637.png" alt="img"/>使用作者姓名搜索</p>
+
+<p>如果需要在一个位置内引用多篇文献，可以一次选择自己多篇想添加的内容统一添加。</p>
+
+<p><img src="https://cdn.sspai.com/2019/09/20/e5b6576883552f867bd59be6c080a49e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt="img"/>多篇插入</p>
+
+<p>所有文献都引用好之后，直接点击书目即可插入引文。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201638.png" alt="img"/></p>
+
+<h4 id="toc_16">生成报告</h4>
+
+<p>除了插入参考引文之外，Zotero 还给出了另一种导出参考文献的方式——生成报告。</p>
+
+<p>报告是简单的 HTML 页面，概述了所选项目的项目元数据，注释和附件。可以打印它们，也可以将它们发布到网上并通过电子邮件发送。</p>
+
+<p>创建报告可以右键单击中心窗格中的项目或选项，然后选择「由所选条目生成报告…」，也可以右键单击左列中的集合，然后选择「从集合生成报告」。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201639.png" alt="img"/></p>
+
+<p><a href="https://github.com/retorquere/zotero-report-customizer/releases">第三方工具插件</a> 可以帮助你更好地过滤报告内容，例如对报告进行排序或者增删条目等。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201640.png" alt="img"/>导出效果</p>
+
+<h3 id="toc_17">备份和协作</h3>
+
+<h4 id="toc_18">同步</h4>
+
+<p>Zotero 本身支持 300M 免费的存储空间。这对很多人都是不够的，如果你不想购买官方的存储空间可以使用 WebDAV 服务。这里就不做展开介绍了，以国内使用比较方便的「坚果云」为例，官方给了一个比较详细的配置方法教程：<a href="http://help.jianguoyun.com/?p=3168">如何在 Zotero 中设置 webdav 连接到坚果云</a>。</p>
+
+<h4 id="toc_19">协作</h4>
+
+<p>协作功能可能是很多人都忽略掉或者不知道的一个功能。Zotero 提供了相对完善的协作方式，这里做一些介绍。</p>
+
+<p>如果你想和实验室或者几个好用共享协作一个文献库，那么就可以创建一个私有库，需要去官网创建，方式如下。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201641.png" alt="img"/>官网创建小组</p>
+
+<p>随后还有一些具体的权限需要设置，例如什么人可以读，什么人可以编辑。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201642.png" alt="img"/>设置权限</p>
+
+<p>创建好之后，如果你的客户端已经登陆并且完成同步，将会在侧边栏出现一个新的群组。如下图所示。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201643.png" alt="img"/></p>
+
+<p>另外，在网页版的管理界面中可以进行成员邀请和删除。</p>
+
+<h3 id="toc_20">其它内容</h3>
+
+<h4 id="toc_21">插件推荐</h4>
+
+<p>插件系统是 Zotero 作为开源软件的独特优势，你可以通过 <a href="https://www.zotero.org/support/plugins">官方插件网站</a> 进行查看。我目前在用的几款插件如下图所示，推荐安装使用。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201644.gif" alt="img"/>我的在用插件</p>
+
+<h4 id="toc_22">小技巧</h4>
+
+<ul>
+<li>当选择了一个项目时，可以通过按住 Option(Ctrl) 键突出显示包含此项目的所有集合，也就是知道这篇文献所在的分组</li>
+<li>在集合列表或项目列表中的键盘上按 +（加号）可以展开所有节点，按 -（减号）则可以折叠</li>
+<li>要查看所选库或集合中的项目数可以单击然后使用 Command-A(Ctrl-A) 全选，计数将显示在右侧</li>
+<li>若使用快速复制功能，在将项目拖放到文本文档时按住 Shift 键能实现插入引文而不是完整引用</li>
+<li>可以单击详细信息中的 DOI 和 URL 字段标签直接打开链接</li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025629001.html">
+                
+                  <h1>[Pycharm 常用快捷键]</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">常用快捷键</h1>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + Q</td>
+<td>快速查看文档</td>
+</tr>
+<tr>
+<td>Ctrl + F1</td>
+<td>显示错误描述或警告信息</td>
+</tr>
+<tr>
+<td>Ctrl + /</td>
+<td>行注释（可选中多行）</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + L</td>
+<td>代码格式化</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + O</td>
+<td>自动导入</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + I</td>
+<td>自动缩进</td>
+</tr>
+<tr>
+<td>Tab / Shift + Tab</td>
+<td>缩进、不缩进当前行（可选中多行）</td>
+</tr>
+<tr>
+<td>Ctrl+C/Ctrl+Insert</td>
+<td>复制当前行或选定的代码块到剪贴板</td>
+</tr>
+<tr>
+<td>Ctrl + D</td>
+<td>复制选定的区域</td>
+</tr>
+<tr>
+<td>Ctrl + Y</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>Shift + Enter</td>
+<td>换行（不用鼠标操作了）</td>
+</tr>
+<tr>
+<td>Ctrl +Ｊ</td>
+<td>插入模版</td>
+</tr>
+<tr>
+<td>Ctrl + Shift +/-</td>
+<td>展开/折叠全部代码块</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad+</td>
+<td>全部展开</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad-</td>
+<td>全部折叠</td>
+</tr>
+<tr>
+<td>Ctrl + Delete</td>
+<td>删除到字符结束</td>
+</tr>
+<tr>
+<td>Ctrl + Backspace</td>
+<td>删除到字符开始</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F7</td>
+<td>将当前单词在整个文件中高亮，F3移动到下一个，ESC取消高亮。</td>
+</tr>
+<tr>
+<td>Alt + up/down</td>
+<td>方法上移或下移动</td>
+</tr>
+<tr>
+<td>Alt + Shift + up/down</td>
+<td>当前行上移或下移动</td>
+</tr>
+<tr>
+<td>Ctrl + B/鼠标左键</td>
+<td>转到方法定义处</td>
+</tr>
+<tr>
+<td>Ctrl + W</td>
+<td>选中增加的代码块</td>
+</tr>
+<tr>
+<td>Shift + F6</td>
+<td>方法或变量重命名</td>
+</tr>
+<tr>
+<td>Ctrl + E</td>
+<td>最近访问的文件</td>
+</tr>
+<tr>
+<td>Esc</td>
+<td>从其他窗口回到编辑窗口</td>
+</tr>
+<tr>
+<td>Shift + Esc</td>
+<td>隐藏当前窗口，焦点到编辑窗口</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>回到先前的工具窗口</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + up</td>
+<td>快速上移某一行</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + down</td>
+<td>快速下移某一行</td>
+</tr>
+<tr>
+<td>ctrl+alt+左箭头</td>
+<td>返回上一个光标的位置（CTRL进入函数后返回）</td>
+</tr>
+<tr>
+<td>ctrl+alt+右箭头</td>
+<td>前进到后一个光标的位置</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="toc_1">全部快捷键</h1>
+
+<h2 id="toc_2">1、编辑（Editing）</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + Space</td>
+<td>基本的代码完成（类、方法、属性）</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + Space</td>
+<td>快速导入任意类</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Enter</td>
+<td>语句完成</td>
+</tr>
+<tr>
+<td>Ctrl + P</td>
+<td>参数信息（在方法中调用参数）</td>
+</tr>
+<tr>
+<td>Ctrl + Q</td>
+<td>快速查看文档</td>
+</tr>
+<tr>
+<td>Shift + F1</td>
+<td>外部文档</td>
+</tr>
+<tr>
+<td>Ctrl + 鼠标</td>
+<td>简介</td>
+</tr>
+<tr>
+<td>Ctrl + F1</td>
+<td>显示错误描述或警告信息</td>
+</tr>
+<tr>
+<td>Alt + Insert</td>
+<td>自动生成代码</td>
+</tr>
+<tr>
+<td>Ctrl + O</td>
+<td>重新方法</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + T</td>
+<td>选中</td>
+</tr>
+<tr>
+<td>Ctrl + /</td>
+<td>行注释</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + /</td>
+<td>块注释</td>
+</tr>
+<tr>
+<td>Ctrl + W</td>
+<td>选中增加的代码块</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + W</td>
+<td>回到之前状态</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + ]/[</td>
+<td>选定代码块结束、开始</td>
+</tr>
+<tr>
+<td>Alt + Enter</td>
+<td>快速修正</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + L</td>
+<td>代码格式化</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + O</td>
+<td>自动导入</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + I</td>
+<td>自动缩进</td>
+</tr>
+<tr>
+<td>Tab / Shift + Tab</td>
+<td>缩进、不缩进当前行</td>
+</tr>
+<tr>
+<td>Ctrl+X/Shift+Delete</td>
+<td>剪切当前行或选定的代码块到剪贴板</td>
+</tr>
+<tr>
+<td>Ctrl+C/Ctrl+Insert</td>
+<td>复制当前行或选定的代码块到剪贴板</td>
+</tr>
+<tr>
+<td>Ctrl+V/Shift+Insert</td>
+<td>从剪贴板粘贴</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + V</td>
+<td>从最近的缓冲区粘贴</td>
+</tr>
+<tr>
+<td>Ctrl + D</td>
+<td>复制选定的区域或行到后面或下一行</td>
+</tr>
+<tr>
+<td>Ctrl + Y</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + J</td>
+<td>添加智能线</td>
+</tr>
+<tr>
+<td>Ctrl + Enter</td>
+<td>智能线切割</td>
+</tr>
+<tr>
+<td>Shift + Enter</td>
+<td>下一行另起一行</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + U</td>
+<td>在选定的区域或代码块间切换</td>
+</tr>
+<tr>
+<td>Ctrl + Delete</td>
+<td>删除到字符结束</td>
+</tr>
+<tr>
+<td>Ctrl + Backspace</td>
+<td>删除到字符开始</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad+/-</td>
+<td>展开折叠代码块</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad+</td>
+<td>全部展开</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad-</td>
+<td>全部折叠</td>
+</tr>
+<tr>
+<td>Ctrl + F4</td>
+<td>关闭运行的选项卡</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_3">2、查找/替换(Search/Replace)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>F3</td>
+<td>下一个</td>
+</tr>
+<tr>
+<td>Shift + F3</td>
+<td>前一个</td>
+</tr>
+<tr>
+<td>Ctrl + R</td>
+<td>替换</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F</td>
+<td>全局查找</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + R</td>
+<td>全局替换</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_4">3、运行(Running)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Alt + Shift + F10</td>
+<td>运行模式配置</td>
+</tr>
+<tr>
+<td>Alt + Shift + F9</td>
+<td>调试模式配置</td>
+</tr>
+<tr>
+<td>Shift + F10</td>
+<td>运行</td>
+</tr>
+<tr>
+<td>Shift + F9</td>
+<td>调试</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F10</td>
+<td>运行编辑器配置</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + R</td>
+<td>运行manage.py任务</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_5">4、调试(Debugging)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>F8</td>
+<td>跳过</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>进入</td>
+</tr>
+<tr>
+<td>Shift + F8</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>Alt + F9</td>
+<td>运行游标</td>
+</tr>
+<tr>
+<td>Alt + F8</td>
+<td>验证表达式</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + F8</td>
+<td>快速验证表达式</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>恢复程序</td>
+</tr>
+<tr>
+<td>Ctrl + F8</td>
+<td>断点开关</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F8</td>
+<td>查看断点</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_6">5、导航(Navigation)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + N</td>
+<td>跳转到类</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + N</td>
+<td>跳转到符号</td>
+<td></td>
+</tr>
+<tr>
+<td>Alt + Right/Left</td>
+<td>跳转到下一个、前一个编辑的选项卡</td>
+<td></td>
+</tr>
+<tr>
+<td>F12</td>
+<td>回到先前的工具窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>Esc</td>
+<td>从其他窗口回到编辑窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>Shift + Esc</td>
+<td>隐藏当前窗口，焦点到编辑窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F4</td>
+<td>关闭主动运行的选项卡</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + G</td>
+<td>查看当前行号、字符号</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + E</td>
+<td>最近访问的文件</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+Alt+Left/Right</td>
+<td>后退、前进</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+Shift+Backspace</td>
+<td>导航到最近编辑区域</td>
+<td></td>
+</tr>
+<tr>
+<td>Alt + F1</td>
+<td>查找当前文件或标识</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+B / Ctrl+Click</td>
+<td>跳转到声明</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Alt + B</td>
+<td>跳转到实现</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + I</td>
+<td>查看快速定义</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + B</td>
+<td>跳转到类型声明</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + U</td>
+<td>跳转到父方法、父类</td>
+<td></td>
+</tr>
+<tr>
+<td>Alt + Up/Down</td>
+<td>跳转到上一个、下一个方法</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + ]/[</td>
+<td>跳转到代码块结束、开始</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + F12</td>
+<td>弹出文件结构</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + H</td>
+<td>类型层次结构</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + H</td>
+<td>方法层次结构</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Alt + H</td>
+<td>调用层次结构</td>
+<td></td>
+</tr>
+<tr>
+<td>F2 / Shift + F2</td>
+<td>下一条、前一条高亮的错误</td>
+<td></td>
+</tr>
+<tr>
+<td>F4 / Ctrl + Enter</td>
+<td>编辑资源、查看资源</td>
+<td></td>
+</tr>
+<tr>
+<td>Alt + Home</td>
+<td>显示导航条F11书签开关</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift +F11</td>
+<td>书签助记开关</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl #[0-9]</td>
+<td>+</td>
+<td>跳转到标识的书签</td>
+</tr>
+<tr>
+<td>Shift +</td>
+<td>F11显示书签</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_7">6、搜索相关(Usage Search)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Alt + F7/Ctrl + F7</td>
+<td>文件中查询用法</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F7</td>
+<td>文件中用法高亮显示</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + F7</td>
+<td>显示用法</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_8">7、重构(Refactoring)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>F5</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>剪切</td>
+</tr>
+<tr>
+<td>Alt + Delete</td>
+<td>安全删除</td>
+</tr>
+<tr>
+<td>Shift + F6</td>
+<td>方法或变量重命名</td>
+</tr>
+<tr>
+<td>Ctrl + F6</td>
+<td>更改签名</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + N</td>
+<td>内联</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + M</td>
+<td>提取方法</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + V</td>
+<td>提取属性</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + F</td>
+<td>提取字段</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + C</td>
+<td>提取常量</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + P</td>
+<td>提取参数</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_9">8、控制VCS/Local History</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + K</td>
+<td>提交项目</td>
+</tr>
+<tr>
+<td>Ctrl + T</td>
+<td>更新项目</td>
+</tr>
+<tr>
+<td>Alt + Shift + C</td>
+<td>查看最近的变化</td>
+</tr>
+<tr>
+<td>Alt + BackQuote(’)VCS</td>
+<td>快速弹出</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + J</td>
+<td>当前行使用模版</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_10">9、模版(Live Templates)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + Alt + J</td>
+<td>当前行使用模版</td>
+</tr>
+<tr>
+<td>Ctrl +Ｊ</td>
+<td>插入模版</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_11">10、基本(General)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Alt + #[0-9]</td>
+<td>打开相应编号的工具窗口</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + Y</td>
+<td>同步</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F12</td>
+<td>最大化编辑开关</td>
+</tr>
+<tr>
+<td>Alt + Shift + F</td>
+<td>添加到最喜欢</td>
+</tr>
+<tr>
+<td>Alt + Shift + I</td>
+<td>根据配置检查当前文件</td>
+</tr>
+<tr>
+<td>Ctrl + BackQuote(’)</td>
+<td>快速切换当前计划</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + S</td>
+<td>打开设置页</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + A</td>
+<td>查找编辑器里所有的动作</td>
+</tr>
+<tr>
+<td>Ctrl + Tab</td>
+<td>在窗口间进行切换</td>
+</tr>
+</tbody>
+</table>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
               
 
 
@@ -2351,31 +3201,31 @@ product = reduce(lambda x, y: x * y, l) # 1*2*3*4*5 = 120
 	      
 		      
 			      <li class="post">
-			        <a href="15998025630555.html">高效 PyCharm 使用技巧</a>
+			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025630642.html">群晖NAS安装配置typecho博客教程</a>
+			        <a href="15998025628475.html">Anaconda + VSCode 最详细教程</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025630684.html">Linux vim 编辑器的神级配置 vimrc</a>
+			        <a href="15838967255194.html">Docker 必备可视化工具 Portainer</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025630725.html">正则表达式工具 RegexBuddy 使用指南</a>
+			        <a href="15998025631446.html">Git 常用技巧 （高级用法）</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025630768.html">使用Docker搭建MySQL服务</a>
+			        <a href="15998025629044.html">Git版本管理完全指南（包含常见头疼错误解决方案）</a>
 			      </li>
 		     
 		  

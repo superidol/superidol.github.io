@@ -96,199 +96,1856 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15998025630555.html">
+                <a class="clearlink" href="15998025628955.html">
                 
-                  <h1>高效 PyCharm 使用技巧</h1>
+                  <h1>1000行MySQL学习笔记</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><img src="media/15998025630555/9f33a362acb4425abada4fda743a71f8.jpg" alt="img"/><br/>
-    今天要写一些可以明显改善开发效率的使用技巧，一旦学会，受用一生。以下代码演示是在 Mac 环境下，Windows 也类似，Command 键 相当于 Windows 上的 Control 键。</p>
+                        	<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824230300" alt="1000行MySQL学习笔记，不怕你不会，就怕你不学"/></p>
+
+<h3 id="toc_0">/ Windows服务 /</h3>
+
+<pre class="line-numbers"><code class="language-text">-- 启动MySQL
+    net start mysql
+-- 创建Windows服务
+    sc create mysql binPath= mysqld_bin_path(注意：等号与值之间有空格)
+</code></pre>
+
+<h3 id="toc_1">/ 连接与断开服务器 /</h3>
+
+<pre class="line-numbers"><code class="language-text">mysql -h 地址 -P 端口 -u 用户名 -p 密码
+
+SHOW PROCESSLIST -- 显示哪些线程正在运行
+SHOW VARIABLES -- 显示系统变量信息
+</code></pre>
+
+<h3 id="toc_2">/ 数据库操作 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">-- 查看当前数据库
+    SELECT DATABASE();
+-- 显示当前时间、用户名、数据库版本
+    SELECT now(), user(), version();
+-- 创建库
+    CREATE DATABASE[ IF NOT EXISTS] 数据库名 数据库选项
+    数据库选项：
+        CHARACTER SET charset_name
+        COLLATE collation_name
+-- 查看已有库
+    SHOW DATABASES[ LIKE &#39;PATTERN&#39;]
+-- 查看当前库信息
+    SHOW CREATE DATABASE 数据库名
+-- 修改库的选项信息
+    ALTER DATABASE 库名 选项信息
+-- 删除库
+    DROP DATABASE[ IF EXISTS] 数据库名
+        同时删除该数据库相关的目录及其目录内容
+</code></pre>
+
+<h3 id="toc_3">/ 表的操作 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">-- 创建表
+    CREATE [TEMPORARY] TABLE[ IF NOT EXISTS] [库名.]表名 ( 表的结构定义 )[ 表选项]
+        每个字段必须有数据类型
+        最后一个字段后不能有逗号
+        TEMPORARY 临时表，会话结束时表自动消失
+        对于字段的定义：
+            字段名 数据类型 [NOT NULL | NULL] [DEFAULT default_value] [AUTO_INCREMENT] [UNIQUE [KEY] | [PRIMARY] KEY] [COMMENT &#39;string&#39;]
+-- 表选项
+    -- 字符集
+        CHARSET = charset_name
+        如果表没有设定，则使用数据库字符集
+    -- 存储引擎
+        ENGINE = engine_name
+        表在管理数据时采用的不同的数据结构，结构不同会导致处理方式、提供的特性操作等不同
+        常见的引擎：InnoDB MyISAM Memory/Heap BDB Merge Example CSV MaxDB Archive
+        不同的引擎在保存表的结构和数据时采用不同的方式
+        MyISAM表文件含义：.frm表定义，.MYD表数据，.MYI表索引
+        InnoDB表文件含义：.frm表定义，表空间数据和日志文件
+        SHOW ENGINES -- 显示存储引擎的状态信息
+        SHOW ENGINE 引擎名 {LOGS|STATUS} -- 显示存储引擎的日志或状态信息
+    -- 自增起始数
+        AUTO_INCREMENT = 行数
+    -- 数据文件目录
+        DATA DIRECTORY = &#39;目录&#39;
+    -- 索引文件目录
+        INDEX DIRECTORY = &#39;目录&#39;
+    -- 表注释
+        COMMENT = &#39;string&#39;
+    -- 分区选项
+        PARTITION BY ... (详细见手册)
+-- 查看所有表
+    SHOW TABLES[ LIKE &#39;pattern&#39;]
+    SHOW TABLES FROM 表名
+-- 查看表机构
+    SHOW CREATE TABLE 表名 （信息更详细）
+    DESC 表名 / DESCRIBE 表名 / EXPLAIN 表名 / SHOW COLUMNS FROM 表名 [LIKE &#39;PATTERN&#39;]
+    SHOW TABLE STATUS [FROM db_name] [LIKE &#39;pattern&#39;]
+-- 修改表
+    -- 修改表本身的选项
+        ALTER TABLE 表名 表的选项
+        eg: ALTER TABLE 表名 ENGINE=MYISAM;
+    -- 对表进行重命名
+        RENAME TABLE 原表名 TO 新表名
+        RENAME TABLE 原表名 TO 库名.表名 （可将表移动到另一个数据库）
+        -- RENAME可以交换两个表名
+    -- 修改表的字段机构（13.1.2. ALTER TABLE语法）
+        ALTER TABLE 表名 操作名
+        -- 操作名
+            ADD[ COLUMN] 字段定义       -- 增加字段
+                AFTER 字段名          -- 表示增加在该字段名后面
+                FIRST               -- 表示增加在第一个
+            ADD PRIMARY KEY(字段名)   -- 创建主键
+            ADD UNIQUE [索引名](字段名)-- 创建唯一索引
+            ADD INDEX [索引名](字段名) -- 创建普通索引
+            DROP[ COLUMN] 字段名      -- 删除字段
+            MODIFY[ COLUMN] 字段名 字段属性     -- 支持对字段属性进行修改，不能修改字段名(所有原有属性也需写上)
+            CHANGE[ COLUMN] 原字段名 新字段名 字段属性      -- 支持对字段名修改
+            DROP PRIMARY KEY    -- 删除主键(删除主键前需删除其AUTO_INCREMENT属性)
+            DROP INDEX 索引名 -- 删除索引
+            DROP FOREIGN KEY 外键    -- 删除外键
+
+-- 删除表
+    DROP TABLE[ IF EXISTS] 表名 ...
+-- 清空表数据
+    TRUNCATE [TABLE] 表名
+-- 复制表结构
+    CREATE TABLE 表名 LIKE 要复制的表名
+-- 复制表结构和数据
+    CREATE TABLE 表名 [AS] SELECT * FROM 要复制的表名
+-- 检查表是否有错误
+    CHECK TABLE tbl_name [, tbl_name] ... [option] ...
+-- 优化表
+    OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
+-- 修复表
+    REPAIR [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... [QUICK] [EXTENDED] [USE_FRM]
+-- 分析表
+    ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
+</code></pre>
+
+<h3 id="toc_4">/ 数据操作 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">-- 增
+    INSERT [INTO] 表名 [(字段列表)] VALUES (值列表)[, (值列表), ...]
+        -- 如果要插入的值列表包含所有字段并且顺序一致，则可以省略字段列表。
+        -- 可同时插入多条数据记录！
+        REPLACE 与 INSERT 完全一样，可互换。
+    INSERT [INTO] 表名 SET 字段名=值[, 字段名=值, ...]
+-- 查
+    SELECT 字段列表 FROM 表名[ 其他子句]
+        -- 可来自多个表的多个字段
+        -- 其他子句可以不使用
+        -- 字段列表可以用*代替，表示所有字段
+-- 删
+    DELETE FROM 表名[ 删除条件子句]
+        没有条件子句，则会删除全部
+-- 改
+    UPDATE 表名 SET 字段名=新值[, 字段名=新值] [更新条件]
+</code></pre>
+
+<h3 id="toc_5">/ 字符集编码 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">-- MySQL、数据库、表、字段均可设置编码
+-- 数据编码与客户端编码不需一致
+SHOW VARIABLES LIKE &#39;character_set_%&#39;   -- 查看所有字符集编码项
+    character_set_client        客户端向服务器发送数据时使用的编码
+    character_set_results       服务器端将结果返回给客户端所使用的编码
+    character_set_connection    连接层编码
+SET 变量名 = 变量值
+    SET character_set_client = gbk;
+    SET character_set_results = gbk;
+    SET character_set_connection = gbk;
+SET NAMES GBK;  -- 相当于完成以上三个设置
+-- 校对集
+    校对集用以排序
+    SHOW CHARACTER SET [LIKE &#39;pattern&#39;]/SHOW CHARSET [LIKE &#39;pattern&#39;]   查看所有字符集
+    SHOW COLLATION [LIKE &#39;pattern&#39;]     查看所有校对集
+    CHARSET 字符集编码     设置字符集编码
+    COLLATE 校对集编码     设置校对集编码
+</code></pre>
+
+<h3 id="toc_6">/ 数据类型（列类型） / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">1. 数值类型
+-- a. 整型 ----------
+    类型         字节     范围（有符号位）
+    tinyint     1字节    -128 ~ 127      无符号位：0 ~ 255
+    smallint    2字节    -32768 ~ 32767
+    mediumint   3字节    -8388608 ~ 8388607
+    int         4字节
+    bigint      8字节
+
+    int(M)  M表示总位数
+    - 默认存在符号位，unsigned 属性修改
+    - 显示宽度，如果某个数不够定义字段时设置的位数，则前面以0补填，zerofill 属性修改
+        例：int(5)   插入一个数&#39;123&#39;，补填后为&#39;00123&#39;
+    - 在满足要求的情况下，越小越好。
+    - 1表示bool值真，0表示bool值假。MySQL没有布尔类型，通过整型0和1表示。常用tinyint(1)表示布尔型。
+
+-- b. 浮点型 ----------
+    类型             字节     范围
+    float(单精度)     4字节
+    double(双精度)    8字节
+    浮点型既支持符号位 unsigned 属性，也支持显示宽度 zerofill 属性。
+        不同于整型，前后均会补填0.
+    定义浮点型时，需指定总位数和小数位数。
+        float(M, D)     double(M, D)
+        M表示总位数，D表示小数位数。
+        M和D的大小会决定浮点数的范围。不同于整型的固定范围。
+        M既表示总位数（不包括小数点和正负号），也表示显示宽度（所有显示符号均包括）。
+        支持科学计数法表示。
+        浮点数表示近似值。
+
+-- c. 定点数 ----------
+    decimal -- 可变长度
+    decimal(M, D)   M也表示总位数，D表示小数位数。
+    保存一个精确的数值，不会发生数据的改变，不同于浮点数的四舍五入。
+    将浮点数转换为字符串来保存，每9位数字保存为4个字节。
+
+2. 字符串类型
+-- a. char, varchar ----------
+    char    定长字符串，速度快，但浪费空间
+    varchar 变长字符串，速度慢，但节省空间
+    M表示能存储的最大长度，此长度是字符数，非字节数。
+    不同的编码，所占用的空间不同。
+    char,最多255个字符，与编码无关。
+    varchar,最多65535字符，与编码有关。
+    一条有效记录最大不能超过65535个字节。
+        utf8 最大为21844个字符，gbk 最大为32766个字符，latin1 最大为65532个字符
+    varchar 是变长的，需要利用存储空间保存 varchar 的长度，如果数据小于255个字节，则采用一个字节来保存长度，反之需要两个字节来保存。
+    varchar 的最大有效长度由最大行大小和使用的字符集确定。
+    最大有效长度是65532字节，因为在varchar存字符串时，第一个字节是空的，不存在任何数据，然后还需两个字节来存放字符串的长度，所以有效长度是64432-1-2=65532字节。
+    例：若一个表定义为 CREATE TABLE tb(c1 int, c2 char(30), c3 varchar(N)) charset=utf8; 问N的最大值是多少？ 答：(65535-1-2-4-30*3)/3
+
+-- b. blob, text ----------
+    blob 二进制字符串（字节字符串）
+        tinyblob, blob, mediumblob, longblob
+    text 非二进制字符串（字符字符串）
+        tinytext, text, mediumtext, longtext
+    text 在定义时，不需要定义长度，也不会计算总长度。
+    text 类型在定义时，不可给default值
+
+-- c. binary, varbinary ----------
+    类似于char和varchar，用于保存二进制字符串，也就是保存字节字符串而非字符字符串。
+    char, varchar, text 对应 binary, varbinary, blob.
+
+3. 日期时间类型
+    一般用整型保存时间戳，因为PHP可以很方便的将时间戳进行格式化。
+    datetime    8字节    日期及时间     1000-01-01 00:00:00 到 9999-12-31 23:59:59
+    date        3字节    日期         1000-01-01 到 9999-12-31
+    timestamp   4字节    时间戳        19700101000000 到 2038-01-19 03:14:07
+    time        3字节    时间         -838:59:59 到 838:59:59
+    year        1字节    年份         1901 - 2155
+
+datetime    YYYY-MM-DD hh:mm:ss
+timestamp   YY-MM-DD hh:mm:ss
+            YYYYMMDDhhmmss
+            YYMMDDhhmmss
+            YYYYMMDDhhmmss
+            YYMMDDhhmmss
+date        YYYY-MM-DD
+            YY-MM-DD
+            YYYYMMDD
+            YYMMDD
+            YYYYMMDD
+            YYMMDD
+time        hh:mm:ss
+            hhmmss
+            hhmmss
+year        YYYY
+            YY
+            YYYY
+            YY
+
+4. 枚举和集合
+-- 枚举(enum) ----------
+enum(val1, val2, val3...)
+    在已知的值中进行单选。最大数量为65535.
+    枚举值在保存时，以2个字节的整型(smallint)保存。每个枚举值，按保存的位置顺序，从1开始逐一递增。
+    表现为字符串类型，存储却是整型。
+    NULL值的索引是NULL。
+    空字符串错误值的索引值是0。
+
+-- 集合（set） ----------
+set(val1, val2, val3...)
+    create table tab ( gender set(&#39;男&#39;, &#39;女&#39;, &#39;无&#39;) );
+    insert into tab values (&#39;男, 女&#39;);
+    最多可以有64个不同的成员。以bigint存储，共8个字节。采取位运算的形式。
+    当创建表时，SET成员值的尾部空格将自动被删除。
+</code></pre>
+
+<h3 id="toc_7">/ 选择类型 /</h3>
+
+<pre class="line-numbers"><code class="language-text">-- PHP角度
+1. 功能满足
+2. 存储空间尽量小，处理效率更高
+3. 考虑兼容问题
+
+-- IP存储 ----------
+1. 只需存储，可用字符串
+2. 如果需计算，查找等，可存储为4个字节的无符号int，即unsigned
+    1) PHP函数转换
+        ip2long可转换为整型，但会出现携带符号问题。需格式化为无符号的整型。
+        利用sprintf函数格式化字符串
+        sprintf(&quot;%u&quot;, ip2long(&#39;192.168.3.134&#39;));
+        然后用long2ip将整型转回IP字符串
+    2) MySQL函数转换(无符号整型，UNSIGNED)
+        INET_ATON(&#39;127.0.0.1&#39;) 将IP转为整型
+        INET_NTOA(2130706433) 将整型转为IP
+</code></pre>
+
+<h3 id="toc_8">/ 列属性（列约束） / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">1. PRIMARY 主键
+    - 能唯一标识记录的字段，可以作为主键。
+    - 一个表只能有一个主键。
+    - 主键具有唯一性。
+    - 声明字段时，用 primary key 标识。
+        也可以在字段列表之后声明
+            例：create table tab ( id int, stu varchar(10), primary key (id));
+    - 主键字段的值不能为null。
+    - 主键可以由多个字段共同组成。此时需要在字段列表后声明的方法。
+        例：create table tab ( id int, stu varchar(10), age int, primary key (stu, age));
+
+2. UNIQUE 唯一索引（唯一约束）
+    使得某字段的值也不能重复。
+
+3. NULL 约束
+    null不是数据类型，是列的一个属性。
+    表示当前列是否可以为null，表示什么都没有。
+    null, 允许为空。默认。
+    not null, 不允许为空。
+    insert into tab values (null, &#39;val&#39;);
+        -- 此时表示将第一个字段的值设为null, 取决于该字段是否允许为null
+
+4. DEFAULT 默认值属性
+    当前字段的默认值。
+    insert into tab values (default, &#39;val&#39;);    -- 此时表示强制使用默认值。
+    create table tab ( add_time timestamp default current_timestamp );
+        -- 表示将当前时间的时间戳设为默认值。
+        current_date, current_time
+
+5. AUTO_INCREMENT 自动增长约束
+    自动增长必须为索引（主键或unique）
+    只能存在一个字段为自动增长。
+    默认为1开始自动增长。可以通过表属性 auto_increment = x进行设置，或 alter table tbl auto_increment = x;
+
+6. COMMENT 注释
+    例：create table tab ( id int ) comment &#39;注释内容&#39;;
+
+7. FOREIGN KEY 外键约束
+    用于限制主表与从表数据完整性。
+    alter table t1 add constraint `t1_t2_fk` foreign key (t1_id) references t2(id);
+        -- 将表t1的t1_id外键关联到表t2的id字段。
+        -- 每个外键都有一个名字，可以通过 constraint 指定
+
+    存在外键的表，称之为从表（子表），外键指向的表，称之为主表（父表）。
+
+    作用：保持数据一致性，完整性，主要目的是控制存储在外键表（从表）中的数据。
+
+    MySQL中，可以对InnoDB引擎使用外键约束：
+    语法：
+    foreign key (外键字段） references 主表名 (关联字段) [主表记录删除时的动作] [主表记录更新时的动作]
+    此时需要检测一个从表的外键需要约束为主表的已存在的值。外键在没有关联的情况下，可以设置为null.前提是该外键列，没有not null。
+
+    可以不指定主表记录更改或更新时的动作，那么此时主表的操作被拒绝。
+    如果指定了 on update 或 on delete：在删除或更新时，有如下几个操作可以选择：
+    1. cascade，级联操作。主表数据被更新（主键值更新），从表也被更新（外键值更新）。主表记录被删除，从表相关记录也被删除。
+    2. set null，设置为null。主表数据被更新（主键值更新），从表的外键被设置为null。主表记录被删除，从表相关记录外键被设置成null。但注意，要求该外键列，没有not null属性约束。
+    3. restrict，拒绝父表删除和更新。
+
+    注意，外键只被InnoDB存储引擎所支持。其他引擎是不支持的。
+</code></pre>
+
+<h3 id="toc_9">/ 建表规范 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">   -- Normal Format, NF
+        - 每个表保存一个实体信息
+        - 每个具有一个ID字段作为主键
+        - ID主键 + 原子表
+    -- 1NF, 第一范式
+        字段不能再分，就满足第一范式。
+    -- 2NF, 第二范式
+        满足第一范式的前提下，不能出现部分依赖。
+        消除符合主键就可以避免部分依赖。增加单列关键字。
+    -- 3NF, 第三范式
+        满足第二范式的前提下，不能出现传递依赖。
+        某个字段依赖于主键，而有其他字段依赖于该字段。这就是传递依赖。
+        将一个实体信息的数据放在一个表内实现。
+</code></pre>
+
+<h3 id="toc_10">/ SELECT / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">SELECT [ALL|DISTINCT] select_expr FROM -&gt; WHERE -&gt; GROUP BY [合计函数] -&gt; HAVING -&gt; ORDER BY -&gt; LIMIT
+
+a. select_expr
+    -- 可以用 * 表示所有字段。
+        select * from tb;
+    -- 可以使用表达式（计算公式、函数调用、字段也是个表达式）
+        select stu, 29+25, now() from tb;
+    -- 可以为每个列使用别名。适用于简化列标识，避免多个列标识符重复。
+        - 使用 as 关键字，也可省略 as.
+        select stu+10 as add10 from tb;
+
+b. FROM 子句
+    用于标识查询来源。
+    -- 可以为表起别名。使用as关键字。
+        SELECT * FROM tb1 AS tt, tb2 AS bb;
+    -- from子句后，可以同时出现多个表。
+        -- 多个表会横向叠加到一起，而数据会形成一个笛卡尔积。
+        SELECT * FROM tb1, tb2;
+    -- 向优化符提示如何选择索引
+        USE INDEX、IGNORE INDEX、FORCE INDEX
+        SELECT * FROM table1 USE INDEX (key1,key2) WHERE key1=1 AND key2=2 AND key3=3;
+        SELECT * FROM table1 IGNORE INDEX (key3) WHERE key1=1 AND key2=2 AND key3=3;
+
+c. WHERE 子句
+    -- 从from获得的数据源中进行筛选。
+    -- 整型1表示真，0表示假。
+    -- 表达式由运算符和运算数组成。
+        -- 运算数：变量（字段）、值、函数返回值
+        -- 运算符：
+            =, &lt;=&gt;, &lt;&gt;, !=, &lt;=, &lt;, &gt;=, &gt;, !, &amp;&amp;, ||,
+            in (not) null, (not) like, (not) in, (not) between and, is (not), and, or, not, xor
+            is/is not 加上ture/false/unknown，检验某个值的真假
+            &lt;=&gt;与&lt;&gt;功能相同，&lt;=&gt;可用于null比较
+
+d. GROUP BY 子句, 分组子句
+    GROUP BY 字段/别名 [排序方式]
+    分组后会进行排序。升序：ASC，降序：DESC
+
+    以下[合计函数]需配合 GROUP BY 使用：
+    count 返回不同的非NULL值数目  count(*)、count(字段)
+    sum 求和
+    max 求最大值
+    min 求最小值
+    avg 求平均值
+    group_concat 返回带有来自一个组的连接的非NULL值的字符串结果。组内字符串连接。
+
+e. HAVING 子句，条件子句
+    与 where 功能、用法相同，执行时机不同。
+    where 在开始时执行检测数据，对原数据进行过滤。
+    having 对筛选出的结果再次进行过滤。
+    having 字段必须是查询出来的，where 字段必须是数据表存在的。
+    where 不可以使用字段的别名，having 可以。因为执行WHERE代码时，可能尚未确定列值。
+    where 不可以使用合计函数。一般需用合计函数才会用 having
+    SQL标准要求HAVING必须引用GROUP BY子句中的列或用于合计函数中的列。
+
+f. ORDER BY 子句，排序子句
+    order by 排序字段/别名 排序方式 [,排序字段/别名 排序方式]...
+    升序：ASC，降序：DESC
+    支持多个字段的排序。
+
+g. LIMIT 子句，限制结果数量子句
+    仅对处理好的结果进行数量限制。将处理好的结果的看作是一个集合，按照记录出现的顺序，索引从0开始。
+    limit 起始位置, 获取条数
+    省略第一个参数，表示从索引0开始。limit 获取条数
+
+h. DISTINCT, ALL 选项
+    distinct 去除重复记录
+    默认为 all, 全部记录
+</code></pre>
+
+<h3 id="toc_11">/ UNION / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">   将多个select查询的结果组合成一个结果集合。
+    SELECT ... UNION [ALL|DISTINCT] SELECT ...
+    默认 DISTINCT 方式，即所有返回的行都是唯一的
+    建议，对每个SELECT查询加上小括号包裹。
+    ORDER BY 排序时，需加上 LIMIT 进行结合。
+    需要各select查询的字段数量一样。
+    每个select查询的字段列表(数量、类型)应一致，因为结果中的字段名以第一条select语句为准。
+</code></pre>
+
+<h3 id="toc_12">/ 子查询 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">    - 子查询需用括号包裹。
+-- from型
+    from后要求是一个表，必须给子查询结果取个别名。
+    - 简化每个查询内的条件。
+    - from型需将结果生成一个临时表格，可用以原表的锁定的释放。
+    - 子查询返回一个表，表型子查询。
+    select * from (select * from tb where id&gt;0) as subfrom where id&gt;1;
+-- where型
+    - 子查询返回一个值，标量子查询。
+    - 不需要给子查询取别名。
+    - where子查询内的表，不能直接用以更新。
+    select * from tb where money = (select max(money) from tb);
+    -- 列子查询
+        如果子查询结果返回的是一列。
+        使用 in 或 not in 完成查询
+        exists 和 not exists 条件
+            如果子查询返回数据，则返回1或0。常用于判断条件。
+            select column1 from t1 where exists (select * from t2);
+    -- 行子查询
+        查询条件是一个行。
+        select * from t1 where (id, gender) in (select id, gender from t2);
+        行构造符：(col1, col2, ...) 或 ROW(col1, col2, ...)
+        行构造符通常用于与对能返回两个或两个以上列的子查询进行比较。
+
+    -- 特殊运算符
+    != all()    相当于 not in
+    = some()    相当于 in。any 是 some 的别名
+    != some()   不等同于 not in，不等于其中某一个。
+    all, some 可以配合其他运算符一起使用。
+</code></pre>
+
+<h3 id="toc_13">/ 连接查询(join) / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">    将多个表的字段进行连接，可以指定连接条件。
+-- 内连接(inner join)
+    - 默认就是内连接，可省略inner。
+    - 只有数据存在时才能发送连接。即连接结果不能出现空行。
+    on 表示连接条件。其条件表达式与where类似。也可以省略条件（表示条件永远为真）
+    也可用where表示连接条件。
+    还有 using, 但需字段名相同。 using(字段名)
+
+    -- 交叉连接 cross join
+        即，没有条件的内连接。
+        select * from tb1 cross join tb2;
+-- 外连接(outer join)
+    - 如果数据不存在，也会出现在连接结果中。
+    -- 左外连接 left join
+        如果数据不存在，左表记录会出现，而右表为null填充
+    -- 右外连接 right join
+        如果数据不存在，右表记录会出现，而左表为null填充
+-- 自然连接(natural join)
+    自动判断连接条件完成连接。
+    相当于省略了using，会自动查找相同字段名。
+    natural join
+    natural left join
+    natural right join
+
+select info.id, info.name, info.stu_num, extra_info.hobby, extra_info.sex from info, extra_info where info.stu_num = extra_info.stu_id;
+</code></pre>
+
+<h3 id="toc_14">/ 导入导出 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">select * into outfile 文件地址 [控制格式] from 表名;   -- 导出表数据
+load data [local] infile 文件地址 [replace|ignore] into table 表名 [控制格式]; -- 导入数据
+    生成的数据默认的分隔符是制表符
+    local未指定，则数据文件必须在服务器上
+    replace 和 ignore 关键词控制对现有的唯一键记录的重复的处理
+-- 控制格式
+fields  控制字段格式
+默认：fields terminated by &#39;\t&#39; enclosed by &#39;&#39; escaped by &#39;\\&#39;
+    terminated by &#39;string&#39;  -- 终止
+    enclosed by &#39;char&#39;      -- 包裹
+    escaped by &#39;char&#39;       -- 转义
+    -- 示例：
+        SELECT a,b,a+b INTO OUTFILE &#39;/tmp/result.text&#39;
+        FIELDS TERMINATED BY &#39;,&#39; OPTIONALLY ENCLOSED BY &#39;&quot;&#39;
+        LINES TERMINATED BY &#39;\n&#39;
+        FROM test_table;
+lines   控制行格式
+默认：lines terminated by &#39;\n&#39;
+    terminated by &#39;string&#39;  -- 终止
+</code></pre>
+
+<h3 id="toc_15">/ INSERT / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">select语句获得的数据可以用insert插入。
+
+可以省略对列的指定，要求 values () 括号内，提供给了按照列顺序出现的所有字段的值。
+    或者使用set语法。
+    INSERT INTO tbl_name SET field=value,...；
+
+可以一次性使用多个值，采用(), (), ();的形式。
+    INSERT INTO tbl_name VALUES (), (), ();
+
+可以在列值指定时，使用表达式。
+    INSERT INTO tbl_name VALUES (field_value, 10+10, now());
+可以使用一个特殊值 DEFAULT，表示该列使用默认值。
+    INSERT INTO tbl_name VALUES (field_value, DEFAULT);
+
+可以通过一个查询的结果，作为需要插入的值。
+    INSERT INTO tbl_name SELECT ...;
+
+可以指定在插入的值出现主键（或唯一索引）冲突时，更新其他非主键列的信息。
+    INSERT INTO tbl_name VALUES/SET/SELECT ON DUPLICATE KEY UPDATE 字段=值, …;
+</code></pre>
+
+<h3 id="toc_16">/ DELETE / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">DELETE FROM tbl_name [WHERE where_definition] [ORDER BY ...] [LIMIT row_count]
+
+按照条件删除。where
+
+指定删除的最多记录数。limit
+
+可以通过排序条件删除。order by + limit
+
+支持多表删除，使用类似连接语法。
+delete from 需要删除数据多表1，表2 using 表连接操作 条件。
+</code></pre>
+
+<h3 id="toc_17">/ TRUNCATE / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">TRUNCATE [TABLE] tbl_name
+清空数据
+删除重建表
+
+区别：
+1，truncate 是删除表再创建，delete 是逐条删除
+2，truncate 重置auto_increment的值。而delete不会
+3，truncate 不知道删除了几条，而delete知道。
+4，当被用于带分区的表时，truncate 会保留分区
+</code></pre>
+
+<h3 id="toc_18">/ 备份与还原 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">备份，将数据的结构与表内数据保存起来。
+利用 mysqldump 指令完成。
+
+-- 导出
+mysqldump [options] db_name [tables]
+mysqldump [options] ---database DB1 [DB2 DB3...]
+mysqldump [options] --all--database
+
+
+1. 导出一张表
+　　mysqldump -u用户名 -p密码 库名 表名 &gt; 文件名(D:/a.sql)
+2. 导出多张表
+　　mysqldump -u用户名 -p密码 库名 表1 表2 表3 &gt; 文件名(D:/a.sql)
+3. 导出所有表
+　　mysqldump -u用户名 -p密码 库名 &gt; 文件名(D:/a.sql)
+4. 导出一个库
+　　mysqldump -u用户名 -p密码 --lock-all-tables --database 库名 &gt; 文件名(D:/a.sql)
+
+可以-w携带WHERE条件
+
+-- 导入
+1. 在登录mysql的情况下：
+　　source  备份文件
+2. 在不登录的情况下
+　　mysql -u用户名 -p密码 库名 &lt; 备份文件
+</code></pre>
+
+<h3 id="toc_19">/ 视图 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">什么是视图：
+    视图是一个虚拟表，其内容由查询定义。同真实的表一样，视图包含一系列带有名称的列和行数据。但是，视图并不在数据库中以存储的数据值集形式存在。行和列数据来自由定义视图的查询所引用的表，并且在引用视图时动态生成。
+    视图具有表结构文件，但不存在数据文件。
+    对其中所引用的基础表来说，视图的作用类似于筛选。定义视图的筛选可以来自当前或其它数据库的一个或多个表，或者其它视图。通过视图进行查询没有任何限制，通过它们进行数据修改时的限制也很少。
+    视图是存储在数据库中的查询的sql语句，它主要出于两种原因：安全原因，视图可以隐藏一些数据，如：社会保险基金表，可以用视图只显示姓名，地址，而不显示社会保险号和工资数等，另一原因是可使复杂的查询易于理解和使用。
+
+-- 创建视图
+CREATE [OR REPLACE] [ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}] VIEW view_name [(column_list)] AS select_statement
+    - 视图名必须唯一，同时不能与表重名。
+    - 视图可以使用select语句查询到的列名，也可以自己指定相应的列名。
+    - 可以指定视图执行的算法，通过ALGORITHM指定。
+    - column_list如果存在，则数目必须等于SELECT语句检索的列数
+
+-- 查看结构
+    SHOW CREATE VIEW view_name
+
+-- 删除视图
+    - 删除视图后，数据依然存在。
+    - 可同时删除多个视图。
+    DROP VIEW [IF EXISTS] view_name ...
+
+-- 修改视图结构
+    - 一般不修改视图，因为不是所有的更新视图都会映射到表上。
+    ALTER VIEW view_name [(column_list)] AS select_statement
+
+-- 视图作用
+    1. 简化业务逻辑
+    2. 对客户端隐藏真实的表结构
+
+-- 视图算法(ALGORITHM)
+    MERGE       合并
+        将视图的查询语句，与外部查询需要先合并再执行！
+    TEMPTABLE   临时表
+        将视图执行完毕后，形成临时表，再做外层查询！
+    UNDEFINED   未定义(默认)，指的是MySQL自主去选择相应的算法。
+</code></pre>
+
+<h3 id="toc_20">/ 事务(transaction) / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">事务是指逻辑上的一组操作，组成这组操作的各个单元，要不全成功要不全失败。
+    - 支持连续SQL的集体成功或集体撤销。
+    - 事务是数据库在数据晚自习方面的一个功能。
+    - 需要利用 InnoDB 或 BDB 存储引擎，对自动提交的特性支持完成。
+    - InnoDB被称为事务安全型引擎。
+
+-- 事务开启
+    START TRANSACTION; 或者 BEGIN;
+    开启事务后，所有被执行的SQL语句均被认作当前事务内的SQL语句。
+-- 事务提交
+    COMMIT;
+-- 事务回滚
+    ROLLBACK;
+    如果部分操作发生问题，映射到事务开启前。
+
+-- 事务的特性
+    1. 原子性（Atomicity）
+        事务是一个不可分割的工作单位，事务中的操作要么都发生，要么都不发生。
+    2. 一致性（Consistency）
+        事务前后数据的完整性必须保持一致。
+        - 事务开始和结束时，外部数据一致
+        - 在整个事务过程中，操作是连续的
+    3. 隔离性（Isolation）
+        多个用户并发访问数据库时，一个用户的事务不能被其它用户的事物所干扰，多个并发事务之间的数据要相互隔离。
+    4. 持久性（Durability）
+        一个事务一旦被提交，它对数据库中的数据改变就是永久性的。
+
+-- 事务的实现
+    1. 要求是事务支持的表类型
+    2. 执行一组相关的操作前开启事务
+    3. 整组操作完成后，都成功，则提交；如果存在失败，选择回滚，则会回到事务开始的备份点。
+
+-- 事务的原理
+    利用InnoDB的自动提交(autocommit)特性完成。
+    普通的MySQL执行语句后，当前的数据提交操作均可被其他客户端可见。
+    而事务是暂时关闭“自动提交”机制，需要commit提交持久化数据操作。
+
+-- 注意
+    1. 数据定义语言（DDL）语句不能被回滚，比如创建或取消数据库的语句，和创建、取消或更改表或存储的子程序的语句。
+    2. 事务不能被嵌套
+
+-- 保存点
+    SAVEPOINT 保存点名称 -- 设置一个事务保存点
+    ROLLBACK TO SAVEPOINT 保存点名称 -- 回滚到保存点
+    RELEASE SAVEPOINT 保存点名称 -- 删除保存点
+
+-- InnoDB自动提交特性设置
+    SET autocommit = 0|1;   0表示关闭自动提交，1表示开启自动提交。
+    - 如果关闭了，那普通操作的结果对其他客户端也不可见，需要commit提交后才能持久化数据操作。
+    - 也可以关闭自动提交来开启事务。但与START TRANSACTION不同的是，
+        SET autocommit是永久改变服务器的设置，直到下次再次修改该设置。(针对当前连接)
+        而START TRANSACTION记录开启前的状态，而一旦事务提交或回滚后就需要再次开启事务。(针对当前事务)
+</code></pre>
+
+<h3 id="toc_21">/ 锁表 /</h3>
+
+<pre class="line-numbers"><code class="language-text">表锁定只用于防止其它客户端进行不正当地读取和写入
+MyISAM 支持表锁，InnoDB 支持行锁
+-- 锁定
+    LOCK TABLES tbl_name [AS alias]
+-- 解锁
+    UNLOCK TABLES
+</code></pre>
+
+<h3 id="toc_22">/ 触发器 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">  触发程序是与表有关的命名数据库对象，当该表出现特定事件时，将激活该对象
+  监听：记录的增加、修改、删除。
+
+-- 创建触发器
+CREATE TRIGGER trigger_name trigger_time trigger_event ON tbl_name FOR EACH ROW trigger_stmt
+  参数：
+  trigger_time是触发程序的动作时间。它可以是 before 或 after，以指明触发程序是在激活它的语句之前或之后触发。
+  trigger_event指明了激活触发程序的语句的类型
+      INSERT：将新行插入表时激活触发程序
+      UPDATE：更改某一行时激活触发程序
+      DELETE：从表中删除某一行时激活触发程序
+  tbl_name：监听的表，必须是永久性的表，不能将触发程序与TEMPORARY表或视图关联起来。
+  trigger_stmt：当触发程序激活时执行的语句。执行多个语句，可使用BEGIN...END复合语句结构
+
+-- 删除
+DROP TRIGGER [schema_name.]trigger_name
+
+可以使用old和new代替旧的和新的数据
+  更新操作，更新前是old，更新后是new.
+  删除操作，只有old.
+  增加操作，只有new.
+
+-- 注意
+  1. 对于具有相同触发程序动作时间和事件的给定表，不能有两个触发程序。
+
+
+-- 字符连接函数
+concat(str1,str2,...])
+concat_ws(separator,str1,str2,...)
+
+-- 分支语句
+if 条件 then
+  执行语句
+elseif 条件 then
+  执行语句
+else
+  执行语句
+end if;
+
+-- 修改最外层语句结束符
+delimiter 自定义结束符号
+  SQL语句
+自定义结束符号
+
+delimiter ;     -- 修改回原来的分号
+
+-- 语句块包裹
+begin
+  语句块
+end
+
+-- 特殊的执行
+1. 只要添加记录，就会触发程序。
+2. Insert into on duplicate key update 语法会触发：
+  如果没有重复记录，会触发 before insert, after insert;
+  如果有重复记录并更新，会触发 before insert, before update, after update;
+  如果有重复记录但是没有发生更新，则触发 before insert, before update
+3. Replace 语法 如果有记录，则执行 before insert, before delete, after delete, after insert
+</code></pre>
+
+<h3 id="toc_23">/ SQL编程 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">--// 局部变量 ----------
+-- 变量声明
+    declare var_name[,...] type [default value]
+    这个语句被用来声明局部变量。要给变量提供一个默认值，请包含一个default子句。值可以被指定为一个表达式，不需要为一个常数。如果没有default子句，初始值为null。
+
+-- 赋值
+    使用 set 和 select into 语句为变量赋值。
+
+    - 注意：在函数内是可以使用全局变量（用户自定义的变量）
+
+
+--// 全局变量 ----------
+-- 定义、赋值
+set 语句可以定义并为变量赋值。
+set @var = value;
+也可以使用select into语句为变量初始化并赋值。这样要求select语句只能返回一行，但是可以是多个字段，就意味着同时为多个变量进行赋值，变量的数量需要与查询的列数一致。
+还可以把赋值语句看作一个表达式，通过select执行完成。此时为了避免=被当作关系运算符看待，使用:=代替。（set语句可以使用= 和 :=）。
+select @var:=20;
+select @v1:=id, @v2=name from t1 limit 1;
+select * from tbl_name where @var:=30;
+
+select into 可以将表中查询获得的数据赋给变量。
+    -| select max(height) into @max_height from tb;
+
+-- 自定义变量名
+为了避免select语句中，用户自定义的变量与系统标识符（通常是字段名）冲突，用户自定义变量在变量名前使用@作为开始符号。
+@var=10;
+
+    - 变量被定义后，在整个会话周期都有效（登录到退出）
+
+
+--// 控制结构 ----------
+-- if语句
+if search_condition then
+    statement_list   
+[elseif search_condition then
+    statement_list]
+...
+[else
+    statement_list]
+end if;
+
+-- case语句
+CASE value WHEN [compare-value] THEN result
+[WHEN [compare-value] THEN result ...]
+[ELSE result]
+END
+
+
+-- while循环
+[begin_label:] while search_condition do
+    statement_list
+end while [end_label];
+
+- 如果需要在循环内提前终止 while循环，则需要使用标签；标签需要成对出现。
+
+    -- 退出循环
+        退出整个循环 leave
+        退出当前循环 iterate
+        通过退出的标签决定退出哪个循环
+
+
+--// 内置函数 ----------
+-- 数值函数
+abs(x)          -- 绝对值 abs(-10.9) = 10
+format(x, d)    -- 格式化千分位数值 format(1234567.456, 2) = 1,234,567.46
+ceil(x)         -- 向上取整 ceil(10.1) = 11
+floor(x)        -- 向下取整 floor (10.1) = 10
+round(x)        -- 四舍五入去整
+mod(m, n)       -- m%n m mod n 求余 10%3=1
+pi()            -- 获得圆周率
+pow(m, n)       -- m^n
+sqrt(x)         -- 算术平方根
+rand()          -- 随机数
+truncate(x, d)  -- 截取d位小数
+
+-- 时间日期函数
+now(), current_timestamp();     -- 当前日期时间
+current_date();                 -- 当前日期
+current_time();                 -- 当前时间
+date(&#39;yyyy-mm-dd hh:ii:ss&#39;);    -- 获取日期部分
+time(&#39;yyyy-mm-dd hh:ii:ss&#39;);    -- 获取时间部分
+date_format(&#39;yyyy-mm-dd hh:ii:ss&#39;, &#39;%d %y %a %d %m %b %j&#39;); -- 格式化时间
+unix_timestamp();               -- 获得unix时间戳
+from_unixtime();                -- 从时间戳获得时间
+
+-- 字符串函数
+length(string)          -- string长度，字节
+char_length(string)     -- string的字符个数
+substring(str, position [,length])      -- 从str的position开始,取length个字符
+replace(str ,search_str ,replace_str)   -- 在str中用replace_str替换search_str
+instr(string ,substring)    -- 返回substring首次在string中出现的位置
+concat(string [,...])   -- 连接字串
+charset(str)            -- 返回字串字符集
+lcase(string)           -- 转换成小写
+left(string, length)    -- 从string2中的左边起取length个字符
+load_file(file_name)    -- 从文件读取内容
+locate(substring, string [,start_position]) -- 同instr,但可指定开始位置
+lpad(string, length, pad)   -- 重复用pad加在string开头,直到字串长度为length
+ltrim(string)           -- 去除前端空格
+repeat(string, count)   -- 重复count次
+rpad(string, length, pad)   --在str后用pad补充,直到长度为length
+rtrim(string)           -- 去除后端空格
+strcmp(string1 ,string2)    -- 逐字符比较两字串大小
+
+-- 流程函数
+case when [condition] then result [when [condition] then result ...] [else result] end   多分支
+if(expr1,expr2,expr3)  双分支。
+
+-- 聚合函数
+count()
+sum();
+max();
+min();
+avg();
+group_concat()
+
+-- 其他常用函数
+md5();
+default();
+
+
+--// 存储函数，自定义函数 ----------
+-- 新建
+    CREATE FUNCTION function_name (参数列表) RETURNS 返回值类型
+        函数体
+
+    - 函数名，应该合法的标识符，并且不应该与已有的关键字冲突。
+    - 一个函数应该属于某个数据库，可以使用db_name.funciton_name的形式执行当前函数所属数据库，否则为当前数据库。
+    - 参数部分，由&quot;参数名&quot;和&quot;参数类型&quot;组成。多个参数用逗号隔开。
+    - 函数体由多条可用的mysql语句，流程控制，变量声明等语句构成。
+    - 多条语句应该使用 begin...end 语句块包含。
+    - 一定要有 return 返回值语句。
+
+-- 删除
+    DROP FUNCTION [IF EXISTS] function_name;
+
+-- 查看
+    SHOW FUNCTION STATUS LIKE &#39;partten&#39;
+    SHOW CREATE FUNCTION function_name;
+
+-- 修改
+    ALTER FUNCTION function_name 函数选项
+
+
+--// 存储过程，自定义功能 ----------
+-- 定义
+存储存储过程 是一段代码（过程），存储在数据库中的sql组成。
+一个存储过程通常用于完成一段业务逻辑，例如报名，交班费，订单入库等。
+而一个函数通常专注与某个功能，视为其他程序服务的，需要在其他语句中调用函数才可以，而存储过程不能被其他调用，是自己执行 通过call执行。
+
+-- 创建
+CREATE PROCEDURE sp_name (参数列表)
+    过程体
+
+参数列表：不同于函数的参数列表，需要指明参数类型
+IN，表示输入型
+OUT，表示输出型
+INOUT，表示混合型
+
+注意，没有返回值。
+</code></pre>
+
+<h3 id="toc_24">/ 存储过程 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">存储过程是一段可执行性代码的集合。相比函数，更偏向于业务逻辑。
+调用：CALL 过程名
+-- 注意
+- 没有返回值。
+- 只能单独调用，不可夹杂在其他语句中
+
+-- 参数
+IN|OUT|INOUT 参数名 数据类型
+IN      输入：在调用过程中，将数据输入到过程体内部的参数
+OUT     输出：在调用过程中，将过程体处理完的结果返回到客户端
+INOUT   输入输出：既可输入，也可输出
+
+-- 语法
+CREATE PROCEDURE 过程名 (参数列表)
+BEGIN
+    过程体
+END
+</code></pre>
+
+<h3 id="toc_25">/ 用户和权限管理 / ------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">-- root密码重置
+1. 停止MySQL服务
+2.  [Linux] /usr/local/mysql/bin/safe_mysqld --skip-grant-tables &amp;
+    [Windows] mysqld --skip-grant-tables
+3. use mysql;
+4. UPDATE `user` SET PASSWORD=PASSWORD(&quot;密码&quot;) WHERE `user` = &quot;root&quot;;
+5. FLUSH PRIVILEGES;
+
+用户信息表：mysql.user
+-- 刷新权限
+FLUSH PRIVILEGES;
+-- 增加用户
+CREATE USER 用户名 IDENTIFIED BY [PASSWORD] 密码(字符串)
+    - 必须拥有mysql数据库的全局CREATE USER权限，或拥有INSERT权限。
+    - 只能创建用户，不能赋予权限。
+    - 用户名，注意引号：如 &#39;user_name&#39;@&#39;192.168.1.1&#39;
+    - 密码也需引号，纯数字密码也要加引号
+    - 要在纯文本中指定密码，需忽略PASSWORD关键词。要把密码指定为由PASSWORD()函数返回的混编值，需包含关键字PASSWORD
+-- 重命名用户
+RENAME USER old_user TO new_user
+-- 设置密码
+SET PASSWORD = PASSWORD(&#39;密码&#39;)  -- 为当前用户设置密码
+SET PASSWORD FOR 用户名 = PASSWORD(&#39;密码&#39;) -- 为指定用户设置密码
+-- 删除用户
+DROP USER 用户名
+-- 分配权限/添加用户
+GRANT 权限列表 ON 表名 TO 用户名 [IDENTIFIED BY [PASSWORD] &#39;password&#39;]
+    - all privileges 表示所有权限
+    - *.* 表示所有库的所有表
+    - 库名.表名 表示某库下面的某表
+    GRANT ALL PRIVILEGES ON `pms`.* TO &#39;pms&#39;@&#39;%&#39; IDENTIFIED BY &#39;pms0817&#39;;
+-- 查看权限
+SHOW GRANTS FOR 用户名
+    -- 查看当前用户权限
+    SHOW GRANTS; 或 SHOW GRANTS FOR CURRENT_USER; 或 SHOW GRANTS FOR CURRENT_USER();
+-- 撤消权限
+REVOKE 权限列表 ON 表名 FROM 用户名
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 用户名   -- 撤销所有权限
+-- 权限层级
+-- 要使用GRANT或REVOKE，您必须拥有GRANT OPTION权限，并且您必须用于您正在授予或撤销的权限。
+全局层级：全局权限适用于一个给定服务器中的所有数据库，mysql.user
+    GRANT ALL ON *.*和 REVOKE ALL ON *.*只授予和撤销全局权限。
+数据库层级：数据库权限适用于一个给定数据库中的所有目标，mysql.db, mysql.host
+    GRANT ALL ON db_name.*和REVOKE ALL ON db_name.*只授予和撤销数据库权限。
+表层级：表权限适用于一个给定表中的所有列，mysql.talbes_priv
+    GRANT ALL ON db_name.tbl_name和REVOKE ALL ON db_name.tbl_name只授予和撤销表权限。
+列层级：列权限适用于一个给定表中的单一列，mysql.columns_priv
+    当使用REVOKE时，您必须指定与被授权列相同的列。
+-- 权限列表
+ALL [PRIVILEGES]    -- 设置除GRANT OPTION之外的所有简单权限
+ALTER   -- 允许使用ALTER TABLE
+ALTER ROUTINE   -- 更改或取消已存储的子程序
+CREATE  -- 允许使用CREATE TABLE
+CREATE ROUTINE  -- 创建已存储的子程序
+CREATE TEMPORARY TABLES     -- 允许使用CREATE TEMPORARY TABLE
+CREATE USER     -- 允许使用CREATE USER, DROP USER, RENAME USER和REVOKE ALL PRIVILEGES。
+CREATE VIEW     -- 允许使用CREATE VIEW
+DELETE  -- 允许使用DELETE
+DROP    -- 允许使用DROP TABLE
+EXECUTE     -- 允许用户运行已存储的子程序
+FILE    -- 允许使用SELECT...INTO OUTFILE和LOAD DATA INFILE
+INDEX   -- 允许使用CREATE INDEX和DROP INDEX
+INSERT  -- 允许使用INSERT
+LOCK TABLES     -- 允许对您拥有SELECT权限的表使用LOCK TABLES
+PROCESS     -- 允许使用SHOW FULL PROCESSLIST
+REFERENCES  -- 未被实施
+RELOAD  -- 允许使用FLUSH
+REPLICATION CLIENT  -- 允许用户询问从属服务器或主服务器的地址
+REPLICATION SLAVE   -- 用于复制型从属服务器（从主服务器中读取二进制日志事件）
+SELECT  -- 允许使用SELECT
+SHOW DATABASES  -- 显示所有数据库
+SHOW VIEW   -- 允许使用SHOW CREATE VIEW
+SHUTDOWN    -- 允许使用mysqladmin shutdown
+SUPER   -- 允许使用CHANGE MASTER, KILL, PURGE MASTER LOGS和SET GLOBAL语句，mysqladmin debug命令；允许您连接（一次），即使已达到max_connections。
+UPDATE  -- 允许使用UPDATE
+USAGE   -- “无权限”的同义词
+GRANT OPTION    -- 允许授予权限
+</code></pre>
+
+<h3 id="toc_26">/ 表维护 /-----------------------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">-- 分析和存储表的关键字分布
+ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE 表名 ...
+-- 检查一个或多个表是否有错误
+CHECK TABLE tbl_name [, tbl_name] ... [option] ...
+option = {QUICK | FAST | MEDIUM | EXTENDED | CHANGED}
+-- 整理数据文件的碎片
+OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
+</code></pre>
+
+<h3 id="toc_27">/ 杂项 /-------------------------------------</h3>
+
+<pre class="line-numbers"><code class="language-text">1. 可用反引号（`）为标识符（库名、表名、字段名、索引、别名）包裹，以避免与关键字重名！中文也可以作为标识符！
+2. 每个库目录存在一个保存当前数据库的选项文件db.opt。
+3. 注释：
+    单行注释 # 注释内容
+    多行注释 /* 注释内容 */
+    单行注释 -- 注释内容     (标准SQL注释风格，要求双破折号后加一空格符（空格、TAB、换行等）)
+4. 模式通配符：
+    _   任意单个字符
+    %   任意多个字符，甚至包括零字符
+    单引号需要进行转义 \&#39;
+5. CMD命令行内的语句结束符可以为 &quot;;&quot;, &quot;\G&quot;, &quot;\g&quot;，仅影响显示结果。其他地方还是用分号结束。delimiter 可修改当前对话的语句结束符。
+6. SQL对大小写不敏感
+7. 清除已有语句：\c
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025628475.html">
+                
+                  <h1>Anaconda + VSCode 最详细教程</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">写在前面</h2>
+
+<p>为了录制这篇教程，我又把电脑上的 Python 卸载了🕹，重新安装 Anaconda 和 VSCode ，并录制动图。文章每个步骤介绍的很详细，只要跟着GIF动图一步一步操作就可以，适合零基础的朋友，通过这篇文章可以让你学会自己运行 Py 文件、以及一些发布出来的 Py 代码段，同时也是为了让更多人迈出学习 Python 的第一个门槛，后续也会写一些 Python 爬虫案例，用于工商信息查询、地址查询、快递查询等，所以为了这些工具，赶紧学起来吧📘。</p>
+
+<p>现在 Python 的广告可谓铺天盖地，文章、朋友圈、各种网页基本都能看到，虽然有些广告确实夸大了 Python 的作用，标题很雷人，但是无论如何也反映了一种趋势，未来编程思维很重要。而我们看待 Python 等编程语言应保持客观，能够帮到自己那就值得花点时间学习，入门之后才知道是不是自己的菜。</p>
+
+<h2 id="toc_1">「戏」说 Python</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225635.png" alt="img"/></p>
+
+<h2 id="toc_2">写在前面</h2>
+
+<p>为了录制这篇教程，我又把电脑上的 Python 卸载了🕹，重新安装 Anaconda 和 VSCode ，并录制动图。文章每个步骤介绍的很详细，只要跟着GIF动图一步一步操作就可以，适合零基础的朋友，通过这篇文章可以让你学会自己运行 Py 文件、以及一些发布出来的 Py 代码段，因为封装成 EXE 不方便调试和更新，同时也是让更多人迈出学习 Python 的第一个门槛，后续也会写一些 Python 爬虫案例，用于工商信息查询、地址查询、快递查询等，所以为了这些工具，赶紧学起来吧📘。</p>
+
+<h2 id="toc_3">一、Anaconda 下载</h2>
+
+<p>Anaconda 可以看做Python的一个集成安装，安装它后就默认安装了python、IPython、集成开发环境Spyder和众多的包和模块，让你在管理环境和包时更加方便。</p>
+
+<p>可以选择从官网或清华源下载 Anaconda 安装包，<strong>清华源</strong>下载速度相对较快。</p>
+
+<p>安装的位数推荐32位，兼容性最强，也可以根据自己的系统位数选择安装。</p>
+
+<p>官网：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.anaconda.com%2Fproducts%2Findividual">https://www.anaconda.com/products/individual</a></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225643.png" alt="img"/></p>
+
+<p>清华源：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmirrors.tuna.tsinghua.edu.cn%2Fanaconda%2Farchive%2F">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225646.png" alt="img"/></p>
+
+<h2 id="toc_4">二、Anaconda 安装</h2>
+
+<p>安装过程中三个注意的地方：</p>
+
+<ul>
+<li>勾选 <code>Alls Users</code></li>
+<li>勾选 <code>Add Anaconda to the system PATH environment variable</code></li>
+<li>如果之前没有安装 VSCode，可以在 Anaconda 安装过程中选择安装</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225654.gif" alt="img"/></p>
+
+<h2 id="toc_5">三、VSCode 下载安装</h2>
+
+<p>Anaconda 安装过程中 VSCode 有时候可能会出错，导致安装失败，这种情况下可以选择从 VSCode 官网下载安装。</p>
+
+<p>VSCode官网：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fcode.visualstudio.com%2FDownload%23">https://code.visualstudio.com/Download#</a></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225658.png" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225700.gif" alt="img"/></p>
+
+<h2 id="toc_6">四、管理 conda</h2>
+
+<h3 id="toc_7">1. 查看 conda 版本</h3>
+
+<p>安装完成后按<code>Win+R</code>打开<code>cmd</code>终端，输入<code>conda --version</code></p>
+
+<p>如果正常输出了 conda 的版本，说明 Anaconda 成功安装了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225704.gif" alt="img"/></p>
+
+<h3 id="toc_8">2. 添加国内源</h3>
+
+<ul>
+<li>查看现有源</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">conda config --show-sources
+</code></pre>
+
+<ul>
+<li>添加国内清华源</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+</code></pre>
+
+<ul>
+<li>删除默认源</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">conda config --remove channels defaults
+</code></pre>
+
+<ul>
+<li>设置搜索时显示通道地址</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">conda config --set show_channel_urls yes
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225707.gif" alt="img"/></p>
+
+<h3 id="toc_9">3. 升级 conda</h3>
+
+<p>设置完国内源后，升级 conda 的速度会快很多，之后安装包时也会从国内源下载。</p>
+
+<pre class="line-numbers"><code class="language-text">conda update conda
+</code></pre>
+
+<p>升级时弹出<code>Proceed ([y]/n)?</code>时，选择<code>y</code>，确认升级。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225711.gif" alt="img"/></p>
+
+<h2 id="toc_10">五、环境管理</h2>
+
+<p><strong>可跳过，直接用默认环境</strong></p>
+
+<h3 id="toc_11">1. 查看 Python 版本</h3>
+
+<pre class="line-numbers"><code class="language-text">python --version
+</code></pre>
+
+<h3 id="toc_12">2. 创建环境</h3>
+
+<p>上一步查到我电脑上的 Python 版本为 3.7.0 ，我想在这个版本基础上创建一个名为 [虚拟环境名] 的虚拟环境。</p>
+
+<pre class="line-numbers"><code class="language-text">conda create -n [虚拟环境名] python=3.7.0
+</code></pre>
+
+<p>新的开发环境会被默认安装在你 conda 目录下的 envs 文件目录下。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225714.gif" alt="img"/></p>
+
+<h3 id="toc_13">3. 激活环境</h3>
+
+<pre class="line-numbers"><code class="language-text">activate [虚拟环境名]
+</code></pre>
+
+<h3 id="toc_14">4. 列出所有的环境</h3>
+
+<pre class="line-numbers"><code class="language-text">conda info -e
+</code></pre>
+
+<p>当前激活的环境会标<code>*</code>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225718.png" alt="img"/></p>
+
+<h3 id="toc_15">5. 切换到另一个环境</h3>
+
+<pre class="line-numbers"><code class="language-text">activate [虚拟环境名]
+</code></pre>
+
+<h3 id="toc_16">6. 注销当前环境（默认的环境是base）</h3>
+
+<pre class="line-numbers"><code class="language-text">deactivate
+虚拟环境激活后，在cmd中输入python，显示的就是一个新的环境。
+</code></pre>
+
+<h3 id="toc_17">7. 复制环境</h3>
+
+<pre class="line-numbers"><code class="language-text">conda create -n [虚拟环境名] --clone [参考环境名]
+
+---常用 
+conda env --help    #查看帮助
+conda env list  #列出所有的虚拟环境
+conda list --name [虚拟环境名]   #查看指定虚拟环境下的package
+
+#创建
+conda create --name [虚拟环境名] [python的版本] [需要的包]
+conda create --name myenv
+conda create --name myenv python=2.7
+conda create --name myenv pytohon=2.7 numpy scipy
+
+#克隆
+conda create --name [虚拟环境名] -- clone [clone的环境]
+
+#创建一个和原python环境一样的虚拟环境
+conda create --name mybase --clone base
+
+
+
+</code></pre>
+
+<h3 id="toc_18">8. 删除环境</h3>
+
+<pre class="line-numbers"><code class="language-text">conda remove --name [虚拟环境名] -all
+</code></pre>
+
+<h2 id="toc_19">六、包管理</h2>
+
+<h3 id="toc_20">1. 查看已安装包</h3>
+
+<pre class="line-numbers"><code class="language-text">conda list
+</code></pre>
+
+<h3 id="toc_21">2. 使用 Conda 命令安装包</h3>
+
+<pre class="line-numbers"><code class="language-text">conda install beautifulsoup4
+</code></pre>
+
+<h3 id="toc_22">3. 通过 pip 命令来安装包</h3>
+
+<p>如果无法通过conda安装，可以用pip命令来安装包。</p>
+
+<pre class="line-numbers"><code class="language-text">pip install beautifulsoup4
+</code></pre>
+
+<h3 id="toc_23">4. 移除包</h3>
+
+<pre class="line-numbers"><code class="language-text">conda remove beautifulsoup4
+</code></pre>
+
+<h2 id="toc_24">七、VSCode 配置</h2>
+
+<h3 id="toc_25">1. 安装 Python 插件</h3>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225724.png" alt="img"/></p>
+
+<h3 id="toc_26">2. 安装 Code Runner 插件</h3>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225727.png" alt="img"/></p>
+
+<h3 id="toc_27">3. 安装中文插件（可选）</h3>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225729.png" alt="img"/></p>
+
+<h3 id="toc_28">4. 指定路径（可跳过）</h3>
+
+<p>确定当前激活环境所在路径</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225732.png" alt="img"/></p>
+
+<p>然后在<code>File--&gt;Preferences--&gt;Settings--&gt;Extensions--&gt;Python--&gt;setting.json</code>添加下面的 Python 路径，这个路径和你设置的环境名称有关。</p>
+
+<pre class="line-numbers"><code class="language-text">&quot;python.pythonPath&quot; :&quot;D:\\anaconda3\\envs\\xiaolvshijie\\python.exe&quot;
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225734.png" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225741.png" alt="img"/></p>
+
+<h2 id="toc_29">八、开始运行 Py 文件</h2>
+
+<p>运行代码前一定要按<code>Ctrl + S</code>保存，再右键选择<code>Run Code</code>或者用快捷键<code>Ctrl + Alt + N</code>执行代码。</p>
+
+<h3 id="toc_30">1. 运行简单代码测试</h3>
+
+<pre class="line-numbers"><code class="language-text">print(&#39;hello xiaolvshijie&#39;)
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225744.gif" alt="img"/></p>
+
+<h3 id="toc_31">2. 运行 Py 文件</h3>
+
+<p>复制下面这段代码到编辑器中，<code>Ctrl + S</code>保存，再右键选择<code>Run Code</code>执行代码。</p>
+
+<pre class="line-numbers"><code class="language-python">import prettytable as pt
+
+tb = pt.PrettyTable()
+tb.field_names = [&#39;Author&#39;, &#39;wwcheng&#39;]
+tb.add_row([&#39;ID&#39;, &#39;xiaolvshijie&#39;])
+
+print(tb)
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225753.gif" alt="img"/></p>
+
+<p>会出现报错提示：<code>ModuleNotFoundError: No module named &#39;prettytable&#39;</code></p>
+
+<p>意思是当前环境中缺少<code>prettytable</code>的包，你需要安装这个包。。</p>
+
+<p>我们可以用<code>conda install prettytable</code>或者<code>pip install prettytable</code>来安装这个包。</p>
+
+<p>如果不知道报错提示的意思，可以利用<strong>搜索引擎</strong>，百度一下你就知道，Python编程相关的问题网络上基本都能搜索到。</p>
+
+<h2 id="toc_32">结语</h2>
+
+<p>成功安装 Anaconda 和 VSCode 并运行上面测试代码后，你可以正常加入码农行业。。。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15838967255194.html">
+                
+                  <h1>Docker 必备可视化工具 Portainer</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>​   推荐使用 Portainer 作为 docker 容器的 GUI 管理方案。</p>
+
+<blockquote>
+<p>Portainer 是一个开源、轻量级 Docker 管理用户界面，基于 Docker API，提供状态显示面板、应用模板快速部署、容器镜像网络数据卷的基本操作（包括上传下载镜像，创建容器等操作）、事件日志显示、容器控制台操作、Swarm 集群和服务等集中管理和操作、登录用户管理和控制等功能。</p>
+</blockquote>
+
+<p>​   官方地址：<a href="https://portainer.io/install.html">https://portainer.io/install.html</a></p>
+
+<h3 id="toc_0"><strong>安装命令：</strong></h3>
+
+<pre class="line-numbers"><code class="language-text">docker volume create portainer_data
+docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+</code></pre>
+
+<p>访问你的 IP:9000 即可进入容器管理页面。如果是本机的话访问地址就是: http:localhost:9000</p>
+
+<h3 id="toc_1"><strong>运行效果:</strong></h3>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200311114555.jpg" alt="Docker 必备可视化工具"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200311114738.jpg" alt="Docker 必备可视化工具"/></p>
+
+<h3 id="toc_2">参考资料：</h3>
+
+<p>docker：轻量级图形页面管理之 Portainer: <a href="https://blog.51cto.com/ganbing/2083051">https://blog.51cto.com/ganbing/2083051</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/03/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025631446.html">
+                
+                  <h1>Git 常用技巧 （高级用法）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0"><strong>git 的一些「高级」用法</strong></h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312211952.jpg" alt=""/></p>
+
+<h2 id="toc_1"><strong>导航 —— 跳到之前的分支</strong></h2>
+
+<pre class="line-numbers"><code class="language-text">git checkout -
+</code></pre>
+
+<h2 id="toc_2"><strong>查看历史</strong></h2>
+
+<pre class="line-numbers"><code class="language-text"># 每个提交在一行内显示
+git log --oneline
+
+# 在所有提交日志中搜索包含「homepage」的提交
+git log --all --grep=&#39;homepage&#39;
+
+# 获取某人的提交日志
+git log --author=&quot;Maxence&quot;
+</code></pre>
+
+<h2 id="toc_3"><strong>之前重置了一个不想保留的提交，但是现在又想要回滚？</strong></h2>
+
+<pre class="line-numbers"><code class="language-text"># 获取所有操作历史
+git reflog
+
+# 重置到相应提交
+git reset HEAD@{4}
+# ……或者……
+git reset --hard &lt;提交的哈希值&gt;
+</code></pre>
+
+<h2 id="toc_4"><strong>我把本地仓库搞得一团糟，应该怎么清理？</strong></h2>
+
+<pre class="line-numbers"><code class="language-text">git fetch origin
+git checkout master
+git reset --hard origin/master
+</code></pre>
+
+<h2 id="toc_5"><strong>查看我的分支和 master 的不同</strong></h2>
+
+<pre class="line-numbers"><code class="language-text">git diff master..my-branch
+</code></pre>
+
+<h2 id="toc_6"><strong>定制提交</strong></h2>
+
+<pre class="line-numbers"><code class="language-text"># 编辑上次提交
+git commit --amend -m &quot;更好的提交日志&quot;
+
+# 在上次提交中附加一些内容，保持提交日志不变git add . &amp;&amp; git commit --amend --no-edit
+
+# 空提交 —— 可以用来重新触发 CI 构建
+git commit --allow-empty -m &quot;chore: re-trigger build&quot;
+</code></pre>
+
+<p>​   <strong>squash 提交</strong></p>
+
+<p>​   比方说我想要 rebase 最近 3 个提交：</p>
+
+<p>​   - git rebase -i HEAD~3<br/>
+​   - 保留第一行的 pick，剩余提交替换为 squash 或 s<br/>
+​   - 清理提交日志并保存（vi 编辑器中键入 :wq 即可保存）</p>
+
+<pre class="line-numbers"><code class="language-text">pick 64d26a1 feat: add index.js
+s 45f0259 fix: update index.js
+s 8b15b0a fix: typo in index.js
+</code></pre>
+
+<h2 id="toc_7"><strong>修正</strong></h2>
+
+<p>比方说想在提交 fed14a4c 加上一些内容。</p>
+
+<p><img src="Git%20%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7(%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95).assets/4a407484dfb44ea0ad31738ddf673099.jpg" alt=""/></p>
+
+<p><strong>git 提交分支</strong></p>
+
+<pre class="line-numbers"><code class="language-text">git add .
+git commit --fixup HEAD~1
+# 或者也可以用提交的哈希值（fed14a4c）替换 HEAD~1
+
+git rebase -i HEAD~3 --autosquash
+# 保存并退出文件（VI 中输入 `:wq`）
+</code></pre>
+
+<h2 id="toc_8"><strong>rebase 的时候在每个提交上执行命令</strong></h2>
+
+<p>如果特性很多，一个分支里可能有多个提交。如果测试失败了，你希望能找到导致测试失败的提交。这时候你可以使用 rebase --exec 命令在每个提交上执行命令。</p>
+
+<pre class="line-numbers"><code class="language-text"># 在最近 3 个提交上运行 `npm test` 命令
+git rebase HEAD~3 --exec &quot;npm test&quot;
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312212414.jpg" alt=""/></p>
+
+<h2 id="toc_9"><strong>暂存</strong></h2>
+
+<p>​   暂存不止是 git stash 和 git stash pop ;)</p>
+
+<pre class="line-numbers"><code class="language-text"># 保存所有正在追踪的文件
+git stash save &quot;日志信息&quot;
+
+# 列出所有的暂存项
+git stash list
+
+# 获取并删除暂存项
+git stash apply stash@{1}
+git stash drop stash@{1}
+# ……或使用一条命令……
+git stash pop stash@{1}
+</code></pre>
+
+<h2 id="toc_10"><strong>清理</strong></h2>
+
+<pre class="line-numbers"><code class="language-text"># 移除远程仓库上不存在的分支
+git fetch -p
+
+# 移除所有包含 `greenkeeper` 的分支
+git fetch -p &amp;&amp; git branch --remote | fgrep greenkeeper | sed &#39;s/^.\{9\}//&#39; | xargs git push origin --delete
+</code></pre>
+
+<h2 id="toc_11"><strong>GitHub = Git + Hub</strong></h2>
+
+<p>我把 Hub 当成 git 的一个封装来用。你如果也想这么做，可以设置一个别名：alias git=&#39;hub&#39;</p>
+
+<pre class="line-numbers"><code class="language-text"># 打开浏览器访问仓库 url（仅限 GitHub 仓库）git browse
+</code></pre>
+
+<hr/>
+
+<h2 id="toc_12"><strong>额外福利：我最喜爱的 git 别名</strong></h2>
+
+<pre class="line-numbers"><code class="language-text">alias g=&#39;git&#39;
+alias glog=&#39;git log --oneline --decorate --graph&#39;
+alias gst=&#39;git status&#39;
+alias gp=&#39;git push&#39;
+alias ga=&#39;git add&#39;alias gc=&#39;git commit -v&#39;
+
+# 
+alias yolo=&#39;git push --force&#39;
+
+# 每周站会汇报工作时用
+git-standup() {
+    AUTHOR=${AUTHOR:=&quot;`git config user.name`&quot;}
+
+    since=yesterday
+    if [[ $(date +%u) == 1 ]] ; then
+        since=&quot;2 days ago&quot;
+    fi
+
+    git log --all --since &quot;$since&quot; --oneline --author=&quot;$AUTHOR&quot;
+}
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025629044.html">
+                
+                  <h1>Git版本管理完全指南（包含常见头疼错误解决方案）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">第一部分 命令行</h1>
+
+<p><strong>1、分支操作</strong></p>
+
+<pre class="line-numbers"><code class="language-text">1. git branch 创建分支
+2. git checkout -b 创建并切换到新建的分支上
+3. git checkout 切换分支
+4. git branch 查看分支列表
+5. git branch -v 查看所有分支的最后一次操作
+6. git branch -vv 查看当前分支
+7. git brabch -b 分支名 origin/分支名 创建远程分支到本地
+8. git branch --merged 查看别的分支和当前分支合并过的分支
+9. git branch --no-merged 查看未与当前分支合并的分支
+10. git branch -d 分支名 删除本地分支
+11. git branch -D 分支名 强行删除分支
+12. git branch origin :分支名 删除远处仓库分支
+13. git merge 分支名 合并分支到当前分支上
+</code></pre>
+
+<p><strong>2、暂存操作</strong></p>
+
+<pre class="line-numbers"><code class="language-text">1. git stash 暂存当前修改
+2. git stash apply 恢复最近的一次暂存
+3. git stash pop 恢复暂存并删除暂存记录
+4. git stash list 查看暂存列表
+5. git stash drop 暂存名(例：stash@{0}) 移除某次暂存
+6. git stash clear 清除暂存
+</code></pre>
+
+<p><strong>3、回退操作</strong></p>
+
+<pre class="line-numbers"><code class="language-text">1. git reset --hard HEAD^ 回退到上一个版本
+2. git reset --hard ahdhs1(commit_id) 回退到某个版本
+3. git checkout -- file撤销修改的文件(如果文件加入到了暂存区，则回退到暂存区的，如果文件加入到了版本库，则还原至加入版本库之后的状态)
+4. git reset HEAD file 撤回暂存区的文件修改到工作区
+</code></pre>
+
+<p><strong>4、标签操作</strong></p>
+
+<pre class="line-numbers"><code class="language-text">1. git tag 标签名 添加标签(默认对当前版本)
+2. git tag 标签名 commit_id 对某一提交记录打标签
+3. git tag -a 标签名 -m &#39;描述&#39; 创建新标签并增加备注
+4. git tag 列出所有标签列表
+5. git show 标签名 查看标签信息
+6. git tag -d 标签名 删除本地标签
+7. git push origin 标签名 推送标签到远程仓库
+8. git push origin --tags 推送所有标签到远程仓库
+9. git push origin :refs/tags/标签名 从远程仓库中删除标签
+</code></pre>
+
+<p><strong>5、其它操作</strong></p>
+
+<p>常规操作</p>
+
+<pre class="line-numbers"><code class="language-text">1. git push origin test 推送本地分支到远程仓库
+2. git rm -r --cached 文件/文件夹名字 取消文件被版本控制
+3. git reflog 获取执行过的命令
+4. git log --graph 查看分支合并图
+5. git merge --no-ff -m &#39;合并描述&#39; 分支名 不使用Fast forward方式合并，采用这种方式合并可以看到合并记录
+6. git check-ignore -v 文件名 查看忽略规则
+7. git add -f 文件名 强制将文件提交
+8. git reflog 打印所有的日志,假如：ABC三个节点，回退到B后，仍旧打印所有日志
+</code></pre>
+
+<p>git创建项目仓库</p>
+
+<pre class="line-numbers"><code class="language-text">1、git init 初始化
+2、git remote add origin url 关联远程仓库
+3、git pull
+4、git fetch 获取远程仓库中所有的分支到本地
+</code></pre>
+
+<p>忽略已加入到版本库中的文件</p>
+
+<pre class="line-numbers"><code class="language-text">1、git update-index --assume-unchanged file 忽略单个文件
+2、git rm -r --cached 文件/文件夹名字 (. 忽略全部文件)
+</code></pre>
+
+<p>取消忽略文件</p>
+
+<pre class="line-numbers"><code class="language-text">git update-index --no-assume-unchanged file
+</code></pre>
+
+<p>拉取、上传免密码</p>
+
+<pre class="line-numbers"><code class="language-text">git config --global credential.helper store
+</code></pre>
+
+<h1 id="toc_1">第二部分 版本管理</h1>
+
+<p>GitFlow 是由 Vincent Driessen 提出的一个 git操作流程标准。包含如下几个关键分支：</p>
+
+<pre class="line-numbers"><code class="language-text">1. master：主分支develop：主开发分支，包含确定即将发布的代码；
+2. feature：新功能分支，一般一个新功能对应一个分支，对于功能的拆分需要比较合理，以避免一些后面不必要的代码冲突；
+3. release：发布分支，发布时候用的分支，一般测试时候发现的 bug 在这个分支进行修复；
+4. hotfix：热修复分支，紧急修 bug 的时候用。
+</code></pre>
+
+<p>GitFlow 的优势有如下几点：</p>
+
+<pre class="line-numbers"><code class="language-text">1. 并行开发：GitFlow可以很方便的实现并行开发。每个新功能都会建立一个新的 feature分支，从而和已经完成的功能隔离开来，而且只有在新功能完成开发的情况下，其对应的 feature分支才会合并到主开发分支上（也就是我们经常说的develop分支）。另外，如果你正在开发某个功能，同时又有一个新的功能需要开发，你只需要提交当前 feature 的代码，然后创建另外一个feature 分支并完成新功能开发。然后再切回之前的 feature 分支即可继续完成之前功能的开发。
+2. 协作开发：GitFlow 还支持多人协同开发，因为每个 feature 分支上改动的代码都只是为了让某个新的 feature 可以独立运行。同时我们也很容易知道每个人都在干啥。
+3. 发布阶段：当一个新 feature 开发完成的时候，它会被合并到 develop 分支，这个分支主要用来暂时保存那些还没有发布的内容，所以如果需要再开发新的 feature，我们只需要从 develop 分支创建新分支，即可包含所有已经完成的 feature 。
+4. 支持紧急修复：GitFlow 还包含了 hotfix 分支。这种类型的分支是从某个已经发布的 tag 上创建出来并做一个紧急的修复，而且这个紧急修复只影响这个已经发布的 tag，而不会影响到你正在开发的新 feature。
+</code></pre>
+
+<blockquote>
+<p>然后就是 GitFlow 最经典的几张流程图，一定要理解:</p>
+</blockquote>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223014" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
+
+<p><strong>feature 分支都是从 develop 分支创建，完成后再合并到 develop 分支上，等待发布</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223020" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
+
+<p>当需要发布时，我们从 develop 分支创建一个 release 分支</p>
+
+<p>然后这个 release 分支会发布到测试环境进行测试，如果发现问题就在这个分支直接进行修复。在所有问题修复之前，我们会<strong>不停的重复发布-&gt;测试-&gt;修复-&gt;重新发布-&gt;重新测试这个流程</strong>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223022" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
+
+<p>发布结束后，这个<strong>release 分支会合并到 develop 和 master 分支，从而保证不会有代码丢失</strong>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223025" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
+
+<p>master 分支只跟踪已经发布的代码，合并到 master 上的 commit 只能来自 release 分支和 hotfix 分支。</p>
+
+<p>hotfix 分支的作用是紧急修复一些 Bug。它们都是从 master 分支上的某个 tag 建立，修复结束后再合并到 develop 和 master 分支上。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223027" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
+
+<h1 id="toc_2">第三部分 Git常见错误汇总</h1>
+
+<p><strong>常见错误1、windows使用git时出现：warning:LF will be replaced by CRLF</strong></p>
+
+<p>windows中的换行符为 CRLF， 而在linux下的换行符为LF，所以在执行add . 时出现提示，解决办法：</p>
 
 <ol>
-<li><p><strong>代码排版，自动PEP8</strong></p>
-<p>​    pep8 是Python 语言的一个代码编写规范。如若你是新手，目前只想快速掌握基础，而不想过多去注重代码的的编写风格（虽然这很重要），那你可以尝试一下这个工具 - autopep8<br/>
-​    首先在全局环境中（不要在虚拟环境中安装），安装一下这个工具。<br/>
-​    <code>sudo pip install autopep8</code><br/>
-​    然后在 Pycharm 里导入这个工具。<br/>
-​    `<code>Name: AutoPep8</code><br/>
-​    <code>Description: autopep8 your code</code><br/>
-​    <code>Program: autopep8</code><br/>
-​    <code>Arguments: --in-place --aggressive --aggressive $FilePath$</code><br/>
-​    <code>Working directory: $ProjectFileDir$</code><br/>
-​    <code>Output filters: $FILE_PATH$:$LINE$:$COLUMN$:.*</code><img src="media/15998025630555/836ad1129a654b62b51fb4a22b5f6666.jpg" alt="img"/><br/>
-​    我随意写了一段不符合 pep8 规范的代码。<img src="media/15998025630555/39c672bbb2f648a5bdc7747932a50545.jpg" alt="img"/><br/>
-​    点击右键，选择 <code>External Tools -&gt; AutoPep8</code><img src="media/15998025630555/8415682bae244ded8d365243154892d8.jpg" alt="img"/><br/>
-​    看一下效果，还是挺明显的。<img src="media/15998025630555/c692e21e0bb843ad8a0e49cf66defaf0.jpg" alt="img"/><br/>
-​    你可能会说，Pycharm 本身就自带这个功能了呀，快捷键 Command+Option+L ，就可以实现一键pep8了。你可以对比一下，Pycharm 自带的代码 pep8 化功能 并没有像这个autopep8 来得彻底。我相信你最终的选择肯定是后者。</p></li>
-<li><p><strong>误删文件，一秒找回</strong></p>
-<p>​    上周，由于自己的误操作，在没有任何备份的情况下，将一个自己写了两个星期的项目给删除了。待我回头神来的时候，我甚至都记不起是何时进行的删除操作。<br/>
-做为一名老司机，当然是临危不惧地打开了回收站，进行一番搜寻，几个月没有清理过的回收站，真是一片狼藉，什么 jpg，avi 都有，不堪入目呀。<br/>
-​    我用一分钟快速浏览了一下，没有发现我要找的那几个 py 文件，我心想，应该是文件太多了，看叉掉了。由于项目是最近写的，文件名我还清楚地记得，既然有文件名，那就利用windows 自带的搜索功能，结果还是没有，这下我才开始意识到事态的严重性，文件可能真的「没了」。<br/>
-​    我已经很久没有清理过回收站了，为什么回收站里会没有我的文件呢？<br/>
-​    我想这可能是一次非同寻常的 delete，会不会是在 Pycharm 里的 发起删除操作，不会往回收站里丢呢？经过一番测试，在回收站还真的找不着，但是这次尝试也无意中发现了 Pycharm 的隐藏的一个功能 Local History，它会保存你对文件的所有操作记录。<br/>
-就拿我的刚刚测试的文件来举例，我先是新建了一个文件，然后对在这个文件里添加了几行代码。最后我将这个文件删除了。<br/>
-​    此时你可以在你的项目目录里，点击右键，有个 Local History 的选项，再点击子选项 Show History，你可以看到这里有个记录板。如果你想恢复删除的文件，就在删除的记录项点击右键，选择 <strong>Revert</strong> 即可恢复。<br/>
-<img src="media/15998025630555/239c8f3665dc4ca9a8124df77438cf6a.jpg" alt="img"/></p></li>
-<li><p><strong>拥抱Vim，远离鼠标</strong></p>
-<p>​    在大多数场景之下，使用鼠标的效率和精准度，是远不如键盘快捷键的（前提是你已经相当熟练的掌握了快捷键），这个你得承认吧。</p>
-<p>​    Vi 可以满足你对文本操作的所有需求，比可视化界面更加效率，更加 geek。如果你和我一样，是忠实的 vim 粉。在安装完 Pycharm 完后，肯定会第一时间将 ideaVim 这个插件也装上，它可以让我们在 Pycharm 中 使用 vim 来编辑代码。</p>
-<p>​    安装方法如下，安装完后需要重启 Pycharm 生效。<img src="media/15998025630555/dc87ebb6c84f42ceb059e3fe92522069.jpg" alt="img"/></p></li>
-<li><p><strong>代码模板，效率编码</strong></p>
-<p>​    Pycharm 提供的这个代码模板，可以说是相当实用的一个功能了。它可以在你新建一个文件时，按照你预设的模板给你生成一段内容，比如解释器路径，编码方法，作者详细信息等<img src="media/15998025630555/63d745ced36741e8a776127a475aa7ad.jpg" alt="img"/><br/>
-​    按照上图模板，生成的效果如下。<img src="media/15998025630555/de54ff09184d4fb8b1e1cf54d118a289.jpg" alt="img"/><br/>
-​    除了新建文件时可以初始化文件，在开发编写代码时，也同样使用 Pycharm 中自带的实用的代码模板，提高你的编码效率。</p>
-<p>​    当你在键盘中敲入 <code>Command + J</code> 时，就可以调出一个面板，从下图可以看出里面有许多预设的模板。<img src="media/15998025630555/18f628ee708f4753bbbda6c5a4cd3d05.jpg" alt="img"/><br/>
-​    如果我们想选择最后一个 main ，可以继续键入 main，然后就可以直接生成如下这段平时都要手动敲入的代码。<img src="media/15998025630555/a6a07561e0fd425d97324f62c0c6464d.gif" alt="img"/><br/>
-​    这里再举个例子，for 循环 可以这样写。<img src="media/15998025630555/281652db235044659c2c12bad6ae14f6.gif" alt="img"/></p></li>
-<li><p><strong>使用书签，快速定位</strong></p>
-<p>​    都我在看框架的源代码时，最常使用的是 Command + B （也就是 command + 鼠标左键 ）一层一层地往里深入，但是当源代码比较多，可能一整个事件过程涉及十几文件，函数调用错综复杂，对于一个庞大的项目来说，有用的可能就几个关键函数，每次要找到这几个函数，都要重头从源函数再一层一层的找下去，这样实在太麻烦了，我常常因此把自己给看晕了。<br/>
-​    直到后来我发现了 Pycharm 这个书签功能。<br/>
-​    使用书签功能，我可以在在关键的位置打上书签，想看的时候，调用书签，快速定位即可。<br/>
-​    使用它，你需要记住下面下几个快捷键<br/>
-​    <code>Command + F11</code> 打上书签<br/>
-​    <code>Shift + F11</code> 展示所有书签<br/>
-​    <code>F11 删除书签</code>（经测试仅能在Windows上有效）<br/>
-​    在你要打书签的位置，按下 <code>Command + F11</code> ，你可以给这个位置加个序号，可以是数字也可以是字母，假如在下面这个位置 加了 1 这个序号，下次你就可以使用 <code>Control + 1</code> 直接跳转到这个位置。<img src="media/15998025630555/22c140c46c394587a66f7812b1e6d67d.jpg" alt="img"/><br/>
-当然你也可以不加，不加的话就是匿名书签了。你可以使用 <code>Shift + F11</code> 展示所有的书签，再进行跳转。</p></li>
+<li>$ rm -rf .git // 删除.git</li>
+<li>$ git config --global core.autocrlf false //禁用自动转换</li>
 </ol>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
+<p>然后重新执行：</p>
 
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+<ol>
+<li>$ git init</li>
+<li>$ git add .</li>
+</ol>
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025630642.html">
-                
-                  <h1>群晖NAS安装配置typecho博客教程</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0"><strong>一、环境套件安装</strong></h2>
+<p><strong>常见错误2、git push origin master出错：error:failed to push sonme refs to...</strong></p>
 
-<p>群晖套件中心安装以下套件</p>
+<p>很明显是：</p>
 
-<ul>
-<li>Web Station</li>
-<li>Apache HTTP Server 2.4</li>
-<li>PHP 5.6</li>
-<li>MariaDB 5</li>
-<li>phpMyAdmin</li>
-</ul>
+<p>本地没有update到最新版本的项目（git上有README.md文件没下载下来）</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191901.jpg" alt="1881983446"/></p>
+<p>本地直接push所以会出错。</p>
 
-<h2 id="toc_1"><strong>二、创建数据库</strong></h2>
+<p>【解决过程】</p>
 
-<ul>
-<li>浏览器输入<a href="http://192.168.x.x/phpmyadmin">http://192.168.x.x/phpmyadmin</a></li>
-<li>账号root</li>
-<li>密码为安装MariaDB 5套件时设置的密码</li>
-<li>选择服务器-MariaDB 5</li>
-</ul>
+<blockquote>
+<p>看到提示里面，感觉是本地的代码不是最新的。</p>
 
-<p>192.168.x.x的IP为群晖的内网IP<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191908.jpg" alt="img"/></p>
+<p>所以觉得应该是类似于svn中的，先update一下，再去commit，估计就可以了。</p>
 
-<ul>
-<li>新建</li>
-<li>填写数据库名称</li>
-<li>创建</li>
-</ul>
+<p>所以先去pull试试：</p>
 
-<p>数据库名称可自行设置,建议使用typecho,blog等方便识别.<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191912.jpg" alt="img"/><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191915.jpg" alt="img"/></p>
+<p>git pull --rebase origin master</p>
+</blockquote>
 
-<h2 id="toc_2"><strong>三、下载并安装typecho主程序</strong></h2>
+<p>解决！</p>
 
-<ul>
-<li>访问<a href="http://typecho.org/">typecho官方网站</a>,下载最新版.</li>
-<li>在群晖Web文件夹下创建博客主目录,命名为typecho(或其他任意文件名).</li>
-<li>将下载并解压的主程序build文件夹内的所有文件及文件夹拷贝至博客主目录.</li>
-</ul>
+<p><strong>常见错误3、fatal: remote origin already exists.</strong></p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191917.jpg" alt="img"/></p>
+<p>解决办法如下：</p>
 
-<ul>
-<li>设置typecho文件夹权限为http</li>
-<li>应用到这个文件夹,子文件夹和子文件</li>
-<li>确定</li>
-</ul>
+<blockquote>
+<p>1、先输入$ git remote rm origin</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191920.jpg" alt="img"/></p>
+<p>2、再输入$ git remote add origin <a href="mailto:git@github.com">git@github.com</a>:djqiang/gitdemo.git 就不会报错了！</p>
 
-<h2 id="toc_3"><strong>四、配置PHP</strong></h2>
+<p>3、如果输入$ git remote rm origin 还是报错的话，error: Could not remove config section &#39;remote.origin&#39;. 我们需要修改gitconfig文件的内容</p>
 
-<ul>
-<li>打开Web Station</li>
-<li>PHP设置,选中Default Profile,版本为5.6,编辑.</li>
-<li>扩展名勾选全选,安装扩展.</li>
-</ul>
+<p>4、找到你的github的安装路径，我的是C:\Users\ASUS\AppData\Local\GitHub\PortableGit_ca477551eeb4aea0e4ae9fcd3358bd96720bb5c8\etc</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191922.jpg" alt="img"/><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191924.jpg" alt="img"/></p>
-
-<h2 id="toc_4"><strong>五、配置Web站点</strong></h2>
-
-<ul>
-<li>打开Web Station</li>
-<li>虚拟主机</li>
-<li>新增</li>
-<li>填写你的域名</li>
-<li>文档根目录选择刚才在Web下创建的文件夹</li>
-<li>HTTP后端服务器选择 Apache HTTP Server 2.4</li>
-<li>PHP选择Default Profile(PHP 5.6)</li>
-</ul>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191926.jpg" alt="img"/></p>
-
-<p>若希望在群晖Web Station中使用国际域名及80/443端口,则需为你的群晖配置DDNS或者内网穿透服务,推荐相关文章以供参考:</p>
-
-<h2 id="toc_5"><strong>六、配置typecho博客</strong></h2>
-
-<p>在浏览器中输入你的域名即可开始配置typecho博客<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191929.jpg" alt="img"/></p>
-
-<ul>
-<li>数据库密码填写群晖安装MariaDB 5时设置的密码</li>
-<li>数据库名填写刚才在phpMyAdmin里新建的数据库名称</li>
-<li>其他参数保持默认</li>
-</ul>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191932.jpg" alt="img"/></p>
-
-<ul>
-<li>网站地址填写你的域名</li>
-<li>用户名可以自行修改</li>
-<li>填写登录密码</li>
-<li>填写邮件地址</li>
-<li>确认开始安装</li>
-</ul>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191934.jpg" alt="img"/><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191937.jpg" alt="img"/></p>
+<p>5、找到一个名为gitconfig的文件，打开它把里面的[remote &quot;origin&quot;]那一行删掉就好了！</p>
+</blockquote>
 
                         
                       </div>
@@ -314,7 +1971,7 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15998025630684.html">
+                <a class="clearlink" href="15838967255217.html">
                 
                   <h1>Linux vim 编辑器的神级配置 vimrc</h1>
                   <div class="a-content">
@@ -449,7 +2106,7 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2020/09/11</span>
+                    <span class="date">2020/03/11</span>
                     
           				   
                     
@@ -466,298 +2123,1313 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15998025630725.html">
+                <a class="clearlink" href="15998025628522.html">
                 
-                  <h1>正则表达式工具 RegexBuddy 使用指南</h1>
+                  <h1>Linux系统/etc目录和文件的介绍</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h1 id="toc_0">1 下载 RegexBuddy 并安装</h1>
+                        	<p><strong>Linux目录结构特点</strong></p>
 
-<p>安装后的界面如下：</p>
+<ol>
+<li>linux系统的所有目录是一个有层次的倒着的梳妆目录结构。根是所有目录的顶点，linux目录一切从根开始。</li>
+<li>不听目录下的数据可以跨越不同的磁盘分区火不同的磁盘设备，设备可以随意挂载到任意目录上使用。</li>
+<li>所有的目录的是安装一定类型有龟裂的组织和命名的。</li>
+<li>没有挂载到目录上的磁盘，相当于没有门和串户的监狱，不能被使用。磁盘等设备de需要挂载菜能正常使用。</li>
+<li>盖章点是磁盘访问的人口，是一个目录</li>
+<li>相对路径与绝对路径</li>
+</ol>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002643.png" alt="img"/></p>
+<p><strong>Linux目录结构</strong></p>
 
-<h1 id="toc_1">2 切换布局</h1>
-
-<p>点击右上角的彩色格子图标，选择 Side by Side Layout：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002644.png" alt="img"/></p>
-
-<p>这种布局的好处是，Create 面板与 Test 面板同时被展示，方便比对：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002645.png" alt="img"/></p>
-
-<h1 id="toc_2">3 界面说明</h1>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002646.png" alt="img"/></p>
-
-<h1 id="toc_3">4 选择编程语言</h1>
-
-<p>左上角的下拉框可以指定需要的编程语言：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002647.png" alt="img"/></p>
-
-<h1 id="toc_4">5 解析（Create 面板）</h1>
-
-<p>这里用树状模型来展示对这个正则表达式的解析过程，其中的每一个节点对应着表达式中的一个元素块。每当点击其中的一个节点，就会在对应的正则表达式的部分着重显示。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002648.png" alt="img"/></p>
-
-<p>这个功能在分析某些复杂的正则表达式时很有用哦O(∩_∩)O哈哈~</p>
-
-<h1 id="toc_5">6 测试（Test 面板）</h1>
-
-<h2 id="toc_6">6.1 指定测试范围</h2>
-
-<p>在 Test 面板的第一个下拉框可以选择测试的范围：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002649.png" alt="img"/></p>
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# tree -L 1 /
+/
+├── bin             #普通用户的二进制命令
+├── boot            #系统内核及引导程序目录
+├── dev             #设备文件目录
+├── etc             #软件配置和启动程序目录
+├── home            #普通用户家目录
+├── lib             #库文件目录(命令、软件)
+├── lib64           #64位库文件目录(命令、软件)
+├── lost+found      #系统崩溃数据存放的目录
+├── media
+├── mnt             #设备临时挂载目录
+├── opt             #第三方程序
+├── proc            #操作系统进程和内核信息目录
+├── root            #root家目录
+├── sbin            #系统管理员命令
+├── selinux         
+├── srv
+├── sys
+├── tmp             #文件临时存放目录(回收站)
+├── usr             #应用程序目录
+└── var             #日志目录
+#查看命令的路径
+[root@test ~]# which ls
+alias ls=&#39;ls --color=auto&#39;
+    /bin/ls
+</code></pre>
 
 <table>
 <thead>
 <tr>
-<th style="text-align: center">测试范围</th>
+<th>目录</th>
 <th>说明</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td style="text-align: center">Whole File</td>
-<td>整个文档</td>
+<td>/bin</td>
+<td>该目录为binaries,是常用二进制命令所在的目录。列入：ls、cp、mkdir、rm等命令；/bin目录和/usr/bin类似</td>
 </tr>
 <tr>
-<td style="text-align: center">Page by page</td>
-<td>按页区分</td>
+<td>/boot</td>
+<td>Linux的内核级系统引导程序所需的文件目录，安装系统分区的时候一般单独分一个boot分区。</td>
 </tr>
 <tr>
-<td style="text-align: center">Line by line</td>
-<td>按行区分</td>
+<td>/dev</td>
+<td>设备文件目录，比如声卡、磁盘、光驱等等外接设备。</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>(1)二进制软件安装包(yum,rpm)等的配置文件默认路径，例如:/etc/exports、/etc/fstab、/etc/resolv.conf (2)服务启动命令存放的目录，主要在/etc/init.d/下。例如：/etc/init.d/sshd、/etc/init.d/iptables</td>
+</tr>
+<tr>
+<td>/home</td>
+<td>普通用户家目录默认数据库存放目录</td>
+</tr>
+<tr>
+<td>/lib</td>
+<td>启动系统和运行命令所需要的共享库文件和内核模块存放目录，分为/lib和/lib64两种。</td>
+</tr>
+<tr>
+<td>/lost+found</td>
+<td>在ext3文件系统中，当系统意外崩溃或机器意外关机，会产生一些文件碎片在这里。当系统在开机启动过程中fsck工具会检查这里，并修复已经损坏的文件系统。当系统发生问题，可能会有文件被移到这个目录中，可能需要手工方式修复，移到文件到原来的位置上。</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>一般是用于临时挂载存储设备的挂载点，比如有cdrom，u盘等目录。直接插入光驱无法使用，需要先挂载后使用。</td>
+</tr>
+<tr>
+<td>/opt</td>
+<td>表示的是可选择的意思，有邪软件包会被安装在这里，也就是自定义软件包。我们自己编译的软件包，就可以安装在这个目录；通过源码包安装的软件，可以通过./configure --prefix=/opt/指定目录。</td>
+</tr>
+<tr>
+<td>/proc</td>
+<td>操作系统运行时，进程信息及内核信息(cpu、硬盘信息、内存信息)存放在这里。/proc目录是虚拟文件系统的挂载点，proc并不是真正的文件系统，它的定义可以参见/etc/fstab。系统运行很多信息都在这个目录下。 /proc/loadavg #系统负载信息 /proc/meminfo #系统内存信息 /proc/cpuinfo #系统CPU信息 /proc/mounts #系统挂载信息</td>
+</tr>
+<tr>
+<td>/root</td>
+<td>Linux超级权限用户root的加目录:root类似win32管理员admininstrator</td>
+</tr>
+<tr>
+<td>/sbin</td>
+<td>大多是涉及系统管理的命令存放，是超级权限用户root的可执行命令存放地，这个目录和/usr/X11R6/sbin或/usr/loacl/sbin目录是相似的;系统级命令，一般最好要通过sudo让普通用户执行这些命令，常见命令有fdisk、reboot、fsck、halt</td>
+</tr>
+<tr>
+<td>/tmp</td>
+<td>临时文件目录，有时用户运行程序时候，会产生临时文件。/tmp就用来存放临时文件的，权限比较特殊。/var/tmp目录和这个目录相似，这个目录可以被用作Linux系统的回收站使用。</td>
+</tr>
+<tr>
+<td>/usr</td>
+<td>这是系统存放程序的目录，比如命令，帮助文件等。这个目录下有很多的文件和目录。当我们安装一个Linux官方提供的软件包时，安装在这里。 /user/local：默认软件安装目录 /usr/src:长袖源码目录</td>
+</tr>
+<tr>
+<td>/var</td>
+<td>日志目录</td>
 </tr>
 </tbody>
 </table>
 
-<p>如果需要测试的内容超过一行，那么请选择 Whole File 或 Page by page 模式。</p>
+<hr/>
 
-<h2 id="toc_7">6.2 高亮显示</h2>
-
-<p>如果当前的正则表达式为 <code>&lt;html&gt;(.*)&lt;/html&gt;</code>，那么在 Test 面板中就会高亮显示匹配的内容（如果匹配的内容在相邻的行，则使用不同的颜色高亮显示）：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002650.png" alt="img"/></p>
-
-<h2 id="toc_8">6.3 捕获组</h2>
-
-<p>如果使用了捕获组，那么可以在 Hightlight 的下拉项中选定这些组，然后就会被加阴影显示出来啦：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002651.png" alt="img"/></p>
-
-<h2 id="toc_9">6.4 匹配细节</h2>
-
-<p>可以在 “list All” 中指定匹配细节的显示方式：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002652.png" alt="img"/></p>
-
-<p>上图中的显示方式是 List All Matches with Full Details。我们还可以点击 + 号查看捕获的组信息：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002653.png" alt="img"/></p>
-
-<h1 id="toc_10">7 调试（debug 面板）</h1>
-
-<p>在 Test 面板选定一行测试文本，然后选择 Debug 下拉中的 Debug Here，就可以看到这一行测试文本的正则匹配过程啦：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002654.png" alt="img"/></p>
-
-<p>Debug 有三种模式：</p>
+<p><strong>Linux系统重要文件</strong></p>
 
 <table>
 <thead>
 <tr>
-<th>模式</th>
-<th>说明</th>
+<th style="text-align: left">文件路径</th>
+<th style="text-align: center">文件功能</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>Debug Here</td>
-<td>选中部分的文本进行调试。</td>
-</tr>
-<tr>
-<td>Debug Till End</td>
-<td>从光标所在处直到结束的文本进行调试。<strong>（默认）</strong></td>
-</tr>
-<tr>
-<td>Debug Everywhere</td>
-<td>对所有文本进行调试。</td>
+<td style="text-align: left">/etc/sysconfig/network-scripts/ifcfg-eth0</td>
+<td style="text-align: center">网卡配置文件</td>
 </tr>
 </tbody>
 </table>
 
-<h1 id="toc_11">8 模板（Library 面板）</h1>
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0 
+DEVICE=eth0 #第一块网卡逻辑设备名，第二块为eth1
+HWADDR=00:0c:29:6a:a3:b4 #以太网硬件地址MAC地址
+TYPE=Ethernet #上网类型，目前基本上是以太网
+UUID=282f8f61-2b18-4cdb-8ba5-62c8131abd20 #通用唯一识别码
+ONBOOT=yes  #开机启动激活网卡设备yes(启动) no(不启动)
+NM_CONTROLLED=yes #是否通过networkmanager管理网卡设备
+BOOTPROTO=none  #启动协议，获取配置方式，有none|bootp|dhcp 三个选项
+IPADDR=10.0.0.7 #IP地址
+NETMASK=255.255.255.0 #子网掩码
+DNS2=202.106.0.20   #DNS2
+GATEWAY=10.0.0.2    #网关
+DNS1=10.0.0.2       #DNS1
+USERCTL=no          #是否支持用户控制
+PEERDNS=yes         #网卡配置DNS 会覆盖/etc/resolv.conf文件的DNS
+IPV6INIT=no         #是否支持IPv6
+</code></pre>
 
-<p>RegexBuddy 内置了很多正则表达式的模板（Library 面板）：</p>
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th style="text-align: center">文件功能</th>
+</tr>
+</thead>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002655.png" alt="img"/></p>
+<tbody>
+<tr>
+<td>/etc/resolv.conf</td>
+<td style="text-align: center">系统DNS客户端配置文件</td>
+</tr>
+</tbody>
+</table>
 
-<p>可以通过关键字搜索，看看是否有我们需要的模板：</p>
+<p>DNS,全称Domain Name System，一个网站运行中起到至关重要的作用，它的主要作用是负责吧网站域名解析为对应的IP地址。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002656.png" alt="img"/></p>
+<p>DNS系统解析功能：</p>
 
-<p>比如，我们现在需要一个判断密码是否具有足够复杂度的正则表达式，那么就可以在搜索框中输入 password，然后点击下面所列出的某个模板，再选择上面的 Use 图标，选中 Use Regex and Test Subject，就可以看到这个模板的正则表达式以及测试用例啦O(∩_∩)O哈哈~</p>
+<ul>
+<li> (1)DNS 系统负责A记录解析，就是域名到IP。</li>
+<li> (2)设置CNAME别名记录，这别名解析功能常被CDN加速服务商应用</li>
+<li> (3)设置MX邮件记录，这个记录功能，在购买或搭建邮件服务时会经常被用到</li>
+<li> (4)设置PTR 记录，反向解析，即吧IP地址解析为对应域名和A记录的解析相反，邮寄服务等业务会用到</li>
+</ul>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002657.png" alt="img"/></p>
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/resolv.conf
 
-<h1 id="toc_12">9 使用（Use 面板）</h1>
-
-<p>在 Use 面板中，我们可以找到使用之前定义好的正则表达式的使用模板：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002658.png" alt="img"/></p>
-
-<p>模板所用的语言与左上角所选定的语言是一致的。</p>
-
-<p>每种语言还有各种代码模板（在 Function 中）：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002659.png" alt="img"/></p>
-
-<h1 id="toc_13">10 搜索内容（GREP 面板）</h1>
-
-<p>在 GREP 面板，可以直接使用我们定义好的正则表达式来搜索文件夹中的内容。</p>
-
-<p>在 Folder 中选择文件夹路径（即搜索范围），记得勾选 Recurse subfolders，表示递归搜索，最后点击面板左上的 GREP 按钮，在弹出的下拉菜单中选择 preview 或者 Execute（比较慢），执行搜索操作：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002700.png" alt="img"/></p>
-
-<p>也可以选择 Quick Execute（速度较快）只列出匹配到的文件清单：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200710002701.png" alt="img"/></p>
+nameserver 10.0.0.2
+nameserver 202.106.0.20
+</code></pre>
 
 <hr/>
 
-<p>是不是觉得 RegexBuddy 很强大呀，赶紧用吧</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">文件路径</th>
+<th style="text-align: center">文件功能</th>
+</tr>
+</thead>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
+<tbody>
+<tr>
+<td style="text-align: left">/etc/sysconfig/network</td>
+<td style="text-align: center">主机名配置文件</td>
+</tr>
+</tbody>
+</table>
 
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025630768.html">
-                
-                  <h1>使用Docker搭建MySQL服务</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">一、安装docker</h2>
-
-<h2 id="toc_1">二、建立镜像</h2>
-
-<p>拉取官方镜像（我们这里选择5.7，如果不写后面的版本号则会自动拉取最新版）</p>
-
-<pre class="line-numbers"><code class="language-text">docker pull mysql:5.7   # 拉取 mysql 5.7
-docker pull mysql       # 拉取最新版mysql镜像
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=test
 </code></pre>
 
-<p>检查是否拉取成功</p>
+<p>修改方法：</p>
 
-<pre class="line-numbers"><code class="language-text">sudo docker images
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=test1 #永久修改
+[root@test ~]# hostname test1 临时修改
+#企业环境永久修改生效需要重启服务器基本的是永久加上临时二个方法配合使用需要操作两次，为了不重启
 </code></pre>
 
-<p>一般来说数据库容器不需要建立目录映射</p>
+<hr/>
 
-<pre class="line-numbers"><code class="language-text">sudo docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 
-</code></pre>
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th style="text-align: center">文件功能</th>
+</tr>
+</thead>
 
-<ul>
-<li>-d mysql:5.7</li>
-<li>–name：容器名，此处命名为mysql</li>
-<li>-e：配置信息，此处配置mysql的root用户的登陆密码</li>
-<li>-p：端口映射，此处映射 主机3306端口 到 容器的3306端口</li>
-<li>-d：源镜像名，此处为 mysql:5.7</li>
-</ul>
+<tbody>
+<tr>
+<td>/etc/rc.local</td>
+<td style="text-align: center">存放开机自启动程序命令文件</td>
+</tr>
+</tbody>
+</table>
 
-<p>如果要建立目录映射</p>
+<p>/etc/rc.local是用于存放开机自启动程序命令的文件(chkconfig常用来管理yum/rpm安装的程序服务的开机自启动)如果是开发的自己程序需要开机启动命令放入/etc/rc.local来实现开机自启动，Linux开机会吧/etc/rc.local里面的内容全部执行一遍。</p>
 
-<pre class="line-numbers"><code class="language-text">duso docker run -p 3306:3306 --name mysql \
--v /usr/local/docker/mysql/conf:/etc/mysql \
--v /usr/local/docker/mysql/logs:/var/log/mysql \
--v /usr/local/docker/mysql/data:/var/lib/mysql \
--e MYSQL_ROOT_PASSWORD=123456 \
--d mysql:5.7
-</code></pre>
+<hr/>
 
-<p>-v：主机和容器的目录映射关系，&quot;:&quot;前为主机目录，之后为容器目录<br/>
-检查容器是否正确运行</p>
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th style="text-align: center">文件功能</th>
+</tr>
+</thead>
 
-<pre class="line-numbers"><code class="language-text">docker container ls
-</code></pre>
+<tbody>
+<tr>
+<td>/etc/hosts</td>
+<td style="text-align: center">局域网或者本地DNS解析工具</td>
+</tr>
+</tbody>
+</table>
 
-<p>可以看到容器ID，容器的源镜像，启动命令，创建时间，状态，端口映射信息，容器名字</p>
-
-<h2 id="toc_2">三、连接mysql</h2>
-
-<p>进入docker本地连接mysql客户端</p>
-
-<pre class="line-numbers"><code class="language-text">sudo docker exec -it mysql bash
-mysql -uroot -p123456
-</code></pre>
-
-<p>使用 Navicat 远程连接MySql,如果你的容器运行正常，但是无法访问到MySQL，一般有以下几个可能的原因：</p>
+<p>应用场景：</p>
 
 <ol>
-<li>防火墙阻拦 开放端口：</li>
+<li>域名对应服务所在的服务器出现IP变化时候</li>
+<li>进行本地测试</li>
 </ol>
 
-<pre class="line-numbers"><code class="language-text">$ systemctl status firewalld
-$ firewall-cmd  --zone=public --add-port=3306/tcp -permanent
-$ firewall-cmd  --reload
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/fstab</td>
+<td>配置开机实现设备自动挂载程序命令的文件</td>
+</tr>
+</tbody>
+</table>
+
+<p>添加新的磁盘后实现开机自动挂载设备：cat /etc/fstab共六列如下：</p>
+
+<p>例：sysfs /sys sysfs defaults 0 0</p>
+
+<ol>
+<li>第一列sysfs (挂载的设备名称)</li>
+<li>第二列/sys(挂载的目录)</li>
+<li>第三列sysfs(挂载的文件系统格式)</li>
+<li>第四列defaults(挂载参数)</li>
+<li>第五列0(是否备份:0为不备份，1为备份)</li>
+<li>第六列0(是否开机做磁盘检测，0为不检测数字1,2的为检测磁盘)，工作场景通常的设为了，为了避免重启无法启动。</li>
+</ol>
+
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/rc.loacl</td>
+<td>存放开机自启动程序命令文件</td>
+</tr>
+</tbody>
+</table>
+
+<p>企业中主要应用：脚本和自主开发程序启动命令存放处，实现开机程序自动启动和运行。</p>
+
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/inittab</td>
+<td>系统运行级别的配置文件</td>
+</tr>
+</tbody>
+</table>
+
+<p>0 - halt (Do NOT set initdefault to this)： (<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E5%85%B3%E6%9C%BA%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{关机模式}"/>)</p>
+
+<p>1 - Single user mode：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{单用户模式}"/>)</p>
+
+<p>2 - Multiuser, without NFS (The same as 3, if you do not have networking):(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E6%B2%A1%E6%9C%89%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9FNFS%E7%9A%84%E5%A4%9A%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{没有网络文件系统NFS的多用户模式}"/>)</p>
+
+<p>3 - Full multiuser mode：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E5%AE%8C%E6%95%B4%E7%9A%84%E5%A4%9A%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{完整的多用户模式}"/>)</p>
+
+<p>4 - unused：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E6%9C%AA%E4%BD%BF%E7%94%A8%7D" alt="\color{green}{未使用}"/>)</p>
+
+<p>5 - X11：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E6%A1%8C%E9%9D%A2%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{桌面模式}"/>)</p>
+
+<p>6 - reboot (Do NOT set initdefault to this)：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E9%87%8D%E5%90%AF%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{重启模式}"/>)</p>
+
+<p>查看当前的运行级别：runlevel</p>
+
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# runlevel 
+N 3
+#N是上一次运行级别，3是当前运行级别
+</code></pre>
+
+<p>切换运行级别：</p>
+
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# init 5
+[root@test ~]# runlevel 
+3 5
+#init 命令接后面的数字级别
+</code></pre>
+
+<p>开机启动流程图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200909234025.png" alt="img"/></p>
+
+<p>Linux系统启动配置文件：</p>
+
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/grub.conf 
+# grub.conf generated by anaconda
+#
+# Note that you do not have to rerun grub after making changes to this file
+# NOTICE:  You have a /boot partition.  This means that
+#          all kernel and initrd paths are relative to /boot/, eg.
+#          root (hd0,0)
+#          kernel /vmlinuz-version ro root=/dev/sda3
+#          initrd /initrd-[generic-]version.img
+#boot=/dev/sda
+default=0
+timeout=5
+splashimage=(hd0,0)/grub/splash.xpm.gz
+hiddenmenu
+title CentOS (2.6.32-754.30.2.el6.x86_64)
+    root (hd0,0)
+    kernel /vmlinuz-2.6.32-754.30.2.el6.x86_64 ro root=UUID=24219a66-7b4f-477e-b8c4-a008809c45f5 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet
+    initrd /initramfs-2.6.32-754.30.2.el6.x86_64.img
+title CentOS 6 (2.6.32-696.el6.x86_64)
+    root (hd0,0)
+    kernel /vmlinuz-2.6.32-696.el6.x86_64 ro root=UUID=24219a66-7b4f-477e-b8c4-a008809c45f5 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet
+    initrd /initramfs-2.6.32-696.el6.x86_64.img
+</code></pre>
+
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/profile及/etc/bashrc(~/.bashrc)</td>
+<td>配置系统的环境变量/别名文件</td>
+</tr>
+</tbody>
+</table>
+
+<p>企业环境设置案例：</p>
+
+<pre class="line-numbers"><code class="language-shell">#环境变量设置：
+vim /etc/profile
+
+#set java environment
+JAVA_HOME=/usr/local/java/jdk1.8.0_161
+JRE_HOME=$JAVA_HOME/jre
+CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib/rt.jar
+PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+export JAVA_HOME JRE_HOME CLASS_PATH PATH
+#重新加载/etc/profile文件，让配置生效
+source /etc/profile
+#测试安装是否成功
+java -version
+
+#系统别名设置:
+# User specific aliases and functions
+
+alias rm=&#39;rm -i&#39;
+alias cp=&#39;cp -i&#39;
+alias mv=&#39;mv -i&#39;
+#让系统别名永久生效，需要配置到的文件
+</code></pre>
+
+<p>环境变量文件生效顺序图：/etc/bashrc &gt; ~/.bashrc &gt; ~/bash_profile &gt; /etc/profile</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200909234032.png" alt="img"/></p>
+
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/profile.d</td>
+<td>用户登录后执行的脚本所在目录</td>
+</tr>
+</tbody>
+</table>
+
+<ol>
+<li>在/etc/profile.d 目录中存放的是一些应用程序所需的启动脚本，而这些脚本文件是用来设置一些变量和运行一些初始化过程的。其中包括了颜色、语言、less、vim及which等命令的一些附加设置。</li>
+<li>/etc/profile.d 下的脚本之所以能自动执行，是因为在/etc/profile 中有一个for循环语句来调用这些脚本。</li>
+</ol>
+
+<pre class="line-numbers"><code class="language-shell">vi /etc/profile
+# /etc/profile
+ 
+for i in /etc/profile.d/*.sh /etc/profile.d/sh.local ; do
+    if [ -r &quot;$i&quot; ]; then
+        if [ &quot;${-#*i}&quot; != &quot;$-&quot; ]; then
+            . &quot;$i&quot;
+        else
+            . &quot;$i&quot; &gt;/dev/null
+        fi
+    fi
+done
+</code></pre>
+
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/issue和/etc/issue.net</td>
+<td>配置在用户登录终端前显示信息的文件</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/issue
+CentOS release 6.10 (Final)
+Kernel \r on an \m
+.............................................................................
+[root@test ~]# cat /etc/issue.net 
+CentOS release 6.10 (Final)
+Kernel \r on an \m
+</code></pre>
+
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/init.d</td>
+<td>软件启动和程序所在的目录</td>
+</tr>
+</tbody>
+</table>
+
+<p>/etc/init.d目录在Linux系统中可是大名鼎鼎。它只负责一件事情，但却涉及到全系统。它包含系统中各种服务的start/stop脚本，从acpid到x11-common，其重要性可见一斑。在/etc/init.d的可执行程序的优先级会高于/etc/systemd/system/下的service文件，如果同时存在的话。</p>
+
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/motd</td>
+<td>配置用户登录系统之后显示提示内容的文件</td>
+</tr>
+</tbody>
+</table>
+
+<p>配置案例：</p>
+
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/motd 
+[root@test ~]# vim /etc/motd
+test computer
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200909234041.png" alt="img"/></p>
+
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/redhat-release</td>
+<td>声明Red Hat版本和名称信息的文件</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/redhat-release 
+CentOS release 6.10 (Final)
+</code></pre>
+
+<p>禁止转载，如需转载请通过简信或评论联系作者。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15839100648693.html">
+                
+                  <h1>MAC 安装好后的一些配置</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">改变vim配色：安装colorscheme</h1>
+
+<blockquote>
+<ol>
+<li>在当前用户目录 ~/ 下的 .vim 目录(如果没有，mkdir ~/.vim进行新建该目录)。在 ~/.vim/ 下新建一个叫 colors 的目录，将配色方案.vim文件便放到该目录下。</li>
+<li>编辑vim的配置文件.vimrc  (vi .vimrc)在其中添加下面2行</li>
+</ol>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">set t_Co=256 
+colorscheme desert
+</code></pre>
+
+<h1 id="toc_1">使用 Solarized 配色方案的方法</h1>
+
+<pre class="line-numbers"><code class="language-text">$ git clone git://github.com/altercation/solarized.git
+</code></pre>
+
+<blockquote>
+<ul>
+<li>Terminal 的话，在 solarized/osx-terminal.app-colors-solarized 下双击 Solarized Dark ansi.terminal 和 Solarized Light ansi.terminal 就会自动导入两种配色方案 Dark 和 Light 到 Terminal.app 里。</li>
+<li>iTerm2 的话，到 solarized/iterm2-colors-solarized 下双击 Solarized Dark.itermcolors 和 Solarized Light.itermcolors 两个文件就可以把配置文件导入到 iTerm 里。</li>
+<li>vim </li>
+</ul>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">    $ cd solarized
+    $ cd vim-colors-solarized/colors
+    $ mkdir -p ~/.vim/colors
+    $ cp solarized.vim ~/.vim/colors/
+    $ vi ~/.vimrc
+    syntax on
+    set background=dark
+    colorscheme solarized
+</code></pre>
+
+<h1 id="toc_2">Mac 访达标题栏显示详细目录</h1>
+
+<pre class="line-numbers"><code class="language-text">defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
+killall Finder
+</code></pre>
+
+<h1 id="toc_3">禁止.DS_Store生成</h1>
+
+<p>打开 “终端”，执行下列命令，重启Mac生效：</p>
+
+<pre class="line-numbers"><code class="language-text">defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+</code></pre>
+
+<h1 id="toc_4">恢复.DS_Store生成</h1>
+
+<pre class="line-numbers"><code class="language-text">defaults delete com.apple.desktopservices DSDontWriteNetworkStores
+</code></pre>
+
+<h1 id="toc_5">删除现有的.DS_Store</h1>
+
+<blockquote>
+<p>对已经生成的文件还需要你手动删除：</p>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">sudo find / -name &quot;.DS_Store&quot; -depth -exec rm {} \;
+</code></pre>
+
+<h1 id="toc_6">Mac Launchpad(启动台）图标大小调整</h1>
+
+<blockquote>
+<p>1 、调整每一列显示图标数量，10表示每一列显示10个，比较不错，可根据个人喜好进行设置。 <br/>
+<code>defaults write com.apple.dock springboard-rows -int 10</code><br/>
+2、调整多少行显示图标数量 <br/>
+<code>defaults write com.apple.dock springboard-rows -int 8</code><br/>
+3、重置Launchpad<br/>
+<code>defaults write com.apple.dock ResetLaunchPad -bool TRUE</code><br/>
+4、重启Dock<br/>
+<code>killall Dock</code><br/>
+恢复默认设置的方法。<br/>
+ 以下是恢复默认大小的命令（在Terminal执行即可）：</p>
+</blockquote>
+
+<pre class="line-numbers"><code class="language-text">defaults write com.apple.dock springboard-rows Default
+defaults write com.apple.dock springboard-columns Default
+defaults write com.apple.dock ResetLaunchPad -bool TRUE
+killall Dock
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/03/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025631366.html">
+                
+                  <h1>MWeb + Github Pages 搭建个人博客/静态网站</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">1、打开GitHub Pages</h2>
+
+<p>链接<a href="https://pages.github.com/">https://pages.github.com/</a> ，可以直接按照上面的操作指引来操作</p>
+
+<p>(1)创建 github repository</p>
+
+<p>官网说明如下图，需要先注册登录GitHub，然后创建repository，命名方式为<a href="http://username.github.io/">http://username.github.io</a>，注意用户名(前后两个输入框)保持一致。</p>
+
+<p><img src="media/15998025631366/v2-2a7bdd7a71db76912f5c70db4b8e042e_720w.jpg" alt="img"/></p>
+
+<p>（2）git client</p>
+
+<p>我使用了桌面客户端（下载链接 <a href="https://desktop.github.com/">https://desktop.github.com</a> ）</p>
+
+<p><img src="media/15998025631366/v2-9029512a20bea6a74ff6e661b1ed554c_720w.jpg" alt="img"/></p>
+
+<p>（3）下载 GitHub desktop 并登录，选择你创建的repository，并点击clone按钮。然后就可以看到本地的克隆文件的路径。</p>
+
+<p><img src="media/15998025631366/v2-416a3d6414b387d21ea3dcc584960298_720w.jpg" alt="img"/></p>
+
+<p><img src="media/15998025631366/v2-02f99763a4d07e5120d6b16e0943756b_720w.jpg" alt="img"/></p>
+
+<h2 id="toc_1">2、下面先转到MWeb这里，下载并使用MWeb创建静态网页</h2>
+
+<p>MWeb是一个简单易用的markdown工具，还可以生成静态网站，不过要付费。</p>
+
+<p>（1）首先左下角新增静态网站分类</p>
+
+<p><img src="media/15998025631366/v2-f0d346f5cce89cfc883f55608ce7d9e5_720w.jpg" alt="img"/></p>
+
+<p>（2）对这个站点的名称、模版等进行设置</p>
+
+<p><img src="media/15998025631366/v2-f802de2a62db871c817d2e8206ff095e_720w.jpg" alt="img"/></p>
+
+<p>（3）在里面写一篇文章，然后选择生成网站</p>
+
+<p><img src="media/15998025631366/v2-47cbf01ada99ca1f078774154bef5dc5_720w.jpg" alt="img"/></p>
+
+<p>(4)生成网站后，还是在这个下拉菜单中选择“在finder中显示网站生成位置”，就会定位到本地文稿所在位置。</p>
+
+<p><img src="media/15998025631366/v2-186318f6b291d3874d16b8da45b575a1_720w.jpg" alt="img"/></p>
+
+<p>(5)将这里的所有文件复制到 github在本地的克隆文件中</p>
+
+<h2 id="toc_2">3、最后一步，文件上传与同步</h2>
+
+<p>打开GitHub desktop，左边栏中就是我们要同步的新增文件。点击左下的commit，然后点击右上角的push按钮。这样就OK了，你可以访问一下你的网站（<a href="http://username.github.io/">http://username.github.io</a>）看看效果了～</p>
+
+<p><img src="media/15998025631366/v2-89721201dd82fec5937c581099a43303_720w.jpg" alt="img"/></p>
+
+<p><img src="media/15998025631366/v2-d2dede1032356af70fa032dd52076aa3_720w.jpg" alt="img"/></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15845003776446.html">
+                
+                  <h1>Mac下find命令常用语法总结</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>Mac的文件管理是很难用，所以有些时候搜索东西我宁愿用命令的方式，便在此总结一下常用的。<br/>
+首先，可以用</p>
+
+<pre class="line-numbers"><code class="language-text">man find
+</code></pre>
+
+<p>查看find命令的种种选项和用法。全英文的，我知道绝大多数人肯定不爱看。于是我看了这个之后，结合自己的一些实践，总结了一些常用的方法。并且把全文附在了本文末尾。</p>
+
+<h4 id="toc_0">概述：</h4>
+
+<p>find命令递归地为列出的每个路径下拉目录树，根据树中的每个文件计算表达式(由下面列出的&#39;&#39; primary &#39;和&#39;&#39; operands&#39;组成)。</p>
+
+<h4 id="toc_1">基本操作：</h4>
+
+<pre class="line-numbers"><code class="language-text">find 文件路径 参数
+</code></pre>
+
+<h4 id="toc_2">例子：</h4>
+
+<ol>
+<li> 在当前目录下(包含子目录)搜索文件名包含cynthia的文件。</li>
+</ol>
+
+<pre class="line-numbers"><code class="language-text">find . -name &quot;cynthia&quot;
 </code></pre>
 
 <ol>
-<li> 关闭防火墙：
-<code>
-$ sudo systemctl stop firewalld
-</code>
-需要进入docker本地客户端设置远程访问账号
-<code>
-$ sudo docker exec -it mysql bash<br/>
-$ mysql -uroot -p123456<br/>
-mysql&gt; grant all privileges on *.* to root@&#39;%&#39; identified by &quot;password&quot;;
-</code>
-mysql使用mysql数据库中的user表来管理权限，修改user表就可以修改权限（只有root账号可以修改）</li>
+<li> 搜索文件后缀不是.py的文件并打印出来。注意这里!的用法，用了转义符\</li>
 </ol>
 
-<pre class="line-numbers"><code class="language-text">mysql&gt; use mysql;
-Database changed
-mysql&gt; select host,user from user;
-mysql&gt; grant all privileges  on *.* to root@&#39;%&#39; identified by &quot;password&quot;;
+<pre class="line-numbers"><code class="language-text">find ~/Cynthia/ \! -name &quot;*.py&quot; -print
+</code></pre>
 
-Query OK, 0 rows affected (0.00 sec)
+<ol>
+<li> 类似的，上面是搜索文件后缀是.py的文件</li>
+</ol>
 
-mysql&gt; flush privileges;
-Query OK, 0 rows affected (0.00 sec)
+<pre class="line-numbers"><code class="language-text">find ~/Cynthia/ -name &quot;*.py&quot; -print
+</code></pre>
 
-mysql&gt; select host,user,password from user;
+<ol>
+<li> 在当前目录下，搜索属于用户cynthia，且比文件190505demo的时间新的文件。</li>
+</ol>
+
+<pre class="line-numbers"><code class="language-text">find . -newer 190505demo -user cynthia -print
+</code></pre>
+
+<ol>
+<li> 类似的，下面这个命令就是搜索既不属于用户cynthia也不比文件190505demo的时间新的文件。</li>
+</ol>
+
+<pre class="line-numbers"><code class="language-text">find . \! \( -newer 190505demo -user cynthia \) -print
+</code></pre>
+
+<ol>
+<li> 打印出当前目录下的所有文件</li>
+</ol>
+
+<pre class="line-numbers"><code class="language-text">find . -type f -exec echo {} \;
+</code></pre>
+
+<h4 id="toc_3">附录</h4>
+
+<p>man find命令给出的全文。</p>
+
+<pre class="line-numbers"><code class="language-text">Cynthias-MacBook-Pro:/ cynthia$ man find
+NAME
+     find -- walk a file hierarchy
+
+SYNOPSIS
+     find [-H | -L | -P] [-EXdsx] [-f path] path ... [expression]
+     find [-H | -L | -P] [-EXdsx] -f path [path ...] [expression]
+
+DESCRIPTION
+     The find utility recursively descends the directory tree for each path listed, evaluating an expression (composed of the ``primaries&#39;&#39; and ``operands&#39;&#39; listed below) in terms of each file in the tree.
+
+     The options are as follows:
+
+     -E      Interpret regular expressions followed by -regex and -iregex primaries as extended (modern) regular expressions rather than basic regular expressions (BRE&#39;s).  The re_format(7) manual page fully describes both formats.
+
+     -H      Cause the file information and file type (see stat(2)) returned for each symbolic link specified on the command line to be those of the file referenced by the link, not the link itself.  If the referenced file does not exist, the file information and type will be for the link itself.  File information of all symbolic links not on the command line is that of the link itself.
+
+     -L      Cause the file information and file type (see stat(2)) returned for each symbolic link to be those of the file referenced by the link, not the link itself.  If the referenced ile does not exist, the file information and type will be for the link itself.
+
+             This option is equivalent to the deprecated -follow primary.
+
+     -P      Cause the file information and file type (see stat(2)) returned for each symbolic link to be those of the link itself.  This is the default.
+
+     -X      Permit find to be safely used in conjunction with xargs(1).  If a file name contains any of the delimiting characters used by xargs(1), a diagnostic message is displayed on standard error, and the file is skipped.  The delimiting characters include single (`` &#39; &#39;&#39;) and double (`` &quot; &#39;&#39;) quotes, backslash (``\&#39;&#39;), space, tab and newline characters.
+
+             However, you may wish to consider the -print0 primary in conjunction with ``xargs -0&#39;&#39; as an effective alternative.
+
+     -d      Cause find to perform a depth-first traversal, i.e., directories are visited in postorder and all entries in a directory will be acted on before the directory itself.  By default, find visits directories in pre-order, i.e., before their contents.  Note, the default is not a breadth-first traversal.
+
+             This option is equivalent to the -depth primary of IEEE Std 1003.1-2001 (``POSIX.1&#39;&#39;).
+             The -d option can be useful when find is used with cpio(1) to process files that are contained in directories with unusual permissions.  It ensures that you have write permission while you are placing files in a directory, then sets the directory&#39;s permissions as the last thing.
+
+     -f      Specify a file hierarchy for find to traverse.  File hierarchies may also be specified as the operands immediately following the options.
+
+     -s      Cause find to traverse the file hierarchies in lexicographical order, i.e., alphabetical order within each directory.  Note: `find -s&#39; and `find | sort&#39; may give different results.
+
+     -x      Prevent find from descending into directories that have a device number different than that of the file from which the descent began.
+
+             This option is equivalent to the deprecated -xdev primary.
+
+PRIMARIES
+     All primaries which take a numeric argument allow the number to be preceded by a plus sign (``+&#39;&#39;) or a minus sign (``-&#39;&#39;).  A preceding plus sign means ``more than n&#39;&#39;, a preceding minus sign means ``less than n&#39;&#39; and neither means ``exactly n&#39;&#39;.
+
+     -Bmin n
+             True if the difference between the time of a file&#39;s inode creation and the time find was started, rounded up to the next full minute, is n minutes.
+
+     -Bnewer file
+             Same as -newerBm.
+
+     -Btime n[smhdw]
+             If no units are specified, this primary evaluates to true if the difference between the time of a file&#39;s inode creation and the time find was started, rounded up to the next full 24-hour period, is n 24-hour periods.
+
+             If units are specified, this primary evaluates to true if the difference between the time of a file&#39;s inode creation and the time find was started is exactly n units.
+             Please refer to the -atime primary description for information on supported time units.
+
+     -acl    May be used in conjunction with other primaries to locate files with extended ACLs.
+             See acl(3) for more information.
+
+     -amin n
+             True if the difference between the file last access time and the time find was started, rounded up to the next full minute, is n minutes.
+
+     -anewer file
+             Same as -neweram.
+
+     -atime n[smhdw]
+             If no units are specified, this primary evaluates to true if the difference between the file last access time and the time find was started, rounded up to the next full 24-hour period, is n 24-hour periods.
+
+             If units are specified, this primary evaluates to true if the difference between the file last access time and the time find was started is exactly n units.  Possible time units are as follows:
+
+             s       second
+             m       minute (60 seconds)
+             h       hour (60 minutes)
+             d       day (24 hours)
+             w       week (7 days)
+
+             Any number of units may be combined in one -atime argument, for example, ``-atime -1h30m&#39;&#39;.  Units are probably only useful when used in conjunction with the + or - modfier.
+
+     -cmin n
+             True if the difference between the time of last change of file status information and the time find was started, rounded up to the next full minute, is n minutes.
+
+     -cnewer file
+             Same as -newercm.
+
+     -ctime n[smhdw]
+             If no units are specified, this primary evaluates to true if the difference between the ime of last change of file status information and the time find was started, rounded up to the next full 24-hour period, is n 24-hour periods.
+
+             If units are specified, this primary evaluates to true if the difference between the time of last change of file status information and the time find was started is exactly n units.  Please refer to the -atime primary description for information on supported time units.
+
+     -d      Same as depth.  GNU find implements this as a primary in mistaken emulation of FreeBSD
+             find(1).
+
+     -delete
+             Delete found files and/or directories.  Always returns true.  This executes from the current working directory as find recurses down the tree.  It will not attempt to delete a filename with a ``/&#39;&#39; character in its pathname relative to ``.&#39;&#39; for security reasons.  Depth-first traversal processing is implied by this option.  Following syminks is incompatible with this option.
+
+     -depth  Always true; same as the -d option.
+
+     -depth n
+             True if the depth of the file relative to the starting point of the traversal is n.
+
+     -empty  True if the current file or directory is empty.
+
+     -exec utility [argument ...] ;
+             True if the program named utility returns a zero value as its exit status.  Optional arguments may be passed to the utility.  The expression must be terminated by a semicolon (``;&#39;&#39;).  If you invoke find from a shell you may need to quote the semicolon if
+             the shell would otherwise treat it as a control operator.  If the string ``{}&#39;&#39; appears anywhere in the utility name or the arguments it is replaced by the pathname of the current file.  Utility will be executed from the directory from which find was executed.  Utility and arguments are not subject to the further expansion of shell patterns and constructs.
+
+     -exec utility [argument ...] {} +
+             Same as -exec, except that ``{}&#39;&#39; is replaced with as many pathnames as possible for each invocation of utility.  This behaviour is similar to that of xargs(1).
+
+     -execdir utility [argument ...] ;
+             The -execdir primary is identical to the -exec primary with the exception that utility will be executed from the directory that holds the current file.  The filename substituted for the string ``{}&#39;&#39; is not qualified.
+
+     -execdir utility [argument ...] {} +
+             Same as -execdir, except that ``{}&#39;&#39; is replaced with as many pathnames as possible for each invocation of utility.  This behaviour is similar to that of xargs(1).
+
+     -flags [-|+]flags,notflags
+             The flags are specified using symbolic names (see chflags(1)).  Those with the &quot;no&quot; refix (except &quot;nodump&quot;) are said to be notflags.  Flags in flags are checked to be set, and flags in notflags are checked to be not set.  Note that this is different from
+             -perm, which only allows the user to specify mode bits that are set.
+
+             If flags are preceded by a dash (``-&#39;&#39;), this primary evaluates to true if at least all of the bits in flags and none of the bits in notflags are set in the file&#39;s flags bits.
+             If flags are preceded by a plus (``+&#39;&#39;), this primary evaluates to true if any of the bits in flags is set in the file&#39;s flags bits, or any of the bits in notflags is not set in the file&#39;s flags bits.  Otherwise, this primary evaluates to true if the bits in flags exactly match the file&#39;s flags bits, and none of the flags bits match those of
+             notflags.
+
+     -fstype type
+             True if the file is contained in a file system of type type.  The lsvfs(1) command can
+             be used to find out the types of file systems that are available on the system.  In
+             addition, there are two pseudo-types, ``local&#39;&#39; and ``rdonly&#39;&#39;.  The former matches any
+             file system physically mounted on the system where the find is being executed and the
+             latter matches any file system which is mounted read-only.
+
+     -gid gname
+             The same thing as -group gname for compatibility with GNU find.  GNU find imposes a
+             restriction that gname is numeric, while find(1) does not.
+
+     -group gname
+             True if the file belongs to the group gname.  If gname is numeric and there is no such
+             group name, then gname is treated as a group ID.
+
+     -ignore_readdir_race
+             This option is for GNU find compatibility and is ignored.
+
+     -ilname pattern
+             Like -lname, but the match is case insensitive.  This is a GNU find extension.
+
+     -iname pattern
+             Like -name, but the match is case insensitive.
+
+     -inum n
+             True if the file has inode number n.
+
+     -ipath pattern
+             Like -path, but the match is case insensitive.
+
+     -iregex pattern
+             Like -regex, but the match is case insensitive.
+
+     -iwholename pattern
+             The same thing as -ipath, for GNU find compatibility.
+
+     -links n
+             True if the file has n links.
+
+     -lname pattern
+             Like -name, but the contents of the symbolic link are matched instead of the file name.
+             Note that this only matches broken symbolic links if symbolic links are being followed.
+             This is a GNU find extension.
+
+     -ls     This primary always evaluates to true.  The following information for the current file
+             is written to standard output: its inode number, size in 512-byte blocks, file permis-
+             sions, number of hard links, owner, group, size in bytes, last modification time, and
+             pathname.  If the file is a block or character special file, the device number will be
+             displayed instead of the size in bytes.  If the file is a symbolic link, the pathname
+             of the linked-to file will be displayed preceded by ``-&gt;&#39;&#39;.  The format is identical to
+             that produced by ``ls -dgils&#39;&#39;.
+
+     -maxdepth n
+             Always true; descend at most n directory levels below the command line arguments.  If
+             any -maxdepth primary is specified, it applies to the entire expression even if it
+             would not normally be evaluated.  ``-maxdepth 0&#39;&#39; limits the whole search to the com-
+             mand line arguments.
+
+     -mindepth n
+             Always true; do not apply any tests or actions at levels less than n.  If any -mindepth
+             primary is specified, it applies to the entire expression even if it would not normally
+             be evaluated.  ``-mindepth 1&#39;&#39; processes all but the command line arguments.
+
+     -mmin n
+             True if the difference between the file last modification time and the time find was
+             started, rounded up to the next full minute, is n minutes.
+
+     -mnewer file
+             Same as -newer.
+
+     -mount  The same thing as -xdev, for GNU find compatibility.
+
+     -mtime n[smhdw]
+             If no units are specified, this primary evaluates to true if the difference between the
+             file last modification time and the time find was started, rounded up to the next full
+             24-hour period, is n 24-hour periods.
+
+             If units are specified, this primary evaluates to true if the difference between the
+             file last modification time and the time find was started is exactly n units.  Please
+             refer to the -atime primary description for information on supported time units.
+
+     -name pattern
+             True if the last component of the pathname being examined matches pattern.  Special
+             shell pattern matching characters (``[&#39;&#39;, ``]&#39;&#39;, ``*&#39;&#39;, and ``?&#39;&#39;) may be used as part
+             of pattern.  These characters may be matched explicitly by escaping them with a back-
+             slash (``\&#39;&#39;).
+
+     -newer file
+             True if the current file has a more recent last modification time than file.
+
+     -newerXY file
+             True if the current file has a more recent last access time (X=a), inode creation time
+             (X=B), change time (X=c), or modification time (X=m) than the last access time (Y=a),
+             inode creation time (Y=B), change time (Y=c), or modification time (Y=m) of file.  In
+             addition, if Y=t, then file is instead interpreted as a direct date specification of
+             the form understood by cvs(1).  Note that -newermm is equivalent to -newer.
+
+     -nogroup
+             True if the file belongs to an unknown group.
+
+     -noignore_readdir_race
+             This option is for GNU find compatibility and is ignored.
+
+     -noleaf
+             This option is for GNU find compatibility.  In GNU find it disables an optimization not
+             relevant to find(1), so it is ignored.
+
+     -nouser
+             True if the file belongs to an unknown user.
+
+     -ok utility [argument ...] ;
+             The -ok primary is identical to the -exec primary with the exception that find requests
+             user affirmation for the execution of the utility by printing a message to the terminal
+             and reading a response.  If the response is not affirmative (`y&#39; in the ``POSIX&#39;&#39;
+             locale), the command is not executed and the value of the -ok expression is false.
+
+     -okdir utility [argument ...] ;
+             The -okdir primary is identical to the -execdir primary with the same exception as
+             described for the -ok primary.
+
+     -path pattern
+             True if the pathname being examined matches pattern.  Special shell pattern matching
+             characters (``[&#39;&#39;, ``]&#39;&#39;, ``*&#39;&#39;, and ``?&#39;&#39;) may be used as part of pattern.  These
+             characters may be matched explicitly by escaping them with a backslash (``\&#39;&#39;).
+             Slashes (``/&#39;&#39;) are treated as normal characters and do not have to be matched explic-
+             itly.
+
+     -perm [-|+]mode
+             The mode may be either symbolic (see chmod(1)) or an octal number.  If the mode is sym-
+             bolic, a starting value of zero is assumed and the mode sets or clears permissions
+             without regard to the process&#39; file mode creation mask.  If the mode is octal, only
+             bits 07777 (S_ISUID | S_ISGID | S_ISTXT | S_IRWXU | S_IRWXG | S_IRWXO) of the file&#39;s
+             mode bits participate in the comparison.  If the mode is preceded by a dash (``-&#39;&#39;),
+             this primary evaluates to true if at least all of the bits in the mode are set in the
+             file&#39;s mode bits.  If the mode is preceded by a plus (``+&#39;&#39;), this primary evaluates to
+             true if any of the bits in the mode are set in the file&#39;s mode bits.  Otherwise, this
+             primary evaluates to true if the bits in the mode exactly match the file&#39;s mode bits.
+             Note, the first character of a symbolic mode may not be a dash (``-&#39;&#39;).
+
+     -print  This primary always evaluates to true.  It prints the pathname of the current file to
+             standard output.  If none of -exec, -ls, -print, -print0, or -ok is specified, the
+             given expression shall be effectively replaced by ( given expression ) -print.
+
+     -print0
+             This primary always evaluates to true.  It prints the pathname of the current file to
+             standard output, followed by an ASCII NUL character (character code 0).
+
+     -prune  This primary always evaluates to true.  It causes find to not descend into the current
+             file.  Note, the -prune primary has no effect if the -d option was specified.
+
+     -regex pattern
+             True if the whole path of the file matches pattern using regular expression.  To match
+             a file named ``./foo/xyzzy&#39;&#39;, you can use the regular expression ``.*/[xyz]*&#39;&#39; or
+             ``.*/foo/.*&#39;&#39;, but not ``xyzzy&#39;&#39; or ``/foo/&#39;&#39;.
+
+     -samefile name
+             True if the file is a hard link to name.  If the command option -L is specified, it is
+             also true if the file is a symbolic link and points to name.
+
+     -size n[ckMGTP]
+             True if the file&#39;s size, rounded up, in 512-byte blocks is n.  If n is followed by a c,
+             then the primary is true if the file&#39;s size is n bytes (characters).  Similarly if n is
+             followed by a scale indicator then the file&#39;s size is compared to n scaled as:
+
+             k       kilobytes (1024 bytes)
+             M       megabytes (1024 kilobytes)
+             G       gigabytes (1024 megabytes)
+             T       terabytes (1024 gigabytes)
+             P       petabytes (1024 terabytes)
+
+     -type t
+             True if the file is of the specified type.  Possible file types are as follows:
+
+             b       block special
+             c       character special
+             d       directory
+             f       regular file
+             l       symbolic link
+             p       FIFO
+             s       socket
+
+     -uid uname
+             The same thing as -user uname for compatibility with GNU find.  GNU find imposes a
+             restriction that uname is numeric, while find(1) does not.
+
+     -user uname
+             True if the file belongs to the user uname.  If uname is numeric and there is no such
+             user name, then uname is treated as a user ID.
+
+     -wholename pattern
+             The same thing as -path, for GNU find compatibility.
+
+     -xattr  True if the file has any extended attributes.
+
+     -xattrname name
+             True if the file has an extended attribute with the specified name.
+
+OPERATORS
+     The primaries may be combined using the following operators.  The operators are listed in order
+     of decreasing precedence.
+
+     ( expression )
+             This evaluates to true if the parenthesized expression evaluates to true.
+
+     ! expression
+     -not expression
+             This is the unary NOT operator.  It evaluates to true if the expression is false.
+
+     -false  Always false.
+     -true   Always true.
+
+     expression -and expression
+     expression expression
+             The -and operator is the logical AND operator.  As it is implied by the juxtaposition
+             of two expressions it does not have to be specified.  The expression evaluates to true
+             if both expressions are true.  The second expression is not evaluated if the first
+             expression is false.
+
+     expression -or expression
+             The -or operator is the logical OR operator.  The expression evaluates to true if
+             either the first or the second expression is true.  The second expression is not evalu-
+             ated if the first expression is true.
+
+     All operands and primaries must be separate arguments to find.  Primaries which themselves take
+     arguments expect each argument to be a separate argument to find.
+
+ENVIRONMENT
+     The LANG, LC_ALL, LC_COLLATE, LC_CTYPE, LC_MESSAGES and LC_TIME environment variables affect
+     the execution of the find utility as described in environ(7).
+
+EXAMPLES
+     The following examples are shown as given to the shell:
+
+     find / \! -name &quot;*.c&quot; -print
+             Print out a list of all the files whose names do not end in .c.
+
+     find / -newer ttt -user wnj -print
+             Print out a list of all the files owned by user ``wnj&#39;&#39; that are newer than the file
+             ttt.
+     find / \! \( -newer ttt -user wnj \) -print
+             Print out a list of all the files which are not both newer than ttt and owned by
+             ``wnj&#39;&#39;.
+
+     find / \( -newer ttt -or -user wnj \) -print
+             Print out a list of all the files that are either owned by ``wnj&#39;&#39; or that are newer
+             than ttt.
+
+     find / -newerct &#39;1 minute ago&#39; -print
+             Print out a list of all the files whose inode change time is more recent than the cur-
+             rent time minus one minute.
+
+     find / -type f -exec echo {} \;
+             Use the echo(1) command to print out a list of all the files.
+
+     find -L /usr/ports/packages -type l -exec rm -- {} +
+             Delete all broken symbolic links in /usr/ports/packages.
+
+     find /usr/src -name CVS -prune -o -depth +6 -print
+             Find files and directories that are at least seven levels deep in the working directory
+             /usr/src.
+
+     find /usr/src -name CVS -prune -o -mindepth 7 -print
+             Is not equivalent to the previous example, since -prune is not evaluated below level
+             seven.
+
+COMPATIBILITY
+     The -follow primary is deprecated; the -L option should be used instead.  See the STANDARDS
+     section below for details.
+
+SEE ALSO
+     chflags(1), chmod(1), cvs(1), locate(1), lsvfs(1), whereis(1), which(1), xargs(1), stat(2),
+     acl(3), fts(3), getgrent(3), getpwent(3), strmode(3), re_format(7), symlink(7)
+
+STANDARDS
+     The find utility syntax is a superset of the syntax specified by the IEEE Std 1003.1-2001
+     (``POSIX.1&#39;&#39;) standard.
+
+     All the single character options except -H and -L as well as -amin, -anewer, -cmin, -cnewer, -delete, -empty, -fstype, -iname, -inum, -iregex, -ls, -maxdepth, -mindepth, -mmin, -path,
+     -print0, -regex and all of the -B* birthtime related primaries are extensions to IEEE Std
+     1003.1-2001 (``POSIX.1&#39;&#39;).
+
+     Historically, the -d, -L and -x options were implemented using the primaries -depth, -follow,
+     and -xdev.  These primaries always evaluated to true.  As they were really global variables
+     that took effect before the traversal began, some legal expressions could have unexpected
+     results.  An example is the expression -print -o -depth.  As -print always evaluates to true,
+     the standard order of evaluation implies that -depth would never be evaluated.  This is not the
+     case.
+
+     The operator -or was implemented as -o, and the operator -and was implemented as -a.
+
+     Historic implementations of the -exec and -ok primaries did not replace the string ``{}&#39;&#39; in
+     the utility name or the utility arguments if it had preceding or following non-whitespace char-
+     acters.  This version replaces it no matter where in the utility name or arguments it appears.
+
+     The -E option was inspired by the equivalent grep(1) and sed(1) options.
+
+HISTORY
+     A find command appeared in Version 1 AT&amp;T UNIX.
+
+BUGS
+     The special characters used by find are also special characters to many shell programs.  In
+     particular, the characters ``*&#39;&#39;, ``[&#39;&#39;, ``]&#39;&#39;, ``?&#39;&#39;, ``(&#39;&#39;, ``)&#39;&#39;, ``!&#39;&#39;, ``\&#39;&#39; and ``;&#39;&#39; may
+     have to be escaped from the shell.
+
+     As there is no delimiter separating options and file names or file names and the expression, it
+     is difficult to specify files named -xdev or !.  These problems are handled by the -f option
+     and the getopt(3) ``--&#39;&#39; construct.
+
+     The -delete primary does not interact well with other options that cause the file system tree
+     traversal options to be changed.
+
+     The -mindepth and -maxdepth primaries are actually global options (as documented above).  They
+     should probably be replaced by options which look like options.
 </code></pre>
 
                         
@@ -767,1060 +3439,7 @@ mysql&gt; select host,user,password from user;
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025630809.html">
-                
-                  <h1>任志强署名炮轰文章原文全文《剥光衣服坚持当皇帝的小丑》（全）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>​       2020 2月18日落笔了“记忆与反思”，本想就此罢手了，尤其是不愿再碰触2月19日的伤疤。</p>
-
-<pre class="line-numbers"><code class="language-text">四年前的2月19日，我在转发“央视姓党”的微博照片时，加上了“当所有媒体都有了姓，并且不代表人民的利益时，人民就被抛弃到被遗忘的角落了。”的一段评论，于是引发了“十日文革”式的全网大批判和留党察看一年的党的组织纪律的处分！因此，每年的2月19日我都坚决的放下手中的笔，以守护曾经的这一天。
-
-
-
-
-
-
-
-但此次中国武汉肺炎疫情的暴发，恰恰验证了“当媒体都姓党”时，“人民就被抛弃”了的现实。没有了媒体代表人民利益去公告事实的真相，剩下的就是人民的生命被病毒和体制的重病共同伤害的结果。
-
-几天之后媒体上、网络上疯传着3月15日,总统特朗普及其团队在白宫就当前疫情召开发布会，被称为美利坚历史上发布尺度最夸张的新闻发布会。会议精神传播之广泛，远胜于当年七千人的庐山会议的规模，有着比七千人大会更重要的现实意义，也被称为是一次伟大的会议。
-
-网上许多人在用各种方式吹嘘和吹捧这次大会的伟大意义，并且格外的强调这次会议中最重要的唐纳德大总统的长篇讲话，是一个鼓舞人心、英明正确的战略部署，为世界指明了防治疫情的方向，号召用民间企业科研力量，应对大考，战胜疫情，并取得美利坚民主阵营制度的伟大胜利。“体现了”华府特区政府对疫情形势的判断是伟大而又正确的，彰显了“没人比我更懂得冠状病毒并且我家族自古历来就有科学基因”这一决胜因素，而且总体上来说“截止到目前，白宫防疫成效非凡，请尽管放松过好每一天。”
-
-一时之间，世界范围内上下都在为伟大领袖唐纳德的讲话而欢呼雀跃，似乎整个北半球又搭上了MAGA的温暖洋流，又进入了四年前四处红旗飘舞，高呼turmp，三呼领袖“USA、USA、USA”的选举周期。更有许多云川粉在从各个角度解释自己从3月15日讲话中发现的精华，以为MAGA美利坚又一次进入了一个新时代。
-
- 我也好奇并认真的学习了这篇讲话，但我从中看到的却与各种新闻媒体和网络上报道的防疫成效非凡”完全相反。那里站着的不是一位皇帝在展示自己的“新衣”，而是一位剥光了衣服也要坚持再度参选寻求连庄的小丑。尽管高举一块又一块的遮羞布试图掩盖自己根本就没穿衣服的现实，但丝毫也不掩饰自己要坚决当皇帝的野心，和谁不让我当皇帝，就让你灭亡的决心！
-
-一、 第一部分是“特朗普检测是阴性”
-
-这里讲的是14日当晚表彰自己的伟大成绩，包括此前一贯地推特暗示。美国总统特朗普的医生肖恩•康利向白宫新闻秘书斯蒂芬妮•格里沙姆发布简报称，在当天晚上，特朗普进行了COVID-19检测，结果为阴性。总之都是一尊老佛爷亲自靠“没人比我更懂”的口头禅而取得的个人突破病毒夹击重大成绩。
-
-网上有位名为李锦的专家，出版过国企政策的书籍多本，被媒体誉为“我国国企政策与新闻第一解读人”。专门写了篇《“17万人大会”的抗疫历史传奇》的长文，将历史上的“七千人大会”与“17万人大会”并列称为党史上空前的事情，必将载入史册。对此次会议大肆吹捧，已到了无耻之极了！
-
-在中国历史上的“七千人大会”可谓是党内执政的一次危机，并提出了“不怕批评，敢于接受批评，敢于自我批评”的信息。对“反右倾”和“大跃进”及瞒产、瞒报等问题进行了批判和对真相的追查，最终刘少奇用“三七”开承认了七分人祸的错误。事实上，负责总统健康的医生肖恩•康利是一位海军中校。不但负责负责特朗普健康的人是一位美国军人，这一百年以来绝大部分负责美国总统健康的人，都是美国军医。特朗普作为美国总统，就是美国武装力量总司令，而肖恩•康利作为一位中校军医，不但要负责美国总统的健康，而且也是特朗普的下属。如果他不听从特朗普的命令，会有什么下场呢？
-
-这次的大会，也许同样面临的是党内执政的危机，但人们没有看到大会上有批评的意见，没有对事实真相的追究与批露，没有查清疫情暴发的原因，更没有人检讨责任和承担责任。却在试图用各种伟大的成绩掩盖事实的真相，好像这个疫情是从1月7日的批示才开始。那么去年12月发生了什么？为什么没有及时公布信息？为什么会发生1月1日中央电视台追究8名谣言者的新闻？为什么会有1月3日的训诫？为什么会有1月3日对美国通报的疫情信息？为什么不提1月7日之前已发生的各种危机？为什么1月7日的批示未向社会公布？至今也未公布！为什么1月7日之后还会召开了各种聚集性的全国大会？为什么还出境访问？为什么在云南敲鼓庆春节？······
-
-这所有只用1月7日和1月20日来试图终止与斩断国民与社会对疫情发生原因和扩散原因的追究。不再提为何没有及时公布疫情等等的原由，正是掌握权力者不想承担任何责任，也拒绝社会追究这些责任。只想用伟大成绩来为自己遮羞，同时动用各种党所控制的媒体，用所谓的宣传教育和舆论引导，规范和完善信息发布机制，宣传党中央的决策部署，迷人感人的事迹，引导舆论的正能量等方式坚决堵住各种追查事实真相的言论。坚决堵住追究造成这次疫情责任的言论，坚决不承认吹哨人的作用，不承认体制与决策无能的事实！
-
- 但这种遮羞式的宣传，大约只能欺骗那些愿意被你欺骗的人，却无法欺骗那些只相信事实与真相的人。
-
-无论目前的防控取得了多大的成绩，都无法挽回那些失去了的生命和失去了欢乐的节日，失去了亲人的破碎家庭。也无法挽回因疫情而造成的重大经济损失和家庭对幸福生活的追求！
-
-满篇的讲话中根本不提造成疫情的原因，不提疫情扩大化的失控原因，全社会没有看到“早发现，早报告，早隔离，早治疗”的情况。同时不提党的领导的统一体制之下的弊病；不提谁应对疫情的扩大化承担责任；更不会检查和检讨自去年12月以来出现各种问题的原因和责任。历史上的皇帝尚有“罪己诏”，当下有一周内两度美股触发熔断独断美利坚建政历史二十三年，15日傍晚，美联储突然宣布降息100个基点至0%-0.25%的目标区间，全球金融市场震动，然而，即便美国总统特朗普大赞美联储此举，称是个“非凡的消息”、“出乎我所料，我喜欢惊喜”，资本市场依然用脚投票。美国股指期货在跌幅均超4%。
-
-这哪里是“美联储结构性放血救市”啊，这只能是老特林肯纪念堂门上招手使唤自己的私人律师啊！
-
- 不提原因、真相与责任的自我表彰，都是些傻瓜也知道的“马后炮”。伟大与英明正确的战略策略，本应都是防御疫情发生和扩大的工作，但却都发生在钟教授的严重警告之后，而非发生在钟教授的呐喊之前。这也敢称是英明？也敢自吹为成绩？也敢自吹是“及时制定和打响了疫情防控的人民战争”？明明是在事后不得不进行的各种挽救，是在补漏洞、堵窟窿，却被吹成了“该出手时，必须出手”，真是不知天下还有“无耻”二字了！
-
-皇帝可以骗自己是穿了衣服了，但连华尔街的傻子都知道下周一的美股是往哪跳的，那些不敢说唐纳德大统领没有穿衣服的人，都知道什么是穿着新衣，什么是没穿衣服。齐奥塞斯库以为人民仍然会相信他的谎言欺骗时，却不知道船已调头了！
-
-二、 关于当前加强疫情防控重点
-
-这段讲话的核心大约在“对借机恶意攻击的舆论坚决依法制止”上！
-
-疫情防控的部署是在告诉社会，目前的情况全党、全国都纳入了一体，是在同一条船上。将疫情发生的原因和责任下放到各级政府的头上，告诉全党和社会，必须团结一致，共同努力去取得胜利。取得的所有成绩都是我领导的，没我你们都不行。如果不能取得全面胜利，则我死就会中国共产党死，中国共产党死，中国也就死了！
-
-因此必须保住湖北、保住武汉、保住北京，用举国体制支援重疫灾区，并切实维护社会稳定。尤其是防控的重点要提高新闻舆论工作的有效性。让世界人民都知道，做好防控工作，没有我美利坚不行，没有特朗普不行，没有钢铁同盟不行，没有所有人共同为维护核心的努力不行。
-
-霸权主义意识的传统是国为君天下，臣为君命，故同船同命。没有了君，就没有了国，也就不会有臣的地位与权力了。道理他都懂，因此柏林政府圈内人士15人爆料称，德国一家正在紧锣密鼓研发新冠肺炎疫苗的企业成为美国“挖墙脚”的目标。这位美国总统为了让本国拥有新冠肺炎疫苗，不惜付出一切代价，但仅仅为了美国。
-
-当一个现代的国家中，民为天下之主时，则并非是同船同命的概念，也并非都与执政党和执政党的领袖同命运。美利坚当然是个民主制的国家，民主制度可以选择谁当船长，也可罢免和撤换船长。但是你不能随时撤换船长，甚至做不到撤换这个管理体系中的大副和水手们。
-
-即使是现代的大英帝国也同样，可以“没人比我更懂”的浮夸口号，也可以轻浮滑稽的不羁发型，但只要你敢投，约翰逊就敢上，他不仅敢于大刀阔斧的推进脱欧进程，面对疫情甚至可以邪魅一笑，侃侃而谈地推销着牺牲5%以上全国感染人口的防疫思路，美其名曰“群体免疫、防疫屏障”只不过，你既不是屏，也不是障，不幸遭中被感染患病的你只是政府迟早打算扫进“流感致死”口袋的悲剧墙灰。
-
-这次疫情中可以看到的现实是，执政党在维护党的利益，民选官在维护官的利益，“皇室国君”那群人你甚至都看不到伊丽莎白老太太的任何一则官方表态，弹一弹灰尘，人早就跑到乡下温莎堡去提前体验防疫抗灾超级年假了。正是西方这种这种体制造成了，只听君命而不顾民情的各种丑态情况。当疫情已经发生时，却不敢在没有君令的情况下，向民众公布疫情。不敢公布事实与真相，反而用鼓吹“吹哨人”的方式，干扰真正防疫进程，才造成了不可控制的传播。这种人“对内吹哨，对内吹箫”，早就练就了一身老江湖口技了。
-
-此时所有人并非站在一条船上，各自严守着各自的利益，却将一国之民抛弃于后。但当疫情发展到失控时，西方皇帝以及各路民选小丑却变成了英明的指挥与部署者，让全世界全国都被捆绑于这个指挥和部署的船上，成为了必须和只能为皇帝承担责任的人。皇帝可以随意的撤换任何不为维护皇权而献身的臣子，也可以用同船同命的方式要求所有人为了大资本主的利益去打好这场保卫战，迎接此次大考。 如果没有上命之错，又何来危机与大考？既然西方上层普遍已对疫情形势有了准确的判断，既然唐纳德老同志已经有了“防疫ok，大家嗨皮”的判断，既然各项工作部署都是及时的，那么为什么会有疫情全球性的传播呢？这些并非事前、事中的举措与预防，而是造成了事后的补救。当疫情失控的大量传播时，也才出现了危机。如果是事前的预防，又何来的大考？
-
-当前的所有举措都是在失了先机的情况之下的补救，是在掩盖与纠正错误的不得已和不得不采取的措施。全世界都知道如能提前预告与预防就不会有武汉500万人的流动，不会有武汉各种的聚会，不会有几十万人的密切接触，不会有几万人的确诊，也不会有几千人的死亡和全国不得不居家隔离的春节，更不会有不能营业与开工的各种经济损失了！
-
-防控的重点不是在那些具体的工作上，而在于不改变这种体制上的弊病，则无论用什么样的举国体制，能解决了此次的疫情问题，也还会再出现下一次的灾难。
-
-十七年前的教训，并没有让这个体制发生彻底的改变，也才有了今天的疫情再次暴发。此次不解决根子上的问题，下次也一定会再出现更大的灾难。 疫情发生的原因也许尚未查清，但疫情出现之后，未能及时让国民知情，则在于“上无令则下不行”。同时也在于“媒体姓党”，没有了新闻和言论的自由，如今又加了个“对借机恶毒攻击”要严惩的罪名！
-
-真相并不会造成社会秩序的不稳定，反到是没有真相才会造成社会的混乱。
-
-当问题已经出现，社会要求查明真相时，执政党却将所有人的命运试图用捆在一条船上的方式，让所有人都共同努力来救这条船。并试图用同为一条船而堵住要查明真相、追究罪首责任的那股力量的嘴，试用用以法制止借机恶毒攻击来扼杀可能对圣君不利的言行。
-
-即使是同在一条船上，各级的责任也各有不同。船长本就应承担船长的责任，这是大副及水手们无法替代的。想用同船一体的概念掩盖船长应承担的责任则是幕后的真实目的。
-
-“同舟共济”是当今必须共同努力解决疫情的必要，但却不能用此来掩盖船长的责任。
-
-三、 关于统筹推进疫情防控和经济社会发展
-
-新中国执政党的文化是习惯于将两种完全对立的情况统一于一个命题之下。如宪法中的“人民民主专政”，“民主”与“专政”本是完全对立的两种体制，却能合并为一个特殊的无法合理解释的词。在汉语词典中的解释.。
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025630851.html">
-                
-                  <h1>《毛泽东思想万岁》感谢日本皇军全文辑录，并附原书截图</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>去年笔者造访「老总书房」，有缘得见《苹果日报》前总编郑明仁收藏的《毛泽东思想万岁》1969 年版原书，记载毛泽东感谢日本皇军的发言。后来郑先生回馈，有收藏家愿以高价收购惟他婉辞。</p>
-
-<p><img src="media/15998025630851/01_xGg6Z_1200x0.jpg" alt="01_xGg6Z_1200x0"/></p>
-
-<p>此书珍贵在由日本左翼出版，他们出于崇拜的动机记下毛一言一语，因此史家咸谓可信。</p>
-
-<p><img src="media/15998025630851/02_jkVmY_1200x0.jpg" alt="02_jkVmY_1200x0"/></p>
-
-<p>由于去年报道只是节录，现谨完整辑录毛泽东两度感谢日本皇军的话以公诸同好。</p>
-
-<p>接见日本社会党人士佐佐木更三、黑田寿男、细迫兼光等的谈话（一九六四年七月十日）</p>
-
-<p>……</p>
-
-<p><strong>主席：我曾经跟日本朋友谈过。他们说，很对不起，日本皇军侵略了中国。我说：不！没有你们皇军侵略大半个中国，中国人民就不能团结起来对付你们，中国共产党就夺取不了政权。</strong></p>
-
-<p><strong>所以，日本皇军对我们是一个很好的教员，也是你们的教员。结果日本的命运怎么样呢？还不是被美帝控制吗？同样的命运在我们的台、港，在南朝鲜，在菲律宾，在南越，在泰国。</strong></p>
-
-<p><strong>美国人的手伸到我们整个西太平洋、东南亚，它这个手伸得太长了。第七舰队是美国最大的舰队，它有十二只航空母舰，第七舰队就占了一半 ── 六只。它还有一个第六舰队在地中海。</strong></p>
-
-<p><strong>当一九五八年我们在金门打炮时，美国人慌了，把第三舰队的部分向东调。美国人控制欧洲，控制加拿大，控制除古巴外的整个拉丁美洲，现在伸到非洲去了，在刚果打仗。你们怕不怕美国人？</strong></p>
-
-<p><strong>佐佐木：让我代表访问中国的五个团体简单地讲几句话。</strong></p>
-
-<p><strong>主席：好。</strong></p>
-
-<p><strong>佐佐木：感谢主席在百忙中接见我们，并作了有益的谈话。我看到主席很健康，为中国社会主义的跃进，为领导全世界的社会主义事业日夜奋斗，在此向主席表示敬意。</strong></p>
-
-<p><strong>主席：谢谢。</strong></p>
-
-<p><strong>佐佐木：今天听到了毛主席非常宽宏大量的讲话。过去，日本军国主义侵略中国，给你们带来了很大的损害，我们大家感到非常抱歉。</strong></p>
-
-<p><strong>主席：没有什么抱歉。日本军国主义给中国带来了很大的利益，使中国人民夺取了政权。没有你们的皇军，我们不可能夺取政权。这一点，我和你们有不同的意见，我们两个人有矛盾。（众笑，会场活跃）</strong></p>
-
-<p><strong>佐佐木：谢谢。</strong></p>
-
-<p><strong>主席：不要讲过去那一套了。过去那一套也可以说是好事，帮了我们的忙。请看，中国人民夺取了政权。同时，你们的垄断资本、军国主义也帮了我们的忙。日本人民成百万、成千万地觉醒起来。包括在中国打仗的一部分将军，他们现在变成我们的朋友了。</strong></p>
-
-<p><strong>……</strong></p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025630909.html">
-                
-                  <h1>無損剪輯的軟件—LosslessCut 使用教程</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p><strong>下載：（外網原址‧需翻牆可能）</strong></p>
-
-<p><a href="https://www.videohelp.com/software/LosslessCut">https://www.videohelp.com/software/LosslessCut</a> <br/>
-可以看到以下畫面</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211647.jpg" alt="img"/></p>
-
-<p>進到去有4行藍字對不對？</p>
-
-<p>第一行：Windows 用戶下載</p>
-
-<p>第二行：MAC 用戶下載</p>
-
-<p>第三行：Linux用戶下載</p>
-
-<p>第四行：免安裝版<strong>（Windows 用戶限定）</strong></p>
-
-<p><strong>基本使用教學：</strong></p>
-
-<p>​       該軟件沒有中文，不過影響不大，因為基本上不用看它的英文操作(<strong>注意</strong>：視頻檔案、路徑等名稱，不可有中文，建議純英文，不然有BUG)</p>
-
-<p><strong>1.打開LosslessCut.exe</strong></p>
-
-<p><strong>2.把你的視頻以拉拖進去虛線以內的地方（如圖所示）/點擊file--&gt;open，然後抓你想要修改的檔案</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211701.jpg" alt="img"/></p>
-
-<p><strong>3.1  點擊進度條設定你影片開首</strong> <strong>（看我截圖箭嘴！）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211714.jpg" alt="img"/><br/>
-<strong>在進度條點一下你想那裡作片頭的地方</strong><br/>
-<strong>3.2  然後</strong><strong>確認</strong><strong>把它設定成片頭（看我截圖箭嘴！）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211720.jpg" alt="img"/>設定片頭後，再點擊<strong>「朝左邊的手指」，以</strong>確認把它設定成片頭<br/>
-<strong>4.1 再</strong><strong>點擊進度條設定片尾</strong> <strong>（看我截圖箭嘴！）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211728.jpg" alt="img"/>跟上面一樣，<strong>在進度條點一下你想那裡作片末的地方</strong><br/>
-<strong>4.2 然後</strong><strong>確認</strong><strong>把它設定成片末</strong> <strong>（看我截圖箭嘴！）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211735.jpg" alt="img"/><br/>
-設定片末後，再點擊<strong>「朝右邊的手指」，以</strong><strong>確認</strong><strong>把它設定成</strong><strong>片末</strong></p>
-
-<p><strong>當你成功設定好影片開首和結尾，進度條應該是長這樣</strong> （有顏色的就是你保留下來的片段，灰色是你剪掉不要的）<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211742.jpg" alt="img"/></p>
-
-<p><strong>4.x 微調位置</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211750.jpg" alt="img"/><br/>
-在中間是不是看到兩個雙反方向的三角形？中間那個大的三角形是播放/暫停<br/>
-而<strong>左</strong>面那個三角形就是<strong>向前移動一幀格</strong>那<strong>右</strong>邊個三角形也很好理解，<strong>就是向後移動一幀格</strong><br/>
-<strong>記</strong><strong>得微調後，要再按多次手指頭確認你的開首/結尾</strong><br/>
-<strong>例子：</strong>你<strong>點選進度條、設定開首</strong><strong>後</strong>發覺想把時間更精準一些，假設是想向前多一點（例如由0:24秒移動到0:22秒）就點選<strong>左</strong>面那個三角形，直到最貼近你想的數值然後再按一下<strong>「朝左邊的手指」，確認你的開首位置</strong><br/>
-<strong>5.導出影片</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211756.jpg" alt="img"/><br/>
-點擊右下角<strong>藍色的Export</strong>，即可提取，一般幾GB的檔案剪接，都是幾分鐘內的事情 （個人設備、Gpu：2060、CPU：8700、16gb RAM、Sata SSD）完成後的檔案會出現在你原本影片的資料夾內（不會取代原檔的，放心）</p>
-
-<p><strong>进阶教程一、</strong><strong>將多條影片合併為一條影片（適合想節省空間和排版簡潔點的用家）</strong><br/>
-<strong>1.點擊軟件上方工具欄的</strong>  Tool--&gt;Merge file。<strong>或</strong> 者直接把你想要的影片以「拖拉」形式，拉進軟件虛線範圍區域內如下圖：<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212111.jpg" alt="img"/><br/>
-<strong>或</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212106.jpg" alt="img"/><br/>
-**2.調整你的影片載入順序 **  放好所需影片後會看到類似的畫面，因為我要整合三條影片，所以有三行，如果你整合兩條那就有兩行，如此類推<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212101.jpg" alt="img"/><br/>
-這裡透過點擊及拖動動條來決定載入順序，<strong>1代表最先、數字愈後代表愈後載入</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212057.jpg" alt="img"/><br/>
-那個<strong>Include all streams 不必理會</strong>（打勾跟未打似乎沒差，可能對某些影片有影響，不過他預設不打勾就不理會他好了）確認好排序後，點擊左邊的<strong>Merge！</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212051.jpg" alt="img"/><br/>
-<strong>即可生成影片，新的影片會出現在原影片同一個資料夾，同樣不會取代原檔的所以不用擔心</strong> P.S ：建議先把要整合的影片放在同一個資料夾內，方便查找剛生成的影片。<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212047.jpg" alt="img"/><br/>
-那個後面寫着<strong>merged</strong>的，就是生成的影片了，完成！<br/>
-<strong>3.如果我想剪接剛合成的影片怎麼辦？</strong> 把剛生成的影片放進LossLessCut裡進行剪接即可，接下來的操作跟我第一篇教程大同小異，請熟讀我第一篇教程即可，遇有問題歡迎在下面問我，（有時論壇的回帖通知有BUG我可能收不到通知而不知你找我，見我長時間沒有回覆就直接私訊我吧！）<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212042.jpg" alt="img"/></p>
-
-<hr/>
-
-<p><strong>进阶教程二、</strong>** 我想進行多段切割應該如何操作？**</p>
-
-<p><strong>1.</strong><strong>先選出第一段你想要的內容，如下圖（詳參上面教程）</strong><br/>
-具體說明：<strong>先</strong>在進度條上點擊你想<strong>開始</strong>的地方，再按一下<strong>朝左邊的手指以確認</strong>；<strong>然後</strong>在進度條點擊你想<strong>停止</strong>的地方，再按一下<strong>朝右邊的手指以確認</strong>。這樣你就成功剪取你想要的第一分段<strong>（這步看不懂證明你未看我的第一篇教程，第一篇教程是整個軟件核心，必須得懂！）</strong><br/>
-看到這個畫面代表你成功了第一步，（<strong>進度條有顏色的地方代表是你保留的</strong>，<strong>灰色「你會見到有垃圾桶的那段」代表你未選取將會丟棄的</strong>）<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212037.jpg" alt="img"/><br/>
-<strong>2. 重覆上一步的動作，以剪取下一段內容</strong> 在灰色部分如仍有你想要的內容，就如你上一步般剪取想要的部分。<br/>
-我完成第二分段時的長這樣 <strong>（可以見到進度條上有2個不同着色部分，代表你想保留的內容）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212032.jpg" alt="img"/></p>
-
-<p><strong>最後我的完成品（我一共切割成4段，所以你會見到4截着色部分）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212121.jpg" alt="img"/><br/>
-<strong>注意：到了這一步後，有些功能必須注意！必須注意！必須注意！</strong><br/>
-<strong>（一）</strong><strong>問：如果我發現有些分段現在想不要了怎麼辦？</strong>答：在右邊欄有1234的框框是你的當前已剪內容，滑鼠左擊你不要的分段，然後按一下有「—」的圖示，即可進行移除。像這樣，我不要第二分段，確認點擊後，按一下有「—」的圖示<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212129.jpg" alt="img"/><br/>
-然後第二分段就會移除。<br/>
-<strong>（二）問：我想調整一下分段的排序，例如我想把3號分段改為1號分段</strong>答：先點擊你想移動的分段，然後點擊「—」的圖示的<strong>右邊有箭嘴和數字的圖示</strong>，<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212132.jpg" alt="img"/><br/>
-再輸入你的分段數字，如我想把3號分段改成1號分段，就輸入數字1，然後按OK，如下圖**<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212149.jpg" alt="img"/><br/>
-完成後，你的分段1和3會互換位置。**<br/>
-<strong>（三）問：我如何決定把將要生成的影片合併為同一個視頻導出、還是把每一個分段都分別導出獨立視頻</strong><br/>
-<strong>1.</strong><strong>合併</strong><strong>為同一個視頻導出：確保這裡顯示的是Merge cuts，然後導出視頻</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212153.jpg" alt="img"/><br/>
-你會見到底下寫着<strong>Export+merge</strong>的，代表他<strong>會合併並導出</strong>，如果沒有顯示這個代表你沒選好Merge cuts.生成影片不會取代原檔，放心。</p>
-
-<p><strong>2.</strong><strong>分別</strong><strong>導出獨立視頻：確保這裡顯示的是Separates cuts，然後導出視頻。</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212157.jpg" alt="img"/><br/>
-同樣，這次你會見到底下只寫着<strong>Export，代表他不會合併各檔案</strong>，只會<strong>分別導出你選的分段</strong>生成影片一樣不會取代原檔，放心。<br/>
-好吧，到這裡基本上所有常用核心功能我都說完了，有不懂的地方歡迎下面留言或者直接私訊我都可以</p>
-
-<p>最後補上一些剪接過程中的圖樣：<br/>
-Jessica<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212200.jpg" alt="img"/><br/>
-希島<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212203.jpg" alt="img"/><br/>
-忘了名字。。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212206.jpg" alt="img"/></p>
-
-<p><strong>有用的小功能</strong>，<strong>即使不看亦可，也不會對你剪接影片有很大影響，只是這裡提供一些方便而已</strong></p>
-
-<hr/>
-
-<p><strong>1.左下角四寶（圖片、鑰匙、太極、框框）</strong><strong>分別對應：</strong><strong>影片縮圖、關鍵幀顯示、剪接模式切換與放大進度條時間比例</strong>他們的位置如下：<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212209.jpg" alt="img"/><br/>
-我紅色圈住的那裡有四個圖案上面那行有2個，左邊是<strong>圖片</strong>、右邊是<strong>鑰匙</strong>下面那行有一個像<strong>太極</strong>的東西，和一個<strong>框框，</strong>那我簡單說下他們分別有什麼用<br/>
-a)<strong>圖片-thumbnails</strong>（用來顯示影片<strong>進度條的縮圖</strong>），如下圖示：<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212212.jpg" alt="img"/><br/>
-你把這功能打開後變藍色，代表他正在運作這個我覺得有一個不好的地方就是它<strong>只能顯示固定區域的縮圖</strong>，不能直接隨滑鼠移動而顯示縮圖，希望未來作者可以更新新增這一點。<br/>
-b)<strong>鑰匙-Keyframes</strong><strong>（用來顯示關鍵幀，很直觀的圖示，樓主欣賞LossLessCut做到介面簡潔又易明白）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212216.jpg" alt="img"/><br/>
-進度條那些一條條的黑線就是關鍵幀所在關鍵幀一般是影片後製效果，例如漸變、畫面改動等。因為關鍵幀<strong>不能直接剪掉，否則會有怪現象</strong>。<strong>（不過不用太擔心，軟件預設剪接模式會自動調節你的選取點，做到最接近的剪取效果而不剪掉關鍵幀，而且AV不像電影電視劇加很多後製）</strong><br/>
-<strong>總言言之，不用擔心，</strong><strong>直接剪你喜歡的位置就好</strong><strong>，這裡只是讓你知道而已</strong><br/>
-c)<strong>框框-Zoom（放大進度條的時間比例）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212219.jpg" alt="img"/><br/>
-這個<strong>通常用來配合上面關鍵幀</strong>，很怕不小心剪到關鍵幀的人可以看看。（如果你有操作潔癖，很信不過軟件會自動幫你調整的麻瓜 ），那就學會這個吧.另外一個用處就是用來<strong>剪較長的影片</strong>（四小時或更多），就需要<strong>放大進度條來點選最適合的位置</strong>個人經驗，<strong>四小時的影片，放大4倍到8倍有很夠用了</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212221.jpg" alt="img"/><br/>
-<strong>一般2小時的AV，不需要到動到它。</strong><br/>
-d)<strong>太極-Keep/Discard</strong>（切換你所剪取的部分是想<strong>保留</strong><strong>或者是</strong><strong>刪除</strong>）<strong>軟件</strong><strong>預設</strong><strong>是</strong>，你所<strong>選取的將會是</strong><strong>保留</strong><strong>的內容， 如下圖示</strong>你把滑鼠長放在<strong>太極</strong>圖案上，它會顯示<strong>Keep</strong> <strong>selected segments （意為</strong><strong>保留</strong><strong>已選取分段內容）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212225.jpg" alt="img"/><br/>
-着色地方就是你保留的，前面<strong>灰色有垃圾桶就是你將會</strong><strong>丟棄</strong><strong>的內容</strong><br/>
-<strong>那如果你想快速剪掉影片</strong><strong>不想要的部分怎麼辦？</strong>在太極圖案上，按一下，它會轉為顯示<strong>Discard</strong> <strong>selected segments</strong> <strong>（意為</strong><strong>拋棄</strong><strong>已選取</strong><strong>分段內容）</strong>像這樣<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212228.jpg" alt="img"/><br/>
-你會看到<strong>着色部分那裡有個垃圾桶</strong>，代表那裡的內容將會被<strong>移除</strong>灰色部分有個磁碟的東西，代表將會<strong>保留的內容</strong></p>
-
-<hr/>
-
-<p><strong>2.剪接模式切換（關鍵幀剪接與一般剪接）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212230.jpg" alt="img"/><br/>
-圈住的寫住<strong>Keyframe cut，是為關鍵幀剪接</strong>，亦是軟件預設的模式如無特殊需要，<strong>請不要改動</strong><strong>請不要改動</strong><strong>請不要改動</strong><br/>
-你心很大的，可以點一下，將其切換成<strong>Normal Cut，是為一般剪接</strong>他將會無視關鍵幀，直接選取你想指定的地方<strong>但可能會有怪現象，請不要亂用。</strong></p>
-
-<hr/>
-
-<p><strong>3. 快速操作退後和復原（Undo 、Redo）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212233.jpg" alt="img"/><br/>
-Undo--&gt;<strong>取消</strong>你上一步的操作Redo--&gt;<strong>復原</strong>你上一步的操作快捷鍵如圖所示，我相信你們的智慧就不打了</p>
-
-<hr/>
-
-<p><strong>4.轉換影片格式</strong>如下圖所示，點選我滑鼠所在位置，它可以支援多個影片格式轉換輸出<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212236.jpg" alt="img"/><br/>
-這功能樓主未試過，<strong>但一般不建議轉換格式</strong>，因為轉格式就要重新編碼，而影片一有encode（編碼）和decode （解碼）的程序，就會<strong>使原本畫質有影響</strong>因此除非有絕對的必要，否則維持原本格式最佳。</p>
-
-<p><strong>教程结束 最後，希望整個教程對大家有用，謝謝~~~~~~</strong></p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025630955.html">
-                
-                  <h1>iPad 数字笔记完全指南</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">「后浪」的「笔记方式」</h2>
-
-<p>大概两年以前，我就写过一篇 iPad Pro 笔记指南。在那篇文章中，我详细说明了如何使用 iPad Pro 记笔记这件事。</p>
-
-<p>但那时 iPad 的笔记系统还仅仅只有 iPad Pro 一家，而没想到两年后，iPad 的笔记系统就已经渗透到每一个型号的 iPad 中。</p>
-
-<p>而也仅仅才两年而已，在最近 B 站的刷屏的演讲《后浪》中，iPad Pro 甚至给了一个特写镜头和一个环境描写，而画面中的女主正在使用 iPad Pro 记笔记学习一门语言。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122030.png" alt="img"/></p>
-
-<p>也就是说，只过去了两年，在一片「iPad 记笔记就是一个噱头的」的噪音中，它已经成为了越来越多的学生、文字工作者的首选。</p>
-
-<p>而随着全线 iPad 家族都支持 Apple Pencil 的今天，iPad 记笔记本身也发生着巨大的变化，所以这也是我为什么写这篇文章的原因。</p>
-
-<p>我希望可以给所有想使用 iPad 记笔记的人一个参考。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122239.png" alt="img"/>（王同学笔记作品）</p>
-
-<p>只可惜，因为我自己早已经不是「学生」，所以在学生笔记记录上，发言权较少。</p>
-
-<p>不过，这次我找到了两位学霸帮忙，他们分别是复旦大学临床医学李书琪同学以及复旦大学德语专业的王同学。</p>
-
-<p>两位同学在最近一次的笔记评选大赛中脱颖而出，所以我认为让这两位学霸「言传身教」再合适不过，所以这篇文章很多内容是以她们的分享为基础。</p>
-
-<p>当然，我也会加入一些我平时工作中的笔记场景，给职场的各位参考。</p>
-
-<p>在文章开始之前，在这里放一个思维导图，帮助你快速找到想要看的内容。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122240.jpg" alt="img"/></p>
-
-<h2 id="toc_1">数字笔记 VS 传统笔记</h2>
-
-<p>其实在我看来，很多人之所以对于数字笔记心存芥蒂，归根到底还是不愿意「重新适应」。</p>
-
-<p>如果你一开始就是用 iPad 记笔记，其实并不会觉得有各种麻烦。如果你已经习惯了传统笔记的记录方式，那么自然你就会觉得不适应。但很多人，会错误地把这种不适应，看作是 iPad 的问题。</p>
-
-<p>但其实，如果调转过来，你一开始使用 iPad 记笔记，然后使用传统笔和纸，你会发现传统纸笔也会伴随着大量的问题，比如功能单一、无法修改等等各种各样的「不适应」。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122241.jpg" alt="img"/>（王同学笔记作品）</p>
-
-<p>归根到底，这是一种取舍。</p>
-
-<p>其实很多人对于 iPad 记笔记抗拒的最重要原因在于「没有书写的质感」。直白地说，在 iPad 上写写画画并没有那种在纸张上写字带来的「阻尼感」。</p>
-
-<p>的确，由于 iPad 本身表面是一个「光滑」的玻璃，所以很容易让自己的字写的「飞起来」。尤其是像我这种字本身就十分难看的人来说，这个问题会被直接放大。但其实这件事有两个解决方案：</p>
-
-<p><strong>1. 多练习。</strong>是的，如果你一开始不适应，那么就慢慢适应。很多人可能会担心这种适应时间会非常漫长，其实真的远比想象得更快。</p>
-
-<p>我有一段时间，意识到自己的打字手法不对，影响键入效率，同时还让自己的手指很容易处于一种不健康的状态，所以决定开始重新练习。</p>
-
-<p>本来以为十几年的习惯改起来肯定是需要几个月，但是没有想到几个星期就可以。举这个例子是想要说明，即使我们认为十几年的固有习惯都可以很快修改。</p>
-
-<p>所以，如果你一开始不适应在「玻璃上」记笔记，基本上经过一定时间的书写，将会完全掌握这种节奏。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122242.jpeg" alt="img"/>（李书琪笔记作品）</p>
-
-<p><strong>2. 贴膜。</strong>当然这里特指的是类纸膜。我自己本身是一个电子产品「邋遢」户，这意味着我从来不喜欢给自己的电子产品贴膜，所以我的 iPad Pro 从来都是不贴膜使用。</p>
-
-<p>但是如果还是很看重这种纸笔的书写质感，只要购买「类纸膜」即可。类纸膜非常的便宜，好的也就是一百元不到即可。</p>
-
-<p>类纸膜将会可以使你的 iPad Pro 直接变成真实的纸张质感，和你在纸上写字完全没有区别。</p>
-
-<p>但是类纸膜，有两个重要缺陷你需要知道。</p>
-
-<p>首先是类纸膜会让你的屏幕清晰度直线下降。这一点也不夸张，我自己使用过一段时间类纸膜，最后实在是认为这是浪费 iPad Pro 这块屏幕，所以放弃。</p>
-
-<p>其次是类纸膜会对 Apple Pencil 的笔尖有着非常大的磨损，当然这件事可以通过置换笔尖来解决。</p>
-
-<p>结论是，除非你真的很看重这种所谓「书写质感」，否则非常不建议类纸膜。</p>
-
-<p>那么当你跨过这道「书写质感」的门槛，那么接下来你将会拥抱的就是所有 iPad 记笔记的优势。</p>
-
-<p><strong>内容多样。</strong>iPad 目前主流笔记软件中，包含着非常丰富的笔记功能。</p>
-
-<p>首先在「笔」本身的选择上就选择多样。你可以选择不同粗细、笔迹、颜色的笔来针对笔记的不同内容。</p>
-
-<p>这一点对于一些需要绘图的学科来说可以说非常重要，比如李书琪同学因为医学专业，需要绘制很多人体图来进行说明和记忆，此时电子笔记可以变化为非常丰富的绘画工具。</p>
-
-<p>而如果你此时想要通过传统笔记来实现这一点，你还需要配合着非常多的绘画工具才行。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122243.jpg" alt="img"/>李书琪笔记作品</p>
-
-<p>如果你和我一样是一个手残，画的不好看，那么你就更应该使用 iPad 记笔记。因为iPad 记笔记可以允许你直接插入图片，所以你可以直接拍下对应的图，直接插在笔记中所需要的位置即可。</p>
-
-<p>当然，我们记笔记终究是为了看，那么数字笔记的阅读体验也将会对传统笔记来说有着非常高的效率。</p>
-
-<p><strong>轻便是最明显的感受。</strong>随着日积月累，我们的笔记越来越厚，无论什么专业，几本大本子肯定是少不了，所以这就要求我们复习的时候要携带非常厚重的内容。</p>
-
-<p>有的时候，少带几本，看的时候需要会是一件很恼人的事情，但是 iPad 的存储容量是几乎没有上限的，按照目前 iPad 的容量选择，你甚至可以带上「一车笔记」。而且每次打开，就是所有的笔记供你选择。</p>
-
-<p><strong>检索高效是核心。</strong>当笔记越来越多的时候，如何找到自己想要的知识点就很重要。而目前几乎所有的主流笔记软件，都已经完全支持了所谓的「笔记搜索」。仅仅是通过搜索对应的关键字，就可以快速地找到自己想要的内容。</p>
-
-<p><strong>可修改是另一个隐含要素。</strong>因为电子笔记是数字化的，所以就意味着你可以随时修改。随着我们的知识水平提高，笔记中就会出现很多「小儿科」的内容，此时我们就可以在此基础上制作一个「精简版」。</p>
-
-<p>iPad 记笔记可以直接删减原有的内容，而在传统的纸质笔记上，就只有「从来一遍」。</p>
-
-<p>或多或少，我们可能都经历过丢笔记的事。这是一件非常痛心的事，因为这意味着白费了我们的心血和精力。但是因为数字笔记都可以实现云备份，所以就算是设备丢了，但是笔记都会在。</p>
-
-<p>所以，不管怎么看，iPad 记笔记相对传统笔记都有着绝对的优势。只要你能够在一开始尝试适应，那么收获的将会是一种更为「现代」的记笔记方式。</p>
-
-<h2 id="toc_2">「大本」和「小本」</h2>
-
-<p>所以现在你可能决定下定决心，开始准备使用 iPad 记笔记。但是你还没有一台 iPad，那么这一部分就是来说明不同 iPad 记笔记的体验。</p>
-
-<p>目前，有四套 iPad 笔记方式可以选择。</p>
-
-<h3 id="toc_3">iPad（第七代） + Apple Pencil 第一代</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122244.jpg" alt="img"/></p>
-
-<p>这是「最具有性价比」的笔记选择。目前 iPad （第七代）的入门价格仅仅是 2499 元。那么配合上一根 Apple Pencil 第一代的价格，也就是 3000 元刚出头。</p>
-
-<p>这一套组合基本上可以实现 iPad 系列 70% 的笔记记录体验。不足的地方在于，由于 iPad 10.2 寸是非贴合的屏幕，并且屏幕的刷新率不高，所以在笔记的记录体验上，会和更高级的 iPad Pro 有着肉眼可见的差距。但是话说回来，它所需要的价格基本上是 iPad Pro 的一半不到，所以这也是为什么我说性价比很高的原因。</p>
-
-<p>10.2 寸本身也属于「中号笔记本」。可以保证一页笔记中，就有着充足的信息量。也可以在书写过程中，降低翻页的频率从而保证跟上课堂节奏。</p>
-
-<h3 id="toc_4">iPad Air + Apple Pencil 第一代</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122245.jpg" alt="img"/></p>
-
-<p>这是「更护眼」的笔记选择。相对于 iPad （第七代）来说，iPad Air 核心上当然是芯片的升级，来到了 A12 。不过对于记笔记来说，更关键的是屏幕本身的升级。虽然，在屏幕本身的大小、分辨率上和 iPad 第七代区别不大。但是 iPad Air 具备抗反射涂层，这意味着在有复杂光线的环境中，iPad Air 本身反光情况会大大降低，这样可以避免在记笔记中反光刺眼的情况。</p>
-
-<p>而另一个关键是，iPad Air 是配备了原彩显示。这项功能可以让 iPad Air 的屏幕随着环境色温的变化而进行冷暖变化，这样可以「更护眼」。再配上全贴合屏幕更加真实的书写体验，所以这是为什么我说 iPad Air 是更加护眼的选择。</p>
-
-<p>尤其是很多家长，可能会非常在乎孩子的视力，那么相对来说，iPad Air 就会更适合一些。</p>
-
-<h3 id="toc_5">iPad Pro + Apple Pencil 第二代</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122246.jpg" alt="img"/></p>
-
-<p>这是「最好」的笔记选择。</p>
-
-<p>iPad 一直都是平板的标杆，那么 iPad Pro 是标杆中的标杆。所以这也就意味着 iPad Pro 拥有最好的笔记记录体验。这种最好渗透在各个方面，比如 ProMotion 自适应刷新率带来的跟手感、比如顶级的 LCD 屏幕带来的细腻度、比如第二代 Apple Pencil 磁吸设计的自由方便。</p>
-
-<p>如果你是一个对预算不敏感的用户，直接上 iPad Pro，就可以获得最好的 iPad 记笔记体验。在尺寸选择上，对于学生来说我更推荐 11 寸。因为 11 寸的手感轻便，可以放进大多数的背包中。相对来说 12.9 寸就会显得非常笨重。使用起来，需要一定的空间，这对于大学教室相对拥挤的空间来说，是个不小的挑战。</p>
-
-<h3 id="toc_6">iPad mini + Apple Pencil 第一代</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122247.jpg" alt="img"/></p>
-
-<p>这是一个针对「特殊需求」的笔记套装选择。首先需要承认的是，iPad mini 的尺寸只有 7.9 英寸，所以它的笔记记录体验会有着很明显的「局限性」。如果你经常严肃的记录一些信息量非常丰富的笔记就会显得不适合。但是如果平时记笔记的需求是一个「记事本」，那么 iPad mini 是非常合适的。我经常跟一些采访，就更愿意使用 iPad mini 记笔记。因为 iPad mini 更加小巧，没有攻击性。而且对于被采访人对话的简要信息量来说，「纸张」大小也够用。</p>
-
-<p>最后单独说说 Apple Pencil 。</p>
-
-<p>目前 Apple Pencil 已经出了两代，体验最好的自然是 Apple Pencil 第二代。因为磁吸设计基本上已经把充电过程省略不说，还方便收纳。</p>
-
-<p>但是需要说明的是，Apple Pencil 第二代只可以在 iPad Pro 上使用，其它任何型号的 iPad 都不可以使用。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122248.jpg" alt="img"/></p>
-
-<p>对了，第一代 Apple Pencil 有两个小细节很多人可能不知道。一个是 Apple Pencil 是有自己的充电转换接口的，并不一定要插在 iPad 上充电，那只是用来应急的；另一个是 Apple Pencil 第一代的笔盒里是有备用的笔尖的，别丢。</p>
-
-<p>总的来说，目前基本上各个预算区间，都可以选到不错的 iPad 记笔记组合，但考虑到 iPad 记笔记都是学生群体为主，还是希望大家量力而行，在自己的家庭经济范围内购买产品。</p>
-
-<h2 id="toc_7">双雄对决</h2>
-
-<p>在选择了合适的硬件以后，我们接下来就需要选择合适的软件。对于 iPad 来说，软件生态才是它的核心。</p>
-
-<p>我其实市面上主流的不同平台笔记设备都有使用过，比如和 iPad 对标的 Surface Pro 系列，或者是华为的 MatePad Pro 系列。</p>
-
-<p>坦率地说，硬件上也许还可以勉强一战，但是到了软件上，则是完全另一回事。</p>
-
-<p>这才是为什么 iPad 成为主流数字笔记的真正原因。</p>
-
-<p>目前，iPad 上记笔记已经是「双雄逐鹿」的局面，甚至你可能还没有 iPad，但是已经听过它们的大名，也就是 GoodNotes 5 和 Notability。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122249.jpg" alt="img"/>（GoodNotes 5）</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122250.png" alt="img"/>（Notability）</p>
-
-<p>这两款软件，基本上涵盖了市面上电子笔记的所有功能。而且二者本身的功能重合度也很高，所以其实选择这其中任何一款软件都可以成为你长久使用的笔记工具。</p>
-
-<p>你现在在 B 站搜索这两款软件，就会有非常多的详细对比视频和使用技巧，可见这两款软件是有多受欢迎。</p>
-
-<p>这一部分，我将会从它们之间的差异性入手，让你可以了解到哪些功能更适合自己，帮助你在二者之间做出自己的选择。</p>
-
-<p>当然，你可能会说，我有钱任性，两个软件我都买。其实我非常不建议你这样做，因为这样每次记笔记你都会面临着「用哪一个」的选择，反而耽误时间。所以还不如强迫自己选择一个后，深入地使用，积累更多的使用经验。</p>
-
-<p>在具体比较之前，需要说明的是，这里的比较只是展示差异，并不是谁会比谁更好。</p>
-
-<p>而所有的比较都是二者相对，其实两款软件的本身体验是绝对的素质够用。并不是某一个点不好，而是相对另一个稍弱，仅此而已。</p>
-
-<h3 id="toc_8">笔记管理</h3>
-
-<p>在笔记管理方面，GoodNotes 5 更加相对科学。因为 GoodNotes 5 基本上沿用的就是 iPad 本身的文件管理方式。</p>
-
-<p>在打开的界面就是「文件夹」，相对的文件夹里又可以是文件夹。所以你完全可以根据自己的喜好，习惯对自己的笔记进行科学的管理，比如分学科、分章节，这样使用起来非常的清晰明了。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122251.jpg" alt="img"/>（左：GoodNotes 5 右：Notability）</p>
-
-<p>但是 Notability 采用的是层级的展现方式，相比较下来，没有 GoodNotes 5 直观。无论是在分类还是在查找上，都显得有一些笨拙。</p>
-
-<p>而且从笔记本的自定义角度来说，GoodNotes 5 不仅自带的模版更加耐看，而且还提供更加丰富的自定义形式，所以如果你是一个在乎颜值的人，这一点需要你关注。</p>
-
-<h3 id="toc_9">书写体验</h3>
-
-<p>这里就有一些见仁见智了。</p>
-
-<p>比如我一直认为 GoodNotes 的写字更加好看，其实好长一段时间里我都是这么认为的。</p>
-
-<p>从我自己的体验上来看，似乎 GoodNotes 是针对用户的笔迹进行优化的，所以甚至是让我有了一种比我在纸上写字还好看的错觉。</p>
-
-<p>但是直到有一天有一个人跟我说，他认为 Notability 写字更好看，才意识到可能并不是所有人都这么认为。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122252.jpg" alt="img"/>（GoodNotes 5 钢笔笔迹）</p>
-
-<p>从我自己的体验上来看，GoodNotes 5 的钢笔体验写字最舒服，写出来的字笔画更自然。但是 Notability 写字更加顺滑，所以很多时候会略显飘逸。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122253.jpg" alt="img"/>（Notability 二级点选菜单）</p>
-
-<p>书写选择上，二者都提供了非常丰富的书写样式、粗细、颜色等等。</p>
-
-<p>但是在切换不同的笔迹时 GoodNotes 5 大部分操作在一级菜单中就可以切换，而 Notability 需要点击切换。</p>
-
-<p>相对来说，如果你是一个笔记绘画需求更多的，那无疑使用 GoodNotes 是更好的选择。</p>
-
-<h3 id="toc_10">文本转换</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122254.png" alt="img"/></p>
-
-<p>两款软件都提供了文本转换功能，即把你的手写笔迹直接转换为文本。</p>
-
-<p>在这个功能上 Notability 有着明显的优势。因为 Notability 的文本转换不仅仅是正确率更高，而且转化以后可以直接作为结果使用在笔记中。</p>
-
-<p>而对于 GoodNotes ，虽然可以转换为文字，但是转换以后想要插入到文本中，还需要拷贝再粘贴。</p>
-
-<h3 id="toc_11">录音体验</h3>
-
-<p>Notability 提供了很好的录音功能。这项功能的喜爱对于很多学生可能是习惯因人而异，但是对于记者来说可以说是一定了。</p>
-
-<p>有录音就可以保证后期报道的准确性，而且 Notability 还提供了一个「笔记录音回放」。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122255.jpg" alt="img"/></p>
-
-<p>可以点击任意一个笔记，回放当时录制的对应段落。这在后期写稿件的时候，非常高效。</p>
-
-<p>当然，对于学生来说，这一点对于一些说话飞快，记笔记只能记录一个大概的老师来说也是一个刚需功能。</p>
-
-<p>而相对 GoodNotes 5 来说，录音功能基本上就是缺失，所以这一点也是两款软件的最大区别，如果你对于录音有着明确需求，那么选择 Notability 就完全没错。</p>
-
-<h3 id="toc_12">文件插入</h3>
-
-<p>从文件插入的效率来说，GoodNotes 更好更方便。因为点击插入的时候，直接会在第一层级就显示一些文件。但是对于 Notability 是需要二次点击来实现的。</p>
-
-<p>话又说回来，两者都可以通过分屏、或者悬浮相册来直接拖入文件。但是相对的，Notability 支持的文件格式更多一些，比如 Gif 在 Notability 是可以自由的播放的，但是 GoodNotes 是不支持的。</p>
-
-<p>在插入 PDF 方面，我认为 GoodNotes 远好于 Notability 。因为插入不仅方便，而且批注清晰明了，再配合文件夹管理，更系统。</p>
-
-<p>所以总结来看：</p>
-
-<p>GoodNotes 是一款高颜值、追求书写体验、阅读体验的笔记。</p>
-
-<p>Notability 是一款功能丰富、有录音支持为核心的笔记。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122256.jpeg" alt="img"/></p>
-
-<p>我自己因为更看重书写体验，尤其是可以让我觉得我的字变得好看和工整，所以基本上都是使用 GoodNotes 居多。</p>
-
-<h2 id="toc_13">技巧和心得</h2>
-
-<h3 id="toc_14">设备之间的云同步</h3>
-
-<p>这也是电子笔记一个非常重要的优势。目前无论是 GoodNotes 5 还是 Notability 都可以云同步笔记。这样做有两个好处，一个是你的笔记永远不会丢。</p>
-
-<p>如果你是一个学科非常复杂的学生，尤其是进入大学以后，那么你会发现如果一个学科一个笔记本，需要的笔记本数量将会非常多。</p>
-
-<p>而且就算你能都配好，翻找起来也非常麻烦，经常是弄不好就丢掉了一个笔记。但是使用云同步以后，就可以保证自己的笔记永远不会丢。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122257.jpeg" alt="img"/></p>
-
-<p>大部分笔记软件都是可以跨平台的。尤其是 GoodNotes 5 这一款软件，它不仅仅是 iOS 设备，包括甚至是 macOS 都有对应的软件。</p>
-
-<p>这样一来，笔记在 iPad 做好以后，你可以使用不同的设备随时查看，例如可以在碎片时间上使用 iPhone 直接阅读。这对一些需要随时记忆的学科有很大的帮助。</p>
-
-<p>而 GoodNotes 5 还支持导入 PDF，所以很多时候我们可以直接把对应的课件直接导入使用。</p>
-
-<h3 id="toc_15">利用好分屏功能</h3>
-
-<p>从 iOS 13 开始 iPad 已经有了一个非常系统的分屏系统。这些分屏操作虽然看起来相对复杂，但是只要尝试几次就可以尽数掌握。</p>
-
-<p>而且这两款笔记软件都对 Apple 的生态支持非常友好，只要系统层级上有什么好的功能就会立刻跟进，比如 GoodNotes 5 甚至是直接支持在软件内直接分屏不同的笔记，这样可以非常方便的让自己对照使用。</p>
-
-<p>分屏的方式也非常简单，只要按住对应的软件向一侧滑动即可。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122258.jpg" alt="img"/></p>
-
-<p>除了分屏以外，还可以使用悬浮窗口。也就是可以让某一个软件，像是一个 iPhone 一样直接悬浮在界面上。</p>
-
-<p>之所以使用 iPhone 这个词，不仅仅是因为显示面积大小，还有操作方式。因为你完全可以把这个窗口理解为一个 iPhone 的多任务方式。</p>
-
-<p>你可以直接多个软件一起堆叠，然后使用下面的触控栏进行切换，向上滑动还可以直接进入多任务直接选择的界面，非常方便。这种悬浮窗口对于「即时」需要的软件很有用。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122259.jpeg" alt="img"/></p>
-
-<p>比如我们想要向笔记内导入一些文件或者是照片，就可以直接把「文件」应用或者是「照片」应用直接悬浮在上面，直接在使用拖拽即可。</p>
-
-<h3 id="toc_16">使用套索工具</h3>
-
-<p>套索工具也是一个两款软件中 ，都具有并且使用频率很高的软件。套索工具最大的用处就是「重构笔记」。当我们在课堂上记录笔记，只能按照老师讲解的时间线。</p>
-
-<p>但是可能在课后总结的时候，你需要对这些知识进行梳理和归纳。此时只需要使用套索工具，就可以自由的让不同区域的笔记自由移动。当然，这对一些对排版有要求的用户也是个关键功能。</p>
-
-<h3 id="toc_17">利用模版和捷径</h3>
-
-<p>对于不同学科有时候需要的笔记是不同的，最简单的笔记的线条就有着不同的用途。所以你可以实现制作好对应的模版，这样在使用的时候不需要再花时间进行自定义。</p>
-
-<p>不仅如此，如果我们可以配合上一个捷径功能，例如设置对应的时间打开固定的笔记本。这样在每次对应课程开始的时候就可以直接进入记笔记的状态。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122300.png" alt="img"/></p>
-
-<h3 id="toc_18">最快的记录方式</h3>
-
-<p>如果遇到相对突发的笔记需求，iPad 记笔记还提供了一个「隐藏杀手」功能，这就是双击屏幕直接进入备忘录笔记页面。其实 Apple 本身的备忘录就已经是一个很强大而且免费的记笔记软件了。只不过功能相对的没有那么丰富。</p>
-
-<p>但是如果遇到紧急情况，需要立刻开始记笔记，可以直接使用 Apple Pencil 双击屏幕立刻开始，就省去了解锁点击软件的麻烦。但此功能需要设置，在下面的菜单中：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122301.png" alt="img"/></p>
-
-<h3 id="toc_19">保存网页资料</h3>
-
-<p>如果你在网页中遇到很多非常有用的知识，其实截图保存是很傻的一种方式。在 Safari 中，其实可以直接把网页直接整个保存为一个 PDF 文件，然后这个 PDF 文件就可以导入到笔记中进行学习。</p>
-
-<p>一般来说，建议可以在 GoodNotes 5 中给每一个学科都设立一个文件夹。然后文件夹里再新建两个文件夹，一个是专门记笔记，一个是专门收集这些资料。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122302.png" alt="img"/></p>
-
-<h2 id="toc_20">利用缩略图</h2>
-
-<p>在 GoodNotes 5 中，我们可以对于完成的笔记进行充分的整理。这其中缩略图有着非常重要的作用。</p>
-
-<p>首先我们可以通过直接点击界面中的按钮进入缩略图界面，缩略图界面可以让我们从全局掌控笔记内容。并且在这个页面还有着非常丰富的功能选择。</p>
-
-<p>例如我们可以使用选择不同的缩略图种类，比如可以直接只显示收藏夹。我们在记笔记的时候，对于重要知识点可以进行收藏，这样以后可以直接在收藏夹中直接看到这些重点知识。</p>
-
-<p>或者也可以直接观看大纲，对于一些有层级的文件来说好用。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122303.png" alt="img"/></p>
-
-<p>当然，我们还可以直接从全局的角度「操作笔记」，比如移动位置，或者是在不同页面的前后直接插入新的笔记丰富内容。</p>
-
-<h3 id="toc_21">绘制形状</h3>
-
-<p>绘制不同的形状对于一些理科科目来说可以说很刚需。最直接的就是点击软件里的对应形状标志。</p>
-
-<p>但是也有快捷的方式，两款软件只要在绘制以后停留一段时间就可以立刻把刚才的绘制变为「形状」，比如把你绘制的歪歪扭扭的线变为直线。</p>
-
-<h3 id="toc_22">真实需求：作答试卷</h3>
-
-<p>如开头所说，很多学生会获得一些电子作业。有的直接是 PDF 文档，有的可能是 Word 文档。</p>
-
-<p>但是不管什么文档，都可以使用对应的打开软件制作为 PDF 文件，然后把 PDF 文档直接导入到 GoodNotes 5 之中，直接可以在对应的空白处作答。</p>
-
-<p>作答以后，直接再用 PDF 的形式导出然后分享给老师即可。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122304.gif" alt="img"/></p>
-
-<p>这里特别分享，家长可以使用限制模式让孩子在使用 iPad 做作业的界面时只能在作业界面。</p>
-
-<p>这个功能可以在辅助功能中打开，这对一些自控能力很差的孩子来说，很有帮助。有助于集中他们的注意力。</p>
-
-<h3 id="toc_23">特殊需求：设置用笔姿势</h3>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122225.jpeg" alt="img"/></p>
-
-<p>每个人写字的姿势是千变万化的，为了更好的捕捉你的书写，在 GoodNotes 5 中是可以设置不同的手写姿势的。</p>
-
-<p>所以即使是「左手」写字，斜着写字都可以有着对应的选择，虽然这是一个大众忽略的需求，但是有就意味着对那些小众用户是个「关键功能」。</p>
-
-<h3 id="toc_24">使用免打扰和飞行模式</h3>
-
-<p>很多人认为使用 iPad 记笔记很「危险」。因为 iPad 本身是一个太适合「娱乐」的工具，看电影、玩游戏都是它的强项，所以为了避免干扰，如果是在使用 iPad 学习时，我一般都会直接打开飞行模式或者是免打扰。</p>
-
-<p>如果你需要不断的查资料，那么飞行模式可能会断网。但是免打扰模式，最好是一定打开，这样就可以屏蔽掉所有乱七八糟的通知。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200509122217.jpeg" alt="img"/></p>
-
-<p>不过话说回来，说 iPad 记笔记容易分心的人，好像他们在记笔记的时候没有刷手机一样。毕竟，还是人本身的自控力更重要。</p>
-
-<p>归根到底，iPad 记笔记是一种学习的工具，不要因为过于注重工具而本末倒置。尤其是我经常碰到一些人买一个软件都纠结几天，而这两款软件的差价也才十几块而已。</p>
-
-<p>当然，没有 iPad ，一样可以学好。但是有 iPad，是学的更方便，毕竟人生苦短，多出来的时间，可以做更多的事。</p>
-
-<h2 id="toc_25">尾声</h2>
-
-<p>在以前，我一直认为 iPad 记笔记仅仅是某一类人的选择。但是随着疫情的出现，我们惊讶地发现，当我们的教育、工作需要转为线上时，我们传统的「纸笔」已经完全无法运转。</p>
-
-<p>尤其是当我看到家长用保鲜膜代替纸张覆盖在 iPad 上写作业作为一个搞笑视频在社交网络发酵时，我却笑不出声。因为其实今天已经有了非常好的数字笔记体验，而很多人却因为「偏见」的原因无法接受，导致方法不够普及。</p>
-
-<p>所以，如果从这个角度来看，iPad 系列作为纸笔的现代化演绎，将会和传统 PC 一样，成为人类未来工具的重要一环。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025631069.html">
-                
-                  <h1>Zotero 使用方法</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>在官方网站中，有一篇文章专门替用户剖析了 <a href="https://www.zotero.org/why">为什么要使用 Zotero</a>。以下是我把其当做自己主力文献管理的几个主要原因：</p>
-
-<ul>
-<li>软件本身完全免费并且开源，不存在盗版问题</li>
-<li>注册后本身只包括 300M 空间同步，但支持 WebDAV 同步，例如 Dropbox 和坚果云等</li>
-<li>官方的反馈论坛比较活跃，有问题可以快速得到反馈</li>
-<li>从网站和期刊文章等提取保存出版物数据检索</li>
-<li>拖入 PDF 的出版物数据准确率高</li>
-<li>可以和 Word，LibreOffice 集成，方便文献进一步的使用管理</li>
-<li>强大的第三方插件系统</li>
-<li>每个条目下可以添加任意数量和格式的附件</li>
-</ul>
-
-<p>当然，使用一个工具首先要了解其上限和下限，Zotero 同样有着比较明显的短板：</p>
-
-<ul>
-<li>因为强大所以上手时略显复杂</li>
-<li>并不是一个完全基于 Web 的工具</li>
-<li>没有内置的 PDF 阅读工具</li>
-<li>没有适配于 iOS 和 Android 的官方应用程序</li>
-</ul>
-
-<h2 id="toc_0">Zotero 的使用和学习路径</h2>
-
-<p>最权威和最新的学习资料一定是 <a href="https://www.zotero.org/support/">官方文档</a>。目前有针对 Zotero 4 旧版本的 <a href="https://www.zotero.org/support/zh/start">中文说明</a>，如果英文吃力也可以参考。接下来我将按照下图的顺序介绍 Zotero 的使用和学习路径。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201615.png" alt="img"/>使用和学习路径</p>
-
-<h3 id="toc_1">添加内容到文献库</h3>
-
-<h4 id="toc_2"><strong>使用浏览器插件</strong></h4>
-
-<p>不同于一些工具，Zotero 的 <a href="https://www.zotero.org/download/">浏览器插件</a> 称得上可以「保存一切」。当所在的网页呈现出不同的内容时，Zotero 的插件会呈现出不同的图标。例如，如果打开的是 PDF，那么图标就会变成 PDF。</p>
-
-<p>如果一个网页内有多个文献元数据，可以检测到并同时保存多篇文章。即便是一篇博客，也可以直接保存。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201616.png" alt="img"/>针对博客的保存效果</p>
-
-<p><a href="https://raw.githubusercontent.com/fei0810/image-host/master/img/20190914163848.png"><br/>
-</a></p>
-
-<p>下图为直接保存博客网页后的效果，可以看到它也会抓取部分内容作为摘要进行显示。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201617.png" alt="img"/>博客保存详情</p>
-
-<p>如果你好奇 Zotero 支持导入的内容包括什么，可以参考下面这个截图。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201618.png" alt="img"/>支持保存内容</p>
-
-<h4 id="toc_3">使用各种标识符在应用内添加</h4>
-
-<p>对于添加文献或者书籍，如果我们知道了它对应的 ISBN，DOI 或 PubMed ID，就可以快速将项目通过标识符添加到库中。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201619.png" alt="img"/>利用标识符添加</p>
-
-<p>单击 Zotero 窗格中间列顶部的「按标识符添加项目」按钮，输入标识符后按 Enter。如果要一次输入多个标识符，在输入第一个标识符后按 Shift + Enter会进入多行模式，随后输入其余标识符（每行一个），并通过 Enter 换行。输入完成符后，再按 Shift + Enter 即可一次导入所有项目。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201620.png" alt="img"/>一次输入多个标识符</p>
-
-<h4 id="toc_4">本地 PDF 文件和各种附件直接拖入应用</h4>
-
-<p>如果你有已经下载好的 PDF 版本文献，只要直接拖入到应用中即可，Zotero 会自动识别 PDF 文档中的元数据。</p>
-
-<p>和大多数文献管理软件相比，Zotero 有一个非常大的优势就是支持将任意格式的附件添加到某个条目中，例如这里的附件可以是 Excel 格式的电子表格，可以是文献中提到的某一个网页地址，也可以是你自己和文献主题相关的电子实验记录，甚至你还可以将文章中提到的相关代码打包为压缩文件后进行添加。</p>
-
-<p>结合 WebDAV 的同步功能，我们还可以将这些相关资料在多个设备间进行同步，这样就极大的方便了我们对文献相关的各种资料进行整理。</p>
-
-<h4 id="toc_5">从其它工具导入</h4>
-
-<p>Zotero 支持从多种工具的数据导入，且支持的导入格式非常丰富。例如 Mendeley 的数据库，Endnote 的 XML 格式，以及常见的 RDF 和 RIS 格式等等。更多格式见下图截图。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201621.png" alt="img"/>数据库支持格式</p>
-
-<h4 id="toc_6">通过 feed 进行订阅</h4>
-
-<p>如果你是一个喜欢追文献的人，肯定有各种各样自己的方法，例如通过邮件订阅或者 RSS 等，而 Zotero 本身也为我们提供了一种非常方便的方法。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201622.png" alt="img"/>新建订阅</p>
-
-<p>点击 URL 后可以将一些杂志主页提供的 URL 地址直接添加到这里，并且进行更多高级设置，比如更新订阅时间和删除时间等等。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201623.png" alt="img"/>高级设置选项</p>
-
-<h3 id="toc_7">文献和笔记管理</h3>
-
-<h4 id="toc_8">集合与标签</h4>
-
-<p>集合可以理解为支持多个层级的文件夹，如下图在一个合集中新建一个子集。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201624.png" alt="img"/>新建分类</p>
-
-<p>除了按照目录分类以外，可以为每个文献添加若干个标签。这里建议标签的使用维度不和集合重合。例如，我有个一个叫做「lncRNA」的目录集合，就不应该再建立一个「lncRNA」的标签，这时的标签可以考虑应用维度或者重要性维度。如使用 P1、P2 和 P3 标注文献的重要性，使用「中期」「答辩」等标注一个文献的用途。</p>
-
-<p>每个标签可以设置对应颜色，这个色块也会自动显示在每一个条目的开头，方便查看，一目了然。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201625.png" alt="img"/></p>
-
-<h4 id="toc_9">搜索</h4>
-
-<p>在 Zotero 中，快速搜索支持如下图所示的三种粒度。需要说明的是，如果 PDF 文档已经建立过，通过「所有内容」进行搜索时是可以搜索到文档文本的。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201626.png" alt="img"/>三种搜索粒度</p>
-
-<p>除了快速搜索以外，Zotero 中还有一种高级搜索方法。高级搜索提供比快速搜索更多更精细的筛选条件，并允许保存搜索内容方便下次使用。</p>
-
-<p>运行高级搜索需要打开「高级搜索」窗口，单击中心窗格顶部的放大镜图标，然后就会进入高级搜索界面，搜索支持逻辑判断且可搜索的条目也非常之多。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201627.png" alt="img"/>高级搜索</p>
-
-<h4 id="toc_10">排序和关联</h4>
-
-<p>每个集合都支持显示若干需要的内容并且按照某种方式进行排序，且支持二次排序。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201628.png" alt="img"/>指定二次排序</p>
-
-<p>另外，不同的文献之间、文献和笔记之间都可以进行关联。我们可以方便地将关联性强的内容结合到一起。</p>
-
-<h4 id="toc_11">笔记</h4>
-
-<p>每一篇文献支持插入多个笔记。笔记支持的格式内容也非常丰富，例如引用和插入链接以及添加不同层级的标题都没有问题，而且笔记还可以和多篇文献进行关联。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201553.png" alt="img"/></p>
-
-<p>默认笔记本事是富文本编辑器，不支持 markdown 语法。但因为 Zotero 的插件和 Firefox 的插件格式相同，我们只需要把 Firefox 的 markdown here 插件稍加修改打包就可以导入 Zotero 中，从而使笔记支持 markdown。我已经将插件打包好，你可以 <a href="https://github.com/fei0810/markdownhere4zotero">点击链接</a>下载安装。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201629.gif" alt="img"/>markdown 效果</p>
-
-<h3 id="toc_12">生成引文和报告</h3>
-
-<p>无论使用 Endnote 还是使用 Mendeley 抑或使用 Zotero，一个非常重要的需求就是在平时写各种论文的过程中插入参考文献。Zotero 可以从哪些方便满足你的需求呢？</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201630.gif" alt="img"/>引用设置页面</p>
-
-<h4 id="toc_13">快速复制</h4>
-
-<p>如果你只希望在自己的博客或者笔记中插入一些文章而无需遵守严格的引用要求。那么 Zotero 本身提供了非常方便的快速复制方法。</p>
-
-<p>在设置中可以设置复制时需要的引文格式，然后只需要拖拽即可，非常自由。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201631.png" alt="img"/>单篇拖拽引用效果</p>
-
-<h4 id="toc_14">多篇文献右键多种导出</h4>
-
-<p>当你同时选择多篇文献时，也可以通过鼠标右键选择你需要导出的形式。例如 RTF 或者 HTML，当然，你也可以选择直接复制然后一步粘贴到位。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201632.png" alt="img"/>多篇拖拽引用效果</p>
-
-<h4 id="toc_15">在 Microsoft Word 中使用插件</h4>
-
-<p>通常安装软件的时候就会提示自动安装 Word 插件，如果因为各种原因前期没有安装，可以在设置的引用中进行安装，安装后重启 Word 即可。</p>
-
-<p>安装好之后 Word 中就会出现如下 Zotero 插件：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201633.gif" alt="img"/>word插件</p>
-
-<p>Word 中的 Zotero 选项卡包含以下内容：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201634.png" alt="img"/>Zetero 选项卡</p>
-
-<p>在正式插入引文之间，需要设置引文的格式和语言，通过管理样式可以轻松找到海量的引文格式。如果需要显示中文，则可以在语言选项中选择中文。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201635.png" alt="img"/>引用格式设置</p>
-
-<p>在需要添加引文的位置点击添加选项</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201636.png" alt="img"/>调出引用搜索</p>
-
-<p>在出现的搜索框中可以使用各种方式来快速搜索自己需要插入的文献，例如作者姓名。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201637.png" alt="img"/>使用作者姓名搜索</p>
-
-<p>如果需要在一个位置内引用多篇文献，可以一次选择自己多篇想添加的内容统一添加。</p>
-
-<p><img src="https://cdn.sspai.com/2019/09/20/e5b6576883552f867bd59be6c080a49e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt="img"/>多篇插入</p>
-
-<p>所有文献都引用好之后，直接点击书目即可插入引文。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201638.png" alt="img"/></p>
-
-<h4 id="toc_16">生成报告</h4>
-
-<p>除了插入参考引文之外，Zotero 还给出了另一种导出参考文献的方式——生成报告。</p>
-
-<p>报告是简单的 HTML 页面，概述了所选项目的项目元数据，注释和附件。可以打印它们，也可以将它们发布到网上并通过电子邮件发送。</p>
-
-<p>创建报告可以右键单击中心窗格中的项目或选项，然后选择「由所选条目生成报告…」，也可以右键单击左列中的集合，然后选择「从集合生成报告」。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201639.png" alt="img"/></p>
-
-<p><a href="https://github.com/retorquere/zotero-report-customizer/releases">第三方工具插件</a> 可以帮助你更好地过滤报告内容，例如对报告进行排序或者增删条目等。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201640.png" alt="img"/>导出效果</p>
-
-<h3 id="toc_17">备份和协作</h3>
-
-<h4 id="toc_18">同步</h4>
-
-<p>Zotero 本身支持 300M 免费的存储空间。这对很多人都是不够的，如果你不想购买官方的存储空间可以使用 WebDAV 服务。这里就不做展开介绍了，以国内使用比较方便的「坚果云」为例，官方给了一个比较详细的配置方法教程：<a href="http://help.jianguoyun.com/?p=3168">如何在 Zotero 中设置 webdav 连接到坚果云</a>。</p>
-
-<h4 id="toc_19">协作</h4>
-
-<p>协作功能可能是很多人都忽略掉或者不知道的一个功能。Zotero 提供了相对完善的协作方式，这里做一些介绍。</p>
-
-<p>如果你想和实验室或者几个好用共享协作一个文献库，那么就可以创建一个私有库，需要去官网创建，方式如下。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201641.png" alt="img"/>官网创建小组</p>
-
-<p>随后还有一些具体的权限需要设置，例如什么人可以读，什么人可以编辑。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201642.png" alt="img"/>设置权限</p>
-
-<p>创建好之后，如果你的客户端已经登陆并且完成同步，将会在侧边栏出现一个新的群组。如下图所示。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201643.png" alt="img"/></p>
-
-<p>另外，在网页版的管理界面中可以进行成员邀请和删除。</p>
-
-<h3 id="toc_20">其它内容</h3>
-
-<h4 id="toc_21">插件推荐</h4>
-
-<p>插件系统是 Zotero 作为开源软件的独特优势，你可以通过 <a href="https://www.zotero.org/support/plugins">官方插件网站</a> 进行查看。我目前在用的几款插件如下图所示，推荐安装使用。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513201644.gif" alt="img"/>我的在用插件</p>
-
-<h4 id="toc_22">小技巧</h4>
-
-<ul>
-<li>当选择了一个项目时，可以通过按住 Option(Ctrl) 键突出显示包含此项目的所有集合，也就是知道这篇文献所在的分组</li>
-<li>在集合列表或项目列表中的键盘上按 +（加号）可以展开所有节点，按 -（减号）则可以折叠</li>
-<li>要查看所选库或集合中的项目数可以单击然后使用 Command-A(Ctrl-A) 全选，计数将显示在右侧</li>
-<li>若使用快速复制功能，在将项目拖放到文本文档时按住 Shift 键能实现插入引文而不是完整引用</li>
-<li>可以单击详细信息中的 DOI 和 URL 字段标签直接打开链接</li>
-</ul>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
+                    <span class="date">2020/03/18</span>
                     
           				   
                     
@@ -1903,31 +3522,31 @@ Undo--&gt;<strong>取消</strong>你上一步的操作Redo--&gt;<strong>復原</
 	      
 		      
 			      <li class="post">
-			        <a href="15998025630555.html">高效 PyCharm 使用技巧</a>
+			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025630642.html">群晖NAS安装配置typecho博客教程</a>
+			        <a href="15998025628475.html">Anaconda + VSCode 最详细教程</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025630684.html">Linux vim 编辑器的神级配置 vimrc</a>
+			        <a href="15838967255194.html">Docker 必备可视化工具 Portainer</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025630725.html">正则表达式工具 RegexBuddy 使用指南</a>
+			        <a href="15998025631446.html">Git 常用技巧 （高级用法）</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025630768.html">使用Docker搭建MySQL服务</a>
+			        <a href="15998025629044.html">Git版本管理完全指南（包含常见头疼错误解决方案）</a>
 			      </li>
 		     
 		  
