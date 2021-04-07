@@ -96,164 +96,1287 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15998025630909.html">
+                <a class="clearlink" href="16177589969562.html">
                 
-                  <h1>無損剪輯的軟件—LosslessCut 使用教程</h1>
+                  <h1>Python3 如何优雅地使用正则表达式（完整版）</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><strong>下載：（外網原址‧需翻牆可能）</strong></p>
+                        	<p>正则表达式介绍</p>
 
-<p><a href="https://www.videohelp.com/software/LosslessCut">https://www.videohelp.com/software/LosslessCut</a> <br/>
-可以看到以下畫面</p>
+<p>正则表达式（Regular expressions 也称为 REs，或 regexes 或 regex patterns）本质上是一个微小的且高度专业化的编程语言。它被嵌入到 Python 中，并通过 re 模块提供给程序猿使用。使用正则表达式，你需要指定一些规则来描述那些你希望匹配的字符串集合。这些字符串集合可能包含英语句子、 e-mail 地址、TeX 命令，或任何你想要的东东。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211647.jpg" alt="img"/></p>
+<p>正则表达式模式被编译成一系列的字节码，然后由一个 C 语言写的匹配引擎所执行。对于高级的使用，你可能需要更关注匹配引擎是如何执行给定的 RE，并通过一定的方式来编写 RE，以便产生一个可以运行得更快的字节码。本文暂不讲解优化的细节，因为这需要你对匹配引擎的内部机制有一个很好的理解。但本文的例子均是符合标准的正则表达式语法。</p>
 
-<p>進到去有4行藍字對不對？</p>
+<p><em>小甲鱼注释：Python 的正则表达式引擎是用 C 语言写的，所以效率是极高的。另，所谓的正则表达式，这里说的 RE，就是上文我们提到的“一些规则”。</em></p>
 
-<p>第一行：Windows 用戶下載</p>
+<p>正则表达式语言相对较小，并且受到限制，所以不是所有可能的字符串处理任务都可以使用正则表达式来完成。还有一些特殊的任务，可以使用正则表达式来完成，但是表达式会因此而变得非常复杂。在这种情况下，你可能通过自己编写 Python 代码来处理会更好些；尽管 Python 代码比一个精巧的正则表达式执行起来会慢一些，但可能会更容易理解。</p>
 
-<p>第二行：MAC 用戶下載</p>
+<p><em>小甲鱼注释：这可能是大家常说的“丑话说在前”吧，大家别管他，正则表达式非常优秀，她可以处理你 98.3% 的文本任务，一定要好好学哦~~~~~</em></p>
 
-<p>第三行：Linux用戶下載</p>
+<p>简单的模式</p>
 
-<p>第四行：免安裝版<strong>（Windows 用戶限定）</strong></p>
+<p>我们将从最简单的正则表达式学习开始。由于正则表达式常用于操作字符串的，因此我们从最常见的任务下手：字符匹配。</p>
 
-<p><strong>基本使用教學：</strong></p>
+<p>字符匹配</p>
 
-<p>​       該軟件沒有中文，不過影響不大，因為基本上不用看它的英文操作(<strong>注意</strong>：視頻檔案、路徑等名稱，不可有中文，建議純英文，不然有BUG)</p>
+<p>大多数字母和字符会匹配它们自身。举个例子，正则表达式 FishC 将完全匹配字符串 &quot;FishC&quot;。（你可以启用不区分大小写模式，这将使得 FishC 可以匹配 &quot;FISHC&quot; 或 &quot;fishc&quot;，我们会在后边讨论这个话题。）</p>
 
-<p><strong>1.打開LosslessCut.exe</strong></p>
+<p>当然这个规则也有例外。有少数特殊的字符我们称之为元字符（metacharacter），它们并不能匹配自身，它们定义了字符类、子组匹配和模式重复次数等。本文用很大的篇幅专门讨论了各种元字符及其作用。</p>
 
-<p><strong>2.把你的視頻以拉拖進去虛線以內的地方（如圖所示）/點擊file--&gt;open，然後抓你想要修改的檔案</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211701.jpg" alt="img"/></p>
+<p>下边是元字符的完整列表（我们将在后边逐一讲解）：</p>
 
-<p><strong>3.1  點擊進度條設定你影片開首</strong> <strong>（看我截圖箭嘴！）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211714.jpg" alt="img"/><br/>
-<strong>在進度條點一下你想那裡作片頭的地方</strong><br/>
-<strong>3.2  然後</strong><strong>確認</strong><strong>把它設定成片頭（看我截圖箭嘴！）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211720.jpg" alt="img"/>設定片頭後，再點擊<strong>「朝左邊的手指」，以</strong>確認把它設定成片頭<br/>
-<strong>4.1 再</strong><strong>點擊進度條設定片尾</strong> <strong>（看我截圖箭嘴！）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211728.jpg" alt="img"/>跟上面一樣，<strong>在進度條點一下你想那裡作片末的地方</strong><br/>
-<strong>4.2 然後</strong><strong>確認</strong><strong>把它設定成片末</strong> <strong>（看我截圖箭嘴！）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211735.jpg" alt="img"/><br/>
-設定片末後，再點擊<strong>「朝右邊的手指」，以</strong><strong>確認</strong><strong>把它設定成</strong><strong>片末</strong></p>
+<p>.  ^  $  *  +  ?  { }  [ ]  \  |  ( )</p>
 
-<p><strong>當你成功設定好影片開首和結尾，進度條應該是長這樣</strong> （有顏色的就是你保留下來的片段，灰色是你剪掉不要的）<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211742.jpg" alt="img"/></p>
+<p><em>小甲鱼注释：如果没有这些元字符，正则表达式就变得跟字符串的 find() 方法一样平庸了......</em></p>
 
-<p><strong>4.x 微調位置</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211750.jpg" alt="img"/><br/>
-在中間是不是看到兩個雙反方向的三角形？中間那個大的三角形是播放/暫停<br/>
-而<strong>左</strong>面那個三角形就是<strong>向前移動一幀格</strong>那<strong>右</strong>邊個三角形也很好理解，<strong>就是向後移動一幀格</strong><br/>
-<strong>記</strong><strong>得微調後，要再按多次手指頭確認你的開首/結尾</strong><br/>
-<strong>例子：</strong>你<strong>點選進度條、設定開首</strong><strong>後</strong>發覺想把時間更精準一些，假設是想向前多一點（例如由0:24秒移動到0:22秒）就點選<strong>左</strong>面那個三角形，直到最貼近你想的數值然後再按一下<strong>「朝左邊的手指」，確認你的開首位置</strong><br/>
-<strong>5.導出影片</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506211756.jpg" alt="img"/><br/>
-點擊右下角<strong>藍色的Export</strong>，即可提取，一般幾GB的檔案剪接，都是幾分鐘內的事情 （個人設備、Gpu：2060、CPU：8700、16gb RAM、Sata SSD）完成後的檔案會出現在你原本影片的資料夾內（不會取代原檔的，放心）</p>
+<p>我们先来看下方括号 [ ]，它们指定一个字符类用于存放你需要匹配的字符集合。可以单独列出需要匹配的字符，也可以通过两个字符和一个横杆 - 指定匹配的范围。例如 [abc] 会匹配字符 a，b 或 c；[a-c] 可以实现相同的功能。后者使用范围来表示与前者相同的字符集合。如果你想只匹配小写字母，你的 RE 可以写成 [a-z]。</p>
 
-<p><strong>进阶教程一、</strong><strong>將多條影片合併為一條影片（適合想節省空間和排版簡潔點的用家）</strong><br/>
-<strong>1.點擊軟件上方工具欄的</strong>  Tool--&gt;Merge file。<strong>或</strong> 者直接把你想要的影片以「拖拉」形式，拉進軟件虛線範圍區域內如下圖：<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212111.jpg" alt="img"/><br/>
-<strong>或</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212106.jpg" alt="img"/><br/>
-**2.調整你的影片載入順序 **  放好所需影片後會看到類似的畫面，因為我要整合三條影片，所以有三行，如果你整合兩條那就有兩行，如此類推<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212101.jpg" alt="img"/><br/>
-這裡透過點擊及拖動動條來決定載入順序，<strong>1代表最先、數字愈後代表愈後載入</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212057.jpg" alt="img"/><br/>
-那個<strong>Include all streams 不必理會</strong>（打勾跟未打似乎沒差，可能對某些影片有影響，不過他預設不打勾就不理會他好了）確認好排序後，點擊左邊的<strong>Merge！</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212051.jpg" alt="img"/><br/>
-<strong>即可生成影片，新的影片會出現在原影片同一個資料夾，同樣不會取代原檔的所以不用擔心</strong> P.S ：建議先把要整合的影片放在同一個資料夾內，方便查找剛生成的影片。<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212047.jpg" alt="img"/><br/>
-那個後面寫着<strong>merged</strong>的，就是生成的影片了，完成！<br/>
-<strong>3.如果我想剪接剛合成的影片怎麼辦？</strong> 把剛生成的影片放進LossLessCut裡進行剪接即可，接下來的操作跟我第一篇教程大同小異，請熟讀我第一篇教程即可，遇有問題歡迎在下面問我，（有時論壇的回帖通知有BUG我可能收不到通知而不知你找我，見我長時間沒有回覆就直接私訊我吧！）<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212042.jpg" alt="img"/></p>
+<p>需要注意的一点是：元字符在方括号中不会触发“特殊功能”，在字符类中，它们只匹配自身。例如 [akm\(] 会匹配任何字符 &#39;a&#39;，&#39;k&#39;，&#39;m&#39; 或 &#39;\)&#39;，&#39;\(&#39; 是一个元字符，但在方括号中它不表示特殊含义，它只匹配 &#39;\)&#39;字符本身。</p>
 
-<hr/>
+<p>你还可以匹配方括号中未列出的所有其他字符。做法是在类的开头添加一个脱字符号 ^ ，例如 [<sup>5]</sup> 会匹配除了 &#39;5&#39; 之外的任何字符。</p>
 
-<p><strong>进阶教程二、</strong>** 我想進行多段切割應該如何操作？**</p>
+<p>或许最重要的元字符当属反斜杠 \ 了。跟 Python 的字符串规则一样，如果在反斜杠后边紧跟着一个元字符，那么元字符的“特殊功能”也不会被触发。例如你需要匹配符号 [ 或 \，你可以在它们前面加上一个反斜杠，以消除它们的特殊功能：[，\。</p>
 
-<p><strong>1.</strong><strong>先選出第一段你想要的內容，如下圖（詳參上面教程）</strong><br/>
-具體說明：<strong>先</strong>在進度條上點擊你想<strong>開始</strong>的地方，再按一下<strong>朝左邊的手指以確認</strong>；<strong>然後</strong>在進度條點擊你想<strong>停止</strong>的地方，再按一下<strong>朝右邊的手指以確認</strong>。這樣你就成功剪取你想要的第一分段<strong>（這步看不懂證明你未看我的第一篇教程，第一篇教程是整個軟件核心，必須得懂！）</strong><br/>
-看到這個畫面代表你成功了第一步，（<strong>進度條有顏色的地方代表是你保留的</strong>，<strong>灰色「你會見到有垃圾桶的那段」代表你未選取將會丟棄的</strong>）<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212037.jpg" alt="img"/><br/>
-<strong>2. 重覆上一步的動作，以剪取下一段內容</strong> 在灰色部分如仍有你想要的內容，就如你上一步般剪取想要的部分。<br/>
-我完成第二分段時的長這樣 <strong>（可以見到進度條上有2個不同着色部分，代表你想保留的內容）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212032.jpg" alt="img"/></p>
+<p>反斜杠后边跟一些字符还可以表示特殊的意义，例如表示十进制数字，表示所有的字母或者表示非空白的字符集合。</p>
 
-<p><strong>最後我的完成品（我一共切割成4段，所以你會見到4截着色部分）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212121.jpg" alt="img"/><br/>
-<strong>注意：到了這一步後，有些功能必須注意！必須注意！必須注意！</strong><br/>
-<strong>（一）</strong><strong>問：如果我發現有些分段現在想不要了怎麼辦？</strong>答：在右邊欄有1234的框框是你的當前已剪內容，滑鼠左擊你不要的分段，然後按一下有「—」的圖示，即可進行移除。像這樣，我不要第二分段，確認點擊後，按一下有「—」的圖示<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212129.jpg" alt="img"/><br/>
-然後第二分段就會移除。<br/>
-<strong>（二）問：我想調整一下分段的排序，例如我想把3號分段改為1號分段</strong>答：先點擊你想移動的分段，然後點擊「—」的圖示的<strong>右邊有箭嘴和數字的圖示</strong>，<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212132.jpg" alt="img"/><br/>
-再輸入你的分段數字，如我想把3號分段改成1號分段，就輸入數字1，然後按OK，如下圖**<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212149.jpg" alt="img"/><br/>
-完成後，你的分段1和3會互換位置。**<br/>
-<strong>（三）問：我如何決定把將要生成的影片合併為同一個視頻導出、還是把每一個分段都分別導出獨立視頻</strong><br/>
-<strong>1.</strong><strong>合併</strong><strong>為同一個視頻導出：確保這裡顯示的是Merge cuts，然後導出視頻</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212153.jpg" alt="img"/><br/>
-你會見到底下寫着<strong>Export+merge</strong>的，代表他<strong>會合併並導出</strong>，如果沒有顯示這個代表你沒選好Merge cuts.生成影片不會取代原檔，放心。</p>
+<p><em>小甲鱼解释：反斜杠真牛逼，反斜杠后边跟元字符去除特殊功能，反斜杠后边跟普通字符实现特殊功能。</em></p>
 
-<p><strong>2.</strong><strong>分別</strong><strong>導出獨立視頻：確保這裡顯示的是Separates cuts，然後導出視頻。</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212157.jpg" alt="img"/><br/>
-同樣，這次你會見到底下只寫着<strong>Export，代表他不會合併各檔案</strong>，只會<strong>分別導出你選的分段</strong>生成影片一樣不會取代原檔，放心。<br/>
-好吧，到這裡基本上所有常用核心功能我都說完了，有不懂的地方歡迎下面留言或者直接私訊我都可以</p>
+<p>让我们来举个例子：\w 匹配任何单词字符。如果正则表达式以字节的形式表示，这相当于字符类 [a-zA-Z0-9_]；如果正则表达式是一个字符串，\w 会匹配所有 Unicode 数据库（unicodedata 模块提供）中标记为字母的字符。你可以在编译正则表达式的时候，通过提供 re.ASCII 表示进一步限制 \w 的定义。</p>
 
-<p>最後補上一些剪接過程中的圖樣：<br/>
-Jessica<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212200.jpg" alt="img"/><br/>
-希島<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212203.jpg" alt="img"/><br/>
-忘了名字。。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212206.jpg" alt="img"/></p>
+<p><em>小甲鱼解释：re.ASCII 标志使得 \w 只能匹配 ASCII 字符，不要忘了，Python3 是 Unicode 的。</em></p>
 
-<p><strong>有用的小功能</strong>，<strong>即使不看亦可，也不會對你剪接影片有很大影響，只是這裡提供一些方便而已</strong></p>
+<p>下边列举一些反斜杠加字符构成的特殊含义：</p>
 
-<hr/>
+<table>
+<thead>
+<tr>
+<th><strong>特殊字符</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
 
-<p><strong>1.左下角四寶（圖片、鑰匙、太極、框框）</strong><strong>分別對應：</strong><strong>影片縮圖、關鍵幀顯示、剪接模式切換與放大進度條時間比例</strong>他們的位置如下：<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212209.jpg" alt="img"/><br/>
-我紅色圈住的那裡有四個圖案上面那行有2個，左邊是<strong>圖片</strong>、右邊是<strong>鑰匙</strong>下面那行有一個像<strong>太極</strong>的東西，和一個<strong>框框，</strong>那我簡單說下他們分別有什麼用<br/>
-a)<strong>圖片-thumbnails</strong>（用來顯示影片<strong>進度條的縮圖</strong>），如下圖示：<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212212.jpg" alt="img"/><br/>
-你把這功能打開後變藍色，代表他正在運作這個我覺得有一個不好的地方就是它<strong>只能顯示固定區域的縮圖</strong>，不能直接隨滑鼠移動而顯示縮圖，希望未來作者可以更新新增這一點。<br/>
-b)<strong>鑰匙-Keyframes</strong><strong>（用來顯示關鍵幀，很直觀的圖示，樓主欣賞LossLessCut做到介面簡潔又易明白）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212216.jpg" alt="img"/><br/>
-進度條那些一條條的黑線就是關鍵幀所在關鍵幀一般是影片後製效果，例如漸變、畫面改動等。因為關鍵幀<strong>不能直接剪掉，否則會有怪現象</strong>。<strong>（不過不用太擔心，軟件預設剪接模式會自動調節你的選取點，做到最接近的剪取效果而不剪掉關鍵幀，而且AV不像電影電視劇加很多後製）</strong><br/>
-<strong>總言言之，不用擔心，</strong><strong>直接剪你喜歡的位置就好</strong><strong>，這裡只是讓你知道而已</strong><br/>
-c)<strong>框框-Zoom（放大進度條的時間比例）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212219.jpg" alt="img"/><br/>
-這個<strong>通常用來配合上面關鍵幀</strong>，很怕不小心剪到關鍵幀的人可以看看。（如果你有操作潔癖，很信不過軟件會自動幫你調整的麻瓜 ），那就學會這個吧.另外一個用處就是用來<strong>剪較長的影片</strong>（四小時或更多），就需要<strong>放大進度條來點選最適合的位置</strong>個人經驗，<strong>四小時的影片，放大4倍到8倍有很夠用了</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212221.jpg" alt="img"/><br/>
-<strong>一般2小時的AV，不需要到動到它。</strong><br/>
-d)<strong>太極-Keep/Discard</strong>（切換你所剪取的部分是想<strong>保留</strong><strong>或者是</strong><strong>刪除</strong>）<strong>軟件</strong><strong>預設</strong><strong>是</strong>，你所<strong>選取的將會是</strong><strong>保留</strong><strong>的內容， 如下圖示</strong>你把滑鼠長放在<strong>太極</strong>圖案上，它會顯示<strong>Keep</strong> <strong>selected segments （意為</strong><strong>保留</strong><strong>已選取分段內容）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212225.jpg" alt="img"/><br/>
-着色地方就是你保留的，前面<strong>灰色有垃圾桶就是你將會</strong><strong>丟棄</strong><strong>的內容</strong><br/>
-<strong>那如果你想快速剪掉影片</strong><strong>不想要的部分怎麼辦？</strong>在太極圖案上，按一下，它會轉為顯示<strong>Discard</strong> <strong>selected segments</strong> <strong>（意為</strong><strong>拋棄</strong><strong>已選取</strong><strong>分段內容）</strong>像這樣<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212228.jpg" alt="img"/><br/>
-你會看到<strong>着色部分那裡有個垃圾桶</strong>，代表那裡的內容將會被<strong>移除</strong>灰色部分有個磁碟的東西，代表將會<strong>保留的內容</strong></p>
+<tbody>
+<tr>
+<td>\d</td>
+<td>匹配任何十进制数字；相当于类 [0-9]</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>与 \d 相反，匹配任何非十进制数字的字符；相当于类 [<sup>0-9]</sup></td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符（包含空格、换行符、制表符等）；相当于类 [ \t\n\r\f\v]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>与 \s 相反，匹配任何非空白字符；相当于类 [^ \t\n\r\f\v]</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配任何单词字符，见上方解释</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>于 \w 相反</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>与 \b 相反</td>
+</tr>
+</tbody>
+</table>
 
-<hr/>
+<p>它们可以包含在一个字符类中，并且一样拥有特殊含义。例如 [\s,.] 是一个字符类，它将匹配任何空白字符（/s 的特殊含义），&#39;,&#39; 或 &#39;.&#39;。 </p>
 
-<p><strong>2.剪接模式切換（關鍵幀剪接與一般剪接）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212230.jpg" alt="img"/><br/>
-圈住的寫住<strong>Keyframe cut，是為關鍵幀剪接</strong>，亦是軟件預設的模式如無特殊需要，<strong>請不要改動</strong><strong>請不要改動</strong><strong>請不要改動</strong><br/>
-你心很大的，可以點一下，將其切換成<strong>Normal Cut，是為一般剪接</strong>他將會無視關鍵幀，直接選取你想指定的地方<strong>但可能會有怪現象，請不要亂用。</strong></p>
+<p>最后我们要讲的一个元字符是 .，它匹配除了换行符以外的任何字符。如果设置了 re.DOTALL 标志，. 将匹配包括换行符在内的任何字符。</p>
 
-<hr/>
+<p>重复的事情</p>
 
-<p><strong>3. 快速操作退後和復原（Undo 、Redo）</strong><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212233.jpg" alt="img"/><br/>
-Undo--&gt;<strong>取消</strong>你上一步的操作Redo--&gt;<strong>復原</strong>你上一步的操作快捷鍵如圖所示，我相信你們的智慧就不打了</p>
+<p>使用正则表达式能够轻松的匹配不同的字符集合，但 Python 字符串现有的方法却无法实现。然而，如果你认为这是正则表达式的唯一优势，那你就 too young too native 了。正则表达式有另一个强大的功能，就是你可以指定 RE 部分被重复的次数。</p>
 
-<hr/>
+<p>我们来看看 * 这个元字符，当然它不是匹配 &#39;*&#39; 字符本身（我们说过元字符都是有特殊能力的），它用于指定前一个字符匹配零次或者多次。</p>
 
-<p><strong>4.轉換影片格式</strong>如下圖所示，點選我滑鼠所在位置，它可以支援多個影片格式轉換輸出<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200506212236.jpg" alt="img"/><br/>
-這功能樓主未試過，<strong>但一般不建議轉換格式</strong>，因為轉格式就要重新編碼，而影片一有encode（編碼）和decode （解碼）的程序，就會<strong>使原本畫質有影響</strong>因此除非有絕對的必要，否則維持原本格式最佳。</p>
+<p>例如 ca*t 将匹配 ct（0 个字符 a），cat（1 个字符 a），caaat（3 个字符 a），等等。需要注意的是，由于受到 C 语言的 int 类型大小的内部限制，正则表达式引擎会限制字符 &#39;a&#39; 的重复个数不超过 20 亿个；不过，通常我们工作中也用不到那么大的数据。</p>
 
-<p><strong>教程结束 最後，希望整個教程對大家有用，謝謝~~~~~~</strong></p>
+<p>正则表达式默认的重复规则是贪婪的，当你重复匹配一个 RE 时，匹配引擎会尝试尽可能多的去匹配。直到 RE 不匹配或者到了结尾，匹配引擎就会回退一个字符，然后再继续尝试匹配。</p>
+
+<p>我们通过例子一步步的给大家讲解什么叫“贪婪”：先考虑一下表达式 a[bcd]*b，首先需要匹配字符 &#39;a&#39;，然后是零个到多个 [bcd]，最后以 &#39;b&#39; 结尾。那现在想象一下，这个 RE 匹配字符串 abcbd 会怎样？</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>步骤</strong></th>
+<th><strong>匹配</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>a</td>
+<td>匹配 RE 的第一个字符 &#39;a&#39;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>abcbd</td>
+<td>引擎在符合规则的情况下尽可能地匹配 [bcd]*，直到该字符串的结尾</td>
+</tr>
+<tr>
+<td>3</td>
+<td>失败</td>
+<td>引擎尝试匹配 RE 最后一个字符 &#39;b&#39;，但当前位置已经是字符串的结尾，所以失败告终</td>
+</tr>
+<tr>
+<td>4</td>
+<td>abcb</td>
+<td>回退，所以 [bcd]* 匹配少一个字符</td>
+</tr>
+<tr>
+<td>5</td>
+<td>失败</td>
+<td>再一次尝试匹配 RE 最后一个字符 &#39;b&#39;，但字符串最后一个字符是 &#39;d&#39;，所以失败告终</td>
+</tr>
+<tr>
+<td>6</td>
+<td>abc</td>
+<td>再次回退，所以 [bcd]* 这次只匹配 &#39;bc&#39;</td>
+</tr>
+<tr>
+<td>7</td>
+<td>abcb</td>
+<td>再一次尝试匹配字符 &#39;b&#39;，这一次字符串当前位置指向的字符正好是 &#39;b&#39;，匹配成功</td>
+</tr>
+</tbody>
+</table>
+
+<p>最终，RE 匹配的结果是 abcb。</p>
+
+<p><em>小甲鱼解释：正则表达式默认的匹配规则是贪婪的，后边有教你如何使用非贪婪的方法匹配。</em></p>
+
+<p>另一个实现重复的元字符是 +，用于指定前一个字符匹配一次或者多次。</p>
+
+<p>要特别注意 * 和 + 的区别：* 匹配的是零次或者多次，所以被重复的内容可能压根儿不会出现；+ 至少需要出现一次。例如 ca+t 会匹配 cat 和 caaat，但不会匹配 ct。</p>
+
+<p>还有两个表示重复的元字符，其中一个是问号 ?，用于指定前一个字符匹配零次或者一次。你可以这么想，它的作用就是把某种东西标志位可选的。例如 小?甲鱼 可以匹配 小甲鱼，也可以匹配 甲鱼。</p>
+
+<p>最灵活的应该是元字符 {m,n}（m 和 n 都是十进制整数），上边讲到的几个元字符都可以使用它来表达，它的含义是前一个字符必须匹配 m 次到 n 次之间。例如 a/{1,3}b 会匹配 a/b，a//b 和 a///b。但不会匹配 ab（没有斜杠）；也不会匹配 ab（斜杠超过三个）。</p>
+
+<p>你可以省略 m 或者 n，这样的话，引擎会假定一个合理的值代替。省略 m，将被解释为下限 0；省略 n 则会被解释为无穷大（事实上是上边我们提到的 20 亿）。</p>
+
+<p><em>小甲鱼解释：如果是 {,n} 相当于 {0,n}；如果是 {m,} 相当于 {m,+无穷}；如果是 {n}，则是重复前一个字符 n 次。另外还有一个超容易出错的是写成 {m, n}，看着挺美，但注意，正则表达式里边不能随意添加空格，不然会改变原来的含义。</em></p>
+
+<p>聪明的鱼油应该已经发现了，其实 *、+ 和 ? 都可以使用 {m,n} 来代替。{0,} 跟 * 是一样的；{1,} 跟 + 是一样的；{0,1} 跟 ? 是一样的。不过还是鼓励大家记住并使用 *、+ 和 ?，因为这些字符更短并且更容易阅读。</p>
+
+<p><em>小甲鱼解释：还有一个原因是匹配引擎对 * + ? 做了优化，效率要更高些。</em></p>
+
+<p>使用正则表达式</p>
+
+<p>现在我们开始来写一些简单的正则表达式吧。Python 通过 re 模块为正则表达式引擎提供一个接口，同时允许你将正则表达式编译成模式对象，并用它们来进行匹配。</p>
+
+<p><em>小甲鱼解释：re 模块是使用 C 语言编写，所以效率比你用普通的字符串方法要高得多；将正则表达式进行编译（compile）也是为了进一步提高效率；后边我们会经常提到“模式”，指的就是正则表达式被编译成的模式对象。</em></p>
+
+<p>编译正则表达式</p>
+
+<p>正则表达式被编译为模式对象，该对象拥有各种方法供你操作字符串，如查找模式匹配或者执行字符串替换。</p>
+
+<ol>
+<li>&gt;&gt;&gt; import re</li>
+<li>&gt;&gt;&gt; p = re.compile(&#39;ab*&#39;)</li>
+<li>&gt;&gt;&gt; p </li>
+<li>&lt;_sre.SRE_Pattern object at 0x...&gt;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>re.compile() 也可以接受 flags 参数，用于开启各种特殊功能和语法变化，我们会在后边一一介绍。</p>
+
+<p>现在我们先来看个简单的例子：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;ab*&#39;, re.IGNORECASE)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>正则表达式作为一个字符串参数传给 re.compile()。由于正则表达式并不是 Python 的核心部分，因此没有为它提供特殊的语法支持，所以正则表达式只能以字符串的形式表示。（有些应用根本就不需要使用到正则表达式，所以 Python 社区的小伙伴们认为没有必要将其纳入 Python 的核心。）相反，re 模块仅仅是作为 C 的扩展模块包含在 Python 中，就像 socket 模块和 zlib 模块。</p>
+
+<p>使用字符串来表示正则表达式保持了 Python 简洁的一贯风格，但也因此有一些负面影响，下边我们就来谈一谈。</p>
+
+<p>麻烦的反斜杠</p>
+
+<p>上一篇中我们已经提到了，正则表达式使用 &#39;\&#39; 字符来使得一些普通的字符拥有特殊的能力（例如 \d 表示匹配任何十进制数字），或者剥夺一些特殊字符的能力（例如 [ 表示匹配左方括号 &#39;[&#39;）。这会跟 Python 字符串中实现相同功能的字符发生冲突。</p>
+
+<p><em>小甲鱼解释：挺拗口，接着看例子你就懂了~</em></p>
+
+<p>现在的情况是，你需要在 LaTeX 文件中使用正则表达式匹配字符串 &#39;\section&#39;。因为反斜杠作为需要匹配的特殊字符，所以你需要再它前边加多一个反斜杠来剥夺它的特殊功能。所以我们会把正则表达式的字符写成 &#39;\section&#39;。</p>
+
+<p>但不要忘了，Python 在字符串中同样使用反斜杠来表示特殊意义。因此，如果我们想将 &#39;\section&#39; 完整地传给 re.compile()，我们需要再次添加两个反斜杠......</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>匹配字符</strong></th>
+<th><strong>匹配阶段</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>\section</td>
+<td>需要匹配的字符串</td>
+</tr>
+<tr>
+<td>\section</td>
+<td>正则表达式使用 &#39;\&#39; 表示匹配字符 &#39;\&#39;</td>
+</tr>
+<tr>
+<td>&quot;\\section&quot;</td>
+<td>不巧，Python 字符串也使用 &#39;\&#39; 表示字符 &#39;\&#39;</td>
+</tr>
+</tbody>
+</table>
+
+<p>简而言之，为了匹配反斜杠这个字符，我们需要在字符串中使用四个反斜杠才行。所以，在正则表达式中频繁地使用反斜杠，会造成反斜杠风暴，进而导致你的字符串极其难懂。</p>
+
+<p>解决方法是使用 Python 的原始字符串来表示正则表达式（就是在字符串前边加上 r，大家还记得吧...）：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>正则字符串</strong></th>
+<th><strong>原始字符串</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>&quot;ab*&quot;</td>
+<td>r&quot;ab*&quot;</td>
+</tr>
+<tr>
+<td>&quot;\\section&quot;</td>
+<td>r&quot;\section&quot;</td>
+</tr>
+<tr>
+<td>&quot;\w+\s+\1&quot;</td>
+<td>r&quot;\w+\s+\1&quot;</td>
+</tr>
+</tbody>
+</table>
+
+<p><em>小甲鱼解释：强烈建议使用原始字符串来表达正则表达式。</em></p>
+
+<p>实现匹配</p>
+
+<p>当你将正则表达式编译之后，你就得到一个模式对象。那你拿他可以用来做什么呢？模式对象拥有很多方法和属性，我们下边列举最重要的几个来讲：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>match()</td>
+<td>判断一个正则表达式是否从开始处匹配一个字符串</td>
+</tr>
+<tr>
+<td>search()</td>
+<td>遍历字符串，找到正则表达式匹配的第一个位置</td>
+</tr>
+<tr>
+<td>findall()</td>
+<td>遍历字符串，找到正则表达式匹配的所有位置，并以列表的形式返回</td>
+</tr>
+<tr>
+<td>finditer()</td>
+<td>遍历字符串，找到正则表达式匹配的所有位置，并以迭代器的形式返回</td>
+</tr>
+</tbody>
+</table>
+
+<p>如果没有找到任何匹配的话，match() 和 search() 会返回 None；如果匹配成功，则会返回一个匹配对象（<a href="https://docs.python.org/3.4/library/re.html#match-objects">match object</a>），包含所有匹配的信息：例如从哪儿开始，到哪儿结束，匹配的子字符串等等。</p>
+
+<p>接下来我们一步步讲解：</p>
+
+<ol>
+<li>&gt;&gt;&gt; import re</li>
+<li>&gt;&gt;&gt; p = re.compile(&#39;[a-z]+&#39;)</li>
+<li>&gt;&gt;&gt; p</li>
+<li>re.compile(&#39;[a-z]+&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>现在，你可以尝试使用正则表达式 [a-z]+ 去匹配各种字符串。</p>
+
+<p>例如：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p.match(&quot;&quot;)</li>
+<li>&gt;&gt;&gt; print(p.match(&quot;&quot;))</li>
+<li>None</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>因为 + 表示匹配一次或者多次，所以空字符串不能被匹配。因此，match() 返回 None。</p>
+
+<p>我们再尝试一个可以匹配的字符串：</p>
+
+<ol>
+<li>&gt;&gt;&gt; m = p.match(&#39;fishc&#39;)</li>
+<li>&gt;&gt;&gt; m </li>
+<li>&lt;_sre.SRE_Match object; span=(0, 5), match=&#39;fishc&#39;&gt;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>在这个例子中，match() 返回一个匹配对象，我们将其存放在变量 m 中，以便日后使用。</p>
+
+<p>接下来让我们来看看匹配对象里边有哪些信息吧。匹配对象包含了很多方法和属性，以下几个是最重要的：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>group()</td>
+<td>返回匹配的字符串</td>
+</tr>
+<tr>
+<td>start()</td>
+<td>返回匹配的开始位置</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回匹配的结束位置</td>
+</tr>
+<tr>
+<td>span()</td>
+<td>返回一个元组表示匹配位置（开始，结束）</td>
+</tr>
+</tbody>
+</table>
+
+<p>大家看：</p>
+
+<ol>
+<li>&gt;&gt;&gt; m.group()</li>
+<li>&#39;fishc&#39;</li>
+<li>&gt;&gt;&gt; m.start()</li>
+<li>0</li>
+<li>&gt;&gt;&gt; m.end()</li>
+<li>5</li>
+<li>&gt;&gt;&gt; m.span()</li>
+<li>(0, 5)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>由于 match() 只检查正则表达式是否在字符串的起始位置匹配，所以 start() 总是返回 0。</p>
+
+<p>然而，search() 方法可就不一样咯：</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(p.match(&#39;<sup>_<sup>fishc&#39;))</sup></sup></li>
+<li>None</li>
+<li>&gt;&gt;&gt; m = p.search(&#39;<sup>_<sup>fishc&#39;)</sup></sup></li>
+<li>&gt;&gt;&gt; print(m)</li>
+<li>&lt;_sre.SRE_Match object; span=(3, 8), match=&#39;fishc&#39;&gt;</li>
+<li>&gt;&gt;&gt; m.group()</li>
+<li>&#39;fishc&#39;</li>
+<li>&gt;&gt;&gt; m.span()</li>
+<li>(3, 8)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>在实际应用中，最常用的方式是将匹配对象存放在一个局部变量中，并检查其返回值是否为 None。</p>
+
+<p>形式通常如下：</p>
+
+<ol>
+<li>p = re.compile( ... )</li>
+<li>m = p.match( &#39;string goes here&#39; )</li>
+<li>if m:</li>
+<li>  print(&#39;Match found: &#39;, m.group())</li>
+<li>else:</li>
+<li>  print(&#39;No match&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>有两个方法可以返回所有的匹配结果，一个是 findall()，另一个是 finditer()。</p>
+
+<p>findall() 返回的是一个列表：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;\d+&#39;)</li>
+<li>&gt;&gt;&gt; p.findall(&#39;3只小甲鱼，15条腿，多出的3条在哪里？&#39;)</li>
+<li>[&#39;3&#39;, &#39;15&#39;, &#39;3&#39;]</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>findall() 需要在返回前先创建一个列表，而 finditer() 则是将匹配对象作为一个迭代器返回：</p>
+
+<ol>
+<li>&gt;&gt;&gt; iterator = p.finditer(&#39;3只小甲鱼，15条腿，还有3条去了哪里？&#39;)</li>
+<li>&gt;&gt;&gt; iterator</li>
+<li><callable_iterator object at 0x10511b588></li>
+<li>&gt;&gt;&gt; for match in iterator:</li>
+<li>​     print(match.span())</li>
+<li>​<br/></li>
+<li>(0, 1)</li>
+<li>(6, 8)</li>
+<li>(13, 14)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：如果列表很大，那么返回迭代器的效率要高很多。迭代器的相关知识请看：<a href="http://blog.fishc.com/3560.html">《零基础入门学习Python》048 | 魔法方法：迭代器</a></em></p>
+
+<p>模块级别的函数</p>
+
+<p>使用正则表达式也并非一定要创建模式对象，然后调用它的匹配方法。因为，re 模块同时还提供了一些全局函数，例如 match()，search()，findall()，sub() 等等。这些函数的第一个参数是正则表达式字符串，其他参数跟模式对象同名的方法采用一样的参数；返回值也一样，同样是返回 None 或者匹配对象。</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.match(r&#39;From\s+&#39;, &#39;From_FishC.com&#39;))</li>
+<li>None</li>
+<li>&gt;&gt;&gt; re.match(r&#39;From\s+&#39;, &#39;From FishC.com&#39;)</li>
+<li>&lt;_sre.SRE_Match object; span=(0, 5), match=&#39;From &#39;&gt;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>其实，这些函数只是帮你自动创建一个模式对象，并调用相关的函数（上一篇的内容，还记得吗？）。它们还将编译好的模式对象存放在缓存中，以便将来可以快速地直接调用。</p>
+
+<p>那我们到底是应该直接使用这些模块级别的函数呢，还是先编译一个模式对象，再调用模式对象的方法呢？这其实取决于正则表达式的使用频率，如果说我们这个程序只是偶尔使用到正则表达式，那么全局函数是比较方便的；如果我们的程序是大量的使用正则表达式（例如在一个循环中使用），那么建议你使用后一种方法，因为预编译的话可以节省一些函数调用。但如果是在循环外部，由于得益于内部缓存机制，两者效率相差无几。</p>
+
+<p>编译标志</p>
+
+<p>编译标志让你可以修改正则表达式的工作方式。在 re 模块下，编译标志均有两个名字：完整名和简写，例如 IGNORECASE 简写是 I（如果你是 Perl 的粉丝，那么你有福了，因为这些简写跟 Perl 是一样的，例如 re.VERBOSE 的简写是 re.X）。另外，多个标志还可以同时使用（通过“|”），如：re.I | re.M 就是同时设置 I 和 M 标志。</p>
+
+<p>下边列举一些支持的编译标志：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>标志</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>ASCII, A</td>
+<td>使得转义符号如 \w，\b，\s 和 \d 只能匹配 ASCII 字符</td>
+</tr>
+<tr>
+<td>DOTALL, S</td>
+<td>使得 . 匹配任何符号，包括换行符</td>
+</tr>
+<tr>
+<td>IGNORECASE, I</td>
+<td>匹配的时候不区分大小写</td>
+</tr>
+<tr>
+<td>LOCALE, L</td>
+<td>支持当前的语言（区域）设置</td>
+</tr>
+<tr>
+<td>MULTILINE, M</td>
+<td>多行匹配，影响 ^ 和 $</td>
+</tr>
+<tr>
+<td>VERBOSE, X (for &#39;extended&#39;)</td>
+<td>启用详细的正则表达式</td>
+</tr>
+</tbody>
+</table>
+
+<p>下面我们来详细讲解一下它们的含义：</p>
+
+<p>A<br/>
+ASCII<br/>
+使得 \w，\W，\b，\B，\s 和 \S 只匹配 ASCII 字符，而不匹配完整的 Unicode 字符。这个标志仅对 Unicode 模式有意义，并忽略字节模式。</p>
+
+<p>S<br/>
+DOTALL<br/>
+使得 . 可以匹配任何字符，包括换行符。如果不使用这个标志，. 将匹配除了换行符的所有字符。</p>
+
+<p>I<br/>
+IGNORECASE<br/>
+字符类和文本字符串在匹配的时候不区分大小写。举个例子，正则表达式 [A-Z] 也将会匹配对应的小写字母，像 FishC 可以匹配 FishC，fishc 或 FISHC 等。如果你不设置 LOCALE，则不会考虑语言（区域）设置这方面的大小写问题。</p>
+
+<p>L<br/>
+LOCALE<br/>
+使得 \w，\W，\b 和 \B 依赖当前的语言（区域）环境，而不是 Unicode 数据库。</p>
+
+<p>区域设置是 C 语言的一个功能，主要作用是消除不同语言之间的差异。例如你正在处理的是法文文本，你想使用 \w+ 来匹配单词，但是 \w 只是匹配 [A-Za-z] 中的单词，并不会匹配 &#39;é&#39; 或 &#39;&#231;&#39;。如果你的系统正确的设置了法语区域环境，那么 C 语言的函数就会告诉程序 &#39;é&#39; 或 &#39;&#231;&#39; 也应该被认为是一个字符。当编译正则表达式的时候设置了 LOCALE 的标志，\w+ 就可以识别法文了，但速度多少会受到影响。</p>
+
+<p>M<br/>
+MULTILINE<br/>
+（^ 和 $ 我们还没有提到，别着急，后边我们有细讲...）</p>
+
+<p>通常 ^ 只匹配字符串的开头，而 $ 则匹配字符串的结尾。当这个标志被设置的时候，^ 不仅匹配字符串的开头，还匹配每一行的行首；&amp; 不仅匹配字符串的结尾，还匹配每一行的行尾。</p>
+
+<p>X<br/>
+VERBOSE<br/>
+这个标志使你的正则表达式可以写得更好看和更有条理，因为使用了这个标志，空格会被忽略（除了出现在字符类中和使用反斜杠转义的空格）；这个标志同时允许你在正则表达式字符串中使用注释，# 符号后边的内容是注释，不会递交给匹配引擎（除了出现在字符类中和使用反斜杠转义的 #）。</p>
+
+<p>下边是使用 re.VERBOSE 的例子，大家看下正则表达式的可读性是不是提高了不少：</p>
+
+<ol>
+<li>charref = re.compile(r&quot;&quot;&quot;</li>
+<li>&amp;[#]          # 开始数字引用</li>
+<li>(</li>
+<li>   0[0-7]+      # 八进制格式</li>
+<li>  | [0-9]+      # 十进制格式</li>
+<li>  | x[0-9a-fA-F]+  # 十六进制格式</li>
+<li>)</li>
+<li>;            # 结尾分号</li>
+<li>&quot;&quot;&quot;, re.VERBOSE)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>如果没有设置 VERBOSE 标志，那么同样的正则表达式会写成：</p>
+
+<ol>
+<li>charref = re.compile(&quot;&amp;#(0[0-7]+|[0-9]+|x[0-9a-fA-F]+);&quot;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>哪个可读性更加？相信大家心里有底了。</p>
+
+<p>更多强大的功能</p>
+
+<p>到目前为止，我们只是介绍了正则表达式的一部分功能。在这一篇中，我们会学习到一些新的元字符，然后再教大家如何使用组来获得被匹配的部分文本。</p>
+
+<p>更多元字符</p>
+
+<p>还有一些元字符我们没有讲到，接下来小甲鱼一一为大家讲解。</p>
+
+<p>有些元字符它们不匹配任何字符，只是简单地表示成功或失败，因此这些字符也称之为<strong>零宽断言</strong>。例如 \b 表示当前位置位于一个单词的边界，但 \b 并不能改变位置。因此，零宽断言不应该被重复使用，因为 \b 并不会修改当前位置，所以 \b\b 跟 \b 是没什么两样的。</p>
+
+<p><em>小甲鱼解释：很多人可能不理解“改变位置”和“零宽断言”的意思？我尝试解释下，比如 abc 匹配完 a 之后，咱的当前位置就会移动，才能继续匹配 b，依次类推...但是 \babc 的话，\b 表示当前位置在单词的边界（单词的第一个字母或者最后一个字母），这时候当前位置不会发生改变，接着将 a 与当前位置的字符进行匹配......</em></p>
+
+<p>|</p>
+
+<p>或操作符，对两个正则表达式进行或操作。如果 A 和 B 是正则表达式，A | B 会匹配 A 或 B 中出现的任何字符。为了能够更加合理的工作，| 的优先级非常低。例如 Fish|C 应该匹配 Fish 或 C，而不是匹配 Fis，然后一个 &#39;h&#39; 或 &#39;C&#39;。</p>
+
+<p>同样，我们使用 | 来匹配 &#39;|&#39; 字符本身；或者包含在一个字符类中，像这样 [|]。</p>
+
+<p>^</p>
+
+<p>匹配字符串的起始位置。如果设置了 MULTILINE 标志，就会变成匹配每一行的起始位置。在 MULTILINE 中，每当遇到换行符就会立刻进行匹配。</p>
+
+<p>举个例子，如果你只希望匹配位于字符串开头的单词 From，那么你的正则表达式可以写为 <sup>From：</sup></p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.search(&#39;<sup>From&#39;,</sup> &#39;From Here to Eternity&#39;)) </li>
+<li>&lt;_sre.SRE_Match object; span=(0, 4), match=&#39;From&#39;&gt;</li>
+<li>&gt;&gt;&gt; print(re.search(&#39;<sup>From&#39;,</sup> &#39;Reciting From Memory&#39;))</li>
+<li>None</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>$</p>
+
+<p>匹配字符串的结束位置，每当遇到换行符也会离开进行匹配。</p>
+
+<p>&gt;&gt;&gt; print(re.search(&#39;}\(&#39;, &#39;{block}&#39;)) <br/>
+&lt;_sre.SRE_Match object; span=(6, 7), match=&#39;}&#39;&gt;<br/>
+\&gt;&gt;&gt; print(re.search(&#39;}\)&#39;, &#39;{block} &#39;))<br/>
+None<br/>
+&gt;&gt;&gt; print(re.search(&#39;}$&#39;, &#39;{block}\n&#39;)) <br/>
+&lt;_sre.SRE_Match object; span=(6, 7), match=&#39;}&#39;&gt;</p>
+
+<p>同样，我们使用 $ 来匹配 &#39;\(&#39; 字符本身；或者包含在一个字符类中，像这样 [\)]。</p>
+
+<p>\A</p>
+
+<p>只匹配字符串的起始位置。如果没有设置 MULTILINE 标志的时候，\A 和 ^ 的功能是一样的；但如果设置了 MULTILINE 标志，则会有一些不同：\A 还是匹配字符串的起始位置，但 ^ 会对字符串中的每一行都进行匹配。</p>
+
+<p>\Z</p>
+
+<p>只匹配字符串的结束位置。</p>
+
+<p>\b</p>
+
+<p>单词边界，这是一个只匹配单词的开始和结尾的零宽断言。“单词”定义为一个字母数字的序列，所以单词的结束指的是空格或者非字母数字的字符。</p>
+
+<p>下边例子中，class 只有在出现一个完整的单词 class 时才匹配；如果出现在别的单词中，并不会匹配。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;\bclass\b&#39;)</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;no class at all&#39;)) </li>
+<li>&lt;_sre.SRE_Match object; span=(3, 8), match=&#39;class&#39;&gt;</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;the declassified algorithm&#39;))</li>
+<li>None</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;one subclass is&#39;))</li>
+<li>None</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>在使用这些特殊的序列的时候，有两点是需要注意的：第一点需要注意的是，Python 的字符串跟正则表达式在有些字符上是有冲突的（回忆之前反斜杠的例子）。比如说在 Python 中，\b 表示的是退格符（ASCII 码值是 8）。所以，你如果不使用原始字符串，Python 会将 \b 转换成退格符处理，这样就肯定跟你的预期不一样了。</p>
+
+<p>下边的例子中，我们故意不写表示原始字符串的 &#39;r&#39;，结果确实大相庭径：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;\bclass\b&#39;)</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;no class at all&#39;))</li>
+<li>None</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;\b&#39; + &#39;class&#39; + &#39;\b&#39;)) </li>
+<li>&lt;_sre.SRE_Match object; span=(0, 7), match=&#39;\x08class\x08&#39;&gt;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>第二点需要注意的是，在字符类中不能使用这个断言。跟 Python 一样，在字符类中，\b 只是用来表示退格符。</p>
+
+<p>\B</p>
+
+<p>另一个零宽断言，与 \b 的含义相反，\B 表示非单词边界的位置。</p>
+
+<p>分组</p>
+
+<p>通常在实际的应用过程中，我们除了需要知道一个正则表达式是否匹配之外，还需要更多的信息。对于比较复杂的内容，正则表达式通常使用分组的方式分别对不同内容进行匹配。</p>
+
+<p>下边的例子，我们将 RFC-822 头用“:”号分成名字和值分别匹配：</p>
+
+<ol>
+<li>From: <a href="mailto:author@example.com">author@example.com</a></li>
+<li>User-Agent: Thunderbird 1.5.0.9 (X11/20061227)</li>
+<li>MIME-Version: 1.0</li>
+<li>To: <a href="mailto:editor@example.com">editor@example.com</a></li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>像这种情况，我们就可以写一个正则表达式先来匹配一整个 RFC-822 头，然后利用分组功能，使用一个组来匹配头的名字，另一个组匹配名字对应的值。</p>
+
+<p><em>小甲鱼解释：RFC-822 是电子邮件的标准格式，当然看到这里你还不知道分组要怎么分，不急，请接着往下看......</em></p>
+
+<p>在正则表达式中，使用元字符 ( ) 来划分组。( ) 元字符跟数学表达式中的小括号含义差不多；它们将包含在内部的表达式组合在一起，所以你可以对一个组的内容使用重复操作的元字符，例如 *，+，? 或者 {m,n}。</p>
+
+<p>例如，(ab)* 会匹配零个或者多个 ab：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;(ab)*&#39;)</li>
+<li>&gt;&gt;&gt; print(p.match(&#39;ababababab&#39;).span())</li>
+<li>(0, 10)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>使用 ( ) 表示的子组我们还可以对它进行按层次索引，可以将索引值作为参数传递给这些方法：group()，start()，end() 和 span()。序号 0 表示第一个分组（这个是默认分组，一直存在的，所以不传入参数相当于默认值 0）：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;(a)b&#39;)</li>
+<li>&gt;&gt;&gt; m = p.match(&#39;ab&#39;)</li>
+<li>&gt;&gt;&gt; m.group()</li>
+<li>&#39;ab&#39;</li>
+<li>&gt;&gt;&gt; m.group(0)</li>
+<li>&#39;ab&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：有几对小括号就是分成了几个子组，例如 (a)(b) 和 (a(b)) 都是由两个子组构成的。</em></p>
+
+<p>子组的索引值是从左到右进行编号，子组也允许嵌套，因此我们可以通过从左往右来统计左括号 ( 来确定子组的序号。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;(a(b)c)d&#39;)</li>
+<li>&gt;&gt;&gt; m = p.match(&#39;abcd&#39;)</li>
+<li>&gt;&gt;&gt; m.group(0)</li>
+<li>&#39;abcd&#39;</li>
+<li>&gt;&gt;&gt; m.group(1)</li>
+<li>&#39;abc&#39;</li>
+<li>&gt;&gt;&gt; m.group(2)</li>
+<li>&#39;b&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>group() 方法可以一次传入多个子组的序号：</p>
+
+<ol>
+<li>&gt;&gt;&gt; m.group(2,1,2)</li>
+<li>(&#39;b&#39;, &#39;abc&#39;, &#39;b&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：start() 是获得参数子组的开始位置；end() 是获得对应子组的结束位置；span() 是获得对应子组的范围。</em></p>
+
+<p>我们还特么可以通过 groups() 方法一次性返回所有的子组匹配的字符串：</p>
+
+<ol>
+<li>&gt;&gt;&gt; m.groups()</li>
+<li>(&#39;abc&#39;, &#39;b&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>还有一个反向引用的概念需要介绍。反向引用指的是你可以在后面的位置使用先前匹配过的内容，用法是反斜杠加上数字。例如 \1 表示引用前边成功匹配的序号为 1 的子组。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;(\b\w+)\s+\1&#39;)</li>
+<li>&gt;&gt;&gt; p.search(&#39;Paris in the the spring&#39;).group()</li>
+<li>&#39;the the&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>如果只是搜索字符串，反向引用不会被用到，因为很少有文本格式会这样来重复字符。但是，你很快会发现，在字符串替换的时候，反向引用是非常有用的（深井冰）！</p>
+
+<p><em>小甲鱼注释：注意，在 Python 的字符串中会使用反斜杠加数字的方式来表示数字的值对应的 ASCII 字符，所以在使用反向索引的正则表达式中，我们依然强调要使用原始字符串。</em></p>
+
+<p>非捕获组和命名组</p>
+
+<p>精心设计的正则表达式可能会划分很多组，这些组不仅可以匹配相关的子串，还能够对正则表达式本身进行分组和结构化。在复杂的正则表达式中，由于有太多的组，因此通过组的序号来跟踪和使用会变得困难。有两个新的功能可以帮你解决这个问题——非捕获组和命名组——它们都使用了一个公共的正则表达式扩展语法。我们先来看看这个表达式扩展语法是什么。</p>
+
+<p>正则表达式的扩展语法</p>
+
+<p>众所周知，Perl 5 为标准的正则表达式增加了许多强大的功能。Perl 的开发者们并不能选择一个新的元字符或者通过反斜杠构造一个新的特殊序列来实现扩展的功能。因为这样会和标准的正则表达式发生冲突。比如你想选择 &amp; 作为扩展功能的元字符（在标准正则表达式中，&amp; 没有特殊意义），但这样的话，已经按照标准语法写出来的正则表达式就不得不修改，因为它们中包含的 &#39;&amp;&#39; 意愿上只是把它当做普通字符来匹配而已。</p>
+
+<p><em>小甲鱼解释：看起来很是头疼的兼容性问题，Perl 的开发者们是如何解决的呢？请接着看......</em></p>
+
+<p>最终，Perl 的开发者们决定使用 (?...) 作为扩展语法。问号 ? 紧跟在左小括号 ( 后边，本身是一个语法错误的写法，因为 ? 前边没有东西可以重复，所以这样就解决了兼容性的问题<em>（理由是语法正确的正则表达式肯定不会这么写嘛~）</em>。然后，紧跟在 ? 后边的字符则表示哪些扩展语法会被使用。例如 (?=foo) 表示一种新的扩展功能（前向断言），(?:foo) 则表示另一种扩展功能（一个包含子串 foo 的非捕获组）。</p>
+
+<p>Python 支持 Perl 的一些扩展语法，并且在此基础上还增加了一个扩展语法。如果紧跟在问号 ? 后边的是 P，那么可以肯定这是一个 Python 的扩展语法。</p>
+
+<p>好，既然我们已经知道了如何对正则表达式的标准语法进行扩展，那我们回来看看这些扩展语法在复杂的正则表达式中是如何应用的。</p>
+
+<p>非捕获组</p>
+
+<p>第一个我们要讲的是非捕获组。有时候你知识需要用一个组来表示部分正则表达式，你并不需要这个组去匹配任何东西，这时你可以通过非捕获组来明确表示你的意图。非捕获组的语法是 (?:...)，这个 ... 你可以替换为任何正则表达式。</p>
+
+<ol>
+<li>&gt;&gt;&gt; m = re.match(&quot;([abc])+&quot;, &quot;abc&quot;)</li>
+<li>&gt;&gt;&gt; m.groups()</li>
+<li>(&#39;c&#39;,)</li>
+<li>&gt;&gt;&gt; m = re.match(&quot;(?:[abc])+&quot;, &quot;abc&quot;)</li>
+<li>&gt;&gt;&gt; m.groups()</li>
+<li>()</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：“捕获”就是匹配的意思啦，普通的子组都是捕获组，因为它们能从字符串中匹配到数据。</em></p>
+
+<p>除了你不能从非捕获组获得匹配的内容之外，其他的非捕获组跟普通子组没有什么区别了。你可以在里边放任何东西，使用重复功能的元字符，或者跟其他子组进行嵌套（捕获的或者非捕获的子组都可以）。</p>
+
+<p>当你需要修改一个现有的模式的时候，(?:...) 是非常有用的。原始是添加一个非捕获组并不会影响到其他（捕获）组的序号。值得一提的是，在搜索的速度上，捕获组和非捕获组的速度是没有任何区别的。</p>
+
+<p>命名组</p>
+
+<p>我们再来看另外一个重要功能：命名组。普通子组我们使用序列来访问它们，命名组则可以使用一个有意义的名字来进行访问。</p>
+
+<p>命名组的语法是 Python 特有的扩展语法：(?P<name>)。很明显，&lt; &gt; 里边的 name 就是命名组的名字啦。命名组除了有一个名字标识之外，跟其他捕获组是一样的。</p>
+
+<p>匹配对象的所有方法不仅可以处理那些由数字引用的捕获组，还可以处理通过字符串引用的命名组。除了使用名字访问，命名组仍然可以使用数字序号进行访问：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;(?P<word>\b\w+\b)&#39;)</li>
+<li>&gt;&gt;&gt; m = p.search( &#39;(((( Lots of punctuation )))&#39; )</li>
+<li>&gt;&gt;&gt; m.group(&#39;word&#39;)</li>
+<li>&#39;Lots&#39;</li>
+<li>&gt;&gt;&gt; m.group(1)</li>
+<li>&#39;Lots&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>命名组非常好用，因为它让你可以使用一个好记的名字代替一些毫无意义的数字。下边是来自 imaplib 模块的例子：</p>
+
+<ol>
+<li>InternalDate = re.compile(r&#39;INTERNALDATE &quot;&#39;</li>
+<li>​     r&#39;(?P<day>[ 123][0-9])-(?P<mon>[A-Z][a-z][a-z])-&#39;</li>
+<li>​     r&#39;(?P<year>[0-9][0-9][0-9][0-9])&#39;</li>
+<li>​     r&#39; (?P<hour>[0-9][0-9]):(?P<min>[0-9][0-9]):(?P<sec>[0-9][0-9])&#39;</li>
+<li>​     r&#39; (?P<zonen>[-+])(?P<zoneh>[0-9][0-9])(?P<zonem>[0-9][0-9])&#39;</li>
+<li>​     r&#39;&quot;&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>很明显，使用 m.group(&#39;zonem&#39;) 访问匹配内容要比使用数字 9 更简单明了。</p>
+
+<p>正则表达式中，反向引用的语法像 (...)\1 是使用序号的方式来访问子组；在命名组里，显然也是有对应的变体：使用名字来代替序号。其扩展语法是 (?P=name)，含义是该 name 指向的组需要在当前位置再次引用。那么搜索两个单词的正则表达式可以写成 (\b\w+)\s+\1，也可以写成 (?P<word>\b\w+)\s+(?P=word)：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;(?P<word>\b\w+)\s+(?P=word)&#39;)</li>
+<li>&gt;&gt;&gt; p.search(&#39;Paris in the the spring&#39;).group()</li>
+<li>&#39;the the&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>前向断言</p>
+
+<p>我们要讲解的另一个零宽断言是前向断言，前向断言可以分为前向肯定断言和前向否定断言两种形式。</p>
+
+<p>(?=...)</p>
+
+<p>前向肯定断言。如果当前包含的正则表达式（这里以 ... 表示）在当前位置成功匹配，则代表成功，否则失败。一旦该部分正则表达式被匹配引擎尝试过，就不会继续进行匹配了；剩下的模式在此断言开始的地方继续尝试。</p>
+
+<p>(?!...)</p>
+
+<p>前向否定断言。这跟前向肯定断言相反（不匹配则表示成功，匹配表示失败）。</p>
+
+<p>为了使大家更易懂，我们举个例子来证明这玩意是真的很有用。大家考虑一个简单的正则表达式模式，这个模式的作用是匹配一个文件名。我们都知道，文件名是用 . 将名字和扩展名分隔开的。例如在 fishc.txt 中，fishc 是文件的名字，.txt 是扩展名。</p>
+
+<p>这个正则表达式其实挺简单的：</p>
+
+<p>.<em>[.].</em>$</p>
+
+<p>注意，这里用于分隔的 . 是一个元字符，所以我们使用 [.] 剥夺了它的特殊功能。还有 \(，我们使用 \) 确保字符串剩余的部分都包含在扩展名中。所以这个正则表达式可以匹配 fishc.txt，foo.bar，autoexec.bat，sendmail.cf，printers.conf 等。</p>
+
+<p>现在我们来考虑一种复杂一点的情况，如果你想匹配扩展名不是 bat 的文件，你的正则表达式应该怎么写呢？<br/>
+我们先来看下你有可能写错的尝试：</p>
+
+<p>.<em>[.][<sup>b].</sup></em>$</p>
+
+<p>这里为了排除 bat，我们先尝试排除扩展名的第一个字符为非 b。但这是错误的开始，因为 foo.bar 后缀名的第一个字符也是 b。</p>
+
+<p>为了弥补刚刚的错误，我们试了这一招：</p>
+
+<p>.*<a href="%5B%5Eb%5D..%7C.%5B%5Ea%5D.%7C..%5B%5Et%5D">.</a>$</p>
+
+<p>我们不得不承认，这个正则表达式变得很难看......但这样第一个字符不是 b，第二个字符不是 a，第三个字符不是 t......这样正好可以接受 foo.bar，排除 autoexec.bat。但问题又来了，这样的正则表达式要求扩展名必须是三个字符，比如 sendmail.cf 就会被排除掉。</p>
+
+<p>好吧，我们接着修复问题：</p>
+
+<p>.*<a href="%5B%5Eb%5D.?.?%7C.%5B%5Ea%5D?.?%7C..?%5B%5Et%5D?">.</a>$</p>
+
+<p>在第三次尝试中，我们让第二个和第三个字符变成可选的。这样就可以匹配稍短的扩展名，比如 sendmail.cf。</p>
+
+<p>不得不承认，我们把事情搞砸了，现在的正则表达式变得艰涩难懂外加奇丑无比！！</p>
+
+<p>更惨的是如果需求改变了，例如你想同时排除 bat 和 exe 扩展名，这个正则表达式模式就变得更加复杂了......</p>
+
+<p>当当当当！主角登场，其实，一个前向否定断言就可以解决你的难题：</p>
+
+<p>.<em><a href="?!bat$">.</a>.</em>$</p>
+
+<p>我们来解释一下这个前向否定断言的含义：如果正则表达式 bat 在当前位置不匹配，尝试剩下的部分正则表达式；如果 bat 匹配成功，整个正则表达式将会失败（因为是前向否定断言嘛<sup>_<sup>）。(?!bat$)</sup></sup> 末尾的 $ 是为了确保可以正常匹配像 sample.batch 这种以 bat 开始的扩展名。</p>
+
+<p>同样，有了前向否定断言，要同时排除 bat 和 exe 扩展名，也变得相当容易：</p>
+
+<p>.<em><a href="?!bat$%7Cexe$">.</a>.</em>$</p>
+
+<p>修改字符串</p>
+
+<p>我们已经介绍完如何对字符进行搜索，接下来我们讲讲正则表达式如何修改字符串。</p>
+
+<p>正则表达式使用以下方法修改字符串：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>split()</td>
+<td>在正则表达式匹配的地方进行分割，并返回一个列表</td>
+</tr>
+<tr>
+<td>sub()</td>
+<td>找到所有匹配的子字符串，并替换为新的内容</td>
+</tr>
+<tr>
+<td>subn()</td>
+<td>跟 sub() 干一样的勾当，但返回新的字符串以及替换的数目</td>
+</tr>
+</tbody>
+</table>
+
+<p>分割字符串</p>
+
+<p>正则表达式的 split() 方法将字符串在匹配的地方进行分割，并将分割后的结果作为列表返回。它的做法其实很像字符串的 split() 方法，但这个可以使用更加广泛的分隔符。你猜的没错，它同时提供了一个模块级别的函数：re.split()</p>
+
+<p><strong>.split(*string*[, *maxsplit=0*])</strong></p>
+
+<p>通过正则表达式匹配来分割字符串。如果在 RE 中，你使用了捕获组，那么它们的内容会作为一个列表返回。你可以通过传入一个 <em>maxsplit</em> 参数来设置分割的数量。如果 <em>maxsplit</em> 的值是非 0，表示至多有 <em>maxsplit</em> 个分割会被处理，剩下的内容作为列表的最后一个元素返回。</p>
+
+<p>下边例子中，分隔符是任何非字母数字字符：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;\W+&#39;)</li>
+<li>&gt;&gt;&gt; p.split(&#39;This is a test, short and sweet, of split().&#39;)</li>
+<li>[&#39;This&#39;, &#39;is&#39;, &#39;a&#39;, &#39;test&#39;, &#39;short&#39;, &#39;and&#39;, &#39;sweet&#39;, &#39;of&#39;, &#39;split&#39;, &#39;&#39;]</li>
+<li>&gt;&gt;&gt; p.split(&#39;This is a test, short and sweet, of split().&#39;, 3)</li>
+<li>[&#39;This&#39;, &#39;is&#39;, &#39;a&#39;, &#39;test, short and sweet, of split().&#39;]</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>有时候你可能不仅对分隔符之间的内容感兴趣，你可能对分隔符本身（就是正则表达式匹配的内容）也同样感兴趣。如果使用了捕获组，那么作为分隔符的值也会被返回：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;\W+&#39;)</li>
+<li>&gt;&gt;&gt; p2 = re.compile(r&#39;(\W+)&#39;)</li>
+<li>&gt;&gt;&gt; p.split(&#39;This... is a test.&#39;)</li>
+<li>[&#39;This&#39;, &#39;is&#39;, &#39;a&#39;, &#39;test&#39;, &#39;&#39;]</li>
+<li>&gt;&gt;&gt; p2.split(&#39;This... is a test.&#39;)</li>
+<li>[&#39;This&#39;, &#39;... &#39;, &#39;is&#39;, &#39; &#39;, &#39;a&#39;, &#39; &#39;, &#39;test&#39;, &#39;.&#39;, &#39;&#39;]</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>模块级别的函数 re.split() 除了将 RE 作为第一个参数外，其他参数是一样的：</p>
+
+<ol>
+<li>&gt;&gt;&gt; re.split(&#39;[\W]+&#39;, &#39;Words, words, words.&#39;)</li>
+<li>[&#39;Words&#39;, &#39;words&#39;, &#39;words&#39;, &#39;&#39;]</li>
+<li>&gt;&gt;&gt; re.split(&#39;([\W]+)&#39;, &#39;Words, words, words.&#39;)</li>
+<li>[&#39;Words&#39;, &#39;, &#39;, &#39;words&#39;, &#39;, &#39;, &#39;words&#39;, &#39;.&#39;, &#39;&#39;]</li>
+<li>&gt;&gt;&gt; re.split(&#39;[\W]+&#39;, &#39;Words, words, words.&#39;, 1)</li>
+<li>[&#39;Words&#39;, &#39;words, words.&#39;]</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>搜索和替换</p>
+
+<p>另一个常见的任务就是找到所有的匹配部分，并替换成不同的字符串。sub 方法可以帮你实现这个愿望！sub 方法有一个 <em>replacement</em> 参数，它可以是一个待替换的字符串，或者一个处理字符串的函数。</p>
+
+<p><strong>.sub(*replacement*, *string*[, *count=0*])</strong></p>
+
+<p>返回一个字符串，这个字符串从最左边开始，所有 RE 匹配的地方都替换成 <em>replacement</em>。如果没有找到任何匹配，那么返回原字符串。</p>
+
+<p>可选参数 <em>count</em> 指定最多替换的次数，必须是一个非负值。默认值是 0，意思是替换所有找到的匹配。</p>
+
+<p>下边是使用 sub() 方法的例子，它会将所有的颜色替换成 color：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile( &#39;(blue|white|red)&#39;)</li>
+<li>&gt;&gt;&gt; p.sub( &#39;colour&#39;, &#39;blue socks and red shoes&#39;)</li>
+<li>&#39;colour socks and colour shoes&#39;</li>
+<li>&gt;&gt;&gt; p.sub( &#39;colour&#39;, &#39;blue socks and red shoes&#39;, count=1)</li>
+<li>&#39;colour socks and red shoes&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>subn() 方法跟 sub() 方法干同样的勾当，但区别是返回值为一个包含有两个元素的元组：一个是替换后的字符串，一个是替换的数目。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile( &#39;(blue|white|red)&#39;)</li>
+<li>&gt;&gt;&gt; p.subn( &#39;colour&#39;, &#39;blue socks and red shoes&#39;)</li>
+<li>(&#39;colour socks and colour shoes&#39;, 2)</li>
+<li>&gt;&gt;&gt; p.subn( &#39;colour&#39;, &#39;no colours at all&#39;)</li>
+<li>(&#39;no colours at all&#39;, 0)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>空匹配只有在它们没有紧挨着前一个匹配时才会被替换掉：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;x*&#39;)</li>
+<li>&gt;&gt;&gt; p.sub(&#39;-&#39;, &#39;abxd&#39;)</li>
+<li>&#39;-a-b-d-&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>如果 <em>replacement</em> 参数是一个字符串，那么里边的反斜杠都会被处理。比如 \n 将会被转换成一个换行符，\r 转换成回车，等等。未知的转义如 \j 保持原样。逆向引用如 \6，则被 RE 中相应的捕获组匹配的内容所替换。这使你可以在替换后的字符串中插入一部分原字符串。</p>
+
+<p>下边例子中，将匹配被 { 和 } 括起来的单词 section，并将 section 替换成 subsection：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;section{ ( [<sup>}]*</sup> ) }&#39;, re.VERBOSE)</li>
+<li>&gt;&gt;&gt; p.sub(r&#39;subsection{\1}&#39;,&#39;section{First} section{second}&#39;)</li>
+<li>&#39;subsection{First} subsection{second}&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：1. 大家还记得吗？这里开启了 re.VERBOSE，空格将被忽略。因为这里一堆符号，用空格隔开看着才不会乱糟糟的......2. 这里</em> <em>r&#39;subsection{\1}&#39; 使用 \1 引用匹配模式中的 ([<sup>}]*)</sup> 匹配的字符串内容。</em></p>
+
+<p>还可以使用 Python 的扩展语法 (?P<name>...) 指定命名组，引用命名组的语法是 \g<name>。\g<name> 会将名字为 name 的组匹配的字符串替换进去。另外，\g&lt;数字&gt; 是通过组的序号进行引用。\g<2>其实就相当于 \2，但我们更提倡使用 \g<2>，因为这样可以避免歧义。例如，\g<2>0 的含义是引用序号为 2 的组，然后后边匹配一个字符 &#39;0&#39;，而你写成 \20 就会被认为是引用序号为 20 的组了。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;section{ (?P<name> [<sup>}]*</sup> ) }&#39;, re.VERBOSE)</li>
+<li>&gt;&gt;&gt; p.sub(r&#39;subsection{\1}&#39;,&#39;section{First}&#39;)</li>
+<li>&#39;subsection{First}&#39;</li>
+<li>&gt;&gt;&gt; p.sub(r&#39;subsection{\g<1>}&#39;,&#39;section{First}&#39;)</li>
+<li>&#39;subsection{First}&#39;</li>
+<li>&gt;&gt;&gt; p.sub(r&#39;subsection{\g<name>}&#39;,&#39;section{First}&#39;)</li>
+<li>&#39;subsection{First}&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>有时候你可能不满足简单的字符串替换，你可能需要在替换的过程中动点“手脚”......没关系，一样可以满足你！<em>replacement</em> 参数还可以是一个函数，该函数将会在正则表达式模式每次不重复匹配的时候被调用。在每次调用时，函数会收到一个匹配对象的参数，因此你就可以利用这个对象去计算出新的字符串并返回它。</p>
+
+<p>下边的例子中，替换函数将十进制数替换为十六进制数：</p>
+
+<ol>
+<li>&gt;&gt;&gt; def hexrepl(match):</li>
+<li>...   &quot;Return the hex string for a decimal number&quot;</li>
+<li>...   value = int(match.group())</li>
+<li>...   return hex(value)</li>
+<li>...</li>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;\d+&#39;)</li>
+<li>&gt;&gt;&gt; p.sub(hexrepl, &#39;Call 65490 for printing, 49152 for user code.&#39;)</li>
+<li>&#39;Call 0xffd2 for printing, 0xc000 for user code.&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>当使用模块级的 re.sub() 函数时，正则表达式模式作为第一个参数。该模式可以是一个字符串或一个编译好的对象。如果你需要指定正则表达式标志，那么你必须使用后者；或者使用模式内嵌修正器，例如 sub(&quot;(?i)b+&quot;, &quot;x&quot;, &quot;bbbb BBBB&quot;) 返回 &#39;x x&#39;。</p>
+
+<p>常见问题</p>
+
+<p>正则表达式是一个非常强大的工具，但在有些时候它并不能直观地按照你的意愿来运行。本篇我们将指出一些最常见的错误。</p>
+
+<p>使用字符串方法</p>
+
+<p>有时使用 re 模块是个错误！如果你匹配一个固定的字符串或者单个字符类，并且你没有使用 re 的任何标志（像 IGNORECASE 标志），那么就没有必要使用正则表达式了。字符串有一些方法是对固定字符串进行操作的，并且它们通常比较快。因为它们都是独立优化的 C 语言小循环，目的是在简单的情况下代替功能更加强大、更具通用性的正则表达式引擎。</p>
+
+<p>举个例子，例如你想把字符串中所有的 dead 替换成 word，你会想到使用正则表达式的 re.sub() 方法来实现，但这么简单的替换，还是考虑直接使用字符串的 replace() 方法吧。但有一点你需要注意，就是 replace() 会在单词里边进行替换，像 swordfish 会变成 sdeedfish，这显然不是你想要的！replace() 没办法识别单词的边界，因此你才来考虑使用正则表达式。只需要将 RE 的模式写成 \bword\b 即可胜任此任务。</p>
+
+<p>另一个常见的情况是从一个字符串中删除单个字符或者用另一个字符替代它。你也许会想到用 re.sub(&#39;\n&#39;, &#39; &#39;, S) 这样的正则表达式来实现，但其实字符的 translate() 方法完全能够胜任这个任务，并且比任何正则表达式操作起来更快些。<br/>
+简而言之，在使用 re 模块之前，先考虑一下你的问题是否可以用更快速、简单的字符串自带方法来解决。</p>
+
+<p>match() VS search()</p>
+
+<p>match() 函数只会检查 RE 是否在字符串的开始处匹配，而 search() 会遍历整个字符串搜索匹配的内容。记住这一区别很重要。再次强调一下，match() 只会报告一次成功的匹配，并且匹配的位置必须是从字符串的第一个字符开始：</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.match(&#39;super&#39;, &#39;superstition&#39;).span())</li>
+<li>(0, 5)</li>
+<li>&gt;&gt;&gt; print(re.match(&#39;super&#39;, &#39;insuperable&#39;))</li>
+<li>None</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>另一方面，search() 函数将遍历整个字符串，并报告它找到的第一个匹配：</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.search(&#39;super&#39;, &#39;superstition&#39;).span())</li>
+<li>(0, 5)</li>
+<li>&gt;&gt;&gt; print(re.search(&#39;super&#39;, &#39;insuperable&#39;).span())</li>
+<li>(2, 7)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>有时候你可能会耍点小聪明，使用 re.match() 然后在 RE 的前边加上 .*。但尽量不要这么做，最好采用 re.search() 代替。正则表达式编译器会对 REs 做一些分析，以便可以在搜索匹配时提高速度。一般分析会先找到匹配的第一个字符是什么。举个例子，模式 Crow 必须从字符 &#39;C&#39; 开始匹配，那么匹配引擎分析后会快速遍历字符串，然后在 &#39;C&#39; 被找到之后才开始全部匹配。</p>
+
+<p>按照上面的分析，你添加一个 .* 会导致这个优化失败，这就需要从头到尾扫描一遍，然后再回溯匹配 RE 剩余的部分。所以，请使用 re.search() 代替。</p>
+
+<p>贪婪 VS 非贪婪</p>
+
+<p>当重复一个正则表达式时，如果使用 a*，那么结果是尽可能多地去匹配。当你尝试匹配一对对称的定界符，例如 HTML 标志中的尖括号，默认的贪婪模式会使得你很困扰。</p>
+
+<p>我们来看下例子：</p>
+
+<ol>
+<li>&gt;&gt;&gt; s = &#39;<html><head><title>Title</title>&#39;</li>
+<li>&gt;&gt;&gt; len(s)</li>
+<li>32</li>
+<li>&gt;&gt;&gt; print(re.match(&#39;&lt;.*&gt;&#39;, s).span())</li>
+<li>(0, 32)</li>
+<li>&gt;&gt;&gt; print(re.match(&#39;&lt;.*&gt;&#39;, s).group())</li>
+<li><html><head><title>Title</title></li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>RE 匹配在 <html> 的 &lt; 后，.* 消耗掉字符串的剩余部分。由于正则表达式默认是贪婪的原因，RE 必须从字符串的尾部一个字符一个字符地回溯，直到找到匹配的 &gt;。大家看到，按照这种方法，最后找到匹配内容竟是 <html> 的 &lt; 开始，到 </title> 的 &gt; 结束。显然这不是你想要的结果。</p>
+
+<p>在这种情况下，解决方案是使用非贪婪的限定符 *?、+?、?? 或 {m,n}?，尽可能地匹配小的文本。</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.match(&#39;&lt;.*?&gt;&#39;, s).group())</li>
+<li><html></li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>在上边的例子中，&gt; 在第一个 &lt; 被匹配后立刻尝试匹配，如果失败，匹配引擎前进一步，尝试下一个字符，直到第一次匹配 &gt;，这样就得到了我们想要的结果。</p>
+
+<p>注意，使用正则表达式分析 HTML 和 XML 是很痛苦的。当你编写一个正则表达式去处理所有可能的情况时，你会发现 HTML 和 XML 总会打破你的“规则”，这让你很头疼......像这样的话，建议使用 HTML 和 XML 解析器来处理更合适。</p>
+
+<p>使用 re.VERBOSE</p>
+
+<p>现在你应该意识到了，正则表达式的表示非常紧凑。这也带来了一个问题，就是不好阅读。中等复杂的正则表达式可能包含许多反斜杠、圆括号和元字符，以至于难以读懂。</p>
+
+<p>在这些 REs 中，当编译正则表达式时指定 re.VERBOSE 标志是非常有帮助的。因为它允许你可以编辑正则表达式的格式，使之更清楚。</p>
+
+<p>re.VERBOSE 标志有几个作用。在正则表达式中不在字符类中的空白字符将被忽略。这就意味着像 I love FishC 这样的表达式和可读性较差的 IloveFishC 相同。但 [a b] 将匹配字符 &#39;a&#39;、&#39;b&#39; 或 &#39; &#39;；另外，你也可以把注释放到 RE 中，注释是从 # 开始到下一行。当使用三引号字符串时，会使得 REs 的格式更整洁：</p>
+
+<ol>
+<li>pat = re.compile(r&quot;&quot;&quot;</li>
+<li>\s*                   # Skip leading whitespace</li>
+<li>(?P<header>[<sup>:]+)</sup>  # Header name</li>
+<li>\s* :                  # Whitespace, and a colon</li>
+<li>(?P<value>.*?)      # The header&#39;s value -- *? used to</li>
+<li>​                      # lose the following trailing whitespace</li>
+<li>\s*$                  # Trailing whitespace to end-of-line</li>
+<li>&quot;&quot;&quot;, re.VERBOSE)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>同样的内容，下边这个要难读得多：</p>
+
+<ol>
+<li>pat = re.compile(r&quot;\s<em>(?P<header>[<sup>:]+)\s</sup></em>:(?P<value>.<em>?)\s</em>$&quot;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>&lt;完&gt;</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2021/04/07</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025631155.html">
+                
+                  <h1>Python之platform模块</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>该模块用来访问平台相关属性。常见属性和方法</p>
+
+<p><strong>平台架构</strong></p>
+
+<pre class="line-numbers"><code class="language-text">platform.machine()
+</code></pre>
+
+<p>返回平台架构。若无法确定，则返回空字符串。</p>
+
+<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.machine()
+&#39;AMD64&#39;
+&gt;&gt;&gt; platform.machine()
+&#39;x86_64&#39;
+</code></pre>
+
+<p><strong>网络名称（主机名）</strong></p>
+
+<pre class="line-numbers"><code class="language-text">platform.node()
+</code></pre>
+
+<p>返回计算机的网络名称(可能未被完全限定！)。如果无法确定该值,则返回空字符串。</p>
+
+<pre class="line-numbers"><code class="language-text">#windows
+&gt;&gt;&gt; platform.node()
+&#39;office&#39;
+
+#linux
+&gt;&gt;&gt; platform.node()
+&#39;abcxx&#39;
+</code></pre>
+
+<p><strong>系统版本</strong></p>
+
+<pre class="line-numbers"><code class="language-text">platform.platform(aliased = 0,terse = 0)
+</code></pre>
+
+<p>如果aliased为True,则该函数将使用不同平台的别名来报告与其常用名称不同的系统名称,例如SunOS将被报告为Solaris。 system_alias()函数用于实现。<br/>
+将terse设置为True会导致该功能仅返回识别平台所需的绝对最小信息。</p>
+
+<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.platform()
+&#39;Windows-8.1-6.3.9600-SP0&#39;
+
+&gt;&gt;&gt; platform.platform(aliased=True)
+&#39;Windows-8.1-6.3.9600-SP0&#39;
+
+&gt;&gt;&gt; platform.platform(aliased=True,terse=True)
+&#39;Windows-8.1&#39;
+
+&gt;&gt;&gt; platform.platform(aliased=True,terse=False)
+&#39;Windows-8.1-6.3.9600-SP0&#39;
+
+#linux
+&gt;&gt;&gt; platform.platform()
+&#39;Linux-2.6.32-642.13.1.el6.x86_64-x86_64-with-centos-6.8-Final&#39;
+</code></pre>
+
+<p><strong>处理器名称</strong></p>
+
+<pre class="line-numbers"><code class="language-text">platform.processor()
+</code></pre>
+
+<p>返回处理器名称。</p>
+
+<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.processor()
+&#39;Intel64 Family 6 Model 60 Stepping 3, GenuineIntel&#39;` 
+
+#linux
+&gt;&gt;&gt; platform.processor()
+&#39;x86_64&#39;
+</code></pre>
+
+<p><strong>系统名称</strong></p>
+
+<pre class="line-numbers"><code class="language-text">platform.system()
+</code></pre>
+
+<p>返回系统/操作系统名称,例如“Linux”,“Windows”或“Java”。如果无法确定该值,则返回空字符串。</p>
+
+<pre class="line-numbers"><code class="language-text">&gt;&gt;&gt; platform.system()
+&#39;Windows&#39;
+
+#linux
+&gt;&gt;&gt; platform.system()
+&#39;Linux&#39;
+</code></pre>
 
                         
                       </div>
@@ -279,614 +1402,302 @@ Undo--&gt;<strong>取消</strong>你上一步的操作Redo--&gt;<strong>復原</
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15998025628690.html">
+                <a class="clearlink" href="15998025628569.html">
                 
-                  <h1>知识管理｜生产力工具组成你的个人知识库</h1>
+                  <h1>Python核心技术与实战：学习笔记(一)</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<blockquote>
-<p>今年2月初的时候，在简书平台发布了<a href="https://www.jianshu.com/p/674e2e343437">《个人知识库软件应用及推荐》</a>，里面的“思维导图”为1.0版本，后来发现仍有诸多不足，历经多次修改，都改到怀疑人生了，直到现在的4.0版，基本完成定型了。之前接触过很多软件工具，大浪淘沙后留下适合自己的工具来完善自己的体系，逐渐形成“个人知识库”。希望这篇文章能给大家带来启发。善用工具，善用佳软，才能得心应手，事半功倍。</p>
-</blockquote>
+                        	<h3 id="toc_0">03|列表和元组，到底用哪一个？</h3>
 
-<p>​       个人知识库分为4大系列，分别为：思维管理(思维导图)、时间管理、知识管理、文件管理，效率工具(生产力工具)，下方有另外的两个系列，分别为：护眼工具、手机记录类APP(优秀手机软件)，几大系列生产力工具组成强大的个人知识库。</p>
+<p>列表是动态的，长度大小不固定，可以随意地增加、删减或者改变元素（mutable）。 而元组是静态的，长度大小固定，无法增加删减或者改变（immutable）。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193642.png" alt="img"/></p>
+<p>count(item) 表示统计列表 / 元组中 item 出现的次数。</p>
 
-<h3 id="toc_0">第一章：思维管理</h3>
+<p>index(item) 表示返回列表 / 元组中 item 第一次出现的索引。</p>
 
-<hr/>
+<p>list.reverse() 和 list.sort() 分别表示原地倒转列表和排序（注意，元组没有内置的这两个 函数)。</p>
 
-<p>思维管理，也叫思维导图、脑图、树形图，而思维导图在广阔的市场上有诸多的国内外软件厂商彼此竞争。<br/>
-<strong>1、传统基础型的思维导图</strong></p>
+<p>reversed() 和 sorted() 同样表示对列表 / 元组进行倒转和排序，但是会返回一个倒转后 或者排好序的新的列表 / 元组。</p>
 
-<ul>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.xmind.cn">XMind</a>或XMind 2020，XMind为传统版本，而2020版为新版本，2020版原名称为XMind：ZEN，后于2020年3月23日更名为XMind 2020，作为国内老牌的思维导图软件，也是国内最多人使用的思维导图之一，支持导入及导出markdown格式；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.edrawsoft.cn%2Fmindmaster">MindMaster</a>，中文名为：亿图思维导图，于2017年上线，作为新秀的思维导图软件，估计以后的日子成为XMind公司的主要竞争对手；</p></li>
-<li><p>，为加拿大Corel公司出品的思维导图，适合企业使用，该公司有两个著名度较高的绘图软件，分别为CorelDRAW和Corel PaintShop，分别对应Abode公司的Photoshop和Adobe Illustrator；<br/>
-Xmind为国内历史悠久的思维导图，MindMaster为后来追上的思维导图，建议两者择一而用；</p></li>
-</ul>
+<pre class="line-numbers"><code class="language-python">l = [1, 2, 3]
+l.__sizeof__()
+#64
+tup = (1, 2, 3)
+tup.__sizeof__()
+#48
+</code></pre>
 
-<p><strong>2、能画流程图的思维导图软件</strong></p>
+<pre class="line-numbers"><code class="language-python">l = []
+l.__sizeof__() // 空列表的存储空间为 40 字节
+40
+l.append(1)
+l.__sizeof__()
+72 // 加入了元素 1 之后，列表为其分配了可以存储 4 个元素的空间 (72 - 40)/8 = 4
+l.append(2)
+l.__sizeof__()
+72 // 由于之前分配了空间，所以加入元素 2，列表空间不变
+l.append(3)
+l.__sizeof__()
+72 // 同上
+l.append(4)
+l.__sizeof__()
+72 // 同上
+l.append(5)
+l.__sizeof__()
+104 // 加入元素 5 之后，列表的空间不足，所以又额外分配了可以存储 4 个元素的空间
+</code></pre>
 
-<ul>
-<li><p>Edraw Max</p>
-<p>，中文名称为：亿图图示，是一款矢量绘图图表软件，相当于微软的Visio，功能介于Visio和Adobe Illustrator之间，能绘制流程图、思维导图、组织架构图、网络图、平面布置图、甘特图、各种图表等，9.4版本为旧版本图标，后从10.0版本开始整合MindMaster新引擎，绘制的思维导图更加美观，和MindMaster(亿图思维导图)绘制的思维导图基本一样，还改进了一直以来存在连接线的“吸附问题”和“拉伸问题”，使用更加平滑流畅，建议安装10.0后的版本，使用感觉更加良好，其中10.0.2为最后一个不需登录账号使用的版本，10.0.4版本增加登录账号验证，登录账号是国内软件厂商的普遍做法，登录账号验证后无论在何处都可使用，均可下载网友制作分享的各类模板；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193658.jpg" alt="img"/></p></li>
-<li><p>IAuto流程图</p>
-<p>，简称：IA，于2019年底上线的新软件，其官网到目前为止仍未上线，暂在国内某第一自媒体平台推广，支持绘制流程图、树状图(思维导图)、甘特图、数字曲线等，功能仍在不断推陈出新，而另一个矢量绘图软件</p>
-<p>蚂蚁画图</p>
-<p>的操作界面与之有几分相似；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193706.jpg" alt="img"/></p></li>
-<li><p>WPS 2019</p>
-<p>，注意的是2019年版才加入绘制流程图和思维导图等功能，专业版也有此功能，在文字处理组件的插入功能里面，不开通会员则源文件保存在云空间，只能导出图片格式和PDF格式，不能导出源文件和SVG格式；开通会员特权，则思维导图和流程图则保存为pos格式，但云盘保存的思维导图为pof格式，而流程图则为pom格式；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193732.jpg" alt="img"/></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fdiagrams.net">diagrams.net</a>，原名为：draw.io，开源软件；<br/>
-<strong>3、大纲式思维导图</strong></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.zdfans.com%2Fhtml%2F52923.html">WriteMapper</a>，该软件采用了节点+文字编辑器的形式，无需在单独的脑图、大纲工具和编辑工具之间来回切换，即是将思维导图软件和记事本合二为一，并对它们的功能进行了整合，支持多种格式，如HTML、TXT、Markdown、RTF 和 DOCX 等格式；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fawehook%2Fblink-mind-desktop">BlinkMind</a>，是GitHub开源代码仓库的开源软件，支持思维导图与大纲笔记无缝切换；<br/>
-<strong>4、幻灯片式思维导图</strong></p></li>
-<li><p>Focusky动画演示大师，由万彩信息技术出品。可创建思维导图风格的动态幻灯片，听说需要登陆帐号才能使用，输出格式为PDF，不能导出图片格式，实属遗憾；<br/>
-<strong>5、网状结构式思维导图</strong></p></li>
-<li><p>TheBrain，黑马软件，相对普通用户来说较为小众、另类。不同于普通的思维导图软件，都是树状结构目录，视觉效果较为分类整齐，而是网状动态结构的思维导图，远看像蜘蛛网一样错综复杂，近看丝丝分明，双击节点就将该节点变为中心主题，绘制的图像似“知识图谱”，内置3个视图，分为标准视图、大纲视图、思维导图等，内有笔记编辑器及支持Markdown编辑。据摘自网上的部分介绍，比较适合做工作日志、项目管理等复杂、数量繁多等情况使用，可将资料、快捷方式打包整合在一起组成网状图，比起传统的思维导图更像人的神经元集群思维结构；<br/>
-<strong>6、3D节点式思维导图</strong></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.3zentree.com%2Fcn%2F">3ZENTREE</a>，中文名称为：三生之树，一款基于3D交互式节点的信息系统，节点可以存储有用的信息，例如文本、图像和网页结点间的关系在三维空间中呈现，它可以帮助你收集数据和想法建立事物之间关联的全局图，激发更多的创意；</p></li>
-</ul>
+<pre class="line-numbers"><code class="language-python">python3 -m timeit &#39;x=(1,2,3,4,5,6)&#39;
+20000000 loops, best of 5: 9.97 nsec per loop
+python3 -m timeit &#39;x=[1,2,3,4,5,6]&#39;
+5000000 loops, best of 5: 50.1 nsec per loop
+</code></pre>
 
-<blockquote>
-<p>思维导图算起来大概有六种类型，有多种玩法，根据个人使用习惯使用相对用途的思维导图，才能发挥更大的作用；思维导图可用来作为知识管理、个人计划、工作计划、思维管理等，善用思维导图整理发散性的思维，开发头脑风暴等，也可用来作为内容分解，强化记忆；<br/>
-<strong>使用建议</strong>：当初找了很多思维导图，也尝试过一些思维导图软件，思维导图建议在XMind、Mindmaster、MindManager三者之间选其一；<br/>
-<strong>软件推荐</strong>：XMind界面较为简洁，一个文件可以创建多个画布，方便在“思维导图”与“大纲”之间切换，导入及导出markdown格式，与MD编辑器配合使用较为方便，Mindmaster，支持图的类型和模板较多，绘制的图比较美观，操作上较为简单便捷，MindManager历史悠久，比较商业化，适合企业使用，而个人使用的思维导图工具为：Mindmaster+Edraw Max，Mindmaster绘制普通的思维导图，而Edraw Max则用来绘制复杂的图，一般Edraw Max较少使用；</p>
-</blockquote>
+<h3 id="toc_1">04 | 字典、集合，你真的了解吗？</h3>
 
-<h3 id="toc_1">第二章：时间管理</h3>
+<p>集合并不支持索引操作，因为集合本质上是一个哈希表，和列表不一 样。</p>
 
-<hr/>
+<pre class="line-numbers"><code class="language-python">#字典和集合的创建方式
+d1 = {&#39;name&#39;: &#39;jason&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;male&#39;}
+d2 = dict({&#39;name&#39;: &#39;jason&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;male&#39;})
+d3 = dict([(&#39;name&#39;, &#39;jason&#39;), (&#39;age&#39;, 20), (&#39;gender&#39;, &#39;male&#39;)])
+d4 = dict(name=&#39;jason&#39;, age=20, gender=&#39;male&#39;)
+print(d1 == d2 == d3 ==d4)
+# True
+s1 = {1, 2, 3}
+s2 = set([1, 2, 3])
+print(s2)
+# {1, 2, 3}
+print(s1 == s2)
+# True
+</code></pre>
 
-<p>时间管理，主要分为日程管理、任务管理、待办事项管理。<br/>
-<strong>1、日历管理(日程管理)</strong><br/>
-分别以日、周、月、年等时间为跨度的日历日程软件；</p>
+<p>字典访问可以直接索引键，如果不存在，就会抛出异常；也可以使用 get(key, default) 函数来进行索引。如果键不存在，调用 get() 函数可以返回 一个默认值。</p>
 
-<ul>
-<li>EssentialPIM，老牌的著名的信息管理软件；</li>
-<li>VueMinder Ultimate(桌面日历软件)，拥有漂亮的桌面日历插件；</li>
-<li>EfficientPIM Pro(高效E人)或Efficient Efficcess(个人信息管理)，两者只是图标不一样，为易飞科技出品的信息管理软件；</li>
-<li>WinPIM(友情强档)，国内历史悠久的信息管理软件；</li>
-<li>Foxmail，邮箱客户端，内有“月计划表”；</li>
-<li>网易邮箱大师，邮箱客户端，内有“月计划表”；</li>
-<li>QQ邮箱(网页端)，内有“月计划表”；</li>
-<li>Outlook，微软出品的邮箱客户端，内有“月计划表”；</li>
-<li>邮件和日历，win10商店应用，需登录微软“Outlook”帐号；
-<strong>2、任务管理</strong></li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.appcgn.com%2Ftodolist.html">TodoList</a>，黑马软件，开源工具，软件小巧，功能强大，上手有些难度；
-<strong>3、待办事项管理</strong>
-记录待办事项(To do list)的清单软件，助你高效完成任务和规划时间的应用；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.dida365.com">TickTick(滴答清单)</a>，开通高级会员才能使用“月计划表”，其实“月计划表”可利用邮箱类软件代替；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Ftodo.microsoft.com%2Ftasks">Microsoft To do</a>(微软待办)，微软收购“奇妙清单”后出品的软件；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwemind.cn">微秘</a>，集合笔记、日历、待办、打卡、清醒等功能，支持markdown语法编辑，看起来是一个功能比较全面的软件，这个还真是不好归类；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Feverdo.net">Everdo</a>，<a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.pc6.com%2Fsoftview%2FSoftView_827770.html">下载网址</a>，只有英文版；
-<strong>4、项目管理</strong></li>
-<li>Edraw Project(亿图项目管理软件)，主要用来绘制“甘特图”；
-<strong>5、时间跟踪管理</strong></li>
-<li>ManicTime，之前重装系统后特意安装了该软件，主要用来统计时间具体花费在那些方面，可以看到每个软件具体使用的时间，上网时长、聊天时间、工作时长都能看到。使用后发现功能比想象中要强大的多，不但能看到浏览网页历史记录，还有每60秒的屏幕后台自动截图，还真可怕的屏幕监控工具，还是适合用在正途，时间统计及分析时间花费在那些方面；</li>
-<li>RescueTime
-<strong>6、轻量级应用</strong>
-为日历类、待办事项、番茄工作法软件等小软件；<br/>
-6.1 日历类</li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fchs.desktopcal.com%2Fchs">DesktopCal</a>(桌面日历)，漂亮的透明的桌面日历挂件，可登陆帐号同步；</li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.youxiao.cn">优效日历</a>，可完美无缝替代windows系统日历，内置强大的时间管理效率工具；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmytime.ruanmei.com">云日历</a>，为软媒魔方优化工具里面的小工具，可记录待办事项及日程，其云记事功能仍在开发中，尚未开放；
-6.2 待办事项</li>
-<li>Wise Reminder</li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.tomatolist.com">番茄·人生</a></li>
-<li>日常轻单setodo<br/>
-6.3 便签类</li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.yynote.cn">小黄条</a></li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fli-zheng-hao%2FStikyNotes%2Freleases">StikyNotes</a>
-6.4 计时器(番茄钟)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgetwnr.com%2Fzh">wnr</a>，可设置全屏模式进行提醒，够霸气吧；</li>
-</ul>
+<p>集合并不支持索引操作，因为集合本质上是一个哈希表，和列表不一 样。</p>
 
-<blockquote>
-<p><strong>使用建议</strong>：基本不怎么用时间管理软件，只用“云日历(软媒魔方)”和ManicTime(用于软件使用时间统计)，更倾向于使用纸质版“效率手册“里面的“待办事项清单”、“月计划表”及“计划任务表”，毕竟随手可得，随手可写，更加高效；<br/>
-<strong>扩展阅读</strong>：关于学习“时间管理”的基本知识，可到以下网站观看，加深对于时间管理的见解：</p>
-</blockquote>
+<p>想要判断一个元素在不在字典或集合内，我们可以用 value in dict/set 来判断。</p>
 
-<ol>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.youxiao.cn%2Findex.php%2Fhow-to-manage-your-time">“时间管理”</a></li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.tomatolist.com%2Fknowledge.html">“知识集”</a></li>
-<li><a href="https://www.jianshu.com/p/eb663d188662">搞不懂日程、任务与待办事项，还想做时间管理？！</a></li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.ixigua.com%2F6807027457753874955">学习方法——如何时间管理？高效人生？</a></li>
-</ol>
+<p>插入操作</p>
 
-<h3 id="toc_2">第三章：知识管理</h3>
+<p>每次向字典或集合插入一个元素时，Python 会首先计算键的哈希值（hash(key)），再和 mask = PyDicMinSize - 1 做与操作，计算这个元素应该插入哈希表的位置 index = hash(key) &amp; mask。如果哈希表中此位置是空的，那么这个元素就会被插入其中。 而如果此位置已被占用，Python 便会比较两个元素的哈希值和键是否相等。若两者都相等，则表明这个元素已经存在，如果值不同，则更新值。 若两者中有一个不相等，这种情况我们通常称为哈希冲突（hash collision），意思是两 个元素的键不相等，但是哈希值相等。这种情况下，Python 便会继续寻找表中空余的位置，直到找到位置为止。</p>
 
-<hr/>
+<p>值得一提的是，通常来说，遇到这种情况，最简单的方式是线性寻找，即从这个位置开始， 挨个往后寻找空位。当然，Python 内部对此进行了优化（这一点无需深入了解，你有兴趣 可以查看源码，我就不再赘述），让这个步骤更加高效。 查找操作 和前面的插入操作类似，Python 会根据哈希值，找到其应该处于的位置；然后，比较哈希 表这个位置中元素的哈希值和键，与需要查找的元素是否相等。如果相等，则直接返回；如 果不等，则继续查找，直到找到空位或者抛出异常为止。</p>
 
-<p>知识管理，以笔记工具作为收集箱，平时将资料收集并汇总在一起，经过提炼后，及时归档到知识库中；<br/>
-<strong>1、收藏夹</strong></p>
+<p>删除操作</p>
 
-<ul>
-<li><p>浏览器的网络收藏夹</p></li>
-<li><p>自由收藏(手机系统自带)</p></li>
-<li><p>微信、今日头条、知乎、简书平台等等(平台收藏)</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.360doc.com">360doc个人图书馆</a>，一个优秀文章的收录平台，可以收录多个自媒体平台的优秀文章；</p></li>
-<li><p>CC助手</p></li>
-<li><p>收趣<br/>
-<strong>2、笔记管理</strong><br/>
-2.1 云笔记<br/>
-2.1.1 云笔记本</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.yinxiang.com">印象笔记</a>，为国内版名字，国际版为Evernote，国内最多人用的云笔记软件；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fnote.youdao.com">有道云笔记</a>，网易出品的云笔记软件，初始容量为3GB，应经足够使用了；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.wiz.cn%2Fzh-cn">为知笔记</a>，前身为：网文快捕(CyberArticle)，为笔记工具中的一匹黑马；</p></li>
-<li><p>OneNote，微软出品可绘画、自由度较高的云笔记软件；</p></li>
-<li><p>Notion，是一款将笔记、知识库和任务管理整合的笔记协作工具，也是铁人三项全能冠军的笔记工具，不只作为笔记工具使用，也可以用来建立知识库，目前仍没有中文语言，不翻墙比较难登录，还有随时有被墙的可能，使用及迁移知识库需慎重考虑；<br/>
-2.1.2 大纲笔记</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmubu.com">幕布</a>，大纲笔记软件，可一键转换为思维导图，可来回切换；<br/>
-2.1.3 知识库</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.yuque.com">语雀</a>，阿里巴巴旗下的“蚂蚁金服”出品的定位于知识库的笔记软件，之前一直为网页端，后在今年6月处推出桌面客户端，现时客户端版功能仍比较简陋；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.baklib.com">baklib</a><br/>
-2.1.4 协作工具</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fshimo.im">石墨文档</a>，类似Office套件的网上云办公协作工具；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fiflydocs.com">讯飞文档</a><br/>
-2.2 个人数据库(本地笔记)</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.wjjsoft.com%2Fchs">mybase</a>，为共享软件，历史悠久的个人知识管理工具和笔记管理软件，采用树形的分类管理，可创建无限层级，新版本可以使用markdown语法编辑；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.haoxg.net%2F">eDiary(电子日记本)</a>，免费软件，白日梦工作室出品的软件，为个人维护更新的软件，从1999年更新至今，已经有21个年头，毅力惊人，支持的朋友可在官网页面捐助；</p></li>
-<li><p>RedNotebook(桌面日记本)，免费软件；</p></li>
-<li><p>My Notes Kepper</p></li>
-<li><p>Memo book<br/>
-个人数据库(本地笔记)普遍因开发年份比较早，历史悠久，所以整体UI界面设计已经跟不上潮流，不需要云同步的朋友可以使用这类软件，毕竟用U盘备份数据库就万无一失了，将数据库备份到其它电脑也可以使用；<br/>
-2.3 文本编辑器<br/>
-2.3.1 富文本编辑器</p></li>
-<li><p>CherryTree，网民称之为“樱桃树”；</p></li>
-<li><p>iDailyDiary</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.iceui.net%2FiceEditor.html">iceEditor</a>，开源软件；<br/>
-2.3.2 记事本(轻量级文本编辑器)</p></li>
-<li><p>Notepad3</p></li>
-<li><p>EverEdit</p></li>
-<li><p>EmEditor</p></li>
-<li><p>EditPlus</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.notepadsapp.com">Notepads</a>，当然也支持markdown语法编辑；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.k-edv.com%2Fnotepadx">NotepadX</a>，<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.microsoft.com%2Fzh-cn%2Fp%2Fnotepadx%2F9nblggh6jzx9">下载网址</a>；<br/>
-2.3.3 文本代码编辑器</p></li>
-<li><p>visual studio code，简称为：VS Code，由微软公司出品，虽为代码编辑器，因该软件有众多插件，也算得上是“软件平台”，可安装MD编辑或To do List等众多神器插件，实现不同的功能及玩法，等着你尽情发挥；</p></li>
-<li><p>Atom</p></li>
-<li><p>Sublime Text</p></li>
-<li><p>HBuliderX</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193754.jpg" alt="img"/></p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193804.jpg" alt="img"/></p>
-<p>HBuilder X使用界面.jpg</p></li>
-<li><p>CudaText</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgitee.com%2Fcalvinwilliams%2FEditUltra">EditUltra</a><br/>
-2.4 Markdown语法编辑器<br/>
-2.4.1 MD语法笔记本</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fjoplinapp.org">Joplin</a>，双窗口模式，数据库保存，图片独立存放在一个文件夹，可在界面直接启用“外部编辑器”编辑文章；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.qownnotes.org">QOwnNotes</a>，单窗口模式，插入的图片不能实时显示及预览，可在界面直接启用“外部编辑器”编辑文章，单篇文章保存为单个MD格式文件，和Joplin的数据库保存方式不一样；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.gitnoteapp.com">GitNote</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Ffocusnote.91xiaban.com">FocusNote(专注笔记)</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Frainbowbyte.com%2Fapp%2Frainbownote.html">彩虹笔记</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fdocumentnode.io">Document Node(文蝶结)</a>，New，看简介应为海外华裔开发的软件，为MD语法编辑器、富文本编辑器、通用文字编辑器，并能绘制思维导图；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fzadam%2Ftrilium%2Freleases">Trilium Notes</a>，目前只有英文版，层级结构的笔记程序，专注构建个人的大型知识库，支持关系图、链接图、书籍格式的笔记结构；</p></li>
-<li><p>VNote，适合程序员用；</p></li>
-<li><p>BoostNote，适合程序员用；<br/>
-2.4.2 MD语法写作编辑器</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.typora.io">Typora</a>，是一款天堂级的写作软件，让你摒却尘世间的浮华，专注于写作当中，让你摆脱word的繁琐设置，不需专注于格式，全身投入于写作当中；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmarktext.app">Mark Text</a>，<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fmarktext%2Fmarktext%2Freleases">下载网址</a>，微软出品的开源软件；</p></li>
-<li><p>Inspire(灵感写作)</p>
-<p>下载网址</p>
-<p>，东日软件开发的轻量级写作工具，给你一个沉浸式的写作环境，让你更加专注于写作，导出word文件相对比Typora方便，操作及使用界面和iMac平台的Ulysses有几分相似；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193819.jpg" alt="img"/></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.wiz.cn%2Fzh-cn%2Fwiznote-lite">WizNote Lite</a>，New，从“为知笔记”独立出来的makdown语法编辑器，于今年7月3日推出；</p></li>
-<li><p>iA Writer</p>
-<p>，优雅的写作工具，以前只有iMac版，后来推出windows版本；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193828.jpg" alt="img"/></p>
-<p>IA Writer 操作界面.jpg</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.farbox.com%2Fservice%2Fapp%2Fdesktop_editor">FarBox Editor</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.zybuluo.com%2Fcmd">Cmd Markdown(作业部落)</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.mkeditor.com%2F">墨客编辑器</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.atominn.com%2Fwonderpen">WonderPen(妙笔)</a>，一款写作工具，具有“目录树”功能，适合写作小说；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fxiangxuema.com">XXM(想学吗)</a>，支持知识管理(markdown输入)、火花(头脑风暴)、脑图(思维导图)、日程(待开发)的知识管理软件，出发点是挺好，但目前仍算半成品，还需要不断完善；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fobsidian.md">Obsidian(黑曜石)</a>，New，<a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.downxia.com%2Fdowninfo%2F297514.html">点击查看功能简介</a>。很有野心的软件，立志成为优秀强大的个人知识库，让用户拭目以待，看官方简介应为华裔团队开发；</p></li>
-<li><p>minidown(迷你档)</p>
-<p>，New，轻量级的markdown编辑器，原为内部试验的软件，反响不错，后开放出来给广大群众使用，文件体积较少，支持导出MD格式、word格式，也可读写rtf/doc/docx文档；</p>
-<p>Markdown的编辑界面有三种类型，第一种是传统的两列并列模式，代表软件为：MrakdownPad、Joplin，左边为源代码模式，右边为预览效果模式；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193846.png" alt="img"/></p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193856.png" alt="img"/></p>
-<p>第二种为一个窗口的源代码编辑模式，代表软件为：QOwnNotes、Inspire；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193905.png" alt="img"/></p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193913.jpg" alt="img"/></p>
-<p>第三种为一个窗口的预览模式，代表软件为：Typora，当然可以通过下方的按钮迅速切换为“源代码模式”；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193929.jpg" alt="img"/></p>
-<p>Typora使用界面.jpg</p>
-<p>这三种模式对比，显然是第三种模式占优；</p>
-<p>2.5 速记型轻量级个人笔记</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.digimezzo.com%2Fsoftware%2Fknowte-2">Knowte</a></p></li>
-<li><p>CintaNotes，历史悠久的软件，目前为止仍在更新；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FMikescher%2FAlephNote">AlephNote</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FOnlyDeLtA%2FNotesMan">NotesMan</a>，中文名称为：笔记侠，简单便携式笔记管理应用程序，使用后感觉更适合便签管理；<br/>
-2.6 摘录批注笔记</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.zhizhireader.com">知之阅读</a>，从2015年推出，至今有些年头的软件，没怎么宣传，较为低调；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.bookxnote.com">BookxNote</a>，New；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.duitasiwei.com">堆塔思维</a>，New，双人团队开发的软件；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.liquidtext.net">LiquidText</a>，New；<br/>
-具有对PDF文件进行标注、摘录、大纲笔记、思维导图等功能，集收集、整理一体的知识管理软件；<br/>
-2.7 写作工具</p></li>
-<li><p>Scrivener</p></li>
-<li><p>FocusWriter</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.pc6.com%2Fsoftview%2FSoftView_738201.html">BlackDraft</a><br/>
-2.8 涂鸦笔记</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.suishouxie.com">随手写(FiiNote)</a>，随手写混搭键盘、手写、语音、涂鸦、拍照的记事本；<br/>
-<strong>3、文献管理</strong></p></li>
-<li><p>EndNote</p></li>
-<li><p>NoteExpress</p></li>
-<li><p>Citavi</p></li>
-<li><p>Mendeley</p></li>
-<li><p>NoteFirst</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Festudy.cnki.net">知网研学</a>，原名为：CNKI E-Study，集文献检索、下载、管理、笔记、写作、投稿于一体，为学习和研究提供全过程支持；<br/>
-<strong>4、电子书管理</strong></p></li>
-<li><p>Calibre</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.startreader.com">StartReader</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.neat-reader.cn">Neat Reader</a></p></li>
-</ul>
+<p>对于删除操作，Python 会暂时对这个位置的元素，赋于一个特殊的值，等到重新调整哈希 表的大小时，再将其删除。 不难理解，哈希冲突的发生，往往会降低字典和集合操作的速度。因此，为了保证其高效 性，字典和集合内的哈希表，通常会保证其至少留有 1/3 的剩余空间。随着元素的不停插 入，当剩余空间小于 1/3 时，Python 会重新获取更大的内存空间，扩充哈希表。不过，这 种情况下，表内所有的元素位置都会被重新排放。 虽然哈希冲突和哈希表大小的调整，都会导致速度减缓，但是这种情况发生的次数极少。所 以，平均情况下，这仍能保证插入、查找和删除的时间复杂度为 O(1)。</p>
 
-<blockquote>
-<p>“知识管理”重要点是在于“笔记管理”，利用笔记作为载体，构建属于自己的知识体系。“笔记管理”有很多的笔记软件类型，像著名的云笔记“印象笔记”，传统的“本地数据库笔记”、富文本、文本记事本、新兴的markdown语法编辑器等，根据自己的使用习惯寻找选择适合自己“笔记管理”；国内最多人用的都是Office，Office没有树状目录结构，只能单个文件管理，但不能多个文件管理，发现身边的绝大部分同事除了认识Office三件套和WPS，对于其它笔记软件几乎一概不知，也不愿意尝试，更不愿意花时间研究；而markdown是一种轻量级标记语言，算是Txt文本格式的升级版，虽能插入图片，但不能嵌入图片，还是图文分离，不方便管理，可见markdown针对写作人士，实际上并不适合知识收集管理；<br/>
-<strong>使用建议</strong>：最好使用带有云同步的笔记工具作为存放文章、摘录、写作等，方便在生活及工作中查阅、使用编辑；markdown语法编辑器建议用单窗口模式，类似于Typora的实时预览模式或者Ulysses的编辑模式，不建议使用双窗口的并列编辑和预览模式，会降低效率；<br/>
-<strong>软件推荐</strong>：感觉蚂蚁金服出品的云端知识库“语雀”也挺不错的，大厂出品的定位知识库的软件，功能比较齐全，该有的功能都有了，还可生成目录，目录链接多篇文章，还能将文章公开发布，可以在官网的“发现”搜索关键词查找相关文章，目录还有几种玩法，目录里面文章链接网盘分享地址的，还有当成网盘上传工具包的，俨然成了“工具库”；Markdown语法编辑器则用Inspire(灵感写作)+Typora配合使用，一般作为写作工具使用，Inspire(灵感写作)的好处在于单窗口操作，无需预览窗口，还有自动保存，导出word文件比较方便等，而Typora用作审阅写稿等使用；</p>
-</blockquote>
+<h3 id="toc_2">05 | 深入浅出字符串</h3>
 
-<h3 id="toc_3">第四章：文件管理</h3>
+<p>常见的的转义字符</p>
 
-<hr/>
+<p>Python 的字符串是不可变的（immutable），Python 中字符串的改变，通常只能通过创建新的字符串来完成。</p>
 
-<p><strong>1、文件资源管理器</strong><br/>
-1.1 单窗口多标签式</p>
+<pre class="line-numbers"><code class="language-python">s=&#39;HKSIHh&#39;
+s = &#39;H&#39; + s[1:]
+s = s.replace(&#39;h&#39;, &#39;H&#39;
+</code></pre>
 
-<ul>
-<li>QTTabBar</li>
-<li>ExplorerMax(百叶窗)</li>
-<li>Stardock Groupy</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fshutters.160.com">百页窗</a>，驱动人生出品；</li>
-<li>TidyTabs</li>
-<li>RX文件管理器，在微软应用上架，界面字体为白色；</li>
-<li>Files UWP，在GitHub和微软应用上架，界面字体为黑色；<br/>
-1.2 多窗口(窗格)式</li>
-<li>Q-Dir<br/>
-1.3 多窗口多标签式</li>
-<li>Tablacus Explorer<br/>
-1.4 双栏(纵)式</li>
-<li>EF Commander</li>
-<li>Double Commander<br/>
-1.5 双窗口(横)多标签式</li>
-<li>XYplorer</li>
-<li>xplorer2<br/>
-1.6 双栏(纵)多标签式</li>
-<li>Total Commander，老牌的文件管理器；</li>
-<li>Directory Opus</li>
-<li>Multi Commander</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.pcsuperx.com%2FExplorerX">超级文件资源管理器X</a>
-1.7 双栏(纵)多选项卡式</li>
-<li>WinNc<br/>
-文件资源管理器都有很多选择，基本上都是国外开发的，国内开发的基本上很少，推荐使用的双窗口(横)多标签式的XYplorer，还有双栏(纵)多选项卡式的WinNc也挺不错的，最夸张的是Tablacus Explorer，可开9个窗口多个标签，一般人也用不了那么多的窗口吧？
-<strong>2、窗口增强管理器</strong></li>
-<li>Aquasnap</li>
-<li>FancyZones(PowerToys)，为微软出品的PowerToy系统增强工具的一个组件；</li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.aocmonitor.com.cn%2Fservice%2Fdownload%2F46">aoc screen</a>
-<strong>3、文件标签管理工具</strong></li>
-<li>Tabbles</li>
-<li>tagLyst Next<br/>
-windows系统没有自带标签功能，可利用标签工具给文件添加标签，方便快速查找所需文件；
-<strong>4、文件夹美化工具(换色工具)</strong></li>
-<li>目录博士(Dr. Folder)</li>
-<li>Folder Painter</li>
-<li>Rainbow Folders<br/>
-给文件夹更换颜色，按文件重要性分为红、绿、黄、蓝等颜色来区分，更快找到所在文件夹；
-<strong>5、桌面整理工具</strong>
-5.1 桌面整理</li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.360.cn%2Fdesktop">360桌面助手</a>，360出品的独立桌面软件，可开启护眼及定时休息提醒功能，总体比“腾讯桌面整理”优秀；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fguanjia.qq.com%2Fproduct%2Fzmzl">腾讯桌面整理</a>，目前仍不能并列面板，实属遗憾；</li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fxzdesktop.cqttech.com">小智桌面</a>，可以调出快速启动面板及优秀的待办提醒功能，这两方面确实做得比其它桌面整理工具好；</li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.conchdesktop.com">海螺桌面</a></li>
-<li>Fences<br/>
-建议桌面分类，按文件、文件夹、图标分别整理，桌面左面为图标，右上方为文件夹、右下方为文件；<br/>
-5.2 快速启动器</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.wotianna.com%2Flily">Lily快速启动器</a></li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.wotianna.com%2Flucy">Lucy快速启动</a></li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.wotianna.com%2Fwisehotkey">Wise Hotkey Pro</a></li>
-<li>Quick Access Popup</li>
-<li>音速启动(VStart)<br/>
-用了桌面整理软件，就不建议使用快速启动器，虽说使用方法不一样，但是最终目的也是一样的，建议两者择其一；<br/>
-5.3 虚拟桌面</li>
-<li>Dexpot<br/>
-5.4 桌面工具栏</li>
-<li>BitDock比特工具栏
-<strong>6、文件搜索工具</strong>
-6.1 搜索神器</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.voidtools.com%2Fzh-cn">Everything</a>，快速搜索软件；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.wisecleaner.com.cn%2Fwise-jetsearch.html">Wise JetSearch</a>，为著名软件厂商Wise Care 365优化工具里面的一个小组件，后特别独立出来可单独下载，可极速搜索文件；</li>
-<li>Quick Search，为著名优化厂家Glary Utilities出品的快速搜索工具；</li>
-<li>UltraSearch</li>
-<li>Abelssoft Find My Files<br/>
-6.2 文本内容搜索工具</li>
-<li>FileLocator Pro</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.lesbonscomptes.com%2Frecoll">recoll</a>，跨越Linux、MS Windows和Mac OS X的多平台桌面全文搜索工具；</li>
-<li>archivarius3000</li>
-<li>AnyTXT Searcher</li>
-</ul>
+<p>你可能了解到，在其他语言中，如 Java，有可变的字符串类型，比如 StringBuilder，每次 添加、改变或删除字符（串），无需创建新的字符串，时间复杂度仅为 O(1)。这样就大大 提高了程序的运行效率。 但可惜的是，Python 中并没有相关的数据类型，我们还是得老老实实创建新的字符串。因 此，每次想要改变字符串，往往需要 O(n) 的时间复杂度，其中，n 为新字符串的长度。</p>
 
-<blockquote>
-<p><strong>使用建议</strong>：使文件管理有条不紊，需要分类、建立命名规则、设置标签、更改文件夹颜色和利用快速搜索文件定位文件；<br/>
-<strong>软件推荐</strong>：快速搜索工具用的是：Everything，很优秀的搜索工具，快速搜索文件，可直接在搜索界面拉到QQ窗口直接发送，加快办事效率。之前推荐给同事，后来个别同事给了很大的惊喜，通过关键词查找并私下Copy花费一段时间做出来的工作模板，后来唯有把该软件删掉，换成Wise JetSearch，杜绝了Copy情况，现时家用的是Everything，公司则建议使用Wise JetSearch、Quick Search、UltraSearch，这三者搜索软件都是差不多的，三者选其一；介绍这类软件给别人，仍需谨慎对待；</p>
-</blockquote>
+<pre class="line-numbers"><code class="language-python">s = &#39;&#39;
+for n in range(0, 100000):
+ s += str(n)
+</code></pre>
 
-<h3 id="toc_4">第五章：效率神器(生产力工具)</h3>
+<p>自从 Python2.5 开始，每次处理字符串的拼接操作时（str1 += str2），Python 首先会检 测 str1 还有没有其他的引用。如果没有的话，就会尝试原地扩充字符串 buffer 的大小，而 不是重新分配一块内存来创建新的字符串并拷贝。</p>
 
-<hr/>
+<p>这样的话，上述例子中的时间复杂度就仅 为 O(n) 了。</p>
 
-<p><strong>1、桌面效率工具</strong><br/>
-具备快速启动软件及快速搜索功能的工具，这类软件很多都是集成Everything搜索配合使用；</p>
+<p>因此，以后你在写程序遇到字符串拼接时，如果使用’+=&#39;更方便，就放心地去用吧，不用 过分担心效率问题了。 另外，对于字符串拼接问题，除了使用加法操作符，我们还可以使用字符串内置的 join 函 数。string.join(iterable)，表示把每个元素都按照指定的格式连接起来。</p>
 
-<ul>
-<li><p>Listary</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fu.tools">utools</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.huochaipro.com">火柴</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgetquicker.net">Quicker</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.wox.one">Wox</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FXUANXUQAQ%2FFile-Engine">File Engine</a>，<a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.pc6.com%2Fsoftview%2FSoftView_744104.html">下载网址</a>；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.pc6.com%2Fsoftview%2FSoftView_849009.html">EasyGo</a>，因wox长时间没有维护，参考wox的功能界面和使用习惯、逻辑，编写了类似的软件，看简介说明算是Wox的升级改造版吧；</p></li>
-<li><p>PowerToys Run，为微软出品的PowerToy系统增强工具的一个组件；<br/>
-<strong>2、截图工具</strong></p></li>
-<li><p>PicPick</p></li>
-<li><p>FastStone Captube</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgetsharex.com">ShareX</a></p></li>
-<li><p>Ashampoo Snap，德国阿香婆出品的强大的截图软件；</p></li>
-<li><p>TechSmith Snagit，最为强大的截图工具，拥有录像功能；<br/>
-<strong>3、截(贴)图工具</strong></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fzh.snipaste.com">Snipaste</a>，优秀的贴图功能，按F1键区域截图，F3键贴图功能；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.hellohao.cn%2F%3Fp%3D44">Helloao截图</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Ftylearymf%2FSETUNA2">SETUNA2</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fpoerin%2FScreenote">Screenote</a><br/>
-<strong>4、图片压缩工具</strong></p></li>
-<li><p>图压</p>
-<p>，一款免费的本地图片压缩软件，支持压缩JPG/PNG/GIF/SVG等图片格式，支持压缩SVG格式的图片压缩工具实在较为罕见；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193944.jpg" alt="img"/></p></li>
-<li><p>柚图</p>
-<p>，支持压缩JPG、PNG格式，支持生成压缩率极高的webp图片，客户端为4MB，体积较少，压缩速度较快，比较奇特的软件，联网才能使用，不然转换过程发生崩溃，但是官网又没有特别说明要联网才能使用，限制上传流量为1KB和禁用网络后均不能使用，因是单文件体积较少，估计可能是云压缩，经过测试压缩图片速度其实比本地压缩工具还快，又不像是云压缩，联网更像是反馈通道，这个要靠高人具体分析了，使用操作等感觉和共享软件“PP鸭”差不多，除了联网没有其它限制；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902193954.png" alt="img"/></p></li>
-<li><p>hummingbird(蜂鸟)</p>
-<p>，开源工具，压缩速度较慢；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902194005.jpg" alt="img"/></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmyqqjd.com%2F17189.html">Image optimizer</a>，古老级的压缩工具；</p></li>
-<li><p>JPNGmin</p></li>
-<li><p>Imagine</p>
-<p>，开源工具，有些局限性，To PNG需要安装ImageMagick；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902194020.jpg" alt="img"/></p>
-<p>5、剪贴板增强工具</p></li>
-<li><p>Ditto</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fhluk%2FCopyQ">CopyQ</a></p></li>
-<li><p>Flashpaste</p></li>
-<li><p>ClipboardFusion<br/>
-<strong>6、剪贴板转存工具</strong></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fhuiyadanli%2FPasteEx">PasteEx</a><br/>
-<strong>7、文件快速拷贝工具</strong></p></li>
-<li><p>fastcopy</p></li>
-<li><p>TeraCopy<br/>
-<strong>8、CAD图形复制到Word</strong></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.dayanzai.me%2Fbetterwmf.html">BetterWMF</a>，将 DWG 格式文件转变为 WMF 格式，再插入word里面，避免DWG格式复制到word可能出现的其它问题；<br/>
-<strong>9、GIF录制</strong></p></li>
-<li><p>ScreenToGIF</p></li>
-<li><p>LICEcap</p></li>
-<li><p>GifCam<br/>
-<strong>10、全局鼠标手势</strong></p></li>
-<li><p>WGestures</p></li>
-<li><p>Mouselnc</p></li>
-<li><p>StrokesPlus.net</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fpoerin%2FStroke">Stroke</a></p></li>
-</ul>
+<pre class="line-numbers"><code class="language-python">l = []
+for n in range(0, 100000):
+ l.append(str(n))
+l = &#39; &#39;.join(l) 
 
-<blockquote>
-<p><strong>软件推荐</strong>：截图工具使用FastStone Captube或者PicPick，两者功能大体一致，当然ShareX也很优秀，下一步环节做得比较好，操作方便，比较自动化、流程化；贴图工具则用：Snipaste，方便区域截图及贴图；图片压缩工具则用到“图压”，毕竟为本地压缩软件，不需联网操作，支持压缩JPG、PNG格式，压缩速度较快，界面虽有一处小广告，但不影响具体操作；</p>
-</blockquote>
+#由于列表的 append 操作是 O(1) 复杂度，字符串同理。因此，这个含有 for 循环例子的时
+间复杂度为 n*O(1)=O(n)。
+</code></pre>
 
-<h3 id="toc_5">第六章：护眼工具</h3>
+<p>string.strip(str)，表示去掉首尾的 str 字符串； string.lstrip(str)，表示只去掉开头的 str 字符串； string.rstrip(str)，表示只去掉尾部的 str 字符串。</p>
 
-<hr/>
+<h3 id="toc_3">06 | Python “黑箱”：输入与输出</h3>
 
-<p><strong>为什么“护眼工具”和“个人知识库”毫不相关，为什么还会出现在这篇文章呢？</strong>主要是在提醒长时间或高强度面对屏幕作业的朋友，注意用眼保护，尤其是专业写作人员、绘图人员、视频编辑者，一坐下去连续作业至少有几个小时，不注重休息长时间操作电脑会导致眼睛疲劳干涩，屏幕的蓝光对眼睛有害，<strong>长期的话可能会导致“干眼症”或者“结膜炎”等眼疾，中招了那不是怀疑人生，而是痛不欲生</strong>。建议安装护眼工具，降低屏幕亮度，比较接近暖色系，启用窗体背景豆沙绿色，降低蓝光，减少眼疲劳及对眼睛的伤害。</p>
+<p>让我们来做一个简单的 NLP（自然语言处理）任务。如果你对此不太了解也没有影 响，我会带你一步步完成这个任务。</p>
 
-<ul>
-<li><p>Iris，最为著名的防蓝光护眼工具，设置较多，但同时设置比较繁琐；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.zdfans.com%2Fhtml%2F27069.html">LightBuld</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.wotianna.com%2Flxhygl">联想护眼卫士</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.zdfans.com%2Fhtml%2F56732.html">护眼宝</a></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.carrotchou.com%2F33127.html">f. lux</a>，开源软件；</p></li>
-<li><p>CareUEyes</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902194032.jpg" alt="img"/></p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgetgammy.com">Gammy</a>(调节屏幕亮度)；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fprojecteye.thelittlepandaisbehind.com">ProjectEye</a>(用眼提醒软件)，内附夜间模式、番茄钟功能，建议和LightBulb配合使用，减少眼睛疲劳；</p></li>
-<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.appinn.com%2Foffandlock">offandlock</a>(关闭屏幕)，年代比较久远的软件，下载链接估计失效了；</p></li>
-<li><p>EyeCareAPP</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902194039.jpg" alt="img"/></p></li>
-<li><p>360桌面助手，内含护眼模式，还可以开启窗体背景视觉保护豆沙颜色，可惜该护眼工具集成到桌面助手里面，没有出独立版的软件；</p></li>
-</ul>
+<p>首先，我们要清楚 NLP 任务的基本步骤，也就是下面的四步： 1. 读取文件； 2. 去除所有标点符号和换行符，并把所有大写变成小写； 3. 合并相同的词，统计每个词出现的频率，并按照词频从大到小排序； 4. 将结果按行输出到文件 out.txt。 你可以自己先思考一下，用 Python 如何解决这个问题。这里，我也给出了我的代码，并附 有详细的注释。我们一起来看下这段代码。</p>
 
-<blockquote>
-<p>个人建议使用360桌面助手的护眼模式功能，操作方便简单，颜色比较柔和，不会出现偏灰的情况，只可惜不出独立版，要和桌面整理工具一齐才能使用。护眼工具多少都是有点功效的，一般看手机时间较长，比较容易患上眼疾，不是说红眼病，是像红眼病的干眼症+结膜炎等症状。选择观看工具要坚持“宁大勿小”的原则，选择顺序依次为投影、电视、电脑、平板电脑、手机，尽量有电脑的地方使用电脑，尽量不要玩手机，也不要两头切换操作。<strong>玩手机过长比较容易引起“过敏性结膜炎”，什么是“过敏性结膜炎”？</strong>过敏性结膜炎=干眼症+结膜炎，两者基本上是“难兄难弟”一样，很多时候都是同时患上，要看偏向那个，谁轻谁重，就判定是那个。得了这个疾病有什么后果，医生都不好意思说这病治不好，就开几瓶眼药水打发你走。“过敏性结膜炎”在中医诊断为“暴风客热病(风热偏盛症)”，西医诊断为：结膜炎，别称“火眼”，就像孙大圣的“金睛火眼”一样，没有大圣那个有特殊用途，一发作就感觉眼烧起来，眼睛像红眼病一样通红充血，那不叫酸爽，叫痛不欲生。“过敏性结膜炎”就像鼻炎，是治不好的，一看手机稍微长一些就很容易反复发作，一旦患上此病，则看个人体质，个人体质不同缓解时间也不一样，是按月来计的，患上了基本上大半年时间就废掉了，尤其是开始的前几个月发作，感觉人已废了一半。所以要提早预防，建议硬件+软件防护配合使用，<strong>眼保护措施如下</strong>： 1.建议组装电脑显示屏要选“净蓝屏”的屏幕，会过滤掉去掉蓝光的，比普通屏幕多几张毛爷爷，反正是一次性投资，不要过分在意；2 .装上一个护眼工具软件，减低亮度及调暖色系，窗口背景豆沙绿色，只需装一个就OK了，装多了会发生冲突，就像Iris和360桌面助手的护眼工具会发生冲突，注：护眼工具是会影响PS操作，很难判断色差； 3.用计时软件设置定时休息，每一小时休息5至10分钟；4.还需配一个“一键屏幕关闭”软件； 5.近视的话最好配一副防蓝光+抗疲劳眼镜，镜片是显绿色及稍许偏黄的； 6.尽量少玩手机，少刷抖音、微信朋友圈，能用电脑看的就用电脑看，坚持“宁大勿少”原则；<br/>
-<strong>使用建议</strong>：win10系统某些优化版不知是系统自带Bug或还是存在过度优化等问题，会导致开启“夜间模式”失效，会使多数护眼工具失效，如：360桌面助手的“护眼模式”、LightBuld、CareUEyes等软件失效，而Iris和f. lux则无影响，估计没有依赖“夜间模式”的模块功能，另外独立运行；<br/>
-<strong>软件推荐</strong>：win7及win10的“夜间模式”正常的话，用“360桌面助手”、“CareUEyes”或“EyeCareAPP”，合格的“护眼软件”基本要具备两个条件：不同场合的“护眼模式”及类似番茄钟的“定时休息提醒”功能；如果win10系统的“夜间模式”失效的话，则建议使用“Iris”和“f. lux”；</p>
-</blockquote>
+<pre class="line-numbers"><code class="language-python">import re
+# 你不用太关心这个函数
+def parse(text):
+ # 使用正则表达式去除标点符号和换行符
+     text = re.sub(r&#39;[^\w ]&#39;, &#39; &#39;, text)
+     # 转为小写
+     text = text.lower()
 
-<h3 id="toc_6">护眼之“屏显字体”</h3>
+     # 生成所有单词的列表
+     word_list = text.split(&#39; &#39;)
 
-<hr/>
+     # 去除空白单词
+     word_list = filter(None, word_list)
 
-<p>平时在某些平台网站，稍微留意一下，字体一般以微软雅黑、思源黑体为主，好的字体可以减少眼睛疲劳，阅读文章的时候看起来更加舒畅，尤其写作的时候更加舒适。好的“屏显字体”一般多为黑体和圆体，因为字体笔划比较均匀，线条粗细度基本一致，不会出现一粗一细导致偏色的情况。win7、win10系统默认字体为“微软雅黑”，其实“微软雅黑”字体也挺不错的，看起来很悠和，以“微软雅黑”字体作为基准，作为参考，经过多番试验，得出以下字体比较适合作为阅读时或写作时的“屏显字体”：<br/>
-No.1</p>
+     # 生成单词和词频的字典
+     word_cnt = {}
+     for word in word_list:
+         if word not in word_cnt:
+            word_cnt[word] = 0
+            word_cnt[word] += 1
 
-<ul>
-<li>汉仪润圆系列字体，建议用55W；</li>
-<li>方正屏显雅宋简体</li>
-<li>方正准雅宋gbk</li>
-<li>思源黑体</li>
-<li>未来荧黑</li>
-<li>资源圆体<br/>
-No.2</li>
-<li>微软雅黑</li>
-<li>方正兰亭黑体</li>
-<li>方正兰亭圆体</li>
-<li>方正悠黑</li>
-<li>苹方</li>
-<li>小米兰亭Pro<br/>
-No.3 个性字体：</li>
-<li>岚-沁惜体</li>
-<li>悠哉字体</li>
-<li>素材集市康康体<br/>
-介绍完了中文的“屏显字体”，顺便介绍英文的“屏显字体”，通常英文的“屏显字体”适合于代码展示及编写，在屏幕看起来非常合适。</li>
-<li>Consolas</li>
-<li>Source Code Pro</li>
-<li><p>JetBrains Mono<br/>
-那种场景可以用到“屏显字体”呢？中文和英文的“屏显字体”如何配合使用呢？<br/>
-平时用markdown语法写作的时候，默认字体为“宋体”，但是字体达不到一定的粗度及看起来不太舒服，容易导致眼疲劳，可以用到“字体映射”的方法，这里用到两个工具举例子，分别为：</p></li>
-</ul>
+     # 按照词频排序
+     sorted_word_cnt = sorted(word_cnt.items(), key=lambda kv: kv[1], reverse=True)
+
+     return sorted_word_cnt
+with open(&#39;in.txt&#39;, &#39;r&#39;) as fin:
+    text = fin.read()
+word_and_freq = parse(text)
+with open(&#39;out.txt&#39;, &#39;w&#39;) as fout:
+   for word, freq in word_and_freq:
+       fout.write(&#39;{} {}\n&#39;.format(word, freq))
+</code></pre>
+
+<h3 id="toc_4">07 | 修炼基本功：条件与循环</h3>
+
+<p>不过，切记，在实际写代码时，我们鼓励，除了 boolean 类型的数据，条件判断最好是显 性的。比如，在判断一个整型数是否为 0 时，我们最好写出判断的条件：</p>
+
+<pre class="line-numbers"><code class="language-pass">if i != 0:
+ ...
+ 
+#不推荐的写法：
+if i:
+...
+</code></pre>
+
+<pre class="line-numbers"><code class="language-swift">l = [1, 2, 3, 4, 5, 6, 7]
+for index, item in enumerate(l):
+    if index &lt; 5:
+        print(item) 
+</code></pre>
+
+<p>在循环语句中，我们还常常搭配 continue 和 break 一起使用。所谓 continue，就是让程 序跳过当前这层循环，继续执行下面的循环；而 break 则是指完全跳出所在的整个循环 体。在循环中适当加入 continue 和 break，往往能使程序更加简洁、易读。</p>
+
+<p>range() 函数是直接由 C 语言写的，调用它速度非常快。而 while 循环中的“i += 1”这个操作，得通过 Python 的解释器间接调用底层的 C 语言；并且这个简单的操 作，又涉及到了对象的创建和删除（因为 i 是整型，是 immutable，i += 1 相当于 i = new int(i + 1)）。所以，显然，for 循环的效率更胜一筹。</p>
+
+<h3 id="toc_5">08 | 异常处理：如何提高程序的稳定性？</h3>
+
+<pre class="line-numbers"><code class="language-python">class MyInputError(Exception):
+ &quot;&quot;&quot;Exception raised when there&#39;re errors in input&quot;&quot;&quot;
+     def __init__(self, value): # 自定义异常类型的初始化
+        self.value = value
+     def __str__(self): # 自定义异常类型的 string 表达形式
+        return (&quot;{} is invalid input&quot;.format(repr(self.value)))
+
+try:
+    raise MyInputError(1) # 抛出 MyInputError 这个异常
+except MyInputError as err:
+    print(&#39;error: {}&#39;.format(err))
+</code></pre>
+
+<p>异常，通常是指程序运行的过程中遇到了错误，终止并退出。我们通常使用 try except 语句去处理异常，这样程序就不会被终止，仍能继续执行。 处理异常时，如果有必须执行的语句，比如文件打开后必须关闭等等，则可以放在 finally block 中。 异常处理，通常用在你不确定某段代码能否成功执行，也无法轻易判断的情况下，比如数 据库的连接、读取等等。正常的 flow-control 逻辑，不要使用异常处理，直接用条件语 句解决就可以了。</p>
+
+<h3 id="toc_6">09 | 不可或缺的自定义函数</h3>
+
+<pre class="line-numbers"><code class="language-python">def find_largest_element(l):
+    if not isinstance(l, list):
+        print(&#39;input is not type of list&#39;)
+    return
+
+if len(l) == 0:
+    print(&#39;empty input&#39;)
+    return
+    largest_element = l[0]
+    for item in l:
+        if item &gt; largest_element:
+            largest_element = item
+    print(&#39;largest element is: {}&#39;.format(largest_element))
+
+find_largest_element([8, 1, -3, 2, 0])
+# 输出
+# largest
+# element is: 8
+</code></pre>
+
+<pre class="line-numbers"><code class="language-python">def outer():
+    x = &quot;local&quot;
+
+    def inner():
+
+        nonlocal x  # nonlocal 关键字表示这里的 x 就是外部函数 outer 定义的变量 x
+    x = &#39;nonlocal&#39;
+    print(&quot;inner:&quot;, x)
+    inner()
+    print(&quot;outer:&quot;, x)
+
+outer()
+# 输出
+inner:
+nonlocal
+outer:
+nonlocal
+</code></pre>
+
+<pre class="line-numbers"><code class="language-python">def nth_power(exponent):
+    def exponent_of(base):
+        return base ** exponent
+
+    return exponent_of  # 返回值是 exponent_of 函数
+
+
+square = nth_power(2)  # 计算一个数的平方
+cube = nth_power(3)  # 计算一个数的立方
+# square
+# # 输出
+# &lt; function
+# __main__.nth_power. &lt; locals &gt;.exponent(base) &gt;
+# cube
+# # 输出
+# &lt; function
+# __main__.nth_power. &lt; locals &gt;.exponent(base) &gt;
+# print(square(2))  # 计算 2 的平方
+# print(cube(2))  # 计算 2 的立方
+# # 输出
+# 4  # 2^2
+# 8  # 2^3
+</code></pre>
 
 <ol>
-<li><p>markdown语法写作编辑器：Inspire(灵感写作)；</p></li>
-<li><p>文本代码编辑器：HBuliderX；</p>
-<p>Inspire(灵感写作)可以在设置里面自定义字体，遗憾的是只有一项定义文字，只能留着定义中文字体，不能另外定义英文字体；</p>
-<p>HBuliderX可在设置里面自定义字体，分为两项定义，一项可以定义中文字体，另一项定义英文字体，显示出来的文字效果更加优美；</p>
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902194049.jpg" alt="img"/></p>
-<p>定义好字体后，可以在写作的界面看到更换字体后的效果，显示的字体和导出后打印的字体是不一样的，这就是“字体映射”，遗憾的是，像某些MD语法编辑器，不能设置字体，如Typora不能直接在设置里面更换字体，要用到另外的方法在主题里面修改字体；</p></li>
+<li>Python 中函数的参数可以接受任意的数据类型，使用起来需要注意，必要时请在函数开 头加入数据类型的检查；</li>
+<li>.和其他语言不同，Python 中函数的参数可以设定默认值；</li>
+<li>嵌套函数的使用，能保证数据的隐私性，提高程序运行效率；</li>
+<li>合理地使用闭包，则可以简化程序的复杂度，提高可读性。</li>
 </ol>
 
-<h3 id="toc_7">第七章：手机记录类APP</h3>
+<h3 id="toc_7">10 | 简约不简单的匿名函数</h3>
 
-<hr/>
+<p>函数 map(function, iterable) 的第一个参数是函数对象，第二个参 数是一个可以遍历的集合，它表示对 iterable 的每一个元素，都运用 function 这个函数。</p>
 
-<p>手机记录类APP，都是优秀手机软件。<br/>
-<strong>1、GTD工具</strong></p>
+<pre class="line-numbers"><code class="language-bash">python3 -mtimeit -s&#39;xs=range(1000000)&#39; &#39;map(lambda x: x*2, xs)&#39;
+# 2000000 loops, best of 5: 171 nsec per loop
+python3 -mtimeit -s&#39;xs=range(1000000)&#39; &#39;[x * 2 for x in xs]&#39;
+# 5 loops, best of 5: 62.9 msec per loop
+python3 -mtimeit -s&#39;xs=range(1000000)&#39; &#39;l = []&#39; &#39;for i in xs: l.append(i * 2)&#39;
+# 5 loops, best of 5: 92.7 msec per loop
+</code></pre>
 
-<ul>
-<li>TickTick(滴答清单)</li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fmail.sina.com%2Fmeow">喵记</a>，新浪出品</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fdislikeapp.com">dislike</a></li>
-<li>Any. do</li>
-<li>MyLifeOrganized(MLO)</li>
-<li>备忘录(系统自带)
-<strong>2、思维导图</strong></li>
-<li>MindMaster(亿图思维导图)</li>
-<li>XMind
-<strong>3、笔记本</strong></li>
-<li><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.yeyulingfeng.com%2F6347.html">微笔记</a></li>
-<li>FairNote笔记本</li>
-<li>Evernote
-<strong>4、语音录入</strong></li>
-<li>讯飞语记</li>
-<li>Idea Note(闪念胶囊)
-<strong>5、时间日程管理软件</strong></li>
-<li>EssentialPIM
-<strong>6、文本编辑器</strong></li>
-<li>Jota+ Text Editor
-<strong>7、扫描及OCR识别</strong></li>
-<li>扫描全能王</li>
-<li>全能扫描王</li>
-<li>白描</li>
-</ul>
+<p>filter(function, iterable) 函数，它和 map 函数类似，function 同样表示一个 函数对象。filter() 函数表示对 iterable 中的每个元素，都使用 function 判断，并返回 True 或者 False，最后将返回 True 的元素组成一个新的可遍历的集合。</p>
 
-<blockquote>
-<p><strong>软件推荐</strong>：使用TicTick(滴答清单)代替手机的备忘录，毕竟手机的备忘录功能仍不够强大，还有PC版，登录账号方便同步，用来作为待办事项提醒工具；录音工具就用到讯飞语记，方便速记，适合记录霎时间出现的灵感和会议记录等场合录音，而扫描全能王则在身边没有扫描仪、外出的场合作为应急使用；</p>
-</blockquote>
+<pre class="line-numbers"><code class="language-python">l = [1, 2, 3, 4, 5]
+new_list = filter(lambda x: x % 2 == 0, l) # [2, 4]
+</code></pre>
 
-<h3 id="toc_8">“开源软件”汇总一览表</h3>
+<p>最后我们来看 reduce(function, iterable) 函数，它通常用来对一个集合做一些累积操作。 function 同样是一个函数对象，规定它有两个参数，表示对 iterable 中的每个元素以及上 一次调用后的结果，运用 function 进行计算，所以最后返回的是一个单独的数值。</p>
 
-<hr/>
-
-<p>GitHub(微软)、Gitee(开源中国)等“开源代码托管仓库”发布的“开源软件”，上方软件有部分是开源平台的开源软件，有兴趣或喜欢免费软件、支持开源的书友们请在以下发布页下载。</p>
-
-<ul>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fjgraph%2Fdrawio-desktop%2Freleases%2Ftag%2Fv13.4.5">diagrams.net</a>(流程图式思维导图)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fawehook%2Fblink-mind-desktop">BlinkMind</a>(大纲式思维导图)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fbituplink%2Fsetodo">日常轻单(setodo)</a>【待办事项】</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fli-zheng-hao%2FStikyNotes%2Freleases">StikyNotes</a>(便签工具)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FRoderickQiu%2Fwnr">wnr</a>【计时器(番茄钟)】</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgitee.com%2Ficeui%2FiceEditor%23tt_daymode%3D1%26tt_font%3Dm">iceEditor</a>(富文本编辑器)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FJasonStein%2FNotepads">Notepads</a>【记事本(轻量级文本编辑器)】</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgitee.com%2Fcalvinwilliams%2FEditUltra">EditUltra</a>(文本代码编辑器)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fzadam%2Ftrilium%2Freleases">Trilium Notes</a>(MD语法笔记本)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Ftamlok%2Fvnote">Vnote</a>(MD语法笔记本)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fboostio%2Fboostnote.next">BoostNote</a>(MD语法笔记本)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fmarktext%2Fmarktext%2Freleases">Mark Text</a>(MD语法写作编辑器)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.wiz.cn%2Fzh-cn%2Fwiznote-lite">WizNote Lite</a>(MD语法写作编辑器)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fxland%2Fxiangxuema">XXM(想学吗)</a>(MD语法写作编辑器)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FMikescher%2FAlephNote">AlephNote</a>【笔记(便签)管理工具】</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FOnlyDeLtA%2FNotesMan">NotesMan</a>【笔记(便签)管理工具】</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Ffiles-community%2Ffiles-uwp">Files UWP</a>(单窗口多标签式文件管理器)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Ftablacus.github.io%2Fexplorer_en.html">Tablacus Explorer</a>(多窗口多标签式文件管理器)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FXUANXUQAQ%2FFile-Engine">File Engine</a>(桌面效率工具)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fmicrosoft%2FPowerToys">PowerToys Run</a>(桌面效率工具)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Ftylearymf%2FSETUNA2">SETUNA2</a> 【截(贴)图工具】</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fpoerin%2FScreenote">Screenote</a>【截(贴)图工具】</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fthunkli%2Fhummingbird">hummingbird(蜂鸟)</a>【图片压缩工具】</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fmeowtec%2FImagine">Imagine</a>(图片压缩工具)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fhluk%2FCopyQ">CopyQ</a>(剪贴板增强工具)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fhuiyadanli%2FPasteEx">PasteEx</a>(剪贴板转存工具)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fpoerin%2FStroke">Stroke</a>(全局鼠标手势)</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FFushko%2Fgammy">Gammy</a>(护眼工具，调节屏幕亮度)</li>
-</ul>
-
-<h3 id="toc_9">iMac平台对应的优秀软件</h3>
-
-<hr/>
-
-<p>iMac平台优秀软件对应的windows平台软件，左边为iMac软件，右边为windows软件。</p>
-
-<ol>
-<li>思维导图：MindNode VS XMind/MindMaster(亿图思维导图)/MindManager</li>
-<li>摘录批注笔记：MarginNote VS 知之阅读/Bookxnote/堆塔思维/LiquidText</li>
-<li>MD语法写作编辑器：Ulysses/Bear(熊掌记) VS Inspire(灵感写作)/IA Writer/MarkEditor/Farbox Editor</li>
-</ol>
-
-<h3 id="toc_10">延伸话题</h3>
-
-<hr/>
-
-<ul>
-<li>Notion，将笔记本、知识库、任务管理整合的笔记协作工具。原在国内开发，后因开发效果不满意，把整个国内团队解雇了，后东渡日本组建团队重新开发新的版本。Notion于今年5月份宣布个人用户免费几天后被曝出石墨文档前员工抄袭源代码并开发出“寒舟”，后者迫于公众压力，后下架停止开发；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.wolai.com">wolai(我来)</a>，构建个人信息库、笔记、待办的笔记工具，据网友的评价为Notion/语雀 + Roam的结合体，具有双向链功能，类似Notion的全能型的知识工具，更新比较频繁。经过“寒舟事件”的像素级抄写，网民对于类似软件有所预防，那让我们拭目以待，期待后续发挥；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fdocumentnode.io">Document Node</a>(文蝶结)，Markdown语法、富文本笔记本，根据官方简述，应为海外华裔开发；</li>
-<li>Typora，最为著名的跨平台Markdown语法写作编辑器，据说由国人开发的，待网友核实；</li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fobsidian.md">Obsidian</a>(黑曜石)，Markdown语法写作编辑器(个人知识库)，根据官方简述，应为海外华人开发；</li>
-</ul>
-
-<blockquote>
-<p>这几年开发的优秀软件越来越多有国人及华裔的背影，但同质化越来越严重，竞争越来越激烈，抄袭阻碍创新，由此窥见，可谓创业不容易，开发需谨慎。</p>
-</blockquote>
-
-<h3 id="toc_11">总结</h3>
-
-<hr/>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200902194127.png" alt="img"/></p>
-
-<p>“个人知识库”属于“知识管理工具”，可以理解为“个人核武库”，运用工具不在于多而在于精，主要是围绕“知识管理及运用”来运转的，搭建框架将其完善，其实搞好“知识管理”主要是围绕适合自己的“笔记工具”来做为「知识容器」，其它工具为辅，进行一系列步骤：收集→整理→归纳/优化→输出。当初“个人知识库”的构建，也是接触到“知识管理”的相关文章，觉得该花时间研究一下。以前没有“知识管理”的概念，基本都是粗放型的管理，收集的资料比较零碎、分散化，没有及时存档，没有形成结构化、体系化的管理，不便于以后的整合资源、输出应用，唯有将零散的知识笔记组织起来，定期整理内化，将现有的知识储备转换为能力，才能形成强大的生产力。围绕“知识管理”这个主题，初步制定分为几个步骤来慢慢完善：</p>
-
-<ol>
-<li>打造个人知识库；</li>
-<li>建立个人知识管理体系；</li>
-<li>加强知识管理，注重输出及应用；</li>
-<li>知识内化变现；</li>
-<li>利用随手可得的A4纸，创建A4页面的“效率手册”，笔记模板一分为三，分别对应不同场景使用，分为笔记本(NoteBook)—学习/生活用、记事本(NotePad)—工作用、备忘录(Memo Book)—个人用，加强时间管理规划人生；</li>
-</ol>
-
-<h3 id="toc_12">参考资料</h3>
-
-<hr/>
-
-<ul>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fzhuanlan.zhihu.com%2Fp%2F20798798">《普通人的知识管理和软件应用技巧》</a></li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.bilibili.com%2Fvideo%2FBV1os411U7wJ">《知识管理与高效操作》</a></li>
-<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fizyx.xyz">“稻米鼠”</a></li>
-</ul>
+<pre class="line-numbers"><code class="language-python">l = [1, 2, 3, 4, 5]
+product = reduce(lambda x, y: x * y, l) # 1*2*3*4*5 = 120
+</code></pre>
 
                         
                       </div>
@@ -912,117 +1723,427 @@ No.3 个性字体：</li>
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15998025630642.html">
+                <a class="clearlink" href="16032646657736.html">
                 
-                  <h1>群晖NAS安装配置typecho博客教程</h1>
+                  <h1>python格式化输出的方法</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0"><strong>一、环境套件安装</strong></h2>
+                        	<p>python对于数的输出包括%d和%f,下面来详细介绍python对数的输出。</p>
 
-<p>群晖套件中心安装以下套件</p>
+<p>（1）输出整型</p>
 
-<ul>
-<li>Web Station</li>
-<li>Apache HTTP Server 2.4</li>
-<li>PHP 5.6</li>
-<li>MariaDB 5</li>
-<li>phpMyAdmin</li>
-</ul>
+<pre class="line-numbers"><code class="language-text">a=55
+print(&quot;%d&quot;%a)    #直接输出整数a
+print(&quot;%4d&quot;%a)   #默认右对齐，占四个字符的位置，不足则补空格
+print(&quot;%04d&quot;%a)  #默认右对齐，占四个字符位置，不足则补0
+print(&quot;%-4d&quot;%a)  #添加负号表示左对齐，占四个字符位置，不足
+print(&quot;%-04d&quot;%a)     # 则补空格(5,6相同)
+print(&quot;%6.4d&quot;%a)  
+print(&quot;%06.4d&quot;%a)
+print(&quot;%-6.4d&quot;%a)
+print(&quot;%-06.4d&quot;%a)
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191901.jpg" alt="1881983446"/></p>
+#一下为运行结果
+55
+  55
+0055
+55  
+55  
+  0055
+000055
+0055  
+0055  
+</code></pre>
 
-<h2 id="toc_1"><strong>二、创建数据库</strong></h2>
+<p>（2）输出浮点型</p>
 
-<ul>
-<li>浏览器输入<a href="http://192.168.x.x/phpmyadmin">http://192.168.x.x/phpmyadmin</a></li>
-<li>账号root</li>
-<li>密码为安装MariaDB 5套件时设置的密码</li>
-<li>选择服务器-MariaDB 5</li>
-</ul>
+<pre class="line-numbers"><code class="language-text">b=3.1415926535
+print(&quot;%f&quot;%b)   #输出浮点数，默认保留六位小数，不足则补零
+print(&quot;%.3f&quot;%b) #四舍五入保留三位小数。
+print(&quot;%.0f&quot;%b) #四舍五入保留整数位
+print(&quot;%6.3f&quot;%b) #默认右对齐，占六个字符位置，小数点后保留三位
+print(&quot;%06.3f&quot;%b)#默认右对齐，占六个字符位置，小数点后保留三位，不足则补0
+print(&quot;%-6.3f&quot;%b)#加负号表示左对齐，占六个字符位置，不足则补空格
+print(&quot;%-06.3f&quot;%b+&#39;ddl&#39;)
 
-<p>192.168.x.x的IP为群晖的内网IP<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191908.jpg" alt="img"/></p>
+#以下为运行结果
+3.141593
+3.142
+3
+ 3.142
+03.142
+3.142 
+3.142 ddl
+</code></pre>
 
-<ul>
-<li>新建</li>
-<li>填写数据库名称</li>
-<li>创建</li>
-</ul>
+<p>输出整型和浮点型可以类比记忆，两者有许多相似之处。</p>
 
-<p>数据库名称可自行设置,建议使用typecho,blog等方便识别.<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191912.jpg" alt="img"/><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191915.jpg" alt="img"/></p>
+<p>用“%m.nf”,m表示位宽，默认右对齐，不足则在前面补0，n为保留小数的位数。若需要左对齐，在m前面加负号。</p>
 
-<h2 id="toc_2"><strong>三、下载并安装typecho主程序</strong></h2>
+<p>计算机的四舍五入区别于数学上的四舍五入，保留整数的时候四舍六入五看齐，奇入偶不入。保留小数的情况更复杂。这种方式可以在各种误差叠加时尽可能减小误差。<br/>
+除此之外，round函数和format函数也可以实现格式化输出。<br/>
+(3) round函数</p>
 
-<ul>
-<li>访问<a href="http://typecho.org/">typecho官方网站</a>,下载最新版.</li>
-<li>在群晖Web文件夹下创建博客主目录,命名为typecho(或其他任意文件名).</li>
-<li>将下载并解压的主程序build文件夹内的所有文件及文件夹拷贝至博客主目录.</li>
-</ul>
+<p>round(x,n)表示对x四舍五入，保留n位小数，round(x)表示对x保留整数位。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191917.jpg" alt="img"/></p>
+<pre class="line-numbers"><code class="language-text">a=3.1425926
+print(round(a))
+print(round(a,3))
+print(round(a,10))
 
-<ul>
-<li>设置typecho文件夹权限为http</li>
-<li>应用到这个文件夹,子文件夹和子文件</li>
-<li>确定</li>
-</ul>
+#运行结果
+3
+3.143
+3.1425926
+</code></pre>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191920.jpg" alt="img"/></p>
+<p>（4）format函数<br/>
+format函数感兴趣的可以移步这篇文章<br/>
+<a href="https://www.runoob.com/python/att-string-format.html">https://www.runoob.com/python/att-string-format.html</a></p>
 
-<h2 id="toc_3"><strong>四、配置PHP</strong></h2>
+<p>（5）zfill函数</p>
 
-<ul>
-<li>打开Web Station</li>
-<li>PHP设置,选中Default Profile,版本为5.6,编辑.</li>
-<li>扩展名勾选全选,安装扩展.</li>
-</ul>
+<p>Python zfill() 方法返回指定长度的字符串，原字符串右对齐，前面填充0。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191922.jpg" alt="img"/><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191924.jpg" alt="img"/></p>
+<pre class="line-numbers"><code class="language-text">a=&#39;123&#39;
+print(a.zfill(8))  #zfill里面是指定的长度
+print(a.zfill(1))
+#运行结果
+00000123    #八位长度
+123         #需要的长度小于指定长度时，返回自身
+</code></pre>
 
-<h2 id="toc_4"><strong>五、配置Web站点</strong></h2>
+<p>（6）ljust函数和rjust函数</p>
 
-<ul>
-<li>打开Web Station</li>
-<li>虚拟主机</li>
-<li>新增</li>
-<li>填写你的域名</li>
-<li>文档根目录选择刚才在Web下创建的文件夹</li>
-<li>HTTP后端服务器选择 Apache HTTP Server 2.4</li>
-<li>PHP选择Default Profile(PHP 5.6)</li>
-</ul>
+<p>ljust() 方法返回一个原字符串左对齐,并使用空格填充至指定长度的新字符串。如果指定的长度小于原字符串的长度则返回原字符串。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191926.jpg" alt="img"/></p>
+<p>rjust() 返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串。如果指定的长度小于字符串的长度则返回原字符串。</p>
 
-<p>若希望在群晖Web Station中使用国际域名及80/443端口,则需为你的群晖配置DDNS或者内网穿透服务,推荐相关文章以供参考:</p>
+<pre class="line-numbers"><code class="language-text">a=&#39;123&#39;
+print(a.ljust(8,&#39;0&#39;))
+print(a.ljust(8,&#39;x&#39;))
+print(a.rjust(8,&#39;0&#39;))
+print(a.rjust(8,&#39;x&#39;))
 
-<h2 id="toc_5"><strong>六、配置typecho博客</strong></h2>
+#运行结果
+12300000
+123xxxxx
+00000123
+xxxxx123
+</code></pre>
 
-<p>在浏览器中输入你的域名即可开始配置typecho博客<br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191929.jpg" alt="img"/></p>
+<p>由此可以看出，ljust和rjust函数的适用范围要远大于zfill函数。</p>
 
-<ul>
-<li>数据库密码填写群晖安装MariaDB 5时设置的密码</li>
-<li>数据库名填写刚才在phpMyAdmin里新建的数据库名称</li>
-<li>其他参数保持默认</li>
-</ul>
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/10/21</span>
+                    
+          				   
+                    
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191932.jpg" alt="img"/></p>
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
 
-<ul>
-<li>网站地址填写你的域名</li>
-<li>用户名可以自行修改</li>
-<li>填写登录密码</li>
-<li>填写邮件地址</li>
-<li>确认开始安装</li>
-</ul>
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025628862.html">
+                
+                  <h1>SSH 用法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>今天小编为大家分享一篇关于SSH 的介绍和使用方法的文章。本文从SSH是什么出发，讲述了SSH的基本用法，之后在远程登录、端口转发等多种场景下进行独立的讲述，希望能对大家有所帮助。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191934.jpg" alt="img"/><br/>
-<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312191937.jpg" alt="img"/></p>
+<h2 id="toc_0">1 <strong>什么是SSH？</strong></h2>
+
+<p>SSH是一种网络协议，用于计算机之间的加密登录。最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。</p>
+
+<h2 id="toc_1">2 <strong>SSH登录原理</strong></h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230528" alt="img"/></p>
+
+<h2 id="toc_2">3 <strong>SSH基本用法</strong></h2>
+
+<p>语法:</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -p 22 user@host
+</code></pre>
+
+<p>参数:-p：指定端口号。user：登录的用户名。host：登录的主机。</p>
+
+<p>默认的端口号为22，当端口号为22的时候，可以省略，直接使用如下方式:</p>
+
+<pre class="line-numbers"><code class="language-css">ssh user@host
+</code></pre>
+
+<p>此外，如果本地正在使用的用户名与远程登录的用户名一致，登录用户名也是可以省略的，即如下：</p>
+
+<pre class="line-numbers"><code class="language-undefined">ssh host
+</code></pre>
+
+<h2 id="toc_3">4 <strong>SSH远程登录实例</strong></h2>
+
+<p>现在我有两台linux虚拟机，上面安装都是centOS6.5，ip分别为192.168.13.135和192.168.13.138，如下图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230104" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230109" alt="img"/></p>
+
+<p>现在，我需要操作的是通过SSH在192.168.13.138上面，登录到192.168.13.135上面。首先，我们可以使用如下命令，查看两台机器是否启用了ssh。</p>
+
+<pre class="line-numbers"><code class="language-undefined">netstat -ntlp |grep ssh
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230118" alt="img"/></p>
+
+<p>使用如下命令进行连接。</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -p 22 root@192.168.13.135
+</code></pre>
+
+<p>若在本机上是首次登录该远程主机，则会出现如下界面。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230131" alt="img"/></p>
+
+<p>大致意思就是，无法确认host主机的真实性，只知道它的公钥指纹，问你还想继续连接吗？输入yes即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230142" alt="img"/></p>
+
+<p>然后输入密码，即可连接ok了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230154" alt="img"/></p>
+
+<p>要想退出，直接输入exit即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230201" alt="img"/></p>
+
+<h2 id="toc_4">5 <strong>SSH端口转发</strong></h2>
+
+<p>SSH 不仅仅能够自动加密和解密 SSH 客户端与服务端之间的网络数据，同时，SSH 还能够提供了一个非常有用的功能，那就是端口转发，即将TCP 端口的网络数据，转发到指定的主机某个端口上，在转发的同时会对数据进行相应的加密及解密。如果工作环境中的防火墙限制了一些网络端口的使用，但是允许 SSH 的连接，那么也是能够通过使用SSH转发后的端口进行通信。转发，主要分为本地转发与远程转发两种类型。</p>
+
+<h3 id="toc_5">1.转发的参数</h3>
+
+<pre class="line-numbers"><code class="language-undefined">-C：压缩数据
+-f ：后台认证用户/密码，通常和-N连用，不用登录到远程主机。
+-N ：不执行脚本或命令，通常与-f连用。
+-g ：在-L/-R/-D参数中，允许远程主机连接到建立的转发的端口，如果不加这个参数，只允许本地主机建立连接。
+-L : 本地端口:目标IP:目标端口
+-D : 动态端口转发
+-R : 远程端口转发
+-T ：不分配 TTY 只做代理用
+-q ：安静模式，不输出 错误/警告 信息
+</code></pre>
+
+<h3 id="toc_6">2.本地转发</h3>
+
+<p>有本地网络服务器的某个端口，转发到远程服务器某个端口。说白了就是，将发送到本地端口的请求，转发到目标端口。格式如下：ssh -L 本地网卡地址:本地端口:目标地址:目标端口 用户@目标地址。现在我们利用本地转发来解决一个问题，比如我们有两台机器，如下：centos A（192.168.13.139）centos B（192.168.13.142）</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230211" alt="img"/></p>
+
+<p>现在，centos B（192.168.13.142）机器上面安装了mysql，并设置了运行任何主机连接，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230224" alt="img"/></p>
+
+<p>此时，在centos A（192.168.13.139）上面是可以连上centos B（192.168.13.142）的mysql，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230229" alt="img"/></p>
+
+<p>那么，现在我开始centos B（192.168.13.142）限制不允许外部ip连接，仅仅让127.0.0.1连接，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230241" alt="img"/></p>
+
+<p>此时，centos A（192.168.13.139）上面怎么连接上centos B（192.168.13.142）的mysql呢？</p>
+
+<p>此时，我们还是使用上面的mysql连接方式，肯定会报错，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230253" alt="img"/></p>
+
+<p>当然在centos B（192.168.13.142）mysql还是可访问的。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230258" alt="img"/></p>
+
+<p>这个时候，我们就可以使用本地端口转发了，将本地的某个端口，映射到centos B（192.168.13.142）机器上面的，如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L 127.0.0.1:3306:127.0.0.1:3306 root@192.168.13.142
+</code></pre>
+
+<p>因为本地网卡地址是可以省略的，上面的转发，可以简写为：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L 3306:127.0.0.1:3306 root@192.168.13.142
+</code></pre>
+
+<p>当然，ssh连接的时候，若两台机器的用户名相同，也是可以省略的，即命令可以简写为：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L 3306:127.0.0.1:3306 192.168.13.14
+</code></pre>
+
+<p>上面的代码就是将本地的3306端口，转发到192.168.13.142的3306端口。因为centos B（192.168.13.142）上面的mysql使用的3606端口。当然，我们首先得看看本地的3306端口是否被占用，如被占用，可以使用其他的端口。</p>
+
+<p>数据流向如图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230316" alt="img"/></p>
+
+<p>首先，centos A（192.168.13.139）上的应用将数据发送到本地的127.0.0.1上面的3306端口。然后，centos A（192.168.13.139）将3306端口的数据，通过SSH转发到centos B（192.168.13.142）的3306端口。接着，centos B（192.168.13.142）将处理后的数据，原路返回给centos A（192.168.13.139）。如果是首次通过ssh连接cetosB该机器，则会提示确认公钥，并让你选择是否确定连接。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230321" alt="img"/></p>
+
+<p>此时，我们在centos A上面连接centos B上面的mysql，就可以这么写了。</p>
+
+<pre class="line-numbers"><code class="language-undefined">bin/mysql -h127.0.0.1 -uroot -p
+</code></pre>
+
+<p>如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230330" alt="img"/></p>
+
+<p>我们可以通过下面命令，在centosA查看ssh转发监听的进程。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230340" alt="img"/></p>
+
+<h3 id="toc_7">3.远程转发</h3>
+
+<p>由远程服务器的某个端口，转发到本地网络的服务器某个端口。说白了，就是将发送到远程端口的请求，转发到目标端口。格式如下：ssh -R 远程网卡地址:远程端口:目标地址:目标端口下面三台机器为例，如下：centos A（192.168.13.139）centos B（192.168.13.142）win7（10.18.78.135）假设，win7（10.18.78.135）与centos B（192.168.13.142）不能直接连接，但是win7（10.18.78.135）与centos A（192.168.13.139）可以连接centos B（192.168.13.142）也可以centos A（192.168.13.139）连接，那么，我们就可以在centos A（192.168.13.139）上面使用远程端口转发了，让win7（10.18.78.135）与centos B（192.168.13.142）进行通信。</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -R 127.0.0.1:80:10.18.78.135:80 root@192.168.13.142
+</code></pre>
+
+<p>即centos B（192.168.13.142）监听自己的80端口，然后将所有数据，由centos A（192.168.13.139）发给win7（10.18.78.135）。</p>
+
+<h2 id="toc_8">6 <strong>SSH的远程操作</strong></h2>
+
+<p>ssh远程操作，主要用于在远程的机器上面执行某个操作，格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh user@host &#39;command&#39;
+</code></pre>
+
+<p>案例1、在机器A（192.168.13.148）中查看机器B（192.168.13.149）的操作系统类型。在A机器上面执行如下代码：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh  dequan@192.168.13.149  &#39;uname -a&#39;
+</code></pre>
+
+<p>案例2、将机器A（192.168.13.148）中test文件夹复制到B机器（192.168.13.149）。在A机器上面，执行如下命令：</p>
+
+<pre class="line-numbers"><code class="language-bash">tar -cz test | ssh dequan@192.168.13.149 &#39;tar -xz&#39;
+</code></pre>
+
+<p>当然，我们也可以使用scp命令或rz命令，传输文件。案例3、在机器A（192.168.13.148）处查看B机器（192.168.13.149）是否监听了1080端口。在A机器上面，执行如下命令：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh dequan@192.168.13.149 &#39;netstat -tln |grep 1080&#39;
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230356" alt="img"/></p>
+
+<h2 id="toc_9">7 <strong>SSH的本地转发</strong></h2>
+
+<p>本地转发，说白了，就是把发到本地的某个端口请求，转发到远程的某台机器上面。格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L  [本地地址:]本地端口:远程地址:远程端口 远程用户@远程地址
+</code></pre>
+
+<p>案例1、在机器B（192.168.13.149）上面访问机器A（192.168.13.148）的服务。</p>
+
+<p>现在，我们在A机器上面，启动了Nginx服务，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230405" alt="img"/></p>
+
+<p>我们希望B机器也能够这样使用A机器上面的服务。需要把B机器上面80端口请求，转发到A机器上面。目前在B机器这样执行，是报错的，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230410" alt="img"/></p>
+
+<p>需要在B机器上面，执行如下代码：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -f -N -L 127.0.01:80:192.168.13.148:80 dequan@192.168.13.148
+</code></pre>
+
+<p>然后，在B机器上面，访问A机器的服务，就想访问自身的服务一样。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230421" alt="img"/></p>
+
+<h2 id="toc_10">8 <strong>SSH的远程转发</strong></h2>
+
+<p>远程转发，即把发给远程机器的某个端口请求，转发到本地的机器上面。格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -R [远程地址:]远程端口:本地地址:本地端口 远程用户@远程地址
+</code></pre>
+
+<p>在上面的案例中，我们也可以通过远程转发来实现。即在A机器上面执行如下代码：</p>
+
+<pre class="line-numbers"><code class="language-css">sudo ssh -f -N -R 8081:127.0.0.1:80 dequan@192.168.13.149
+</code></pre>
+
+<p>我们监听了B机器的8081端口，把该端口的请求，转发到A机器上面。可以在B机器上面看到，我们的监听，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230428" alt="img"/></p>
+
+<p>此时，执行如下命令，就会被转发到A机器的127.0.0.1的80端口，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230433" alt="img"/></p>
+
+<h3 id="toc_11">1、利用远程转发，实现代理功能</h3>
+
+<p>目前B机器，只能在自己127.0.0.1的80端口监听并转发，如何让B机器作为代理，转发其他机器的请求到A机器上面呢？比如，现在有一台机器C（192.168.13.143），C不能访问A，但是能够访问B。如何让C利用B来访问A呢？此时，需要将B的监听，由127.0.0.1:8081，改为0:0.0.0:8081，修改sshd的配置/etc/ssh/sshd_config。</p>
+
+<pre class="line-numbers"><code class="language-undefined"> vim /etc/ssh/sshd_config
+如果有
+GatewayPorts no
+改为
+GatewayPorts yes
+
+没有，添加即可
+然后重启sshd
+
+sudo service sshd restart
+</code></pre>
+
+<p>然后重新，设置动态转发，如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -f -g  -N -R 8081:127.0.0.1:80 dequan@192.168.13.149
+</code></pre>
+
+<p>可以看到，此时B机器，已经监听了0:0.0.0:8081</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230442" alt="img"/></p>
+
+<p>在C机器上面，我们通过curl模拟请求，利用B机器做代理，如下：</p>
+
+<pre class="line-numbers"><code class="language-css">curl -x 192.168.13.149:8081 127.0.0.1
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230449" alt="img"/></p>
+
+<p>当然，如果还有其他机器，也可以使用类似的方式，来请求A机器。</p>
+
+<h2 id="toc_12">9 <strong>SSH的动态转发</strong></h2>
+
+<p>对于SSH的本地转发和远程转发，都需要将本地端口和远程端口一一绑定，格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -D [本地地址:]本地端口号 远程用户@远程地址
+</code></pre>
+
+<p>比如，把发到B机器上面的请求，都转发到A机器上面，让A机器去执行请求。</p>
+
+<h2 id="toc_13">10 <strong>SSH存在的问题</strong></h2>
+
+<p>如果有人截获了登录请求，然后冒充远程主机，将伪造的公钥发给用户，那么用户很难辨别真伪。因为不像https协议，SSH协议的公钥是没有证书中心（CA）公证的，也就是说，都是自己签发的。可以设想，如果攻击者插在用户与远程主机之间（比如在公共的wifi区域），用伪造的公钥，获取用户的登录密码。再用这个密码登录远程主机，那么SSH的安全机制就荡然无存了。这种风险就是著名的&quot;中间人攻击&quot;（Man-in-the-middle attack）。</p>
+
+<h2 id="toc_14">11 <strong>总结</strong></h2>
+
+<p>本篇文章主要介绍了SSH的基本概念和实践中常用的一些方法，并没有涉及深层原理和优化的知识，在底层实现和协议具体内容还能继续深入研究。如果有什么疑问或建议，可以在下方留言。</p>
 
                         
                       </div>
@@ -1048,63 +2169,1170 @@ No.3 个性字体：</li>
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15998025630555.html">
+                <a class="clearlink" href="16177589969377.html">
                 
-                  <h1>高效 PyCharm 使用技巧</h1>
+                  <h1>SSH 用法</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><img src="media/15998025630555/9f33a362acb4425abada4fda743a71f8.jpg" alt="img"/><br/>
-    今天要写一些可以明显改善开发效率的使用技巧，一旦学会，受用一生。以下代码演示是在 Mac 环境下，Windows 也类似，Command 键 相当于 Windows 上的 Control 键。</p>
+                        	<p>今天小编为大家分享一篇关于SSH 的介绍和使用方法的文章。本文从SSH是什么出发，讲述了SSH的基本用法，之后在远程登录、端口转发等多种场景下进行独立的讲述，希望能对大家有所帮助。</p>
+
+<h2 id="toc_0">1 <strong>什么是SSH？</strong></h2>
+
+<p>SSH是一种网络协议，用于计算机之间的加密登录。最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。</p>
+
+<h2 id="toc_1">2 <strong>SSH登录原理</strong></h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230528" alt="img"/></p>
+
+<h2 id="toc_2">3 <strong>SSH基本用法</strong></h2>
+
+<p>语法:</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -p 22 user@host
+</code></pre>
+
+<p>参数:-p：指定端口号。user：登录的用户名。host：登录的主机。</p>
+
+<p>默认的端口号为22，当端口号为22的时候，可以省略，直接使用如下方式:</p>
+
+<pre class="line-numbers"><code class="language-css">ssh user@host
+</code></pre>
+
+<p>此外，如果本地正在使用的用户名与远程登录的用户名一致，登录用户名也是可以省略的，即如下：</p>
+
+<pre class="line-numbers"><code class="language-undefined">ssh host
+</code></pre>
+
+<h2 id="toc_3">4 <strong>SSH远程登录实例</strong></h2>
+
+<p>现在我有两台linux虚拟机，上面安装都是centOS6.5，ip分别为192.168.13.135和192.168.13.138，如下图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230104" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230109" alt="img"/></p>
+
+<p>现在，我需要操作的是通过SSH在192.168.13.138上面，登录到192.168.13.135上面。首先，我们可以使用如下命令，查看两台机器是否启用了ssh。</p>
+
+<pre class="line-numbers"><code class="language-undefined">netstat -ntlp |grep ssh
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230118" alt="img"/></p>
+
+<p>使用如下命令进行连接。</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -p 22 root@192.168.13.135
+</code></pre>
+
+<p>若在本机上是首次登录该远程主机，则会出现如下界面。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230131" alt="img"/></p>
+
+<p>大致意思就是，无法确认host主机的真实性，只知道它的公钥指纹，问你还想继续连接吗？输入yes即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230142" alt="img"/></p>
+
+<p>然后输入密码，即可连接ok了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230154" alt="img"/></p>
+
+<p>要想退出，直接输入exit即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230201" alt="img"/></p>
+
+<h2 id="toc_4">5 <strong>SSH端口转发</strong></h2>
+
+<p>SSH 不仅仅能够自动加密和解密 SSH 客户端与服务端之间的网络数据，同时，SSH 还能够提供了一个非常有用的功能，那就是端口转发，即将TCP 端口的网络数据，转发到指定的主机某个端口上，在转发的同时会对数据进行相应的加密及解密。如果工作环境中的防火墙限制了一些网络端口的使用，但是允许 SSH 的连接，那么也是能够通过使用SSH转发后的端口进行通信。转发，主要分为本地转发与远程转发两种类型。</p>
+
+<h3 id="toc_5">1.转发的参数</h3>
+
+<pre class="line-numbers"><code class="language-undefined">-C：压缩数据
+-f ：后台认证用户/密码，通常和-N连用，不用登录到远程主机。
+-N ：不执行脚本或命令，通常与-f连用。
+-g ：在-L/-R/-D参数中，允许远程主机连接到建立的转发的端口，如果不加这个参数，只允许本地主机建立连接。
+-L : 本地端口:目标IP:目标端口
+-D : 动态端口转发
+-R : 远程端口转发
+-T ：不分配 TTY 只做代理用
+-q ：安静模式，不输出 错误/警告 信息
+</code></pre>
+
+<h3 id="toc_6">2.本地转发</h3>
+
+<p>有本地网络服务器的某个端口，转发到远程服务器某个端口。说白了就是，将发送到本地端口的请求，转发到目标端口。格式如下：ssh -L 本地网卡地址:本地端口:目标地址:目标端口 用户@目标地址。现在我们利用本地转发来解决一个问题，比如我们有两台机器，如下：centos A（192.168.13.139）centos B（192.168.13.142）</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230211" alt="img"/></p>
+
+<p>现在，centos B（192.168.13.142）机器上面安装了mysql，并设置了运行任何主机连接，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230224" alt="img"/></p>
+
+<p>此时，在centos A（192.168.13.139）上面是可以连上centos B（192.168.13.142）的mysql，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230229" alt="img"/></p>
+
+<p>那么，现在我开始centos B（192.168.13.142）限制不允许外部ip连接，仅仅让127.0.0.1连接，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230241" alt="img"/></p>
+
+<p>此时，centos A（192.168.13.139）上面怎么连接上centos B（192.168.13.142）的mysql呢？</p>
+
+<p>此时，我们还是使用上面的mysql连接方式，肯定会报错，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230253" alt="img"/></p>
+
+<p>当然在centos B（192.168.13.142）mysql还是可访问的。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230258" alt="img"/></p>
+
+<p>这个时候，我们就可以使用本地端口转发了，将本地的某个端口，映射到centos B（192.168.13.142）机器上面的，如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L 127.0.0.1:3306:127.0.0.1:3306 root@192.168.13.142
+</code></pre>
+
+<p>因为本地网卡地址是可以省略的，上面的转发，可以简写为：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L 3306:127.0.0.1:3306 root@192.168.13.142
+</code></pre>
+
+<p>当然，ssh连接的时候，若两台机器的用户名相同，也是可以省略的，即命令可以简写为：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L 3306:127.0.0.1:3306 192.168.13.14
+</code></pre>
+
+<p>上面的代码就是将本地的3306端口，转发到192.168.13.142的3306端口。因为centos B（192.168.13.142）上面的mysql使用的3606端口。当然，我们首先得看看本地的3306端口是否被占用，如被占用，可以使用其他的端口。</p>
+
+<p>数据流向如图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230316" alt="img"/></p>
+
+<p>首先，centos A（192.168.13.139）上的应用将数据发送到本地的127.0.0.1上面的3306端口。然后，centos A（192.168.13.139）将3306端口的数据，通过SSH转发到centos B（192.168.13.142）的3306端口。接着，centos B（192.168.13.142）将处理后的数据，原路返回给centos A（192.168.13.139）。如果是首次通过ssh连接cetosB该机器，则会提示确认公钥，并让你选择是否确定连接。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230321" alt="img"/></p>
+
+<p>此时，我们在centos A上面连接centos B上面的mysql，就可以这么写了。</p>
+
+<pre class="line-numbers"><code class="language-undefined">bin/mysql -h127.0.0.1 -uroot -p
+</code></pre>
+
+<p>如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230330" alt="img"/></p>
+
+<p>我们可以通过下面命令，在centosA查看ssh转发监听的进程。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230340" alt="img"/></p>
+
+<h3 id="toc_7">3.远程转发</h3>
+
+<p>由远程服务器的某个端口，转发到本地网络的服务器某个端口。说白了，就是将发送到远程端口的请求，转发到目标端口。格式如下：ssh -R 远程网卡地址:远程端口:目标地址:目标端口下面三台机器为例，如下：centos A（192.168.13.139）centos B（192.168.13.142）win7（10.18.78.135）假设，win7（10.18.78.135）与centos B（192.168.13.142）不能直接连接，但是win7（10.18.78.135）与centos A（192.168.13.139）可以连接centos B（192.168.13.142）也可以centos A（192.168.13.139）连接，那么，我们就可以在centos A（192.168.13.139）上面使用远程端口转发了，让win7（10.18.78.135）与centos B（192.168.13.142）进行通信。</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -R 127.0.0.1:80:10.18.78.135:80 root@192.168.13.142
+</code></pre>
+
+<p>即centos B（192.168.13.142）监听自己的80端口，然后将所有数据，由centos A（192.168.13.139）发给win7（10.18.78.135）。</p>
+
+<h2 id="toc_8">6 <strong>SSH的远程操作</strong></h2>
+
+<p>ssh远程操作，主要用于在远程的机器上面执行某个操作，格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh user@host &#39;command&#39;
+</code></pre>
+
+<p>案例1、在机器A（192.168.13.148）中查看机器B（192.168.13.149）的操作系统类型。在A机器上面执行如下代码：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh  dequan@192.168.13.149  &#39;uname -a&#39;
+</code></pre>
+
+<p>案例2、将机器A（192.168.13.148）中test文件夹复制到B机器（192.168.13.149）。在A机器上面，执行如下命令：</p>
+
+<pre class="line-numbers"><code class="language-bash">tar -cz test | ssh dequan@192.168.13.149 &#39;tar -xz&#39;
+</code></pre>
+
+<p>当然，我们也可以使用scp命令或rz命令，传输文件。案例3、在机器A（192.168.13.148）处查看B机器（192.168.13.149）是否监听了1080端口。在A机器上面，执行如下命令：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh dequan@192.168.13.149 &#39;netstat -tln |grep 1080&#39;
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230356" alt="img"/></p>
+
+<h2 id="toc_9">7 <strong>SSH的本地转发</strong></h2>
+
+<p>本地转发，说白了，就是把发到本地的某个端口请求，转发到远程的某台机器上面。格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -L  [本地地址:]本地端口:远程地址:远程端口 远程用户@远程地址
+</code></pre>
+
+<p>案例1、在机器B（192.168.13.149）上面访问机器A（192.168.13.148）的服务。</p>
+
+<p>现在，我们在A机器上面，启动了Nginx服务，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230405" alt="img"/></p>
+
+<p>我们希望B机器也能够这样使用A机器上面的服务。需要把B机器上面80端口请求，转发到A机器上面。目前在B机器这样执行，是报错的，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230410" alt="img"/></p>
+
+<p>需要在B机器上面，执行如下代码：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -f -N -L 127.0.01:80:192.168.13.148:80 dequan@192.168.13.148
+</code></pre>
+
+<p>然后，在B机器上面，访问A机器的服务，就想访问自身的服务一样。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230421" alt="img"/></p>
+
+<h2 id="toc_10">8 <strong>SSH的远程转发</strong></h2>
+
+<p>远程转发，即把发给远程机器的某个端口请求，转发到本地的机器上面。格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -R [远程地址:]远程端口:本地地址:本地端口 远程用户@远程地址
+</code></pre>
+
+<p>在上面的案例中，我们也可以通过远程转发来实现。即在A机器上面执行如下代码：</p>
+
+<pre class="line-numbers"><code class="language-css">sudo ssh -f -N -R 8081:127.0.0.1:80 dequan@192.168.13.149
+</code></pre>
+
+<p>我们监听了B机器的8081端口，把该端口的请求，转发到A机器上面。可以在B机器上面看到，我们的监听，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230428" alt="img"/></p>
+
+<p>此时，执行如下命令，就会被转发到A机器的127.0.0.1的80端口，如下：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230433" alt="img"/></p>
+
+<h3 id="toc_11">1、利用远程转发，实现代理功能</h3>
+
+<p>目前B机器，只能在自己127.0.0.1的80端口监听并转发，如何让B机器作为代理，转发其他机器的请求到A机器上面呢？比如，现在有一台机器C（192.168.13.143），C不能访问A，但是能够访问B。如何让C利用B来访问A呢？此时，需要将B的监听，由127.0.0.1:8081，改为0:0.0.0:8081，修改sshd的配置/etc/ssh/sshd_config。</p>
+
+<pre class="line-numbers"><code class="language-undefined"> vim /etc/ssh/sshd_config
+如果有
+GatewayPorts no
+改为
+GatewayPorts yes
+
+没有，添加即可
+然后重启sshd
+
+sudo service sshd restart
+</code></pre>
+
+<p>然后重新，设置动态转发，如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -f -g  -N -R 8081:127.0.0.1:80 dequan@192.168.13.149
+</code></pre>
+
+<p>可以看到，此时B机器，已经监听了0:0.0.0:8081</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230442" alt="img"/></p>
+
+<p>在C机器上面，我们通过curl模拟请求，利用B机器做代理，如下：</p>
+
+<pre class="line-numbers"><code class="language-css">curl -x 192.168.13.149:8081 127.0.0.1
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828230449" alt="img"/></p>
+
+<p>当然，如果还有其他机器，也可以使用类似的方式，来请求A机器。</p>
+
+<h2 id="toc_12">9 <strong>SSH的动态转发</strong></h2>
+
+<p>对于SSH的本地转发和远程转发，都需要将本地端口和远程端口一一绑定，格式如下：</p>
+
+<pre class="line-numbers"><code class="language-css">ssh -D [本地地址:]本地端口号 远程用户@远程地址
+</code></pre>
+
+<p>比如，把发到B机器上面的请求，都转发到A机器上面，让A机器去执行请求。</p>
+
+<h2 id="toc_13">10 <strong>SSH存在的问题</strong></h2>
+
+<p>如果有人截获了登录请求，然后冒充远程主机，将伪造的公钥发给用户，那么用户很难辨别真伪。因为不像https协议，SSH协议的公钥是没有证书中心（CA）公证的，也就是说，都是自己签发的。可以设想，如果攻击者插在用户与远程主机之间（比如在公共的wifi区域），用伪造的公钥，获取用户的登录密码。再用这个密码登录远程主机，那么SSH的安全机制就荡然无存了。这种风险就是著名的&quot;中间人攻击&quot;（Man-in-the-middle attack）。</p>
+
+<h2 id="toc_14">11 <strong>总结</strong></h2>
+
+<p>本篇文章主要介绍了SSH的基本概念和实践中常用的一些方法，并没有涉及深层原理和优化的知识，在底层实现和协议具体内容还能继续深入研究。如果有什么疑问或建议，可以在下方留言。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2021/04/07</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16115637115601.html">
+                
+                  <h1>Surge 把你的 Mac 变成最强路由器</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>2021-01-16 290 words  2 minutes </p>
+
+<p>CONTENTS</p>
+
+<p>最近一两年我用过很多路由器：斐讯 n1、NanoPi r2s、NanoPi r4s、华硕 ax86u 等等都是蛮热门的产品。但在我前俩天买了用了 Mac 的 Surge 当作家里的路由器后，方便和体验真的是回不去了。</p>
+
+<p>关于 surge 4 的教程特别是 DHCP 当做路由器，我看网上的资料教程实在是很少，自己查也废了不少功夫，就写个教程做个视频分享给大家。温馨提示：<strong>首先你得有台放在家里，最好接着网线的 Mac 系统电脑；还有就是你要花几百块买 Surge 这个软件。</strong></p>
+
+<p>Surge 是一个很强大的网络工具，不仅仅是一个代理软件；目前 Surge 是版本买断制度的，你可以直接在<a href="https://nssurge.com/buy_now">官网购买</a>，然后就能一直使用 Surge 4 这个大的版本了。</p>
+
+<h2 id="toc_0">Surge DHCP 接管网络</h2>
+
+<h3 id="toc_1">1 添加 Surge 的配置文件</h3>
+
+<p>你订阅的服务应该会给 Surge 的<strong>订阅链接</strong>，如果没有也没关系，你可以通过第三方 <a href="https://bianyuan.xyz/">订阅转换</a> 生成（推荐用这个，分流会丰富合理很多）：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211324-20210125161246169.png" alt="https://oss.qust.me/img/20210116211324.png"/></p>
 
 <ol>
-<li><p><strong>代码排版，自动PEP8</strong></p>
-<p>​    pep8 是Python 语言的一个代码编写规范。如若你是新手，目前只想快速掌握基础，而不想过多去注重代码的的编写风格（虽然这很重要），那你可以尝试一下这个工具 - autopep8<br/>
-​    首先在全局环境中（不要在虚拟环境中安装），安装一下这个工具。<br/>
-​    <code>sudo pip install autopep8</code><br/>
-​    然后在 Pycharm 里导入这个工具。<br/>
-​    `<code>Name: AutoPep8</code><br/>
-​    <code>Description: autopep8 your code</code><br/>
-​    <code>Program: autopep8</code><br/>
-​    <code>Arguments: --in-place --aggressive --aggressive $FilePath$</code><br/>
-​    <code>Working directory: $ProjectFileDir$</code><br/>
-​    <code>Output filters: $FILE_PATH$:$LINE$:$COLUMN$:.*</code><img src="media/15998025630555/836ad1129a654b62b51fb4a22b5f6666.jpg" alt="img"/><br/>
-​    我随意写了一段不符合 pep8 规范的代码。<img src="media/15998025630555/39c672bbb2f648a5bdc7747932a50545.jpg" alt="img"/><br/>
-​    点击右键，选择 <code>External Tools -&gt; AutoPep8</code><img src="media/15998025630555/8415682bae244ded8d365243154892d8.jpg" alt="img"/><br/>
-​    看一下效果，还是挺明显的。<img src="media/15998025630555/c692e21e0bb843ad8a0e49cf66defaf0.jpg" alt="img"/><br/>
-​    你可能会说，Pycharm 本身就自带这个功能了呀，快捷键 Command+Option+L ，就可以实现一键pep8了。你可以对比一下，Pycharm 自带的代码 pep8 化功能 并没有像这个autopep8 来得彻底。我相信你最终的选择肯定是后者。</p></li>
-<li><p><strong>误删文件，一秒找回</strong></p>
-<p>​    上周，由于自己的误操作，在没有任何备份的情况下，将一个自己写了两个星期的项目给删除了。待我回头神来的时候，我甚至都记不起是何时进行的删除操作。<br/>
-做为一名老司机，当然是临危不惧地打开了回收站，进行一番搜寻，几个月没有清理过的回收站，真是一片狼藉，什么 jpg，avi 都有，不堪入目呀。<br/>
-​    我用一分钟快速浏览了一下，没有发现我要找的那几个 py 文件，我心想，应该是文件太多了，看叉掉了。由于项目是最近写的，文件名我还清楚地记得，既然有文件名，那就利用windows 自带的搜索功能，结果还是没有，这下我才开始意识到事态的严重性，文件可能真的「没了」。<br/>
-​    我已经很久没有清理过回收站了，为什么回收站里会没有我的文件呢？<br/>
-​    我想这可能是一次非同寻常的 delete，会不会是在 Pycharm 里的 发起删除操作，不会往回收站里丢呢？经过一番测试，在回收站还真的找不着，但是这次尝试也无意中发现了 Pycharm 的隐藏的一个功能 Local History，它会保存你对文件的所有操作记录。<br/>
-就拿我的刚刚测试的文件来举例，我先是新建了一个文件，然后对在这个文件里添加了几行代码。最后我将这个文件删除了。<br/>
-​    此时你可以在你的项目目录里，点击右键，有个 Local History 的选项，再点击子选项 Show History，你可以看到这里有个记录板。如果你想恢复删除的文件，就在删除的记录项点击右键，选择 <strong>Revert</strong> 即可恢复。<br/>
-<img src="media/15998025630555/239c8f3665dc4ca9a8124df77438cf6a.jpg" alt="img"/></p></li>
-<li><p><strong>拥抱Vim，远离鼠标</strong></p>
-<p>​    在大多数场景之下，使用鼠标的效率和精准度，是远不如键盘快捷键的（前提是你已经相当熟练的掌握了快捷键），这个你得承认吧。</p>
-<p>​    Vi 可以满足你对文本操作的所有需求，比可视化界面更加效率，更加 geek。如果你和我一样，是忠实的 vim 粉。在安装完 Pycharm 完后，肯定会第一时间将 ideaVim 这个插件也装上，它可以让我们在 Pycharm 中 使用 vim 来编辑代码。</p>
-<p>​    安装方法如下，安装完后需要重启 Pycharm 生效。<img src="media/15998025630555/dc87ebb6c84f42ceb059e3fe92522069.jpg" alt="img"/></p></li>
-<li><p><strong>代码模板，效率编码</strong></p>
-<p>​    Pycharm 提供的这个代码模板，可以说是相当实用的一个功能了。它可以在你新建一个文件时，按照你预设的模板给你生成一段内容，比如解释器路径，编码方法，作者详细信息等<img src="media/15998025630555/63d745ced36741e8a776127a475aa7ad.jpg" alt="img"/><br/>
-​    按照上图模板，生成的效果如下。<img src="media/15998025630555/de54ff09184d4fb8b1e1cf54d118a289.jpg" alt="img"/><br/>
-​    除了新建文件时可以初始化文件，在开发编写代码时，也同样使用 Pycharm 中自带的实用的代码模板，提高你的编码效率。</p>
-<p>​    当你在键盘中敲入 <code>Command + J</code> 时，就可以调出一个面板，从下图可以看出里面有许多预设的模板。<img src="media/15998025630555/18f628ee708f4753bbbda6c5a4cd3d05.jpg" alt="img"/><br/>
-​    如果我们想选择最后一个 main ，可以继续键入 main，然后就可以直接生成如下这段平时都要手动敲入的代码。<img src="media/15998025630555/a6a07561e0fd425d97324f62c0c6464d.gif" alt="img"/><br/>
-​    这里再举个例子，for 循环 可以这样写。<img src="media/15998025630555/281652db235044659c2c12bad6ae14f6.gif" alt="img"/></p></li>
-<li><p><strong>使用书签，快速定位</strong></p>
-<p>​    都我在看框架的源代码时，最常使用的是 Command + B （也就是 command + 鼠标左键 ）一层一层地往里深入，但是当源代码比较多，可能一整个事件过程涉及十几文件，函数调用错综复杂，对于一个庞大的项目来说，有用的可能就几个关键函数，每次要找到这几个函数，都要重头从源函数再一层一层的找下去，这样实在太麻烦了，我常常因此把自己给看晕了。<br/>
-​    直到后来我发现了 Pycharm 这个书签功能。<br/>
-​    使用书签功能，我可以在在关键的位置打上书签，想看的时候，调用书签，快速定位即可。<br/>
-​    使用它，你需要记住下面下几个快捷键<br/>
-​    <code>Command + F11</code> 打上书签<br/>
-​    <code>Shift + F11</code> 展示所有书签<br/>
-​    <code>F11 删除书签</code>（经测试仅能在Windows上有效）<br/>
-​    在你要打书签的位置，按下 <code>Command + F11</code> ，你可以给这个位置加个序号，可以是数字也可以是字母，假如在下面这个位置 加了 1 这个序号，下次你就可以使用 <code>Control + 1</code> 直接跳转到这个位置。<img src="media/15998025630555/22c140c46c394587a66f7812b1e6d67d.jpg" alt="img"/><br/>
-当然你也可以不加，不加的话就是匿名书签了。你可以使用 <code>Shift + F11</code> 展示所有的书签，再进行跳转。</p></li>
+<li> 订阅链接填上你的 v2ray、ss 、trojan 的订阅</li>
+<li> 客户端选择 surge 4</li>
+<li> 选择生成订阅链接就好了</li>
 </ol>
+
+<p>打开 surge 设置中的<strong>配置</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211500.png" alt="https://oss.qust.me/img/20210116211500.png"/></p>
+
+<p>选择从 url 安装配置</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211555.png" alt="https://oss.qust.me/img/20210116211555.png"/></p>
+
+<p>粘贴上你的配置文件订阅地址后选择完成</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211622.png" alt="https://oss.qust.me/img/20210116211622.png"/></p>
+
+<p>选中刚才添加的点击 <strong>应用</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211641.png" alt="https://oss.qust.me/img/20210116211641.png"/></p>
+
+<p>在策略里选择 <strong>规则判定</strong>，这时候你应该就能愉快的上网了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211714.png" alt="https://oss.qust.me/img/20210116211714.png"/></p>
+
+<p>如果不行可以重新退出打开下 surge，并检查是否打开了 <strong>设置为系统代理</strong> 和 <strong>增强模式</strong>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211730.png" alt="https://oss.qust.me/img/20210116211730.png"/></p>
+
+<h3 id="toc_2">2 配置 Surge DHCP 接管网络</h3>
+
+<h4 id="toc_3">设置电脑 IP 为静态IP</h4>
+
+<p>打开 <strong>系统偏好设置-网络</strong>，选择以太网（也就是网线接口），配置 IPv4 选择 <strong>使用 DHCP（手动设定地址）</strong>，我的路由器是 192.168.88.1 所以 IP 地址我就填 192.168.88.2，只用修改最后一位在 2-225 之间就行。（如果你的路由器是 192.168.31.1 你的 IP 地址就可以填 192.168.31.2，以此类推）随后选择 <strong>应用</strong>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116212721.png" alt="https://oss.qust.me/img/20210116212721.png"/></p>
+
+<h4 id="toc_4">关闭路由器 DHCP</h4>
+
+<p>一般都在 <strong>内部网络-DHCP服务器</strong> 选项里，关闭启用 DHCP， 保存并应用。（各家系统的设置位置可能有差别，但基本都是有 DHCP 开关选项的）</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116212428.png" alt="https://oss.qust.me/img/20210116212428.png"/></p>
+
+<h4 id="toc_5">打开 Surge DHCP 选项</h4>
+
+<p>在左侧 <strong>设备</strong> 里，点开后有 <strong>DHCP 服务器</strong> 开关，点开后请认真看下内容，然后选择下一步。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116221722.png" alt="https://oss.qust.me/img/20210116221722.png"/></p>
+
+<p>网络设备和你上面设置固定的 IP 的一致，插网线的选择 <strong>Ethernet</strong> 就行，继续下一步。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116212820.png" alt="https://oss.qust.me/img/20210116212820.png"/></p>
+
+<p>Surge 会检测当前网络环境是否有 DHCP 设置，如果上面你正确关闭了 路由器 DHCP 这里应该能直接过去。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116213020.png" alt="https://oss.qust.me/img/20210116213020.png"/></p>
+
+<p>选择 Surge 默认的设置点击<strong>完成</strong>即可，如果你懂的可以自行修改。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116213337.png" alt="https://oss.qust.me/img/20210116213337.png"/></p>
+
+<p>把你其它设备<strong>重新连接 wifi 或者关闭路由器 wifi 再打开</strong>即可看到 设备里新增设备。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116213153.png" alt="https://oss.qust.me/img/20210116213153.png"/></p>
+
+<p>如果你想你连接的设备通过 Surge 走代理服务，你可以右键选择设备名然后选择 <strong>使用 Surge 作为网关</strong>，再<strong>设备重新连接或者关闭路由器 wifi 再打开</strong>即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116213225.png" alt="https://oss.qust.me/img/20210116213225.png"/></p>
+
+<h2 id="toc_6">Surge DHCP 使用模块</h2>
+
+<p>我只购买了 Mac 版的 Surge，但我想我的手机也能实现除了能用代理外，也能使用 微博去广告、Netflix 有评分、看 tiktok 不用拔掉 sim 卡。如果你也想使用 Module 的功能可以继续往下看，这部分可能稍微有点麻烦。</p>
+
+<h4 id="toc_7">Mac 创建证书</h4>
+
+<ol>
+<li><p>打开 <strong>钥匙串访问 app</strong>（Keychain Access.app）</p></li>
+<li><p>选择菜单项 钥匙串访问 （Keychain Access） -&gt; 证书助理 （Certificate Assistant） -&gt; 创建证书颁发机构 Create Certificate Authority…</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116221318.png" alt="https://oss.qust.me/img/20210116221318.png"/></p></li>
+<li><p>证书参数（名字邮箱随意填写）点击创建即可，记下倒出的位置，后面要用到。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116222932.png" alt="https://oss.qust.me/img/20210116222932.png"/></p></li>
+<li><p>证书创建后，在左侧选择 <strong>我的证书</strong> （My Certificates），然后在右侧列表中找到该证书，右键点击证书，选择导出，<strong>导出格式选择为 .p12 格式，导出时需要设置 密码 （passphrase），不可设置为空。若不可选择 p12 格式，请确认先切换到我的证书 （My Certificates） 后再进行导出。</strong></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223054.png" alt="https://oss.qust.me/img/20210116223054.png"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223108.png" alt="https://oss.qust.me/img/20210116223108.png"/></p></li>
+<li><p>将证书复制到左侧 Keychains 列表中的 System 中 粘贴 （不做该步骤会使得 Safari 不认该 CA，不过 Chrome 可以正常工作）输入刚才添加的密码完成。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223550.png" alt="https://oss.qust.me/img/20210116223550.png"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223604.png" alt="https://oss.qust.me/img/20210116223604.png"/></p></li>
+<li><p>双击证书，将该证书标记为可信，关闭窗口输入登录密码确认操作。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223630.png" alt="https://oss.qust.me/img/20210116223630.png"/></p></li>
+<li><p>将得到的 Certificates.p12 文件用在 terminal 中进行 base64 编码，得到结果会用到。</p>
+<table>
+<thead>
+<tr>
+<th><code>1</code></th>
+<th><code>base64 SurgeModule.p12</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224319.png" alt="https://oss.qust.me/img/20210116224319.png"/></p></li>
+<li><p>编辑 Surge 的配置文件（设置-配置-在 Finder 中找到配置；然后用文本编辑器打开），加入 MITM 段。ca-passphrase = 填写你之前的密码，ca-p12 = 填写你刚 base64 出来的结果。</p>
+<table>
+<thead>
+<tr>
+<th><code>1 2 3 4 5 6</code></th>
+<th><code>[MITM] enable = true tcp-connection = true hostname = *facebook.com, *pinboard.in ca-passphrase = 123456 ca-p12 = MIIJtQIBAzCCCXwGCSqGSIb3DQ…..</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224523.png" alt="https://oss.qust.me/img/20210116224523.png"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224533.png" alt="https://oss.qust.me/img/20210116224533.png"/></p></li>
+<li><p>打开再文件里右键刚才编辑好的文件选 Surge 打开，选择覆盖，便会使用新的配置文件。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224637.png" alt="https://oss.qust.me/img/20210116224637.png"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224646.png" alt="https://oss.qust.me/img/20210116224646.png"/></p></li>
+<li><p>在 <strong>解密</strong> 中打开 HTTPS 解密开关。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224919.png" alt="https://oss.qust.me/img/20210116224919.png"/></p></li>
+</ol>
+
+<h4 id="toc_8">发送证书到手机安装</h4>
+
+<ol>
+<li><p>在 Surge <strong>解密</strong> 中选择为 iOS 模拟器倒出证书</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116225450.png" alt="https://oss.qust.me/img/20210116225450.png"/></p></li>
+<li><p>发送证书到手机（airdrop 或者别的方式发到手机上）。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116231352.png" alt="https://oss.qust.me/img/20210116231352.png"/></p></li>
+<li><p>在手机打开描述文件，设置里选择已下载的描述文件-安装描述文件-选择同意输入密码即可。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116225607.PNG" alt="https://oss.qust.me/img/20210116225607.PNG"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116231010.PNG" alt="https://oss.qust.me/img/20210116231010.PNG"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116231016.PNG" alt="https://oss.qust.me/img/20210116231016.PNG"/></p></li>
+<li><p>最后在 <strong>设置</strong>-<strong>通用</strong>-<strong>关于手机</strong> 打开对证书的信任。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116231307.PNG" alt="https://oss.qust.me/img/20210116231307.PNG"/></p></li>
+</ol>
+
+<h4 id="toc_9">Surge 安装打开模块</h4>
+
+<p>在<strong>设置</strong>中打开<strong>模块</strong>选择<strong>从 URL 安装模块</strong>，安装这个模块选择开启后应用即可。</p>
+
+<p><a href="https://raw.githubusercontent.com/pengchujin/SurgeMacModule/main/modules.sgmodule">https://raw.githubusercontent.com/pengchujin/SurgeMacModule/main/modules.sgmodule</a></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116232936.png" alt="https://oss.qust.me/img/20210116232936.png"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116234315.png" alt="https://oss.qust.me/img/20210116234315.png"/></p>
+
+<p>更多模块功能可以看看这里（上面是我做了一个合并的，免拔卡看 tiktok、Netflix 评分、微博去广告 等等）</p>
+
+<ul>
+<li>  <a href="https://github.com/lhie1/Rules/tree/master/Surge/Surge%203/Module">https://github.com/lhie1/Rules/tree/master/Surge/Surge%203/Module</a></li>
+<li>  <a href="https://github.com/Tartarus2014/Surge-Script">https://github.com/Tartarus2014/Surge-Script</a></li>
+<li>  <a href="https://github.com/nzw9314/Surge/tree/master/Module">https://github.com/nzw9314/Surge/tree/master/Module</a></li>
+</ul>
+
+<p>也可以看看这个 module 使用教程：<a href="https://merlinblog.xyz/wiki/surge-module.html">https://merlinblog.xyz/wiki/surge-module.html</a></p>
+
+<h2 id="toc_10">总结</h2>
+
+<p>如果有有问题可以看看 surge 开发者详细的文章：<a href="https://blankwonder.medium.com">https://blankwonder.medium.com</a></p>
+
+<p>surge 官方功能手册：<a href="https://manual.nssurge.com/book/understanding-surge/cn/">https://manual.nssurge.com/book/understanding-surge/cn/</a></p>
+
+<p>如果对这篇教程有疑问也可以发邮件给我 <a href="mailto:pengchujin@hotmail.com">pengchujin@hotmail.com</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2021/01/25</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025628906.html">
+                
+                  <h1>TCP/IP 解释</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>计算机网络是一门基础课程，但是老师所讲的东西无非起到一个抛砖引玉的作用。然而对于需要自学的人来说，无疑是更难的。前路漫漫～～</p>
+
+<p>计算机网络本来就是比较枯燥的，文章内容较多，建议读者耐心看完这篇文章，希望大家看完后都能有所收获。先把这篇文章的大致结构放上来。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190058" alt="img"/></p>
+
+<h1 id="toc_0">预备知识</h1>
+
+<hr/>
+
+<p>谢希仁的那本《计算机网络》是很多大学选择的计网教材，在第一章是一个概论，大致讲了计算机网络的发展，也可以说是每个人都必须了解的小常识。在这里，我就做一个总结概括，把它作为学习计网预备知识。</p>
+
+<h2 id="toc_1">互联网简史</h2>
+
+<ul>
+<li>第一阶段：20世纪50年代，数据通信技术与网络理论基础研究</li>
+<li>第二阶段：20世纪60年代，ARPANET与分组交换技术</li>
+<li>第三阶段：20世纪70年代中期，网络体系结构与网络协议的标准化</li>
+<li>第四阶段：20世纪90年代，互联网、高速网络、无线网络、移动互联网与网络安全技术发展</li>
+</ul>
+
+<h2 id="toc_2">互联网的发展</h2>
+
+<p><strong>「计算机网络的发展主要经历了下面的七个阶段。」</strong></p>
+
+<ul>
+<li><p><strong>「批处理」</strong>：为了让更多的人使用计算机，出现了批处理系统。所谓的批处理，是指事先把用户数程序数据装入卡带或者磁带，并由计算机按照一定顺序读取。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190102" alt="img"/></p></li>
+<li><p><strong>「分时系统」</strong>：批处理系统之后，又出现分时系统。它是指多个终端同时与计算机连接，允许多个用户同时使用计算机。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190104" alt="img"/></p></li>
+<li><p><strong>「计算机通信技术」</strong>：在分时系统中，我们看到了终端和计算机的连接，但这并不意味着计算机与计算机之间也已互联连接。随着计算机的数量普及，计算机之间的数据交互的便捷性越来越受到重视，最开始两个主机之间交互数据过程相当繁琐，因此计算机通信技术（计算机与计算机之间由通信线路连接）应运而生。人们可以很轻松的即时读取另一台计算机中的数据，从而极大地缩短了传输数据的时间。</p></li>
+<li><p><strong>「计算机网络的产生」</strong>：20世纪70年代，人们开始实验基于分组交换技术的计算机网络，并着手研究不同厂商的计算机之间相互通信的技术。到了80年代，一种能够互联多种计算机的网络应运而生。网络通信技术进入了发展的高速公路。</p></li>
+<li><p><strong>「互联网的普及」</strong>：进入20世纪90年代，随着计算机的价格降低、性能增强、各类应用纷纷冒头，计算机普及程度越来越高。面对这一趋势，各家厂商不仅要保证生产产品的自身互联性，还着力于让自己的网络技术不断与互联网技术（TCP/IP）兼容。</p></li>
+<li><p><strong>「互联网时代」</strong>：随着互联网的普及，现在，人们越来越离不开互联网了。生活、学习工作也都得依靠网络信息，万物互联的时代早就已经到来了。</p></li>
+<li><p><strong>「网络安全时代」</strong>：互联网给世界带来了颠覆性的改变，给人们日常生活带来了极大的便利，互联网呈现给现代人一个高度便捷的信息网络环境，在国家面前，犹如水电煤气一样，成为了国家必不可少的重要资源，随着万物互联，网络安全必定是国家安全最重要的一环。在互联网普及的初期，人们更关注单纯的连接性，注重不受任何限制的建立连接。但现在，人们不再满足与“单纯的连接”而是更为追求“安全的连接”。</p></li>
+</ul>
+
+<h2 id="toc_3">网络的性能指标</h2>
+
+<ul>
+<li><strong>「比特」</strong>：比特(bit)是计算机中数据量的单位，也是信息论中使用的信息量的单位。英文单词bit来源于binary digit，意思是一个“二进制数字”。网络技术中的速率指的是连接在计算机网络上的主机在数字信道上传送数据的速率，它也称为数据率(data rate)或比特率(bit rate)。</li>
+<li><strong>「带宽」</strong>：在计算机网络中，带宽用来表示网络的通信线路传送数据的能力，因此网络带宽表示单位时间内从网络中的某一点到另一点所能通过的“最高数据率”。这种意义的带宽的单位是比特/秒。</li>
+<li><strong>「吞吐量」</strong>：吞吐量(throughput)表示在单位时间内通过某个网络（或信道、接口）的数据量，他表示当前网络传输数据的能力。</li>
+<li>时延：</li>
+<li>1、<strong>「发送时延」</strong>：指主机或路由器发送数据帧所需要的时间，也就是从发送数据帧的第一个比特算起，到该帧的最后一个比特发送完毕所需要的时间。</li>
+<li>2、<strong>「传播时延」</strong>：指电磁波在信道中传播一定距离需要花费的时间。</li>
+<li><strong>「时延带宽积」</strong>：时延带宽积表示链路可容纳的比特数，因此，链路的时延带宽积又称为以比特为单位的链路长度。</li>
+<li><strong>「往返时间RTT」</strong>：往返时间RTT，表示从发送方发送数据开始，到发送方收到来自接收方的确认（接收方收到数据后便立即发送确认），总共经历的时间。往返时间一般就会包括分组在网络中的各种时延。</li>
+<li><strong>「利用率」</strong>：利用率可以分为信道利用率和网络利用率两种。信道利用率指出某信道有百分之几的时间是被利用的（有数据通过）。完全空闲的信道的利用率是零。网络的利用率则是全网络的信道利用率的加权平均值。信道利用率并非越高越好，这是因为，根据排队论的理论，当某信道的利用率增大时，该信道引起的时延也会迅速增加。信道或网络的利用率过高会产生非常大的时延。</li>
+</ul>
+
+<h2 id="toc_4">不能不知道的小常识</h2>
+
+<h3 id="toc_5">计算机网络的分类</h3>
+
+<p>按照<strong>「地理覆盖范围」</strong>来分类的话，计算机网络可以被分为一下三个部分：</p>
+
+<ul>
+<li><strong>「局域网」</strong>（Local Area NetWork，LAN），常见的办公室、宿舍或网吧中的网络就是局域网几米到10km以内。其特点是：连接范围窄，用户少，配置容易，连接速率高。</li>
+<li><strong>「城域网」</strong>（Metropolitan Area NetWork，MAN），用于将一个城市、一个地区的企业、机关或学校的局域网连接起来，实现区域内的资源共享</li>
+<li><strong>「广域网」</strong>：广域网（Wide Area Network，WAN），也称为远程网，不同城市间的LAN或者MAN网络互连，因为距离远，信息衰减比较严重，所以这种网络一般要租用专线，通过特殊协议进行连接，构成网状结构，广域网因为所连接的用户多，所以每个用户的连接速率一般较低。</li>
+</ul>
+
+<h3 id="toc_6">计算机网络的拓扑结构</h3>
+
+<ul>
+<li><p>总线结构</p>
+<p>：</p></li>
+<li><p>优点：费用较低，易于扩展，线路的利用率高；</p></li>
+<li><p>缺点：可靠性不高，维护困难，传输效率低。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190116" alt="img"/></p></li>
+<li><p>环形结构</p>
+<p>：</p></li>
+<li><p>优点：令牌控制，没有线路竞争，实时性强，传输控制容易；</p></li>
+<li><p>缺点：维护困难，可靠性不高</p></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190139" alt="img"/></p>
+
+<ul>
+<li>星型结构</li>
+<li>优点：可靠性高，方便管理，易于扩展，传输效率高.</li>
+<li>缺点：线路利用率低，中心节点需要很高的可靠性和冗余度。</li>
+</ul>
+
+<h2 id="toc_7">计算机有哪些结构</h2>
+
+<p>有三种不同的计算机网络分层模型：</p>
+
+<ul>
+<li><p><strong>「OSI七层模型」</strong></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190144" alt="img"/></p></li>
+<li><p><strong>「五层结构模型」</strong></p></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190150" alt="img"/></p>
+
+<ul>
+<li><strong>「TCP/IP分层结构模型」</strong></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190154" alt="img"/></p>
+
+<p>TCP/IP协议是当前互联网所遵循的协议，它并不是单纯地由TCP或者IP组成，而是由各层的协议一起组成的，构成我们通常说说的TCP/IP协议栈。但是为了更好的理解，后面文章也是按照五层协议来写的。</p>
+
+<h1 id="toc_8">物理层</h1>
+
+<hr/>
+
+<p>这边先给一个建议，大家在学习计算机网络的时候不应该把每个网络协议单独拿出来学习，应该明白它的产生原因以及在整个计算机网络的作用。</p>
+
+<h2 id="toc_9">数字信号与模拟信号</h2>
+
+<p>它的作用是：屏蔽不同的传输媒体和通信手段的差异。我们都知道，自然界的信号无非就是两种，一种是数字信号，另一种就是模拟信号。那么是什么模拟信号？什么又是数字信号呢？</p>
+
+<p>说白了，所谓的模拟信号就是连续变化的物理量，模拟信号其特点是幅度连续(连续的含义是在某一取值范围内可以取无限多个数值)。模拟信号，其信号波形在时间上也是连续的，因此它又是连续信号。我们对连续信号进行抽样，就会得到抽样信号，但抽象信号就是离散的（说着说着就说到了信号系统，看来补考对我的影响还是有的）。但数字信号是不同于模拟信号的，他在时间域上是离散的，它有两种不同状态的物理量，分别用“0”，“1”来表示。这就好像电灯开关一样，也有两种不同的状态。</p>
+
+<p>当然，数字信号与模拟信号是可以相互转换的，模拟信号通常使用PCM（脉冲编码调制）方法量化并转换为数字信号，PCM方法是使不同范围的模拟信号对应不同的二进制值。通常，数字信号通过载波相移得到模拟信号。</p>
+
+<h2 id="toc_10">物理层的传输媒介</h2>
+
+<p>我们大家都知道，数据在物理层传输的媒介是不一样的，工作在物理层的是<strong>「集线器」</strong>。不过，大致可以为一下两类：</p>
+
+<ul>
+<li><strong>「引导型传输媒介」</strong>：引导型传输媒体中又有不同的类别，比如同轴电缆、光缆、双绞线，其中双绞线根据是否屏蔽又可以继续细分。</li>
+<li><strong>「非引导型传输媒介」</strong>：非引导型传输媒介指的是无线电波在空间中的传播，利用不同的频段可以传输不同的信号。</li>
+</ul>
+
+<h2 id="toc_11">信道</h2>
+
+<p>说起信道，前面的基础篇提到过信道的利用率，但至于信道更详细的介绍，就没有提到，现在就来仔细看看。按照传输媒介可以分为三类：</p>
+
+<ul>
+<li><strong>「有线信道」</strong>：有线信道以导线为传输媒质，信号沿导线进行传输，信号的能量集中在导线附近，因此传输效率高，但是部署不够灵活。这一类信道使用的传输媒质包括用电线传输电信号的架空明线、电话线、双绞线、对称电缆和同轴电缆等等，还有传输经过调制的光脉冲信号的光导纤维。</li>
+<li><strong>「无线信道」</strong>：无线信道主要有以辐射无线电波为传输方式的无线电信道和在水下传播声波的水声信道等。无线电信号由发射机的天线辐射到整个自由空间上进行传播。不同频段的无线电波有不同的传播方式。</li>
+<li><strong>「存储信道」</strong>：在某种意义上，磁带、光盘、磁盘等数据存储媒质也可以被看作是一种通信信道。将数据写入存储媒质的过程即等效于发射机将信号传输到信道的过程，将数据从存储媒质读出的过程即等效于接收机从信道接收信号的过程。</li>
+</ul>
+
+<p>信道是传输信息的信道，信道容量描述了信道无差错地传输信息的最大能力，可以用来衡量信道的好坏。</p>
+
+<p>关于信道，还有一个重要的参数，那就是信噪比，信噪比越大，信道的容量也越大，这里的话给出著名的香农公式：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190202" alt="img"/></p>
+
+<p>其中，C为信道容量，B为带宽，S/N为信噪比。</p>
+
+<h2 id="toc_12">信道复用</h2>
+
+<p>我们知道，当没有数据进行传输的时候，信道是十分空闲的。但是在网络数据请求量大的时候，比如说最近的618，信息的传播速度就会受阻。那什么是信道的复用，复用就是重复使用的意思。信道的复用可以分为以下几个方面：</p>
+
+<ul>
+<li><strong>「时分复用」</strong>：所谓的时分复用，就是把做整个信道分为不同的时间。当采用时分复用时，所有用户在不同的时间占用同样的频带宽度（分时不分频）。时分复用可能会造成线路资源的浪费</li>
+<li><strong>「频分复用」</strong>：频分复用就是把信号分成不同的频率，当采用频分复用技术时，所有用户在同样的时间占用不同的带宽资源。当采用频分复用技术时，所有用户在同样的时间占用不同的带宽资源。</li>
+<li><strong>「统计时分复用」</strong>：所谓的统计时分复用系统，我们也可以称为异步的时分复用系统。它有一个类似缓冲的机制，当数据到达一定量的时候，才会转发，这大大提高了信道的利用率。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190207" alt="img"/></p>
+
+<h1 id="toc_13">数据链路层</h1>
+
+<hr/>
+
+<h2 id="toc_14">以太网帧</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190214" alt="img"/></p>
+
+<p>数据链路层接收来自网络层的IP数据报，通过一定的封装，让IP数据报能在数据链路层上传输。像这样，装好了的IP数据报，我们称之为以太网帧，也叫MAC帧。MAC帧由以下几个重要的部分组成：</p>
+
+<ul>
+<li><strong>「目的MAC地址」</strong>：MAC帧的目的地址占据6个字节，它标志了目标主机的地址。</li>
+<li><strong>「源MAC地址」</strong>：和目的地址一样，源地址也占据6个字节，它标志的源主机的地址。</li>
+<li><strong>「类型」</strong>：类型占据2个字节，它记录上层使用的协议0X0800表示IP协议。</li>
+<li><strong>「数据部分」</strong>：数据部分自然是来自上层的IP数据报。</li>
+<li><strong>「FCS」</strong>：FCS占据4个字节，它是用来进行差错检测的，如果一个MAC帧发生了错误，则不能发送到目的主机上。</li>
+</ul>
+
+<h2 id="toc_15">差错检测</h2>
+
+<p>为什么要进行差错检测？</p>
+
+<p>现实的通信链路都不会是理想的。这就是说，比特在传输的过程中可能会产生差错：1可能会变成0，0可能会变成1，这就叫做比特差错。在一段是时间内，传输错误的比特占所传输比特总数的比率成为误码率BER(Bit Error Rate)。误码率与信噪比有很大的关系，在实际通信中不可能使误码率下降到零。因此，为了保证数据传输的可靠性，在计算机网络传输数据时，必须采用各种差错检测措施。</p>
+
+<p>MAC帧在传播的过程中会产生差错，差错的产生是不可避免的。前面在以太网帧部分我们提到过差错检测序列FCS，根据FCS我们就可以知道这个MAC帧在传输的过程中是否出现了错误或者丢失。</p>
+
+<p>后面讲到传输层的时候我们也会提到差错检测，那么这两者到底有啥区别了？总结起来，可以用一句话概括：</p>
+
+<ul>
+<li>数据链路层的差错检测的目的是做到&quot;无比特差错&quot;。</li>
+<li>传输层的差错检测的目的是做到&quot;无传输差错&quot;。即弥补帧丢失、帧重复、帧失序。</li>
+</ul>
+
+<p>差错检测的方法主要有两种：奇偶校验法（PCC）和循环冗余校验CRC，PCC非常简单，不是这篇文章的重点，下面主要讲一下CRC循环冗余校验。</p>
+
+<p>循环冗余校验是一种根据传输或保存的数据而产生固定位数校验码的方法，主要用来检测或校验数据传输或者保存后可能出现的错误。生成的数字在传输或者储存之前计算出来并且附加到数据后面，然后接收端进行检验确定数据是否发生变化。</p>
+
+<p>通过CRC，我们可以计算出FCS冗余校验码，FCS位于MAC帧的尾部。通过FCS，我们就可以知道这个MAC帧是否发送了错误。</p>
+
+<h2 id="toc_16">适配器</h2>
+
+<p>说到适配器，其实完全可联想一下生活中的适配器。比如我们给手机充电的时候需要有电源适配器，电源适配器无非就是转换的作用，或者作为一个载体，实现能量的转移。实际上，电脑里的适配器也是一样。结合下面这张图来理解：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190219" alt="img"/></p>
+
+<p>我们都知道，数据在外部媒介中的传输方式是串行传输，然而计算机处理内部指令的时候，用的是并行的方式。怎样把串行传输的数据转换成并行传输呢？这就需要适配器了。适配器就像是起到了桥梁的作用，通过它，就可以轻松实现数据传输方式的转换。</p>
+
+<h2 id="toc_17">CAM表</h2>
+
+<p>我们都知道交换机，交换机是一种多端口的网桥，在数据链路层使用MAC地址转发数据。在交换机类不实际存储以一张表，叫做CAM表。这张表记录了主机的MAC地址以及对应的接口，看看下面的这张图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190223" alt="img"/></p>
+
+<p>有三台主机A，B，C和交换机连接在一起，最开始，CAM里没有存储任何信息。</p>
+
+<p>突然有一天，主机A（源MAC）想要给主机B（目的MAC）发送消息。这个时候，交换机就会检查自己的CAM表里是否存储了主机A的信息，交换机一看没有A的信息，就把A的信息写进自己的CAM表里。现在，交换机的CAM表变成了这样：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190227" alt="img"/></p>
+
+<p>这个时候，交换机的CAM表里已经存储了主机A的信息，但是主机A却想要给主机B发送信息。这可怎么办呢？<strong>「首先」</strong>，交换机会检查自己的CAM表里是否存在B的信息，<strong>「如果存在」</strong>，就直接把信息转发给B。<strong>「如果不存在」</strong>，那又怎么办呢？犹豫了一下，交换机又有了一个想法，它把主机A发给主机B的消息以广播的形式发给了所有连在它身上的主机。主机C也收到了这条消息，但是主机C检查了一下目的地址，不是发给自己的，就果断丢弃了这条消息。主机B收到了这条消息后，同样也检查了收件人（目的地址），发现是给自己的消息，于是就收下了这条消息。之后，交换机就更新了自己的CAM表，上面增加了一条信息：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190232" alt="img"/></p>
+
+<p>就这样，CAM表里存储了主机A，和主机B的信息。下一次，主机A想要给主机B发送信息的时候，交换机就不需要广播了。</p>
+
+<h2 id="toc_18">CSMA/CD协议</h2>
+
+<p>到目前为止CSMA/CD的使用已经相当少了，它的使用在下面两个地方：</p>
+
+<ul>
+<li>使用的是有线网络</li>
+<li>应用在10M/100M的半双工有线网络中</li>
+</ul>
+
+<p><strong>「使用CSMA/CD协议的的网络有以下三个特点：」</strong></p>
+
+<ul>
+<li><strong>「该网络是总线结构」</strong>，所有的计算机接在同一总线上，同一时间内，只允许一台计算机发送（或接收）消息，也就是采用半双工通信。</li>
+<li><strong>「载波监听」</strong>：在发送前、发送中都要不停地对信道进行监听，只有在信道是空闲的时候才能发送消息。</li>
+<li><strong>「碰撞检测」</strong>：主机会在发送消息前，发信息的过程中不断对进行信道检测，如果有两台主机同时发送消息，则消息传输立即停止。随机等待一段时间再进行发送消息，这就是退避算法。</li>
+</ul>
+
+<p><strong>「补充一下退避算法的特点：」</strong></p>
+
+<ul>
+<li><strong>「非坚持的CSMA」</strong>：线路忙，则等待一段时间，再监听；不忙时，立即发送；减少冲突，信道利用率降低</li>
+<li><strong>「1坚持的CSMA」</strong>：线路忙，继续侦听；不忙时，立即发送；信道利用率提高，冲突增大。</li>
+<li><strong>「P坚持的CSMA」</strong>：线路忙，继续侦听；不忙时，根据p概率进行发送，另外的1-p概率为继续侦听（p是一个指定概率值）。</li>
+</ul>
+
+<h1 id="toc_19">网络层</h1>
+
+<hr/>
+
+<h2 id="toc_20">IP协议</h2>
+
+<h3 id="toc_21">IP的概述</h3>
+
+<p>IP协议对应的是IP地址，那么什么是IP地址呢？</p>
+
+<p>维基百科上是这样解释的：</p>
+
+<blockquote>
+<p>❝</p>
+
+<p>IP地址（英语：IP Address, 全称：Internet Protocol Address），又译为网际协议地址、互联网协议地址。当设备连接网络，设备将被分配一个IP地址，用作标识。通过IP地址，设备间可以互相通讯，如果没有IP地址，我们将无法知道哪个设备是发送方，无法知道哪个是接收方。[2] IP地址有两个主要功能：标识设备或网络 和 寻址（英语：location addressing）。</p>
+
+<p>❞</p>
+</blockquote>
+
+<p>上面的一堆文字其实无非解释了两个点，总结如下：</p>
+
+<ul>
+<li>IP地址是用来标记主机的地址，没有IP地址就无法识别主机。（标志主机）</li>
+<li>因为唯一标记主机，所以可以用来在网络中查找主机。（寻址）</li>
+</ul>
+
+<p>现在想一下前面我们说到的MAC地址，MAC地址是一台主机的身份象征。一台主机从出厂以后，MAC地址就唯一确定了，无法更改（当然也可以通过软件修改，但是必须得确保同一局域网下不能有两台MAC地址相同的主机）。</p>
+
+<p><strong>「那么，为什么有了MAC地址，还需要IP地址？或者说是有了IP地址，还需要MAC地址？」</strong></p>
+
+<p>这其实也算是一个经典的问题了，网上也有不少答案，这里推荐两篇文章：</p>
+
+<ul>
+<li>有了 IP 地址，为什么还要用 MAC 地址？</li>
+<li>为什么有MAC地址，还要有IP地址？？</li>
+</ul>
+
+<p>看完上面两篇文章，我总结如下：</p>
+
+<ul>
+<li><strong>「历史原因：」</strong> 以太网诞生于因特网之前，在IP地址之前MAC地址就已经在使用了。两者结合使用，是为了不影响已存在的协议</li>
+<li><strong>「分层实现：」</strong> 对网路协议进行分层以后，数据链路层的实现不需要考虑数据之间的转发，网络层的实现不需要考数据链路层的影响。</li>
+<li><strong>「分工合作：」</strong> IP地址是会随着主机接入网络的不同而发生改变的，而MAC一般不会改变。这样的话，我们可以使用IP地址进行寻址，当数据报和目的主机处于同一网络时，就使用MAC地址进行数据交付。</li>
+</ul>
+
+<h3 id="toc_22">IP数据报</h3>
+
+<p>IP数据的样子是这样的：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190237" alt="img"/></p>
+
+<p>有几个重要的东西必须得进行说明一下：</p>
+
+<ul>
+<li><strong>「版本号」</strong>：占用4位二进制数，表示该IP数据报使用的IP协议版本。目前Internet中使用的主要是TCP/IP协议族中版本号为4的IP协议。</li>
+<li><strong>「头长度」</strong>：占用4位二进制位，此域指出整个报头的长度（包括选项），该长度是以32位二进制数为一个计数单位的，接收端通过此域可以计算出报头在何处结束及从何处开始读数据。普通IP数据报（没有任何选项）该字段的值是5（即20个字节的长度）。</li>
+<li><strong>「服务类型」</strong>：服务类型（TOS、type of service）：占用8位二进制位，用于规定本数据报的处理方式。</li>
+<li><strong>「生存时间（TTL，Time To Live）」</strong>：占用8位二进制位，它指定了数据报可以在网络中传输的最长时间。实际应用中把生存时间字段设置成了数据报可以经过的最大路由器数。TTL的初始值由源主机设置（通常为32、64、128或256），一旦经过一个处理它的路由器，它的值就减1。当该字段为0时，数据报就丢弃，并发送ICMP报文通知源主机，因此可以防止进入一个循环回路时，数据报无休止地传输下去。</li>
+<li><strong>「上层协议标识」</strong>：占用8位二进制位，IP协议可以承载各种上层协议，目标端根据协议标识就可以把收到的IP数据报送到TCP或UDP等处理此报文的上层协议了。</li>
+</ul>
+
+<p>关于IP数据报相对详细的文章可以看看这篇文章：IP数据报格式详解</p>
+
+<h3 id="toc_23">子网掩码与IP地址</h3>
+
+<p>前面说到IP地址的组成的时候，说到过网络号。常见的IP地址无非就是由网络地址和主机地址组成。那么什么是网络号？网络号就是计算机当前所在网络的名字，在这个网络下，又由许多的主机构成。那又该怎么计算网络号了？这时候，子网掩码派上了用场。</p>
+
+<p>通常，计算机的IP地址和子网掩码是成对出现的，通过子网掩码和IP地址进行对照就可以知道主机号和网络号。为了方便表示，子网掩码前面通常是连续的1，后面部分是连续的0，不能出现0和1交替的情况。</p>
+
+<p>请看下面的例子。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190243" alt="img"/></p>
+
+<p>现在已经知道了主机A的IP地址和子网掩码，把它们转化成二进制的形式。通过二进制对应子网掩码的1的部分对应IP地址的网络号，子网掩码为0的部分对应主机号。下面的这张图画的很清楚：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190246" alt="img"/></p>
+
+<h2 id="toc_24">ICMP协议</h2>
+
+<p>我们知道，IP协议是不可靠的传输协议，网络中进行可靠传输的是TCP协议，这个后面在讲传输层的时候会说到。那么，如果在消息没有送达的情况下，网络层是怎么解决的了？这个时候，就需要用到ICMP协议。什么是ICMP协议了？ICMP是网络控制报文协议(Internet Control Message Protocol, ICMP)。</p>
+
+<p>它的作用：更加有效地转发IP数据报作为IP数据报的数据部分，可以分为ICMP差错报文，和ICMP查询报文。差错报文是用来简单的报告错误的, 至于对于错误怎么处理是高层协议的职责。同时, 差错报文总是发送给最初的数据源(这是因为在ICMP数据报中唯一可以使用的就是源IP和目的IP)，查询报文总是成对出现。</p>
+
+<h2 id="toc_25">ARP协议</h2>
+
+<p>前面说到IP地址用来寻址，当目的地址和数据报处于同一网络时，MAC地址用来交付数据报。现在有一个问题，主机A要给主机B发送消息，消息经过一系列地转发，终于找到了主机B的IP地址。但是，我们都知道，数据在链路层的传输是需要MAC地址的，仅仅知道B的IP地址是无法进行通信的。请看下面这张图：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190251" alt="img"/></p>
+
+<p>这个时候，ARP协议就派上用场了。ARP全称是地址解析协议（Address Resolution Protocol），其基本功能为透过目标设备的IP地址，查询目标设备的MAC地址，以保证通信的顺利进行，它是IPv4中网络层必不可少的协议。</p>
+
+<p><strong>「如同交换机工作在数据链路层一样，路由器是工作在网络层的。交换机有CAM表，路由器也有路由表。」</strong></p>
+
+<p>现在路由器要给主机B发送一条消息，必须得知道主机B的MAC地址才能进行通信。这个时候路由器会发送一个ARP请求，该请求是以广播的形式发送的，每一台连接到该路由器的主机都收到得到这条消息。但是只有主机B检查到自己的IP地址符合要求。于是主机B发送给路由器一条ARP响应，把自己的MAC的地址告诉了路由器。就像下面图示的那样：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190255" alt="img"/></p>
+
+<p>每次路由器发送一个ARP请求的时候，就会增加一条数据，这一条数据记录了IP地址对应的MAC地址，这样路由器下次再给该主机发送消息的时候就不用广播了。当然如同交换机的CAM表中的数据有生存了时间一样，路由表中的数据也有生存时间。试想一下，如果数据一直存在，那么路由器岂不是需要花大量的存储空间来缓存已经失效的数据。</p>
+
+<h2 id="toc_26">内部网关协议</h2>
+
+<p>互联网的路由选择协议主要有两种，分别是RIP和OSPF。下面具体介绍这两种协议。</p>
+
+<p><strong>「先介绍RIP协议」</strong>：</p>
+
+<ul>
+<li>路由信息协议（RIP） 是内部网关协议IGP中最先得到广泛使用的协议。RIP是一种分布式的基于距离矢量的路由选择协议，是因特网的标准协议，其最大优点就是实现简单，开销较小。</li>
+<li>基本算法：矢量距离算法（简称V－D算法）的思想是：网关周期性地向外广播路径刷新报文，主要内容是由若干（V，D）序偶组成的序偶表；（V，D）序偶中的V代表“向量”，标识网关可到达的信宿（网关或主机），D代表距离，指出该网关去往信宿V的距离；距离D按驿站的个数计。其他网关收到某网关的（V，D）报文后，据此按照最短路径原则对各自的路由表进行刷新。</li>
+<li>它只适用于小型的网络（15跳就达到极限），如果网络过于庞大，当网络出现故障时，要经过比较长的时间才能将此信息传送到所有的路由器。</li>
+</ul>
+
+<p><strong>「接下来说说什么是OSPF：」</strong></p>
+
+<ul>
+<li>基本定义：OSPF(Open Shortest Path First开放式最短路径优先）是一个内部网关协议(Interior Gateway Protocol，简称IGP），用于在单一自治系统（autonomous system,AS）内决策路由。</li>
+<li>基本算法：迪克斯加算法。主要是通过向邻居发送HELLO包来建立邻居关系，选取DR等。</li>
+</ul>
+
+<p>参考文章：计算机网络原理之RIP以及OSPF对比</p>
+
+<h2 id="toc_27">NAT协议</h2>
+
+<p>NAT技术其非常简单，那么NAT它的作用是什么呢？</p>
+
+<p>NAT（Network Address Translation，网络地址转换）是1994年提出的。当在专用网内部的一些主机本来已经分配到了本地IP地址（即仅在本专用网内使用的专用地址），但现在又想和因特网上的主机通信（并不需要加密）时，可使用NAT方法。</p>
+
+<p>这种方法需要在专用网连接到因特网的路由器上安装NAT软件。装有NAT软件的路由器叫做<strong>「NAT路由器」</strong>，<strong>「它至少有一个有效的外部全球IP地址」</strong>。这样，所有使用本地地址的主机在和外界通信时，都要在NAT路由器上将其本地地址转换成全球IP地址，才能和因特网连接。另外，这种通过使用少量的公有IP 地址代表较多的私有IP 地址的方式，<strong>「将有助于减缓可用的IP地址空间的枯竭」</strong>。</p>
+
+<p><strong>「简单来说，NAT技术就是实现局域网与互联网通信的一项协议。」</strong> NAT又可以分为三种不同的类型：</p>
+
+<ul>
+<li><strong>「静态NAT(Static NAT)：」</strong> 静态NAT设置起来最为简单和最容易实现的一种，内部网络中的每个主机都被永久映射成外部网络中的某个合法的地址。当一个内部主机必须被作为一个固定的外部地址访问时，通过静态NAT实现。</li>
+<li><strong>「动态地址NAT(Pooled NAT)：」</strong> 动态NAT则是在外部网络中定 义了一系列的合法地址（地址池），采用动态分配的方法映射到内部网络。动态NAT转换的工作过程是这样的，当有一个内部主机需要访问外网时，从公用IP地址池中取出一个可用的地址分配给该主机使用。当通信完成后，所获取的公用IP地址也被释放回地址池中。外部公用IP在被分配给一个内部主机通信使用时，该地址不能不能再次被分配给其他内部主机使用。</li>
+<li><strong>「网络地址端口转换NAPT（Port－Level NAT）：」</strong> NAPT是把内部地址映射到外部网络的一个IP地址的不同端口上。NAPT（Network Address Port Translation），即网络端口地址转换，可将多个内部地址映射为一个合法公网地址，但以不同的协议端口号与不同的内部地址相对应，也就是&lt;内部地址+内部端口&gt;与&lt;外部地址+外部端口&gt;之间的转换。</li>
+</ul>
+
+<p>参考文章【计算机网络】NAT：网络地址转换</p>
+
+<h2 id="toc_28">IPV6协议</h2>
+
+<p>我们前面说的IP地址其实是IPV4，那么，为什么已经有IPIV4了，还要来一个IPV4呢？原来是这样的，早在上个世纪，人们就预料到IPV4地址枯竭的一天，为了解决这个问题，开始了IPV6的研发。</p>
+
+<p><strong>「IPv6 (IP version 6)是为了根本解决IPv4地址耗尽的问题而被标准化的网际协议。」</strong> IPv4的地址长度为4个8位字节,即32比特。而IPv6的地址长度则是原来的4倍,即128比特,一般写成8个16位字节。可以看到，IPV6的地址是取之不尽，用之不竭的，那么现在为什么不把IPV4全部换成IPV6呢？</p>
+
+<p>从IPV4切换到IPV6极其耗时,需要将网络中所有主机和路由器的IP地址进行重新设置。当互联网广泛普及后,替换所有IP地址会是更为艰巨的任务。</p>
+
+<p>在现存的网络中，既有IPV4又有IPV6，那么它们之间是怎么通信的呢？有两种技术：<strong>「双协议栈」</strong>、<strong>「隧道技术」</strong>，下面分别进行介绍：</p>
+
+<ul>
+<li><strong>「双协议栈」</strong>：改变IP地址的首部，在首部进行转换的过程中，IPV6的首部的部分信息会丢失，而且这种转换的损失不可避免。</li>
+<li><strong>「隧道技术」</strong>：何谓隧道技术了？其实完全可以通过字面的意思理解。下面还是以画图的方式帮助大家理解。隧道技术说白了就是数据在传输的时候进行了另一种的封装与解封，如图数据由IPV6网络进入到IPV4的网络，需要把IPV6的数据包封装在IPV4的数据包里。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190300" alt="img"/></p>
+
+<h1 id="toc_29">传输层</h1>
+
+<hr/>
+
+<h2 id="toc_30">停止等待协议</h2>
+
+<p>什么是停止等待协议了？看完下面一张图你可能就懂了</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190304" alt="img"/></p>
+
+<p>停止等待协议可以由以下三个部分组成：</p>
+
+<ul>
+<li><strong>「无差错情况」</strong>：就像上面那个图一样，为了保证无差错的情况，主机A还要继续向主机B发送消息，就必须得到主机B的回复。</li>
+<li><strong>「出现差错」</strong>：如果出现差错，比如主机A一直没有收到主机B的回复，那么就会有一种机制，使得主机A把这条消息再一次发送给主机B。这中间涉及到一个<strong>「重传时间」</strong>的选择，这里得话，这个重传时间应该不小于RTT（主机A给主机B发送消息，主机B再给主机A发送消息的时间和）。</li>
+<li><strong>「确认丢失和确认迟到」</strong>：确认迟到和确认丢失，看看下面的这张图你可能就明白了</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190308" alt="img"/></p>
+
+<p>数据在传输过程中可能会出现丢失和迟到的情况，对于丢失的数据进行重传，对于迟到的数据不做处理。既然说到了停止等待协议，那我就不得不补充一下ARQ协议。是什么ARQ协议了？</p>
+
+<p>ARQ协议就是发送方不必收到对上一条消息的确认，一次可以发出多个分组，这样就提高了信道的利用，可以在某一时间内传送足够的数据量。</p>
+
+<h2 id="toc_31">UDP</h2>
+
+<p>UDP协议相对与TCP协议来说是相当简单的，传输层的重点自然也是TCP协议。下面先简单解释一下UDP协议。</p>
+
+<p><strong>「UDP具有以下特点：」</strong></p>
+
+<ul>
+<li>面向无连接的协议，进行不可靠的传输</li>
+<li>面向数据报</li>
+<li>没有拥塞控制</li>
+<li>UDP数据报首部开销小</li>
+<li>支持一对一，一对多，多对多，多对一的数据传输</li>
+</ul>
+
+<h2 id="toc_32">TCP</h2>
+
+<h3 id="toc_33">TCP概述</h3>
+
+<p><strong>「TCP是传输层的另一个协议，它具有以下特点：」</strong></p>
+
+<ul>
+<li>TCP协议是面向连接的传输层协议</li>
+<li>提供可靠交付</li>
+<li>使用全双工通信</li>
+<li>面向字节流</li>
+</ul>
+
+<h3 id="toc_34">TCP数据报</h3>
+
+<p>请看下面的这张图片（图片来源于网络）。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190323" alt="img"/></p>
+
+<p>这里的话对数据报的某些字段作一下解释：</p>
+
+<ul>
+<li><strong>「源端口」</strong>：发送主机的端口号</li>
+<li><strong>「目的端口」</strong>：接收主机的端口号</li>
+<li><strong>「序号」</strong>：在一个TCP连接中传送的字节流中的每一个字节都按顺序编号。字节流的起始序号必须在连接建立时设置。TCP数据报首部中的序号字段值则指的是本报文段所发送的数据的第一个字节的序号。</li>
+<li><strong>「确认号」</strong>：即期望收到对方下一个报文段的第一个数据字节的序号。若确认号为N，则表明：到序号N-1为止的所有数据都已正确收到。</li>
+<li><strong>「数据偏移」</strong>：它指出TCP报文段的数据起始处距离TCP报文段的起始处有多远。</li>
+<li><strong>「窗口」</strong>：窗口字段明确指出了现在允许对方发送的数据量。窗口值经常在动态变化着 窗口指的是发送本报文段的一方的接收窗口（而不是自己的发送窗口）。</li>
+<li><strong>「校验和」</strong>：检验和字段检验的范围包括首部和数据这两部分 在计算检验和时，要在TCP报文段的前面加上12字节的伪首部（同UDP）</li>
+<li><strong>「确认ACK」</strong>：仅当ACK=1时确认号字段才有效。当ACK=0时，确认号无效。TCP规定，在连接建立后所有传送的报文段都必须把ACK置1。</li>
+<li><strong>「推送PUSH」</strong>：当两个应用进程进行交互式的通信时，有时在一端的应用进程希望在键入一个命令后立即就能够收到对方的响应，而不再等到整个缓存都填满了后再向上交付。这时，发送方TCP把PSH置1，并立即创建一个报文段发送出去。接收方TCP收到PSH=1的报文段，就尽快地（即“推送”向前）交付接收应用进程。</li>
+<li><strong>「复位RST」</strong> ：当RST=1时，表明TCP连接中出现严重差错（如由于主机崩溃或其他原因），必须释放连接，然后再重新建立运输连接。</li>
+<li><strong>「SNY」</strong>：在连接建立时用来同步序号 当SYN=1而ACK=0时，表明这是一个连接请求报文段。</li>
+<li><strong>「FIN」</strong>：用来释放一个连接。</li>
+</ul>
+
+<h3 id="toc_35">滑动窗口</h3>
+
+<p>TCP进行数据发送，为了提高数据传输的效率，采用了一种叫做滑动窗口的机制来进行数据发送。</p>
+
+<p>下面是发送端滑动窗口的示意图，滑动窗口的大小是绿色部分和红色部分的序列长度。它工作的机制是这样的，一旦发送端收到一个确认，滑动窗口就会向右移动。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190328" alt="img"/></p>
+
+<h3 id="toc_36">流量控制</h3>
+
+<p>关于流量控制，用一句简短的话就可以概括。</p>
+
+<blockquote>
+<p>❝</p>
+
+<p>接收端会给发送端一个负反馈，通过这个负反馈可以控制发送端的滑动窗口的大小。</p>
+
+<p>❞</p>
+</blockquote>
+
+<p>下面可以看一下知乎上是怎么说的，我找了一条讲的最形象，可以结合着理解一下。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190337" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190341" alt="img"/></p>
+
+<p>知乎：TCP协议的滑动窗口具体是怎样控制流量的？</p>
+
+<h3 id="toc_37">拥塞控制</h3>
+
+<ul>
+<li><strong>「慢启动：」</strong> 慢启动值得就是一条TCP链接刚建立时不要一下发送大量数据导致网络拥塞激增，而是由小到大根据反馈逐渐增大拥塞窗口。</li>
+<li><strong>「拥塞避免：」</strong> 拥塞避免就是让滑动窗口缓慢增大，而不是像慢开始那样成倍增长。</li>
+<li><strong>「快重传：」</strong> 发送方只要一连收到三个重复确认就应当立即重传对方尚未收到的报文段，而不必继续等待设置的重传计时器到期。</li>
+<li><strong>「快恢复：」</strong> 快恢复具有下面两个特点</li>
+<li>当发送方连续收到三个重复确认时，就执行 “乘法减小” 算法，把慢开始门限减半。这是为了预防网络发生拥塞。注意，接下去不执行慢开始算法。</li>
+<li>执行快恢复算法时，改变滑动窗口的值，然后开始执行拥塞避免算法，使得拥塞窗口缓慢性增大。</li>
+</ul>
+
+<h3 id="toc_38">三次握手</h3>
+
+<p>三次握手与四次挥手可以说是面试常考的知识点了，不过在介绍三次握手之前，我觉得有必要了解一下<strong>「理想传输条件的共性」</strong>：</p>
+
+<ul>
+<li>传输信道不产生差错</li>
+<li>不管发送方以多快的速度发送数据，接收方总是能够及时接收数据。</li>
+</ul>
+
+<p>理想的情况终究是理想的，上述两种情况在实际环境是不可能发生的。那么，我们就来说说怎样使得我们的实际情况更加接近理想，这就是我们接下来要讲的三次握手。</p>
+
+<p>首先，三次握手和后面要讲的四次挥手都是针对TCP来说的，UDP是面向无连接的协议，不可能存在的三次握手与四次挥手。三次握手与四次挥手是为了更好进行可靠的传输，下面先看下面三次握手的流程图。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190347" alt="img"/></p>
+
+<p>既然是为了进行可靠的传输，无非是要保证客户端与服务器之间的数据发送和接收的正常进行。</p>
+
+<ul>
+<li><strong>「第一次握手」</strong>：Client 什么都不能确认；Server 确认了Client发送正常。</li>
+<li><strong>「第二次握手」</strong>：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己接收正常，Client发送正常。</li>
+<li><strong>「第三次握手」</strong>：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己发送、接收正常，对方发送接收正常。</li>
+</ul>
+
+<p>为什么需要进行第三次握手了？一句话，主要防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误。</p>
+
+<p>通过上面的三个步骤，Client和Server能够进行可靠的传输，缺一不可。</p>
+
+<h3 id="toc_39">四次挥手</h3>
+
+<p>既然理解了三次握手，想必四次挥手也没有啥难度，先把流程图附上。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190351" alt="img"/></p>
+
+<p>如同三次挥手一样，四次挥手也是为了可靠的传输。四次挥手就是Client和Server断开连接的过程，那么你可能会觉得，建立连接的过程需要三次到还可以理解，为啥连断开连接都需要四次。难道一次或者两次就不可以了吗？</p>
+
+<p>是这样的，既然三次握手的需要发送方和接收方确认，那么四次挥手也要得到发送方和接收方的确认。</p>
+
+<ul>
+<li><strong>「第一次挥手」</strong>：Client向Server发送断开的连接的请求。</li>
+<li><strong>「第二次挥手」</strong>：Server向Client发送断开连接的确认。Client收到以后，这个时候TCP进入了半连接的状态，从Client向Server发送数据的通道被关闭了。</li>
+<li><strong>「第三次挥手」</strong>：Server向Client发送一个断开连接的请求。</li>
+<li><strong>「第四次挥手」</strong>：Client向Server发送断开连接的确认。Server收到以后，这个时候TCP连接就完全断开了。</li>
+</ul>
+
+<p>也可以这样考虑，上面提到的问题。假如在第二次挥手的时候，Server在给Client发送ACK的同时，也发送了FIN的请求。那么如果，Server还在接收从Client传输过来的数据，则会因为Client的下一个ACK而关闭接收数据的通道，数据就会接收失败就像下面的这个图那样。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190355" alt="img"/></p>
+
+<p>这里推荐一篇文章，帮助大家更好理解TCP连接地建立和断开的过程：两张动图-彻底明白TCP的三次握手与四次挥手</p>
+
+<h2 id="toc_40">TCP与UDP的应用场景</h2>
+
+<p>至于TCP与UDP的关系，看完下面的这张图你可能就懂了（图片来源于网络）：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190400" alt="img"/></p>
+
+<p>TCP是可靠的传输，UDP是不可靠的传输，那为什么我们还需要使用不可靠的UDP进行数据传输呢？</p>
+
+<p>我们知道，UDP 在传送数据之前不需要先建立连接，远地主机在收到 UDP 报文后，不需要给出任何确认。虽然 UDP 不提供可靠交付，但在某些情况下 UDP 确是一种最有效的工作方式（一般用于即时通信），比如：QQ 语音、 QQ 视频 、直播等等。</p>
+
+<p>TCP 提供面向连接的服务。在传送数据之前必须先建立连接，数据传送结束后要释放连接。TCP 不提供广播或多播服务。由于 TCP 要提供可靠的，面向连接的运输服务（TCP的可靠体现在TCP在传递数据之前，会有三次握手来建立连接，而且在数据传递时，有确认、窗口、重传、拥塞控制机制，在数据传完后，还会断开连接用来节约系统资源），这一难以避免增加了许多开销，如确认，流量控制，计时器以及连接管理等。这不仅使协议数据单元的首部增大很多，还要占用许多处理机资源。TCP 一般用于文件传输、发送和接收邮件、远程登录等场景。</p>
+
+<h1 id="toc_41">应用层</h1>
+
+<hr/>
+
+<h2 id="toc_42">HTTP协议</h2>
+
+<p>关于HTTP的定义，可以看一下维基百科上是怎么说的：</p>
+
+<blockquote>
+<p>❝</p>
+
+<p>在网页浏览器的地址栏上显示HTTP网络协议的插图 HTTP是一个客户端（用户）和服务端（网站）之间请求和应答的标准，通常使用TCP协议。通过使用网页浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口（默认端口为80）。我们称这个客户端为用户代理程序（user agent）。应答的服务器上存储着一些资源，比如HTML文件和图像。我们称这个应答服务器为源服务器（origin server）。</p>
+
+<p>❞</p>
+</blockquote>
+
+<p>http协议现在已经广泛用于万维网，关于http，后面单独那个文章出来讲，不过现在得先说一下https。</p>
+
+<p>其实http和https是一种协议，只不过https经过了SSL（Secure Socket Layer，安全套接字层）或TLS（Transport Layer Security，传输层安全）的封装。单从这两个协议就可以知道，https安全的，而http是不安全的。</p>
+
+<h2 id="toc_43">FTP协议</h2>
+
+<p>FTP（File Transfer Protocol）文件传输协议，在TCP/IP协议族中属于应用层协议运行于TCP协议之上是一种可靠的传输协议，主要功能用于实现用户间文件分发共享，以及网络管理者在进行设备版本升级、日志下载和配置保存等业务操作时，均会使用到FTP功能。</p>
+
+<h2 id="toc_44">DNS协议</h2>
+
+<p>前面说到IP地址是用来定位主机的，但是我们在生活中是很难记住这些没有规律的IP地址，我们只知道网站的域名。那现在要怎么办了？</p>
+
+<p>于是DNS协议出现了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200828190405" alt="img"/></p>
+
+<p>DNS是域名解析协议，假如我们知道了域名，但是不知道服务器的IP地址，就需要用到DNS协议。</p>
+
+<h2 id="toc_45">DHCP协议</h2>
+
+<p>什么是DHCP协议了？还是看看维基上的定义</p>
+
+<blockquote>
+<p>❝</p>
+
+<p>动态主机设置协议（DHCP）是一种使网络管理员能够集中管理和自动分配IP网络地址的通信协议。在IP网络中，每个连接Internet的设备都需要分配唯一的IP地址。DHCP使网络管理员能从中心结点监控和分配IP地址。当某台计算机移到网络中的其它位置时，能自动收到新的IP地址。</p>
+
+<p>❞</p>
+</blockquote>
+
+<p>维基上已经解释的非常清楚了，DHCP的作用就是动态地给主机分配IP地址，大大减少了网络管理员的工作负担。</p>
 
                         
                       </div>
@@ -1114,6 +3342,310 @@ No.3 个性字体：</li>
                   <div class="more-left left">
                   
                     <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025631113.html">
+                
+                  <h1>VS Code 代码编辑器入门指南：核心组件与概念</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">什么是代码编辑器</h2>
+
+<p>如果此前对「代码编辑器」没有任何概念，我们可以和文本编辑器（写作工具）进行类比，就是<strong>为了更好更方便进行代码编写开发</strong>的工具。</p>
+
+<p>提到代码编辑器，不少「工龄」较长的程序员第一反应都会是 Notepad++，这款代码编辑器发布于 2003 年并更新至今，非常经典。因为使用惯性和轻量的特点它目前依旧很受欢迎。不过在 2020 年的今天，有更多好用的代码编辑器值得向你推荐。目前比较受欢迎的代码编辑器主要有 <a href="https://code.visualstudio.com/">VS Code</a>、<a href="https://atom.io/">Atom</a> 和 <a href="https://www.sublimetext.com/">Sublime text</a> 。它们各有特点也都有不少死忠粉，新手在初期都可以尝试。</p>
+
+<p>另外你或许还经常人提起 IDE (Intergreated Development Environment)，和代码编辑器相比 IDE 更关注开箱即用的体验、对代码的智能理解和对大型项目的支持，因此相对「笨重」；代码编辑器则更加轻量，侧重于文件，对于语言和工作流的支持也更自由。</p>
+
+<h2 id="toc_1">为什么选择 VS Code</h2>
+
+<blockquote>
+<p>Visual Studio Code（简称 VS Code）是一个由微软开发，同时支持 Windows 、 Linux 和 macOS 等操作系统且开放源代码的代码编辑器，它支持测试，并内置了 Git 版本控制功能，同时也具有开发环境功能，例如代码补全（类似于 IntelliSense）、代码片段和代码重构等。该编辑器支持用户个性化配置，例如改变主题颜色、键盘快捷方式等各种属性和参数，同时还在编辑器中内置了扩展程序管理的功能。 ——维基百科</p>
+</blockquote>
+
+<p>瑞士计算机科学家 Erich Gamma （《设计模式》作者、 Eclipse 主要开发者之一） 2011 年从 IBM 来到微软后起初负责组建团队开发一款线上开发工具（Manaco），后来他们在这个工具的基础上开发了如今的 VS Code 并于 2015 年发布。VS Code 定位为一个 <strong>高性能轻量级的编辑器</strong>，为了保证主进程的稳定，插件系统运行在主进程之外，所有个性化功能都由插件系统完成，在 IDE 和编辑器之间找到一个比较理想的平衡。</p>
+
+<p>在微软所有开源项目中，VS Code 是目前最受欢迎的一个。经过不同工具之间的比较，我最终选择 VS Code 的原因包括：</p>
+
+<ul>
+<li>完全免费且开源，更新迭代稳定</li>
+<li>跨平台编辑器，满足日常在不同系统中的使用</li>
+<li>占用系统资源比较少，大文件打开速度快</li>
+<li>插件丰富，扩展性极强</li>
+<li>使用人数多且社区活跃，碰到问题和需求容易找到解决方案</li>
+</ul>
+
+<h2 id="toc_2">从 0 到 1 开始使用 VS Code</h2>
+
+<h3 id="toc_3">下载与安装</h3>
+
+<p>VS Code 有两个不同版本：稳定版（Stable）每月更新；预览版（Insiders）每个工作日更新。两个版本可同时安装互不影响，在 <a href="https://code.visualstudio.com/Download">官网</a> 即可选择自己需要的平台和版本，本文使用的版本为稳定版 1.44.1。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182244.png" alt="img"/></p>
+
+<p>客户端安装完成后，如希望通过终端启动 VS Code，可以按下 <code>shift+command+p</code> 调出命令面板，在搜索框内输入<code>shell command</code> 后找到并点击「Shell Command: Install &#39;code&#39; command in PATH」即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182245.png" alt="img"/></p>
+
+<p>VS Code 默认是英文界面，这里<strong>并不建议</strong>把默认语言修改为中文，因为在学习大量英文相关教程和说明时使用英文界面或许更容易操作。另外，VS Code 绝大多数插件都没有汉化，使用起来会中英混杂。</p>
+
+<p>如果需要使用中文，依旧可以通过 <code>shift+command+p</code> 调取命令面板，然后在搜索框中输入 <code>display</code> 找到并点击「Configure Display Language」，这时会显示目前可以选择的语言或者安装其它语言。选择「Install additional languages...」后会跳转到相关语言插件，选择中文语言包安装并进行安装。安装完成后再次找到「Configure Display Language」后选择「zh-cn」后重启即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182246.png" alt="img"/></p>
+
+<h3 id="toc_4">欢迎界面</h3>
+
+<p>打开 VS Code 后，未修改默认配置的情况下首先会看到「欢迎页面」。如下图，欢迎页面有五部分内容。首次使用不妨先花点时间浏览「学习」部分内容，其中交互式演练场（interactive playground）是新手了解 VS Code 好资料。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182247.png" alt="img"/></p>
+
+<h3 id="toc_5">VS Code 主题与图标</h3>
+
+<p>在个性化设置部分点击「Color theme」可以选择一个你喜欢的主题。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182248.png" alt="img"/></p>
+
+<p>除了主题之外，你还可以为 VS Code 选择一套自己喜欢的文件图标。点击左下角的「设置」图标，选择「file icon theme」。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182249.png" alt="img"/></p>
+
+<p>然后选择「Install additional File icon theme...」会弹出可以安装的 icon 插件列表，例如 Material Icom Theme，点击安装后选择使用即可。</p>
+
+<h2 id="toc_6">核心概念与组件</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182250.png" alt="img"/></p>
+
+<p>上面这张图展示了默认配置情况下 VS Code 的基本界面。</p>
+
+<ol>
+<li>编辑器：在这里码字写代码</li>
+<li>侧边栏：可以类比为 macOS 的扩展坞，姑且称为「组件坞」，这里会展示各种组件和插件图标。</li>
+<li>组件内容：击侧边栏不同的组件后这里会展示相应显示组件内容。</li>
+<li>面板：包括问题显示、输出、调试控制台和终端四个组件。问题面板会显示代码中的警告和问题，输出面板会呈现命令和插件的运行结果，调试控制台用来进行代码调试，终端则可以帮助我们直接在 VS Code 中进行命令行操作。</li>
+<li>状态栏：可以类比为 macOS 的菜单栏 + 通知中心，这里会展示和文档及项目相关的简单信息以及部分插件提供的信息。</li>
+</ol>
+
+<h3 id="toc_7">侧边栏及常用组件</h3>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182251.png" alt="img"/></p>
+
+<p>默认情况下，侧边栏显示的五个组件分别是：资源管理器、跨文件搜索、源代码管理、启动和调试和扩展管理。随着后期安装插件的增多，侧边栏可以显示的组件数量也会越来越多，不过你可以通过右击侧边栏选择隐藏那些用不到的组件还可以拖动组件图标进行排序。</p>
+
+<p>侧边栏显示的默认组件中「资源管理器」和「跨文件搜索」就是字面功能，分别用来浏览管理文件和进行内容查找替换，我们会在下篇中配合具体应用场景进行更详细的介绍。源代码管理和调试分别用于 git 一系列操作和 debug，如果你并非程序员，没有这方面的需求也可以选择将其隐藏。</p>
+
+<h3 id="toc_8">扩展管理及插件</h3>
+
+<p>这一部分需要详细介绍「扩展管理」组件和「插件」这个概念。</p>
+
+<p>如文章开头所言，VS Code 中为了保证主进程的稳定所有个性化功能的实现都将通过插件来完成，在下文的应用场景部分我们也会用到大量插件。我们可以把插件理解为 macOS 中的应用，而扩展管理则是 VS Code 的应用商店。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182252.png" alt="img"/></p>
+
+<p>如上图，在组件显示部分可以看到已经安装的插件和推荐插件，所有你想找的东西都可以尝试在搜索框进行搜索。点击感兴趣的插件后会显示插件详情，其中包括详细介绍、作者和更新日志等内容。</p>
+
+<p>需要说明的是，由于 VS Code 的扩展插件数量实在过于庞大，在浏览插件的时候系统已提供了一些过滤操作，点击 <code>···</code> 可以选择只查看安装的插件或者流行的插件等等。</p>
+
+<p>更方便的是你还可以直接在插件搜索框中输入 <code>@</code> 来进行快速过滤。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182253.png" alt="img"/></p>
+
+<p>为了更方便的找到需要的插件，VS Code 支持按照类别进行查找，目前支持的类别如下图所示，包括语言支持、代码片段和主题等。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182254.png" alt="img"/></p>
+
+<p>目前在官方的插件商店中，我们可以看到共有 12 类 20000 余款插件。如果你想开发自己的插件，可以进一步参考 <a href="https://code.visualstudio.com/api">官方插件 API</a> 。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182255.png" alt="img"/></p>
+
+<h3 id="toc_9">命令面板</h3>
+
+<p>VS Code 作为一个代码编辑器，它本身有两个比较极客的设计思想。一个是基于文本（命令）的交互界面，另一个是基于文本的系统设置。基于文本的交互界面就是这里提到的命令面板，系统设置将会稍后介绍。</p>
+
+<p>命令面板的存在提供了一种全新的使用逻辑，熟练使用后可以极大提高效率，因此对命令面板有基本了解是上手 VS Code 的关键。其实在上文安装命令行启动以及设置中文支持时我们都用过它，<code>shift+command+p</code> 就是调用命令面板的一种基本方式。</p>
+
+<p>命令面板的高效在于其<strong>可以通过输入框中的第一个字符</strong>来触发不同功能。</p>
+
+<p>如下图所示，当你按下 <code>shift+command+p</code> 时，命令面板的输入框会自动出现一个 <code>&gt;</code> 它意味着此时命令面板认为你想要搜索相关命令并执行。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182256.png" alt="img"/></p>
+
+<p>当删除 <code>&gt;</code> 后会看到命令面板切换到了「访问最近文件」状态。如果你想在调用命令面板时直接访问最近文件，快捷键是 <code>command+p</code>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182257.png" alt="img"/></p>
+
+<p>如果此时输入 <code>?</code> 会触发命令面板的「帮助」功能，我们可以看到支持哪些操作。下图中显示的切换文件、<code>&gt;</code>执行命令、<code>@</code>符号跳转等我们在后续的应用场景中都会提及。其他单词缩写也代表了对应的操作，例如<code>edt</code>接空格可以管理打开的编辑器，<code>term</code>接空格可以打开或管理终端。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182258.png" alt="img"/></p>
+
+<h3 id="toc_10">修改设置</h3>
+
+<p>在下篇介绍中，我们会涉及到更改默认设置的内容，因此有必要了解 VS Code 更改设置的方法。</p>
+
+<p>VS Code 目前已经有了比较完善的图形化设置界面，只需要使用 <code>command+,</code> 就可以调用。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182259.png" alt="img"/></p>
+
+<p>如上图所示，设置面板已经列出了用户常用配置内容，你可以寻找自己想要改变的东西，但是这里更加推荐直接在搜索框里搜索。此外，VS Code 的配置分为用户（User）和工作区（workspaces）两个层级，其中用户配置会对全局生效，工作区配置只会对当前所在的项目（目录）生效且优先级更高。</p>
+
+<p>除了图形化界面以外，VS Code 的所有配置其实都写在 json 格式的一个文本文件中。你可以非常方便的调出该文件进行设置，只需要在命令面板中输入<code>open sett</code> 然后选择 JSON 即可。如果是针对工作区的设置，json 文件将会保存在工作区<code>.vscode</code>目录下。</p>
+
+<p>在 json 文件中，你可以直接编写设置，也可以点击行号前的「笔形」图标查看可以更改的内容。之所以有必要了解如何通过配置文件更改设置是因为部分插件提供的复杂设置只能通过修改 json 文件完成。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182300.png" alt="img"/></p>
+
+<h3 id="toc_11">工作区</h3>
+
+<p>工作区（workspace）是另一个需要了解的核心概念，它对应在 VS Code 中如何进行文件管理。</p>
+
+<p>上文我们提到相比于 IDE 着重于项目管理，代码编辑器更加侧重于文件本身，VS Code 所有操作就是基于当前目录、子目录和其中的文件进行的。在下篇内容中我们会讲到很多操作和插件都会基于所在目录生成相关的配置文件，而这些文件通常都会被保存到所在目录的<code>.vscode</code>文件夹中。<code>.vscode</code> 文件夹中的各种配置决定了不同目录被打开时 VS Code 会启动哪些插件和配置。</p>
+
+<p>随着项目逐渐发展，单一文件夹往往无法满足我们的开发需求，VS Code 通过工作区这个概念解决了同时操作多个文件夹的问题。简而言之，当你使用 VS Code 打开一个文件夹后可以在命令面板中搜索运行 <code>add folder to workspace</code>，然后选择想要打开的其它文件夹，此时就会显示一个尚未保存的工作区。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182301.png" alt="img"/></p>
+
+<p>当所有文件夹添加完成后在命令面板执行 <code>save workspace as</code> 选择我们的工作区名字和要保存的位置，就可以对该工作区进行保存。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182302.png" alt="img"/></p>
+
+<p>这时我们会看到一个名字后缀为<code>code-workspace</code>的文件，其本质依旧是一个 json 格式的配置文件。其中包括了文件夹的相对路径以及针对工作区的其它设置。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182303.png" alt="img"/></p>
+
+<p>此外，记住两个目录切换的快捷键也会大大提高效率，<code>ctrl+r</code> 可以快速查看并切换最近打开的文件夹，<code>ctrl+w</code> 则可以快速在所有打开的 VS Code 窗口中进行切换。</p>
+
+<h3 id="toc_12">语言支持</h3>
+
+<p>作为一个代码编辑器，VS Code 提供了统一的 <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> 和 <a href="https://code.visualstudio.com/api/extension-guides/debugger-extension">Code Debugging Protocol API</a>，所有语言支持都能够借助这两个 API 在 VS Code 上得到类似 IDE 的开发和调试体验。</p>
+
+<p>程序员可能最关心的内容就是对编程语言的支持，但初学者最不需要担心的其实也是这部分内容。到目前为止常用的主流编程语言在 VS Code 中都得到了很不错的支持，你需要的往往只是安装对应语言插件和进行一点基本配置。这些语言包括基础的 Markdown 和 JSON，以 HTML、CSS 和 JavaScript 为代表的多种前端语言和以 Python、Java、Go、C#、PHP 等为代表的大量后端语言。对于一些在程序员群体中相对使用人数较少的编程语言，例如 R 和 Julia 等也都有插件提供支持。下图为官网展示的几个流行语言插件。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182304.png" alt="img"/></p>
+
+<p>如果想查看自己使用的编程语言是否支持，可以在 <a href="https://marketplace.visualstudio.com/">插件商店</a> 中查找。此外，当你用 VS Code 打开一个文件时，系统会根据文件名后缀自动提示你安装与之相关的语言插件，非常方面。</p>
+
+<p>这一部分我们也会在下篇中结合具体的应用场景进行介绍。</p>
+
+<h3 id="toc_13">常用快捷键</h3>
+
+<p>提倡使用使用快捷键，主要目的是提高效率尽量让双手不离开键盘。快捷键的使用开始看似是一件更浪费时间的事情，但是随着肌肉记忆和熟练度增加效率将会大大提高。</p>
+
+<p>如果你是从其它编辑器切换到 VS Code 完全可以移植之前熟悉的快捷键配置，比如 Vim, Atom 或者 sublime。如果是一个新手，下图是我自己日常用到的 VS Code 高频快捷键，供参考。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200513182305.png" alt="img"/></p>
+
+<p>如果需要查看所有快捷键，可以通过 ctrl+K ctrl+s 进入快捷键设置界面或者直接查看官方文档。</p>
+
+<ul>
+<li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf">windows 快捷键</a></li>
+<li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf">macOS 快捷键</a></li>
+</ul>
+
+<p>以上就是 VS Code 编辑器入门指南上篇的内容，介绍了什么是代码编辑器、为什么选择 VS Code 、从 0 到 1 开始使用 VS Code 以及上手 VS Code 需要了解的核心概念与组件。有了这些知识储备，在下篇中将会介绍 5 个 VS Code 实际应用场景，进而更好的了解 VS Code 的特性和插件。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16177587144759.html">
+                
+                  <h1>Win10自带Ubuntu子系统的安装与配置</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>程序猿们有福了！！！Windows和Linux终于合体了，在同一个WIN10系统下，你既可以继续享受微软给我们带来的便捷，同时又可以开开心心的码代码了，而且有了海量的Linux工具支持。</p>
+
+<h2 id="toc_0">安装Windows Terminal</h2>
+
+<p>在远程连接其他Linux的时候，我通常使用<code>Xshell</code>，就因为它长得比较漂亮耐看。但今天在Windows上，我们也可以安装<code>Windows Terminal</code>。它有点类似于MacOS上的<code>iTerm</code>，可以说是Windows下最舒适的终端。</p>
+
+<p>第一步，从应用商店去获取安装<code>Windows Terminal</code>。</p>
+
+<p>直接在搜索框里搜索<code>Windows Terminal</code>，即可找到这个软件，下图左边第一个。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20201009010137" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20201009010152" alt="img"/></p>
+
+<h2 id="toc_1">安装Ubuntu子系统</h2>
+
+<p>我们只需要在系统上开启子系统功能，然后在应用商店安装Linux就可以了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20201009010202" alt="img"/></p>
+
+<p>image.png</p>
+
+<p>从弹出的对话框里，划到最下边，然后给“适用于Linux的Windows子系统“，打勾。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20201009010210" alt="img"/></p>
+
+<p>从应用商店安装Ubuntu系统，这个系统将会以软件的形式存在。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20201009010219" alt="img"/></p>
+
+<p>在我们的<code>Windows Terminal</code>右上角，有一个向下的箭头，点击它，就可以看到刚刚安装的Ubuntu。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20201009010228" alt="img"/></p>
+
+<p>进入Linux系统之后，我们就可以像配置一个普通Linux一样配置这台机器。通过编辑<code>/etc/apt/sources.list</code>文件，可以把ubuntu的软件源给换掉。在命令行执行<code>sudo apt install zsh</code>可以安装shell终端；运行<code>sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</code>命令可以为配置成oh-my-zsh，从此我们终端颜值就显得很好了。如果你想要你的终端更加漂亮，可以参考下面的主题页面。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20201009010235" alt="img"/></p>
+
+<h2 id="toc_2">Linux与Windows文件互访</h2>
+
+<p>在win10下子系统Ubuntu的目录位置一般是：<br/>
+<code>C:\Users\你的用户名\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc\LocalState\rootfs</code>, rootfs文件夹就是ubuntu下的根目录“/”，在win10下找到该文件后，可以为rootfs文件夹创建一个快捷方式。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20201009010243" alt="img"/></p>
+
+<p>在Ubuntu系统下的/mnt/c目录其实就是win10的home目录，你可以在此目录下创建一个工作文件夹“Workplace”，把需要与win10共享的文件放进去，你在win10的home目录下就可以看到它。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20201009010251" alt="img"/></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2021/04/07</span>
                     
           				   
                     
@@ -1140,7 +3672,7 @@ No.3 个性字体：</li>
 			  </div>
 			  <div class="large-6 columns">
 			<p class="text-right" style="padding-top:25px;">
-			
+			 <a href="all_4.html">&raquo; Next Page</a> 
 			</p>
 			  </div>
 			</div>
@@ -1196,31 +3728,31 @@ No.3 个性字体：</li>
 	      
 		      
 			      <li class="post">
+			        <a href="16177589969532.html">**用好VSCode这13款插件和8个快捷键**</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025628475.html">Anaconda + VSCode 最详细教程</a>
+			        <a href="16177587144586.html">[Chrome浏览器F12开发者工具简单使用]</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15838967255194.html">Docker 必备可视化工具 Portainer</a>
+			        <a href="15998025629001.html">[Pycharm 常用快捷键]</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025631446.html">Git 常用技巧 （高级用法）</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15998025629044.html">Git版本管理完全指南（包含常见头疼错误解决方案）</a>
+			        <a href="16177587144704.html">[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</a>
 			      </li>
 		     
 		  

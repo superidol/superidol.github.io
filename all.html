@@ -96,6 +96,171 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="16177589969532.html">
+                
+                  <h1>**用好VSCode这13款插件和8个快捷键**</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>VsCode 远程开发环境相对其他 IDE 的远程开发环境，实现了真正的远程开发，在本地主机（一般是Windows或MAC）上的操作的对象直接就是远程机（Linux），所有本地主机上的修改直接基于远端文件，摆脱了传统开发流程在本地编辑文件，利用FTP工具上传到远程编译机调试编译，这一套繁琐的操作，因此非常的方便。</p>
+
+<p><strong>接着上篇VsCode教程，这篇文章我会结合日常工作使用经验，教你打造一个体验流畅的 C/C++ 开发环境</strong>，这份配置指南可能不是面面俱到，也不会详细的教你一步步怎么配置插件，这些太细节的工作留给你自己去完成，实际上插件下载页都会有详细的说明。</p>
+
+<p>不少新手可能会觉得 VsCode 编辑文本还好，看代码和写代码太难用，那是没有掌握正确的打开方式，<strong>VsCode 精髓是丰富的插件体系支持，相信看完这篇文章配置好环境之后，就只剩一句「真香」能形容</strong>。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200322" alt="img"/></p>
+
+<p>为了有个直观的印象，先来看下我的 VsCode 插件列表，因为我用VsCode 开发 C/C++/Go/Python 程序，插件比较多，有些可能和本文无关的插件可以忽略掉。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200340" alt="img"/></p>
+
+<h2 id="toc_0"><strong>基础开发插件</strong></h2>
+
+<p>既然是配置支持C/C++环境下开发，<strong>那首先推荐的基础 C/C++ 开发插件</strong>，以下两个是必须要装的插件，主要提供一些基础的代码调试和查看功能，安装以后 VsCode 就能支持智能化代码补全、类型填充和联想、符号和函数定义跳转、引用查找等 C/C++ 程序开发和源码管理必备能力，让你的 VsCode 从编辑器进化成 IDE 的基础插件。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200049" alt="img"/><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200100" alt="img"/></p>
+
+<h2 id="toc_1"><strong>源码阅读</strong></h2>
+
+<p>程序员日常工作有两大内容，一个是写自己的代码，一个是阅读别人写的代码，下面这两个插件让你在 VsCode 优雅看代码。</p>
+
+<p><strong>首先推荐的是下面的这个懒人神器 TODO Tree，自己写的 TODO 哭着也要补充实现。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200118" alt="img"/>TODO Tree</p>
+
+<p>这个插件的使用场景是，你看完代码加了下面这个注释 ：<code>// TODO 以后会扩展这部分功能</code> 当然，不知道这个「以后」是什么时候，一不小心以后变成遥遥无期，一部分原因是不想改，另一部分原因是写下这段注释的人时间久了就忘记了，这时候你需要「 TODO Tree 插件」，我们可以更方便的管理代码中的此类注释。</p>
+
+<p>这个插件能帮你组织和管理TODO 注释，你在代码中注释的带 TODO 的标签会统一在侧边栏显示出来，当然不限于 TODO 注释，可以自定义管理标签比如 <code>FIXME</code> 等，可以基于标签过滤和筛选。</p>
+
+<p><strong>另一个推荐的源码阅读插件是 Bookmarks</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200127" alt="img"/>「书签」这个插件的功能就和它名字一样直接，没错它就是一个你的源码书签，当我们看大工程源码的时候，往往需要在成千上万个源文件之间跳转，<strong>此外， Bookmarks 能帮你方便的创建和管理书签</strong>，看到哪个位置想加个书签就按快捷键 <code>Ctrl + Alt + K</code> ，多按一次就是删除，不仅如此他还提供了在书签之前跳跃和查看管理的功能，更多功能可以自己体验，反正我看大工程源码用这个很爽。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200134" alt="img"/></p>
+
+<h2 id="toc_2"><strong>代码管理</strong></h2>
+
+<p><strong>下面介绍两个 Git 版本控制相关的插件</strong>，项目中我们用的最多的版本控制工具是 Git ，当然 VsCode 自身提供了比较丰富的 Git 版本控制功能，基本上可以通过在界面点点点完成一些了Git 操作，但我今天要介绍的这两个插件能让你的 Git 更惊艳，算是对功能的增强，让你的 Git 操作更直观好用，好看的东西谁不喜欢呢？</p>
+
+<p><strong>第一个出场的是Git Graph 插件，可视化Git仓库，让你的提交记录看起来美观大方，并且基于图中提交点提供了丰富的Git 操作。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200140" alt="img"/>GitGraph</p>
+
+<p>如图中你所见到的样子，提交记录变成一条条时间线，分支也能清晰的用不同颜色时间线区分出来，并且点开提交线上的提交点可以查看当时的提交动作，可以在提交动作上查看做了哪些改动，也可以方便的跳转到改动文件，更多功能自行体验，这个插件 lemon 强烈推荐！</p>
+
+<p><strong>下面介绍的这个GitLens 插件也是Git功能增强工具。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200147" alt="img"/>GitLens</p>
+
+<p>我最喜欢它的一个功能是，它可以在文件中改动的位置后面直接显示出本次改动的提交信息，然后你可以直接通过显示的提交信息跳转到提交文件对比，其实还有其他丰富的功能，不过这个功能我用的最多。</p>
+
+<h2 id="toc_3"><strong>小而美的工具</strong></h2>
+
+<p>下面这几个插件是我在日常使用中积累的工具插件，非必须，但是拥有了之后编码幸福感倍增，下面一一介绍给大家。</p>
+
+<p><strong>第一个是下面这个Bracket Pair Colorizer插件，我管它叫彩虹括号插件。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200151" alt="img"/>彩虹括号</p>
+
+<p>你是否为经常为写的大括号、花括号、小括号没有匹配而烦恼？是否经常找匹配括号看瞎了眼？现在不要 888 也不要 998，只需一键下载安装这个插件就再也不用担心啦。这个插件让你写的每一个括号都能找到他自己的颜色，成双成对，点一下其中一半括号自动匹配另一半，拯救了广大程序员的近视眼睛度数。</p>
+
+<p><strong>再来介绍下面这个koroFileHeader插件，这个插件主要用于自动的插入头文件开头的说明和函数的说明。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200156" alt="img"/>koroFileHHeader</p>
+
+<p>比如我们经常看到别人的头文件开头是这样的模板：</p>
+
+<pre class="line-numbers"><code class="language-text">/******************************************************************************
+*  FILENAME:    niu_bi_head_file.h
+*  DESCRIPTION: 非常厉害的头文件
+*  HISTORY:     Date        Author      Comment
+*               2020/09/05  lemon
+*******************************************************************************/
+</code></pre>
+
+<p>这个可不是别人一个个字打出来的，安装插件之后你只需要简单配置想要的格式，然后按下快捷键<code>Ctrl + Alt +i</code> 即可自动即可自动生成这样一个模板。</p>
+
+<p>类似的对函数的说明注释模板，只需按下快捷键<code>Ctrl + Alt +t</code> 即可完成，非常的方便。</p>
+
+<p><strong>下面这个插件Switcher，这个插件能在头文件和 C/C++ 文件之间跳转。</strong><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200202" alt="img"/></p>
+
+<p>这个插件完全是因为我太懒想省力，才找的一个辅助工具，我们经常需要通过头文件跳到对应的源文件，或者从源文件跳转到对应的头文件，当然可以在侧边栏的文件管理器中选择打开，但是多了一个步骤有点繁琐，所以我找了这个插件，其实按插件的说明文档，它是能在不同的文件类型之间跳转，不仅仅局限于头文件和源文件，懒人福音，你值得拥有。</p>
+
+<h2 id="toc_4"><strong>实用工具</strong></h2>
+
+<p>下面这几个插件是比较实用的工具插件，各取所需。</p>
+
+<p><strong>第一个是官方提供的 VsCode 中文汉化包</strong>。虽然lemon提倡并鼓励大家多多实用英语，但若你不想折腾，那咱们家汉语博大精深，好优美的中国话，那就让VsCode也来说汉语吧，Microsoft 官方直供，兼容性好，放心食用。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200207" alt="img"/>中文语言包</p>
+
+<p><strong>下面这个是 Markdown 预览增强插件</strong>。对于经常写博客或文章的人来说，Markdown 肯定是少不了的，这个插件支持分屏预览，各种丰富的Markdwon 增强功能。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200215" alt="img"/>markdown增强</p>
+
+<p>最后这个 shellman 插件是 Linux shell 脚本辅助工具。在 Linux 下工作难免随手写一个脚本，这个插件能提供了便捷的shell script 自动补全和联想等功能，提高你的脚本编写速度和准确性。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200225" alt="img"/></p>
+
+<p>shellman</p>
+
+<p><strong>以上就是我开发环境中配置的常用插件，快来抄作业，跟着配置起来你就拥有了一个流畅的C/C++开发环境</strong>。搭配下面讲的插件部分内容服用，效果更佳。</p>
+
+<h2 id="toc_5"><strong>最常用快捷键</strong></h2>
+
+<p><strong>快捷键太多，没必要完全记下来，只需记住一些常用的快捷键即可，一些不常用的快捷键在使用的时候加强记忆就好</strong>。列举出我自己常用的快捷键，不多，但够用！应付日常开发工作绰绰有余。</p>
+
+<p><code>Ctrl + Shift + P</code> 这个必须要放在第一位，这个命令是所有「命令之母」。这么说一点也不过分，它会打开 VsCode 命令窗口，在这个窗口下输入上述的插件名称就能知道这个插件支持哪些特性了，顺带还会说明特性快捷键。</p>
+
+<p>下面举个例子，先输入<code>Ctrl + Shift + P</code> 打开命令查找输入框，然后输入 <code>bookmarks</code> 就能知道这个插件的支持的所有特性，顺便记下快捷键。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200231" alt="img"/></p>
+
+<p><code>Ctrl + P</code> 文件查找。快速打开文件列表，输入关键字匹配文件，优先显示最新打开过的文件，方便的在指定文件之间跳转。</p>
+
+<p><code>F12</code> 跳转到定义，这个没啥好说的，跳转到函数或符号的定义，这是高频操作。</p>
+
+<p><code>Alt + F12</code> 以预览方式在当前页面显示定义，都是查看定义，相对 <code>F12</code> 的优点是不会跳出当前文件到定义文件，而是在当前文件打开一个小窗口预览，如下图：<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200236" alt="img"/></p>
+
+<p><code>Shift + F12</code> 查看光标所在函数或变量的引用，就像 <code>Alt +F12</code> 一样以预览方式在当前文件打开引用的文件列表。如下图：<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200243" alt="img"/></p>
+
+<p><code>Alt + 左/右箭头</code> 前进或者后退到光标所在源码的上一个位置。</p>
+
+<p><code>Ctrl + Shift + O</code> 查看当前文件的符号，可以用关键字过滤符号，当然你也可以在左侧的大纲视图中查找符号，不过大纲视图不能查找匹配符号，所以我更习惯用快捷键方式查找符号。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200248" alt="img"/>符号和函数查找</p>
+
+<p>快捷键讲完了吗？没有，太多快捷键了；其他的快捷键不重要吗？因人而异吧，高频使用的快捷键就是重要的，而上面我说的这几个是超高频使用，记住这几个差不多就行了，剩下快捷键你如果用的多了自然就记住了，<strong>但是我上面说的这几个快捷键请务必先记在脑子里，这会大大降低你的使用成本，尽早享受 VsCode Coding 的乐趣</strong>！</p>
+
+<h2 id="toc_6"><strong>最后说几句</strong></h2>
+
+<p>想起我上大学的时候，大一学习C语言课必须安装VC++ 6.0才行，那时候也有 Visual studio 这样的 IDE，不过老师没推荐其他 IDE，都是凭借自己对编程的兴趣发现了更多比VC++ 6.0 更加 &#39;现代化&#39; 的 IDE，比如Jetbrain 系列和Visual studio系列，爱不释手各种尝试。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200254" alt="img"/></p>
+
+<p>现在主流的 IDE 已经非常丰富，其实编辑器或者 IDE 只是一个工具，没有最好自己用的顺手就行，就像 Vim 党和 Emacs 党谁也说服不了谁一样，自己喜欢就好。</p>
+
+<p><strong>大家更应该关注编程这件事本身，提高自身硬实力才是最紧要的，不过好的工具能让你事半功倍</strong>，这点我也是完全赞成的，希望这篇文章也能够让你事半功倍。</p>
+
+<p><strong>如果文章对你有帮助，请不吝点击「在看、分享」激励我持续创作。</strong></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2021/04/07</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15998025628955.html">
                 
                   <h1>1000行MySQL学习笔记</h1>
@@ -1208,6 +1373,1298 @@ OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
               </div><!-- article -->
         
 			<div class="article">
+                <a class="clearlink" href="16177587144586.html">
+                
+                  <h1>[Chrome浏览器F12开发者工具简单使用]</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">1.如何调出开发者工具</h2>
+
+<ul>
+<li>按F12调出</li>
+<li>右键检查（或快捷键Ctrl+Shift+i）调出 </li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000830.png" alt="img"/></p>
+
+<h2 id="toc_1">2.开发者工具初步介绍</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000841.png" alt="img"/></p>
+
+<p>chrome开发者工具最常用的四个功能模块：元素（ELements）、控制台（Console）、源代码（Sources），网络（Network）。</p>
+
+<ul>
+<li>元素（Elements）：用于查看或修改HTML元素的属性、CSS属性、监听事件、断点等。css可以即时修改，即时显示。大大方便了开发者调试页面</li>
+<li>控制台（Console）：控制台一般用于执行一次性代码，查看JavaScript对象，查看调试日志信息或异常信息。还可以当作Javascript API查看用。例如我想查看console都有哪些方法和属性，我可以直接在Console中输入&quot;console&quot;并执行~</li>
+<li>源代码（Sources）：该页面用于查看页面的HTML文件源代码、JavaScript源代码、CSS源代码，此外最重要的是可以调试JavaScript源代码，可以给JS代码添加断点等。</li>
+<li>网络（Network）：网络页面主要用于查看header等与网络连接相关的信息。</li>
+</ul>
+
+<h3 id="toc_2">2.1元素（Elements）</h3>
+
+<ul>
+<li><p>查看元素的代码：点击左上角的箭头图标（或按快捷键Ctrl+Shift+C）进入选择元素模式，然后从页面中选择需要查看的元素，然后可以在开发者工具元素（Elements）一栏中定位到该元素源代码的具体位置</p></li>
+<li><p>查看元素的属性：定位到元素的源代码之后，可以从源代码中读出改元素的属性。如下图中的class、src、width等属性的值。</p></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000850.png" alt="img"/></p>
+
+<ul>
+<li>当然从源代码中读到的只是一部分显式声明的属性，要查看该元素的所有属性，可以在右边的侧栏中查看：</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000905.png" alt="img"/></p>
+
+<ul>
+<li>修改元素的代码与属性：点击元素，然查看右键菜单，可以看到chrome提供的可对元素进行的操作：包括编辑元素代码（Edit as HTML）、修改属性（Add attribute、Edit attribute）等。选择Edit as HTML选项时，元素进入编辑模式，可以对元素的代码进行任意的修改。当然，这个修改也仅对当前的页面渲染生效，不会修改服务器的源代码，故而这个功能也是作为调试页面效果而使用。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000915.png" alt="img"/></p>
+
+<ul>
+<li>查看元素的CSS属性：在元素的右边栏中的styles页面可以查看该元素的CSS属性，这个页面展示该元素原始定义的CSS属性以及从父级元素继承的CSS属性。从这个页面还可以查到该元素的某个CSS特性来自于那个CSS文件，使编码调试时修改代码变得非常方便。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000920.png" alt="img"/></p>
+
+<ul>
+<li>在Styles页旁边，有一个Computed页面，这个页面展示该元素经过计算之后的所有CSS属性，即最后浏览器渲染页面时使用的属性。属性的计算由浏览器自动进行，是浏览器渲染页面的一个必不可少的过程。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000942.png" alt="img"/></p>
+
+<ul>
+<li><p>修改元素的CSS属性：在元素的Styles页面，可以对元素的CSS属性进行修改，甚至删除原有、添加新属性。不过，这些修改，仅对当前浏览器的页面展示生效，不会修改CSS源代码。所以在这里进行CSS属性的修改一般用来调整和完善元素的渲染效果。 </p></li>
+<li><p>给元素添加断点：在元素的右键菜单中选择断点选项（Break on…），选中之后，当元素被修改（通常是被JS代码修改）时，页面加载会暂停，然后可以查看该元素的属性。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000951.png" alt="img"/></p></li>
+<li><p>元素断点添加之后，可以在右侧栏的DOM Breakpoints页面中看到，这个页面可以看到当前网页的所有元素断点。</p></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000958.png" alt="img"/></p>
+
+<ul>
+<li>查看元素的监听事件：元素的右边栏的Event Listener页面，可以查看到该元素的所有监听事件。在开发中，尤其是维护其他人的代码时，会出现不了解元素对应的监听事件，这个时候，可以在这个页面中找到。这个页面不仅能看到对应的事件函数，还可以定位该函数所在的JS文件以及在该文件中的具体位置（行数），大大提高开发维护的效率。 </li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001004.png" alt="img"/></p>
+
+<h2 id="toc_3">3. 控制台（Console）</h2>
+
+<ul>
+<li><p>查看JS对象的及其属性： <br/>
+<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001012.png" alt="img"/></p></li>
+<li><p>执行JS语句： <br/>
+<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001017.png" alt="img"/></p></li>
+<li><p>查看控制台日志：当网页的JS代码中使用了console.log()函数时，该函数输出的日志信息会在控制台中显示。日志信息一般在开发调试时启用，而当正式上线后，一般会将该函数去掉</p></li>
+</ul>
+
+<h2 id="toc_4">4. 源代码（Source）</h2>
+
+<ul>
+<li>查看文件：在源代码（Source）页面可以查看到当前网页的所有源文件。在左侧栏中可以看到源文件以树结构进行展示。 <img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001023.png" alt="img"/></li>
+<li>添加断点：在源代码左边有行号，点击对应行的行号，就好给改行添加上一个断点（再次点击可删除断点）。右键点击断点，在弹出的菜单中选择Edit breakpoint可以给该断的添加中断条件。</li>
+</ul>
+
+<p>​     <img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001030.png" alt="img"/></p>
+
+<ul>
+<li><p>中断调试：添加断点后，当JS代码运行到断点时会中断（对于添加了中断条件的断点在符合条件时中断），此时可以将光标放在变量上查看变量的</p></li>
+<li><p>也可以在右边的侧栏上查看： </p></li>
+</ul>
+
+<p>​    <img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001036.png" alt="img"/></p>
+
+<ul>
+<li>在右侧变量上方，有继续运行、单步跳过等按钮，可以在当前断点后，逐行运行代码，或者直接让其继续运行。</li>
+</ul>
+
+<p>​     <em><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001049.png" alt="img"/></em></p>
+
+<h2 id="toc_5">5.Network详细介绍</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001054.png" alt="img"/></p>
+
+<p>那我就按照从左到右的顺序来写啦~</p>
+
+<ul>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001404.png" alt="img"/>：记录按钮 处于打开状态时会在此面板进行网络连接的信息记录，关闭后则不会记录。</li>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001358.png" alt="img"/>：清除按钮 清除当前的网络连接记录信息。（点击一下就能清空）</li>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001354.png" alt="img"/>：捕获截屏 记录页面加载过程中一些时间点的页面渲染情况，截图根据可视窗口截取，如下图所示。</li>
+</ul>
+
+<p><em><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001059.png" alt="img"/></em></p>
+
+<ul>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001345.png" alt="img"/>：过滤器 能够自定义筛选条件，找到自己想要资源信息，如下图所示。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001103.png" alt="img"/></p>
+
+<p>也可以是一些指定条件<br/>
+指定条件有哪些？</p>
+
+<p>domain：资源所在的域，即url中的域名部分。如 domain:api.github.com</p>
+
+<p>has-response-header：资源是否存在响应头，无论其值是什么。如 has-response-header：Access-Control-Allow-Origin</p>
+
+<p>is：当前时间点在执行的请求。当前可用值：running</p>
+
+<p>larger-than：显示大于指定值大小规格的资源。单位是字节(B),但是K(kB)和M(MB)也是可以的~ 如larger-than:150K</p>
+
+<p>method：使用何种HTTP请求方式。如 GET</p>
+
+<p>mime-type：也写作content-type，是资源类型的标识符。如 text/html</p>
+
+<p>scheme：协议规定。如 HTTPS</p>
+
+<p>set-cookie-name：服务器设置的cookies名称</p>
+
+<p>set-cookie-value：服务器设置的cookies的值</p>
+
+<p>set-cookie-domain：服务器设置的cookies的域</p>
+
+<p>status-code：HTTP响应头的状态码</p>
+
+<ul>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001303.png" alt="img"/>：显示详细信息</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001109.png" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001114.png" alt="img"/></p>
+
+<ul>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001326.png" alt="img"/>：显示时间流</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001120.png" alt="img"/></p>
+
+<p>能够根据时间，查看对应时间下 浏览器请求的资源信息</p>
+
+<ul>
+<li><p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001150.png" alt="img"/>：是否保留日志 </p>
+<p>当选择保留日志，重新加载url当前界面时，之前请求显示的资源信息，会保留下来，不会清空的哟~</p></li>
+<li><p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001136.png" alt="img"/>：是否进行缓存</p>
+<p>当打开开发者工具时生效，打开这个开关，则页面资源不会存入缓存，可以从Status栏的状态码看文件请求状态。</p></li>
+<li><p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001143.png" alt="img"/>：<strong>设置模拟限速，如下图所示。</strong></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001128.png" alt="img"/></p>
+<p>设置限速可以模拟处于各种网络环境下的不同用户访问本页面的情况。</p></li>
+</ul>
+
+<h2 id="toc_6">6.Network主题内容介绍</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001157.png" alt="img"/></p>
+
+<p>下列介绍中，前者为名词解释，后者为举例</p>
+
+<ul>
+<li><p>Name/Pat：资源名称以及URL路径 （main.css）</p></li>
+<li><p>Method：Http请求方法 (GET或者POST)</p></li>
+<li><p>status/Text：Http状态码/文字解释 （200，ok）</p></li>
+<li><p>Type ：请求资源的MIME类型，MIME是Multipurpose Internet Mail Extensions (html,css,js等)</p></li>
+<li><p>Initiator：解释请求是怎么发起的，有四种可能的值</p>
+<pre class="line-numbers"><code class="language-text">     1.Parser  ：请求是由页面的html解析时发送
+     2.Redirect：请求是由页面重定向发送<br/>
+     3.script  ：请求是由script脚本处理发送<br/>
+     4.other   ：请求是由其他过程发送的，比如页面里的Link链接点击
+</code></pre></li>
+<li><p>size/content：size是响应头部和响应体结合的大小，content是请求解码后的大小</p></li>
+</ul>
+
+<h2 id="toc_7">7.请求文件具体说明</h2>
+
+<p>点击某个具体请求后的界面，如下图所示：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001203.png" alt="img"/></p>
+
+<p>一共分为四个模块：</p>
+
+<ul>
+<li>Headers</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001207.png" alt="img"/></p>
+
+<p>Header面板列出资源的请求url、HTTP方法、响应状态码、请求头和响应头及它们各自的值、请求参数等等</p>
+
+<ul>
+<li>Preview：预览面板，用于资源的预览。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001211.png" alt="img"/></p>
+
+<ul>
+<li>Response：响应信息面板包含资源还未进行格式处理的内容</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001215.png" alt="img"/></p>
+
+<ul>
+<li>Timing：资源请求的详细信息花费时间</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001220.png" alt="img"/></p>
+
+<h2 id="toc_8">8.细节补充</h2>
+
+<p>对某请求右键，出现页面如下图所示。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001225.png" alt="img"/></p>
+
+<ul>
+<li><p>Copy Request Headers：复制HTTP请求头到系统剪贴板</p></li>
+<li><p>Copy Response Headers：复制HTTP响应头到系统剪贴板</p></li>
+<li><p>Copy Response：复制HTTP响应内容到系统剪贴板</p></li>
+<li><p>Copy as<br/>
+cURL：将网络请求作为一个curl的命令字符复制到系统剪贴板(curl是一种开源的命令行工具和库，用于配合url语法进行数据传输)</p></li>
+<li><p>Copy All as HAR：将网络请求记录信息以HAR格式复制到系统剪贴板(what is HAR file)</p></li>
+<li><p>Save as HAR with Content：将资源的所有的网络信息保存到HAR文件中(.har文件)</p></li>
+<li><p>Clear Browser Cache：清除浏览器缓存</p></li>
+<li><p>Clear Browser Cookies：清除浏览器cookies</p></li>
+<li><p>Open in Sources Panel：当前选中资源在Sources面板打开</p></li>
+<li><p>Open Link in New Tab：在新tab打开资源链接</p></li>
+<li><p>Copy Link Address：复制资源url到系统剪贴板</p></li>
+</ul>
+
+<p>若将所有的网络信息保存到HAR文件中，点击<a href="https://ericduran.github.io/chromeHAR/">这里</a>，可上传查看</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2021/04/07</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15998025629001.html">
+                
+                  <h1>[Pycharm 常用快捷键]</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h1 id="toc_0">常用快捷键</h1>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + Q</td>
+<td>快速查看文档</td>
+</tr>
+<tr>
+<td>Ctrl + F1</td>
+<td>显示错误描述或警告信息</td>
+</tr>
+<tr>
+<td>Ctrl + /</td>
+<td>行注释（可选中多行）</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + L</td>
+<td>代码格式化</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + O</td>
+<td>自动导入</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + I</td>
+<td>自动缩进</td>
+</tr>
+<tr>
+<td>Tab / Shift + Tab</td>
+<td>缩进、不缩进当前行（可选中多行）</td>
+</tr>
+<tr>
+<td>Ctrl+C/Ctrl+Insert</td>
+<td>复制当前行或选定的代码块到剪贴板</td>
+</tr>
+<tr>
+<td>Ctrl + D</td>
+<td>复制选定的区域</td>
+</tr>
+<tr>
+<td>Ctrl + Y</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>Shift + Enter</td>
+<td>换行（不用鼠标操作了）</td>
+</tr>
+<tr>
+<td>Ctrl +Ｊ</td>
+<td>插入模版</td>
+</tr>
+<tr>
+<td>Ctrl + Shift +/-</td>
+<td>展开/折叠全部代码块</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad+</td>
+<td>全部展开</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad-</td>
+<td>全部折叠</td>
+</tr>
+<tr>
+<td>Ctrl + Delete</td>
+<td>删除到字符结束</td>
+</tr>
+<tr>
+<td>Ctrl + Backspace</td>
+<td>删除到字符开始</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F7</td>
+<td>将当前单词在整个文件中高亮，F3移动到下一个，ESC取消高亮。</td>
+</tr>
+<tr>
+<td>Alt + up/down</td>
+<td>方法上移或下移动</td>
+</tr>
+<tr>
+<td>Alt + Shift + up/down</td>
+<td>当前行上移或下移动</td>
+</tr>
+<tr>
+<td>Ctrl + B/鼠标左键</td>
+<td>转到方法定义处</td>
+</tr>
+<tr>
+<td>Ctrl + W</td>
+<td>选中增加的代码块</td>
+</tr>
+<tr>
+<td>Shift + F6</td>
+<td>方法或变量重命名</td>
+</tr>
+<tr>
+<td>Ctrl + E</td>
+<td>最近访问的文件</td>
+</tr>
+<tr>
+<td>Esc</td>
+<td>从其他窗口回到编辑窗口</td>
+</tr>
+<tr>
+<td>Shift + Esc</td>
+<td>隐藏当前窗口，焦点到编辑窗口</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>回到先前的工具窗口</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + up</td>
+<td>快速上移某一行</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + down</td>
+<td>快速下移某一行</td>
+</tr>
+<tr>
+<td>ctrl+alt+左箭头</td>
+<td>返回上一个光标的位置（CTRL进入函数后返回）</td>
+</tr>
+<tr>
+<td>ctrl+alt+右箭头</td>
+<td>前进到后一个光标的位置</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="toc_1">全部快捷键</h1>
+
+<h2 id="toc_2">1、编辑（Editing）</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + Space</td>
+<td>基本的代码完成（类、方法、属性）</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + Space</td>
+<td>快速导入任意类</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Enter</td>
+<td>语句完成</td>
+</tr>
+<tr>
+<td>Ctrl + P</td>
+<td>参数信息（在方法中调用参数）</td>
+</tr>
+<tr>
+<td>Ctrl + Q</td>
+<td>快速查看文档</td>
+</tr>
+<tr>
+<td>Shift + F1</td>
+<td>外部文档</td>
+</tr>
+<tr>
+<td>Ctrl + 鼠标</td>
+<td>简介</td>
+</tr>
+<tr>
+<td>Ctrl + F1</td>
+<td>显示错误描述或警告信息</td>
+</tr>
+<tr>
+<td>Alt + Insert</td>
+<td>自动生成代码</td>
+</tr>
+<tr>
+<td>Ctrl + O</td>
+<td>重新方法</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + T</td>
+<td>选中</td>
+</tr>
+<tr>
+<td>Ctrl + /</td>
+<td>行注释</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + /</td>
+<td>块注释</td>
+</tr>
+<tr>
+<td>Ctrl + W</td>
+<td>选中增加的代码块</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + W</td>
+<td>回到之前状态</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + ]/[</td>
+<td>选定代码块结束、开始</td>
+</tr>
+<tr>
+<td>Alt + Enter</td>
+<td>快速修正</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + L</td>
+<td>代码格式化</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + O</td>
+<td>自动导入</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + I</td>
+<td>自动缩进</td>
+</tr>
+<tr>
+<td>Tab / Shift + Tab</td>
+<td>缩进、不缩进当前行</td>
+</tr>
+<tr>
+<td>Ctrl+X/Shift+Delete</td>
+<td>剪切当前行或选定的代码块到剪贴板</td>
+</tr>
+<tr>
+<td>Ctrl+C/Ctrl+Insert</td>
+<td>复制当前行或选定的代码块到剪贴板</td>
+</tr>
+<tr>
+<td>Ctrl+V/Shift+Insert</td>
+<td>从剪贴板粘贴</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + V</td>
+<td>从最近的缓冲区粘贴</td>
+</tr>
+<tr>
+<td>Ctrl + D</td>
+<td>复制选定的区域或行到后面或下一行</td>
+</tr>
+<tr>
+<td>Ctrl + Y</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + J</td>
+<td>添加智能线</td>
+</tr>
+<tr>
+<td>Ctrl + Enter</td>
+<td>智能线切割</td>
+</tr>
+<tr>
+<td>Shift + Enter</td>
+<td>下一行另起一行</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + U</td>
+<td>在选定的区域或代码块间切换</td>
+</tr>
+<tr>
+<td>Ctrl + Delete</td>
+<td>删除到字符结束</td>
+</tr>
+<tr>
+<td>Ctrl + Backspace</td>
+<td>删除到字符开始</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad+/-</td>
+<td>展开折叠代码块</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad+</td>
+<td>全部展开</td>
+</tr>
+<tr>
+<td>Ctrl + Numpad-</td>
+<td>全部折叠</td>
+</tr>
+<tr>
+<td>Ctrl + F4</td>
+<td>关闭运行的选项卡</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_3">2、查找/替换(Search/Replace)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>F3</td>
+<td>下一个</td>
+</tr>
+<tr>
+<td>Shift + F3</td>
+<td>前一个</td>
+</tr>
+<tr>
+<td>Ctrl + R</td>
+<td>替换</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F</td>
+<td>全局查找</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + R</td>
+<td>全局替换</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_4">3、运行(Running)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Alt + Shift + F10</td>
+<td>运行模式配置</td>
+</tr>
+<tr>
+<td>Alt + Shift + F9</td>
+<td>调试模式配置</td>
+</tr>
+<tr>
+<td>Shift + F10</td>
+<td>运行</td>
+</tr>
+<tr>
+<td>Shift + F9</td>
+<td>调试</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F10</td>
+<td>运行编辑器配置</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + R</td>
+<td>运行manage.py任务</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_5">4、调试(Debugging)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>F8</td>
+<td>跳过</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>进入</td>
+</tr>
+<tr>
+<td>Shift + F8</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>Alt + F9</td>
+<td>运行游标</td>
+</tr>
+<tr>
+<td>Alt + F8</td>
+<td>验证表达式</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + F8</td>
+<td>快速验证表达式</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>恢复程序</td>
+</tr>
+<tr>
+<td>Ctrl + F8</td>
+<td>断点开关</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F8</td>
+<td>查看断点</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_6">5、导航(Navigation)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + N</td>
+<td>跳转到类</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + N</td>
+<td>跳转到符号</td>
+<td></td>
+</tr>
+<tr>
+<td>Alt + Right/Left</td>
+<td>跳转到下一个、前一个编辑的选项卡</td>
+<td></td>
+</tr>
+<tr>
+<td>F12</td>
+<td>回到先前的工具窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>Esc</td>
+<td>从其他窗口回到编辑窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>Shift + Esc</td>
+<td>隐藏当前窗口，焦点到编辑窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F4</td>
+<td>关闭主动运行的选项卡</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + G</td>
+<td>查看当前行号、字符号</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + E</td>
+<td>最近访问的文件</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+Alt+Left/Right</td>
+<td>后退、前进</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+Shift+Backspace</td>
+<td>导航到最近编辑区域</td>
+<td></td>
+</tr>
+<tr>
+<td>Alt + F1</td>
+<td>查找当前文件或标识</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+B / Ctrl+Click</td>
+<td>跳转到声明</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Alt + B</td>
+<td>跳转到实现</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + I</td>
+<td>查看快速定义</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + B</td>
+<td>跳转到类型声明</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + U</td>
+<td>跳转到父方法、父类</td>
+<td></td>
+</tr>
+<tr>
+<td>Alt + Up/Down</td>
+<td>跳转到上一个、下一个方法</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + ]/[</td>
+<td>跳转到代码块结束、开始</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + F12</td>
+<td>弹出文件结构</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + H</td>
+<td>类型层次结构</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift + H</td>
+<td>方法层次结构</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Alt + H</td>
+<td>调用层次结构</td>
+<td></td>
+</tr>
+<tr>
+<td>F2 / Shift + F2</td>
+<td>下一条、前一条高亮的错误</td>
+<td></td>
+</tr>
+<tr>
+<td>F4 / Ctrl + Enter</td>
+<td>编辑资源、查看资源</td>
+<td></td>
+</tr>
+<tr>
+<td>Alt + Home</td>
+<td>显示导航条F11书签开关</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + Shift +F11</td>
+<td>书签助记开关</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl #[0-9]</td>
+<td>+</td>
+<td>跳转到标识的书签</td>
+</tr>
+<tr>
+<td>Shift +</td>
+<td>F11显示书签</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_7">6、搜索相关(Usage Search)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Alt + F7/Ctrl + F7</td>
+<td>文件中查询用法</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F7</td>
+<td>文件中用法高亮显示</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + F7</td>
+<td>显示用法</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_8">7、重构(Refactoring)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>F5</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>剪切</td>
+</tr>
+<tr>
+<td>Alt + Delete</td>
+<td>安全删除</td>
+</tr>
+<tr>
+<td>Shift + F6</td>
+<td>方法或变量重命名</td>
+</tr>
+<tr>
+<td>Ctrl + F6</td>
+<td>更改签名</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + N</td>
+<td>内联</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + M</td>
+<td>提取方法</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + V</td>
+<td>提取属性</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + F</td>
+<td>提取字段</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + C</td>
+<td>提取常量</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + P</td>
+<td>提取参数</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_9">8、控制VCS/Local History</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + K</td>
+<td>提交项目</td>
+</tr>
+<tr>
+<td>Ctrl + T</td>
+<td>更新项目</td>
+</tr>
+<tr>
+<td>Alt + Shift + C</td>
+<td>查看最近的变化</td>
+</tr>
+<tr>
+<td>Alt + BackQuote(’)VCS</td>
+<td>快速弹出</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + J</td>
+<td>当前行使用模版</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_10">9、模版(Live Templates)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ctrl + Alt + J</td>
+<td>当前行使用模版</td>
+</tr>
+<tr>
+<td>Ctrl +Ｊ</td>
+<td>插入模版</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_11">10、基本(General)</h2>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Alt + #[0-9]</td>
+<td>打开相应编号的工具窗口</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + Y</td>
+<td>同步</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F12</td>
+<td>最大化编辑开关</td>
+</tr>
+<tr>
+<td>Alt + Shift + F</td>
+<td>添加到最喜欢</td>
+</tr>
+<tr>
+<td>Alt + Shift + I</td>
+<td>根据配置检查当前文件</td>
+</tr>
+<tr>
+<td>Ctrl + BackQuote(’)</td>
+<td>快速切换当前计划</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + S</td>
+<td>打开设置页</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + A</td>
+<td>查找编辑器里所有的动作</td>
+</tr>
+<tr>
+<td>Ctrl + Tab</td>
+<td>在窗口间进行切换</td>
+</tr>
+</tbody>
+</table>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/09/11</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="16177587144704.html">
+                
+                  <h1>[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>减少/缩小逻辑卷是数据损坏的最高风险。</p>
+
+<p>所以，如果可能的话，尽量避免这种情况，但如果没有其他选择的话，那就继续。</p>
+
+<p>缩减 LVM 之前，建议先做一个备份。</p>
+
+<p>当你在 LVM 中的磁盘空间耗尽时，你可以通过缩小现有的没有使用全部空间的 LVM，而不是增加一个新的物理磁盘，在卷组上腾出一些空闲空间。</p>
+
+<p><strong>需要注意的是：</strong> 在 GFS2 或者 XFS 文件系统上不支持缩小。</p>
+
+<p>如果你是逻辑卷管理 （LVM） 的新手，我建议你从我们之前的文章开始学习。</p>
+
+<ul>
+<li><strong>第一部分：[如何在 Linux 中创建/配置 LVM（逻辑卷管理）]</strong></li>
+<li><strong>第二部分：[如何在 Linux 中扩展/增加 LVM（逻辑卷调整）]</strong></li>
+</ul>
+
+<p><img src="G:%5CSynologyCloud%5CMy%20MarkDown%5Cimages%5C210610kikq1xynfje7hjaa.jpeg" alt="210610kikq1xynfje7hjaa.jpeg"/></p>
+
+<p>减少逻辑卷涉及以下步骤：</p>
+
+<ul>
+<li>卸载文件系统</li>
+<li>检查文件系统是否有任何错误</li>
+<li>缩小文件系统的大小</li>
+<li>缩小逻辑卷的大小</li>
+<li>重新检查文件系统是否存在错误（可选）</li>
+<li>挂载文件系统</li>
+<li>检查减少后的文件系统大小</li>
+</ul>
+
+<p><strong>比如：</strong> 你有一个 <strong>100GB</strong> 的没有使用全部空间的 LVM，你想把它减少到 <strong>80GB</strong>，这样 <strong>20GB</strong> 可以用于其他用途。</p>
+
+<pre class="line-numbers"><code class="language-text"># df -h /testlvm1
+ 
+
+ 
+Filesystem              Size Used Avail Use% Mounted on
+ 
+/dev/mapper/vg01-lv002  100G 15G  85G   12%  /testlvm1
+ 
+</code></pre>
+
+<h3 id="toc_0">卸载文件系统</h3>
+
+<p>使用 <code>umount</code> 命令卸载文件系统：</p>
+
+<pre class="line-numbers"><code class="language-text"># umount /testlvm1
+ 
+</code></pre>
+
+<h3 id="toc_1">检查文件系统是否有任何错误</h3>
+
+<p>使用 <code>e2fsck</code> 命令检查文件系统是否有错误：</p>
+
+<pre class="line-numbers"><code class="language-text"># e2fsck -f /dev/mapper/vg01-lv002
+ 
+
+ 
+e2fsck 1.42.9 (28-Dec-2013)
+ 
+Pass 1: Checking inodes, blocks, and sizes
+ 
+Pass 2: Checking directory structure
+ 
+Pass 3: Checking directory connectivity
+ 
+Pass 4: Checking reference counts
+ 
+Pass 5: Checking group summary information
+ 
+/dev/mapper/vg01-lv002: 13/6553600 files (0.0% non-contiguous), 12231854/26212352 blocks
+ 
+</code></pre>
+
+<h3 id="toc_2">缩小文件系统</h3>
+
+<p>下面的命令将把 <code>testlvm1</code> 文件系统从 <strong>100GB</strong> 缩小到 <strong>80GB</strong>。</p>
+
+<p><strong>文件系统大小调整的常用语法（<code>resize2fs</code>）</strong>：</p>
+
+<pre class="line-numbers"><code class="language-text">resize2fs [现有逻辑卷名] [新的文件系统大小]
+ 
+</code></pre>
+
+<p>实际命令如下：</p>
+
+<pre class="line-numbers"><code class="language-text"># resize2fs /dev/mapper/vg01-lv002 80G
+ 
+
+ 
+resize2fs 1.42.9 (28-Dec-2013)
+ 
+Resizing the filesystem on /dev/mapper/vg01-lv002 to 28321400 (4k) blocks.
+ 
+The filesystem on /dev/mapper/vg01-lv002 is now 28321400 blocks long.
+ 
+</code></pre>
+
+<h3 id="toc_3">减少逻辑卷 （LVM） 容量</h3>
+
+<p>现在使用 <code>lvreduce</code> 命令缩小逻辑卷（LVM） 的大小。通过下面的命令， <code>/dev/mapper/vg01-lv002</code> 将把逻辑卷 （LVM） 从 100GB 缩小到 80GB。</p>
+
+<p><strong>LVM 缩减 （<code>lvreduce</code>） 的常用语法</strong>：</p>
+
+<pre class="line-numbers"><code class="language-text">lvreduce [新的 LVM 大小] [现有逻辑卷名称]
+ 
+</code></pre>
+
+<p>实际命令如下：</p>
+
+<pre class="line-numbers"><code class="language-text"># lvreduce -L 80G /dev/mapper/vg01-lv002
+ 
+
+ 
+WARNING: Reducing active logical volume to 80.00 GiB
+ 
+THIS MAY DESTROY YOUR DATA (filesystem etc.)
+ 
+Do you really want to reduce lv002? [y/n]: y
+ 
+Reducing logical volume lv002 to 80.00 GiB
+ 
+Logical volume lv002 successfully resized
+ 
+</code></pre>
+
+<h3 id="toc_4">可选：检查文件系统是否有错误</h3>
+
+<p>缩减 LVM 后再次检查文件系统是否有错误：</p>
+
+<pre class="line-numbers"><code class="language-text"># e2fsck -f /dev/mapper/vg01-lv002
+ 
+
+ 
+e2fsck 1.42.9 (28-Dec-2013)
+ 
+Pass 1: Checking inodes, blocks, and sizes
+ 
+Pass 2: Checking directory structure
+ 
+Pass 3: Checking directory connectivity
+ 
+Pass 4: Checking reference counts
+ 
+Pass 5: Checking group summary information
+ 
+/dev/mapper/vg01-lv002: 13/4853600 files (0.0% non-contiguous), 1023185/2021235 blocks
+ 
+</code></pre>
+
+<h3 id="toc_5">挂载文件系统并检查缩小后的大小</h3>
+
+<p>最后挂载文件系统，并检查缩小后的文件系统大小。</p>
+
+<p>使用 <code>mount</code> 命令[挂载逻辑卷]：</p>
+
+<pre class="line-numbers"><code class="language-text"># mount /testlvm1
+ 
+</code></pre>
+
+<p>使用 [df 命令]检查挂载的卷。</p>
+
+<pre class="line-numbers"><code class="language-text"># df -h /testlvm1
+ 
+
+ 
+Filesystem              Size Used Avail Use% Mounted on
+ 
+/dev/mapper/vg01-lv002  80G  15G  65G   18%  /testlvm1
+ 
+</code></pre>
+
+<hr/>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2021/04/07</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15998025628475.html">
                 
                   <h1>Anaconda + VSCode 最详细教程</h1>
@@ -1511,6 +2968,309 @@ print(tb)
               </div><!-- article -->
         
 			<div class="article">
+                <a class="clearlink" href="16177589969503.html">
+                
+                  <h1>Anaconda + VSCode 最详细教程</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">写在前面</h2>
+
+<p>为了录制这篇教程，我又把电脑上的 Python 卸载了🕹，重新安装 Anaconda 和 VSCode ，并录制动图。文章每个步骤介绍的很详细，只要跟着GIF动图一步一步操作就可以，适合零基础的朋友，通过这篇文章可以让你学会自己运行 Py 文件、以及一些发布出来的 Py 代码段，同时也是为了让更多人迈出学习 Python 的第一个门槛，后续也会写一些 Python 爬虫案例，用于工商信息查询、地址查询、快递查询等，所以为了这些工具，赶紧学起来吧📘。</p>
+
+<p>现在 Python 的广告可谓铺天盖地，文章、朋友圈、各种网页基本都能看到，虽然有些广告确实夸大了 Python 的作用，标题很雷人，但是无论如何也反映了一种趋势，未来编程思维很重要。而我们看待 Python 等编程语言应保持客观，能够帮到自己那就值得花点时间学习，入门之后才知道是不是自己的菜。</p>
+
+<h2 id="toc_1">「戏」说 Python</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225635.png" alt="img"/></p>
+
+<h2 id="toc_2">写在前面</h2>
+
+<p>为了录制这篇教程，我又把电脑上的 Python 卸载了🕹，重新安装 Anaconda 和 VSCode ，并录制动图。文章每个步骤介绍的很详细，只要跟着GIF动图一步一步操作就可以，适合零基础的朋友，通过这篇文章可以让你学会自己运行 Py 文件、以及一些发布出来的 Py 代码段，因为封装成 EXE 不方便调试和更新，同时也是让更多人迈出学习 Python 的第一个门槛，后续也会写一些 Python 爬虫案例，用于工商信息查询、地址查询、快递查询等，所以为了这些工具，赶紧学起来吧📘。</p>
+
+<h2 id="toc_3">一、Anaconda 下载</h2>
+
+<p>Anaconda 可以看做Python的一个集成安装，安装它后就默认安装了python、IPython、集成开发环境Spyder和众多的包和模块，让你在管理环境和包时更加方便。</p>
+
+<p>可以选择从官网或清华源下载 Anaconda 安装包，<strong>清华源</strong>下载速度相对较快。</p>
+
+<p>安装的位数推荐32位，兼容性最强，也可以根据自己的系统位数选择安装。</p>
+
+<p>官网：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.anaconda.com%2Fproducts%2Findividual">https://www.anaconda.com/products/individual</a></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225643.png" alt="img"/></p>
+
+<p>清华源：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmirrors.tuna.tsinghua.edu.cn%2Fanaconda%2Farchive%2F">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225646.png" alt="img"/></p>
+
+<h2 id="toc_4">二、Anaconda 安装</h2>
+
+<p>安装过程中三个注意的地方：</p>
+
+<ul>
+<li>勾选 <code>Alls Users</code></li>
+<li>勾选 <code>Add Anaconda to the system PATH environment variable</code></li>
+<li>如果之前没有安装 VSCode，可以在 Anaconda 安装过程中选择安装</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225654.gif" alt="img"/></p>
+
+<h2 id="toc_5">三、VSCode 下载安装</h2>
+
+<p>Anaconda 安装过程中 VSCode 有时候可能会出错，导致安装失败，这种情况下可以选择从 VSCode 官网下载安装。</p>
+
+<p>VSCode官网：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fcode.visualstudio.com%2FDownload%23">https://code.visualstudio.com/Download#</a></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225658.png" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225700.gif" alt="img"/></p>
+
+<h2 id="toc_6">四、管理 conda</h2>
+
+<h3 id="toc_7">1. 查看 conda 版本</h3>
+
+<p>安装完成后按<code>Win+R</code>打开<code>cmd</code>终端，输入<code>conda --version</code></p>
+
+<p>如果正常输出了 conda 的版本，说明 Anaconda 成功安装了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225704.gif" alt="img"/></p>
+
+<h3 id="toc_8">2. 添加国内源</h3>
+
+<ul>
+<li>查看现有源</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">conda config --show-sources
+</code></pre>
+
+<ul>
+<li>添加国内清华源</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+</code></pre>
+
+<ul>
+<li>删除默认源</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">conda config --remove channels defaults
+</code></pre>
+
+<ul>
+<li>设置搜索时显示通道地址</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">conda config --set show_channel_urls yes
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225707.gif" alt="img"/></p>
+
+<h3 id="toc_9">3. 升级 conda</h3>
+
+<p>设置完国内源后，升级 conda 的速度会快很多，之后安装包时也会从国内源下载。</p>
+
+<pre class="line-numbers"><code class="language-text">conda update conda
+</code></pre>
+
+<p>升级时弹出<code>Proceed ([y]/n)?</code>时，选择<code>y</code>，确认升级。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225711.gif" alt="img"/></p>
+
+<h2 id="toc_10">五、环境管理</h2>
+
+<p><strong>可跳过，直接用默认环境</strong></p>
+
+<h3 id="toc_11">1. 查看 Python 版本</h3>
+
+<pre class="line-numbers"><code class="language-text">python --version
+</code></pre>
+
+<h3 id="toc_12">2. 创建环境</h3>
+
+<p>上一步查到我电脑上的 Python 版本为 3.7.0 ，我想在这个版本基础上创建一个名为 [虚拟环境名] 的虚拟环境。</p>
+
+<pre class="line-numbers"><code class="language-text">conda create -n [虚拟环境名] python=3.7.0
+</code></pre>
+
+<p>新的开发环境会被默认安装在你 conda 目录下的 envs 文件目录下。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225714.gif" alt="img"/></p>
+
+<h3 id="toc_13">3. 激活环境</h3>
+
+<pre class="line-numbers"><code class="language-text">activate [虚拟环境名]
+</code></pre>
+
+<h3 id="toc_14">4. 列出所有的环境</h3>
+
+<pre class="line-numbers"><code class="language-text">conda info -e
+</code></pre>
+
+<p>当前激活的环境会标<code>*</code>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225718.png" alt="img"/></p>
+
+<h3 id="toc_15">5. 切换到另一个环境</h3>
+
+<pre class="line-numbers"><code class="language-text">activate [虚拟环境名]
+</code></pre>
+
+<h3 id="toc_16">6. 注销当前环境（默认的环境是base）</h3>
+
+<pre class="line-numbers"><code class="language-text">deactivate
+虚拟环境激活后，在cmd中输入python，显示的就是一个新的环境。
+</code></pre>
+
+<h3 id="toc_17">7. 复制环境</h3>
+
+<pre class="line-numbers"><code class="language-text">conda create -n [虚拟环境名] --clone [参考环境名]
+
+---常用 
+conda env --help    #查看帮助
+conda env list  #列出所有的虚拟环境
+conda list --name [虚拟环境名]   #查看指定虚拟环境下的package
+
+#创建
+conda create --name [虚拟环境名] [python的版本] [需要的包]
+conda create --name myenv
+conda create --name myenv python=2.7
+conda create --name myenv pytohon=2.7 numpy scipy
+
+#克隆
+conda create --name [虚拟环境名] -- clone [clone的环境]
+
+#创建一个和原python环境一样的虚拟环境
+conda create --name mybase --clone base
+
+
+
+</code></pre>
+
+<h3 id="toc_18">8. 删除环境</h3>
+
+<pre class="line-numbers"><code class="language-text">conda remove --name [虚拟环境名] -all
+</code></pre>
+
+<h2 id="toc_19">六、包管理</h2>
+
+<h3 id="toc_20">1. 查看已安装包</h3>
+
+<pre class="line-numbers"><code class="language-text">conda list
+</code></pre>
+
+<h3 id="toc_21">2. 使用 Conda 命令安装包</h3>
+
+<pre class="line-numbers"><code class="language-text">conda install beautifulsoup4
+</code></pre>
+
+<h3 id="toc_22">3. 通过 pip 命令来安装包</h3>
+
+<p>如果无法通过conda安装，可以用pip命令来安装包。</p>
+
+<pre class="line-numbers"><code class="language-text">pip install beautifulsoup4
+</code></pre>
+
+<h3 id="toc_23">4. 移除包</h3>
+
+<pre class="line-numbers"><code class="language-text">conda remove beautifulsoup4
+</code></pre>
+
+<h2 id="toc_24">七、VSCode 配置</h2>
+
+<h3 id="toc_25">1. 安装 Python 插件</h3>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225724.png" alt="img"/></p>
+
+<h3 id="toc_26">2. 安装 Code Runner 插件</h3>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225727.png" alt="img"/></p>
+
+<h3 id="toc_27">3. 安装中文插件（可选）</h3>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225729.png" alt="img"/></p>
+
+<h3 id="toc_28">4. 指定路径（可跳过）</h3>
+
+<p>确定当前激活环境所在路径</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225732.png" alt="img"/></p>
+
+<p>然后在<code>File--&gt;Preferences--&gt;Settings--&gt;Extensions--&gt;Python--&gt;setting.json</code>添加下面的 Python 路径，这个路径和你设置的环境名称有关。</p>
+
+<pre class="line-numbers"><code class="language-text">&quot;python.pythonPath&quot; :&quot;D:\\anaconda3\\envs\\xiaolvshijie\\python.exe&quot;
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225734.png" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225741.png" alt="img"/></p>
+
+<h2 id="toc_29">八、开始运行 Py 文件</h2>
+
+<p>运行代码前一定要按<code>Ctrl + S</code>保存，再右键选择<code>Run Code</code>或者用快捷键<code>Ctrl + Alt + N</code>执行代码。</p>
+
+<h3 id="toc_30">1. 运行简单代码测试</h3>
+
+<pre class="line-numbers"><code class="language-text">print(&#39;hello xiaolvshijie&#39;)
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225744.gif" alt="img"/></p>
+
+<h3 id="toc_31">2. 运行 Py 文件</h3>
+
+<p>复制下面这段代码到编辑器中，<code>Ctrl + S</code>保存，再右键选择<code>Run Code</code>执行代码。</p>
+
+<pre class="line-numbers"><code class="language-python">import prettytable as pt
+
+tb = pt.PrettyTable()
+tb.field_names = [&#39;Author&#39;, &#39;wwcheng&#39;]
+tb.add_row([&#39;ID&#39;, &#39;xiaolvshijie&#39;])
+
+print(tb)
+</code></pre>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200824225753.gif" alt="img"/></p>
+
+<p>会出现报错提示：<code>ModuleNotFoundError: No module named &#39;prettytable&#39;</code></p>
+
+<p>意思是当前环境中缺少<code>prettytable</code>的包，你需要安装这个包。。</p>
+
+<p>我们可以用<code>conda install prettytable</code>或者<code>pip install prettytable</code>来安装这个包。</p>
+
+<p>如果不知道报错提示的意思，可以利用<strong>搜索引擎</strong>，百度一下你就知道，Python编程相关的问题网络上基本都能搜索到。</p>
+
+<h2 id="toc_32">结语</h2>
+
+<p>成功安装 Anaconda 和 VSCode 并运行上面测试代码后，你可以正常加入码农行业。。。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2021/04/07</span>
+                    
+          				   
+                    
+
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15838967255194.html">
                 
                   <h1>Docker 必备可视化工具 Portainer</h1>
@@ -1568,383 +3328,325 @@ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v porta
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15998025631446.html">
+                <a class="clearlink" href="15998025628611.html">
                 
-                  <h1>Git 常用技巧 （高级用法）</h1>
+                  <h1>docker的28个常用指令</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0"><strong>git 的一些「高级」用法</strong></h2>
+                        	<p>1，查看Docker的版本详细信息。</p>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312211952.jpg" alt=""/></p>
-
-<h2 id="toc_1"><strong>导航 —— 跳到之前的分支</strong></h2>
-
-<pre class="line-numbers"><code class="language-text">git checkout -
+<pre class="line-numbers"><code class="language-undefined">docker version
 </code></pre>
 
-<h2 id="toc_2"><strong>查看历史</strong></h2>
+<p>2，查看Docker系统信息，包括镜像和容器数。</p>
 
-<pre class="line-numbers"><code class="language-text"># 每个提交在一行内显示
-git log --oneline
-
-# 在所有提交日志中搜索包含「homepage」的提交
-git log --all --grep=&#39;homepage&#39;
-
-# 获取某人的提交日志
-git log --author=&quot;Maxence&quot;
+<pre class="line-numbers"><code class="language-undefined">docker info
 </code></pre>
 
-<h2 id="toc_3"><strong>之前重置了一个不想保留的提交，但是现在又想要回滚？</strong></h2>
+<p>3，登陆到一个Docker镜像仓库。</p>
 
-<pre class="line-numbers"><code class="language-text"># 获取所有操作历史
-git reflog
-
-# 重置到相应提交
-git reset HEAD@{4}
-# ……或者……
-git reset --hard &lt;提交的哈希值&gt;
+<pre class="line-numbers"><code class="language-undefined">docker login -u 用户名 -p 密码；
 </code></pre>
 
-<h2 id="toc_4"><strong>我把本地仓库搞得一团糟，应该怎么清理？</strong></h2>
+<p>4，退出到一个Docker镜像仓库。</p>
 
-<pre class="line-numbers"><code class="language-text">git fetch origin
-git checkout master
-git reset --hard origin/master
+<pre class="line-numbers"><code class="language-bash">docker logout
 </code></pre>
 
-<h2 id="toc_5"><strong>查看我的分支和 master 的不同</strong></h2>
+<p>5，从镜像仓库中拉取或者更新指定镜像；</p>
 
-<pre class="line-numbers"><code class="language-text">git diff master..my-branch
-</code></pre>
-
-<h2 id="toc_6"><strong>定制提交</strong></h2>
-
-<pre class="line-numbers"><code class="language-text"># 编辑上次提交
-git commit --amend -m &quot;更好的提交日志&quot;
-
-# 在上次提交中附加一些内容，保持提交日志不变git add . &amp;&amp; git commit --amend --no-edit
-
-# 空提交 —— 可以用来重新触发 CI 构建
-git commit --allow-empty -m &quot;chore: re-trigger build&quot;
-</code></pre>
-
-<p>​   <strong>squash 提交</strong></p>
-
-<p>​   比方说我想要 rebase 最近 3 个提交：</p>
-
-<p>​   - git rebase -i HEAD~3<br/>
-​   - 保留第一行的 pick，剩余提交替换为 squash 或 s<br/>
-​   - 清理提交日志并保存（vi 编辑器中键入 :wq 即可保存）</p>
-
-<pre class="line-numbers"><code class="language-text">pick 64d26a1 feat: add index.js
-s 45f0259 fix: update index.js
-s 8b15b0a fix: typo in index.js
-</code></pre>
-
-<h2 id="toc_7"><strong>修正</strong></h2>
-
-<p>比方说想在提交 fed14a4c 加上一些内容。</p>
-
-<p><img src="Git%20%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7(%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95).assets/4a407484dfb44ea0ad31738ddf673099.jpg" alt=""/></p>
-
-<p><strong>git 提交分支</strong></p>
-
-<pre class="line-numbers"><code class="language-text">git add .
-git commit --fixup HEAD~1
-# 或者也可以用提交的哈希值（fed14a4c）替换 HEAD~1
-
-git rebase -i HEAD~3 --autosquash
-# 保存并退出文件（VI 中输入 `:wq`）
-</code></pre>
-
-<h2 id="toc_8"><strong>rebase 的时候在每个提交上执行命令</strong></h2>
-
-<p>如果特性很多，一个分支里可能有多个提交。如果测试失败了，你希望能找到导致测试失败的提交。这时候你可以使用 rebase --exec 命令在每个提交上执行命令。</p>
-
-<pre class="line-numbers"><code class="language-text"># 在最近 3 个提交上运行 `npm test` 命令
-git rebase HEAD~3 --exec &quot;npm test&quot;
-</code></pre>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200312212414.jpg" alt=""/></p>
-
-<h2 id="toc_9"><strong>暂存</strong></h2>
-
-<p>​   暂存不止是 git stash 和 git stash pop ;)</p>
-
-<pre class="line-numbers"><code class="language-text"># 保存所有正在追踪的文件
-git stash save &quot;日志信息&quot;
-
-# 列出所有的暂存项
-git stash list
-
-# 获取并删除暂存项
-git stash apply stash@{1}
-git stash drop stash@{1}
-# ……或使用一条命令……
-git stash pop stash@{1}
-</code></pre>
-
-<h2 id="toc_10"><strong>清理</strong></h2>
-
-<pre class="line-numbers"><code class="language-text"># 移除远程仓库上不存在的分支
-git fetch -p
-
-# 移除所有包含 `greenkeeper` 的分支
-git fetch -p &amp;&amp; git branch --remote | fgrep greenkeeper | sed &#39;s/^.\{9\}//&#39; | xargs git push origin --delete
-</code></pre>
-
-<h2 id="toc_11"><strong>GitHub = Git + Hub</strong></h2>
-
-<p>我把 Hub 当成 git 的一个封装来用。你如果也想这么做，可以设置一个别名：alias git=&#39;hub&#39;</p>
-
-<pre class="line-numbers"><code class="language-text"># 打开浏览器访问仓库 url（仅限 GitHub 仓库）git browse
-</code></pre>
-
-<hr/>
-
-<h2 id="toc_12"><strong>额外福利：我最喜爱的 git 别名</strong></h2>
-
-<pre class="line-numbers"><code class="language-text">alias g=&#39;git&#39;
-alias glog=&#39;git log --oneline --decorate --graph&#39;
-alias gst=&#39;git status&#39;
-alias gp=&#39;git push&#39;
-alias ga=&#39;git add&#39;alias gc=&#39;git commit -v&#39;
-
-# 
-alias yolo=&#39;git push --force&#39;
-
-# 每周站会汇报工作时用
-git-standup() {
-    AUTHOR=${AUTHOR:=&quot;`git config user.name`&quot;}
-
-    since=yesterday
-    if [[ $(date +%u) == 1 ]] ; then
-        since=&quot;2 days ago&quot;
-    fi
-
-    git log --all --since &quot;$since&quot; --oneline --author=&quot;$AUTHOR&quot;
-}
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025629044.html">
-                
-                  <h1>Git版本管理完全指南（包含常见头疼错误解决方案）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">第一部分 命令行</h1>
-
-<p><strong>1、分支操作</strong></p>
-
-<pre class="line-numbers"><code class="language-text">1. git branch 创建分支
-2. git checkout -b 创建并切换到新建的分支上
-3. git checkout 切换分支
-4. git branch 查看分支列表
-5. git branch -v 查看所有分支的最后一次操作
-6. git branch -vv 查看当前分支
-7. git brabch -b 分支名 origin/分支名 创建远程分支到本地
-8. git branch --merged 查看别的分支和当前分支合并过的分支
-9. git branch --no-merged 查看未与当前分支合并的分支
-10. git branch -d 分支名 删除本地分支
-11. git branch -D 分支名 强行删除分支
-12. git branch origin :分支名 删除远处仓库分支
-13. git merge 分支名 合并分支到当前分支上
-</code></pre>
-
-<p><strong>2、暂存操作</strong></p>
-
-<pre class="line-numbers"><code class="language-text">1. git stash 暂存当前修改
-2. git stash apply 恢复最近的一次暂存
-3. git stash pop 恢复暂存并删除暂存记录
-4. git stash list 查看暂存列表
-5. git stash drop 暂存名(例：stash@{0}) 移除某次暂存
-6. git stash clear 清除暂存
-</code></pre>
-
-<p><strong>3、回退操作</strong></p>
-
-<pre class="line-numbers"><code class="language-text">1. git reset --hard HEAD^ 回退到上一个版本
-2. git reset --hard ahdhs1(commit_id) 回退到某个版本
-3. git checkout -- file撤销修改的文件(如果文件加入到了暂存区，则回退到暂存区的，如果文件加入到了版本库，则还原至加入版本库之后的状态)
-4. git reset HEAD file 撤回暂存区的文件修改到工作区
-</code></pre>
-
-<p><strong>4、标签操作</strong></p>
-
-<pre class="line-numbers"><code class="language-text">1. git tag 标签名 添加标签(默认对当前版本)
-2. git tag 标签名 commit_id 对某一提交记录打标签
-3. git tag -a 标签名 -m &#39;描述&#39; 创建新标签并增加备注
-4. git tag 列出所有标签列表
-5. git show 标签名 查看标签信息
-6. git tag -d 标签名 删除本地标签
-7. git push origin 标签名 推送标签到远程仓库
-8. git push origin --tags 推送所有标签到远程仓库
-9. git push origin :refs/tags/标签名 从远程仓库中删除标签
-</code></pre>
-
-<p><strong>5、其它操作</strong></p>
-
-<p>常规操作</p>
-
-<pre class="line-numbers"><code class="language-text">1. git push origin test 推送本地分支到远程仓库
-2. git rm -r --cached 文件/文件夹名字 取消文件被版本控制
-3. git reflog 获取执行过的命令
-4. git log --graph 查看分支合并图
-5. git merge --no-ff -m &#39;合并描述&#39; 分支名 不使用Fast forward方式合并，采用这种方式合并可以看到合并记录
-6. git check-ignore -v 文件名 查看忽略规则
-7. git add -f 文件名 强制将文件提交
-8. git reflog 打印所有的日志,假如：ABC三个节点，回退到B后，仍旧打印所有日志
-</code></pre>
-
-<p>git创建项目仓库</p>
-
-<pre class="line-numbers"><code class="language-text">1、git init 初始化
-2、git remote add origin url 关联远程仓库
-3、git pull
-4、git fetch 获取远程仓库中所有的分支到本地
-</code></pre>
-
-<p>忽略已加入到版本库中的文件</p>
-
-<pre class="line-numbers"><code class="language-text">1、git update-index --assume-unchanged file 忽略单个文件
-2、git rm -r --cached 文件/文件夹名字 (. 忽略全部文件)
-</code></pre>
-
-<p>取消忽略文件</p>
-
-<pre class="line-numbers"><code class="language-text">git update-index --no-assume-unchanged file
-</code></pre>
-
-<p>拉取、上传免密码</p>
-
-<pre class="line-numbers"><code class="language-text">git config --global credential.helper store
-</code></pre>
-
-<h1 id="toc_1">第二部分 版本管理</h1>
-
-<p>GitFlow 是由 Vincent Driessen 提出的一个 git操作流程标准。包含如下几个关键分支：</p>
-
-<pre class="line-numbers"><code class="language-text">1. master：主分支develop：主开发分支，包含确定即将发布的代码；
-2. feature：新功能分支，一般一个新功能对应一个分支，对于功能的拆分需要比较合理，以避免一些后面不必要的代码冲突；
-3. release：发布分支，发布时候用的分支，一般测试时候发现的 bug 在这个分支进行修复；
-4. hotfix：热修复分支，紧急修 bug 的时候用。
-</code></pre>
-
-<p>GitFlow 的优势有如下几点：</p>
-
-<pre class="line-numbers"><code class="language-text">1. 并行开发：GitFlow可以很方便的实现并行开发。每个新功能都会建立一个新的 feature分支，从而和已经完成的功能隔离开来，而且只有在新功能完成开发的情况下，其对应的 feature分支才会合并到主开发分支上（也就是我们经常说的develop分支）。另外，如果你正在开发某个功能，同时又有一个新的功能需要开发，你只需要提交当前 feature 的代码，然后创建另外一个feature 分支并完成新功能开发。然后再切回之前的 feature 分支即可继续完成之前功能的开发。
-2. 协作开发：GitFlow 还支持多人协同开发，因为每个 feature 分支上改动的代码都只是为了让某个新的 feature 可以独立运行。同时我们也很容易知道每个人都在干啥。
-3. 发布阶段：当一个新 feature 开发完成的时候，它会被合并到 develop 分支，这个分支主要用来暂时保存那些还没有发布的内容，所以如果需要再开发新的 feature，我们只需要从 develop 分支创建新分支，即可包含所有已经完成的 feature 。
-4. 支持紧急修复：GitFlow 还包含了 hotfix 分支。这种类型的分支是从某个已经发布的 tag 上创建出来并做一个紧急的修复，而且这个紧急修复只影响这个已经发布的 tag，而不会影响到你正在开发的新 feature。
+<pre class="line-numbers"><code class="language-undefined">docker pull 
 </code></pre>
 
 <blockquote>
-<p>然后就是 GitFlow 最经典的几张流程图，一定要理解:</p>
+<p>说明：<br/>
+-a :拉取所有 tagged 镜像；<br/>
+docker pull 镜像名字 例：docker pull python；<br/>
+docker pull 镜像名字：版本号 例：docker pull python:3.6。</p>
 </blockquote>
 
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223014" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
+<p>6，将本地的镜像上传到镜像仓库,要先登陆到镜像仓库；</p>
 
-<p><strong>feature 分支都是从 develop 分支创建，完成后再合并到 develop 分支上，等待发布</strong></p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223020" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
-
-<p>当需要发布时，我们从 develop 分支创建一个 release 分支</p>
-
-<p>然后这个 release 分支会发布到测试环境进行测试，如果发现问题就在这个分支直接进行修复。在所有问题修复之前，我们会<strong>不停的重复发布-&gt;测试-&gt;修复-&gt;重新发布-&gt;重新测试这个流程</strong>。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223022" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
-
-<p>发布结束后，这个<strong>release 分支会合并到 develop 和 master 分支，从而保证不会有代码丢失</strong>。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223025" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
-
-<p>master 分支只跟踪已经发布的代码，合并到 master 上的 commit 只能来自 release 分支和 hotfix 分支。</p>
-
-<p>hotfix 分支的作用是紧急修复一些 Bug。它们都是从 master 分支上的某个 tag 建立，修复结束后再合并到 develop 和 master 分支上。</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200805223027" alt="Git版本管理完全指南（包含常见头疼错误解决方案）"/></p>
-
-<h1 id="toc_2">第三部分 Git常见错误汇总</h1>
-
-<p><strong>常见错误1、windows使用git时出现：warning:LF will be replaced by CRLF</strong></p>
-
-<p>windows中的换行符为 CRLF， 而在linux下的换行符为LF，所以在执行add . 时出现提示，解决办法：</p>
-
-<ol>
-<li>$ rm -rf .git // 删除.git</li>
-<li>$ git config --global core.autocrlf false //禁用自动转换</li>
-</ol>
-
-<p>然后重新执行：</p>
-
-<ol>
-<li>$ git init</li>
-<li>$ git add .</li>
-</ol>
-
-<p><strong>常见错误2、git push origin master出错：error:failed to push sonme refs to...</strong></p>
-
-<p>很明显是：</p>
-
-<p>本地没有update到最新版本的项目（git上有README.md文件没下载下来）</p>
-
-<p>本地直接push所以会出错。</p>
-
-<p>【解决过程】</p>
+<pre class="line-numbers"><code class="language-undefined">docker push
+</code></pre>
 
 <blockquote>
-<p>看到提示里面，感觉是本地的代码不是最新的。</p>
-
-<p>所以觉得应该是类似于svn中的，先update一下，再去commit，估计就可以了。</p>
-
-<p>所以先去pull试试：</p>
-
-<p>git pull --rebase origin master</p>
+<p>说明：<br/>
+docker push 镜像名字 例：docker push python；<br/>
+docker push 镜像名字：版本号 例：docker push python：v1。</p>
 </blockquote>
 
-<p>解决！</p>
+<p>7，从Docker Hub查找镜像；</p>
 
-<p><strong>常见错误3、fatal: remote origin already exists.</strong></p>
-
-<p>解决办法如下：</p>
+<pre class="line-numbers"><code class="language-undefined">docker search
+</code></pre>
 
 <blockquote>
-<p>1、先输入$ git remote rm origin</p>
+<p>--no-trunc :显示完整的镜像描述；<br/>
+-s :列出收藏数不小于指定值的镜像；<br/>
+docker search 镜像名字 例 ：docker search python。</p>
+</blockquote>
 
-<p>2、再输入$ git remote add origin <a href="mailto:git@github.com">git@github.com</a>:djqiang/gitdemo.git 就不会报错了！</p>
+<p>8，创建一个新的容器并运行一个命令；</p>
 
-<p>3、如果输入$ git remote rm origin 还是报错的话，error: Could not remove config section &#39;remote.origin&#39;. 我们需要修改gitconfig文件的内容</p>
+<pre class="line-numbers"><code class="language-undefined">docker run
+</code></pre>
 
-<p>4、找到你的github的安装路径，我的是C:\Users\ASUS\AppData\Local\GitHub\PortableGit_ca477551eeb4aea0e4ae9fcd3358bd96720bb5c8\etc</p>
+<blockquote>
+<p>说明<br/>
+-d: 后台运行容器，并返回容器ID；<br/>
+-i: 以交互模式运行容器，通常与 -t 同时使用；<br/>
+-p: 端口映射，格式为：主机(宿主)端口:容器端口<br/>
+-t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；<br/>
+-v: 目录映射；<br/>
+--name=&quot;nginx-lb&quot;: 为容器指定一个名称；<br/>
+--env-file=[]: 从指定文件读入环境变量；<br/>
+--restart=[]:重启策略：<br/>
+a、no，默认策略，在容器退出时不重启容器；<br/>
+b、on-failure，在容器非正常退出时（退出状态非0），才会重启容器；<br/>
+c、on-failure:3，在容器非正常退出时重启容器，最多重启3次；<br/>
+d、always，在容器退出时总是重启容器；<br/>
+e、unless-stopped，在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器。<br/>
+例：sudo docker run -itd \ 后台运行进入容器 --name=wssc \ 为容器起一个名字 --restart=always \ 退出时重启 --env-file ./env.list \ 需在当前目录下的env.list运行 -p 8011:80 \ 端口号映射 -v /var/www/project/data:/var/www/project/data \ 挂载 wellaac/wsscr:v1 镜像名字</p>
+</blockquote>
 
-<p>5、找到一个名为gitconfig的文件，打开它把里面的[remote &quot;origin&quot;]那一行删掉就好了！</p>
+<p>9，启动一个或多个已经被停止的容器；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker start
+</code></pre>
+
+<blockquote>
+<p>docker start 容器名字 例：docker start wssc。</p>
+</blockquote>
+
+<p>10，停止一个运行中的容器；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker stop
+</code></pre>
+
+<blockquote>
+<p>docker stop 容器名字 例：docker wssc；<br/>
+docker stop $(docker ps -a -q) 停止所有容器。</p>
+</blockquote>
+
+<p>11,重启容器；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker restart
+</code></pre>
+
+<blockquote>
+<p>docker restart 容器名字 例：docker restart wssc。</p>
+</blockquote>
+
+<p>12，删除一个或多少容器</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker rm
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-f :强制删除一个运行中的容器；<br/>
+-v :-v 删除与容器关联的卷；<br/>
+docker rm 容器名字 例：docker rm wssc<br/>
+docker rm -f 容器名字 例：docker rm -f wssc。</p>
+</blockquote>
+
+<p>13，在运行的容器中执行命令；</p>
+
+<pre class="line-numbers"><code class="language-bash">docker exec
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-i :即使没有附加也保持STDIN 打开；<br/>
+-t :分配一个伪终端；<br/>
+docker exec -it 容器名字 /bin/bash 例：docker exec -it wssc /bin/bash</p>
+</blockquote>
+
+<p>14，列出容器；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker ps
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-a :显示所有的容器，包括未运行的；<br/>
+--format :指定返回值的模板文件；<br/>
+-l :显示最近创建的容器；<br/>
+-n :列出最近创建的n个容器；<br/>
+--no-trunc :不截断输出；<br/>
+-s :显示总的文件大小；<br/>
+例：docker ps docker ps -a docker ps -n 5 。</p>
+</blockquote>
+
+<p>15， 获取容器/镜像的元数据；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker inspect
+</code></pre>
+
+<blockquote>
+<p>docker inspect 镜像名字/容器名字 例：docker inspect wssc 容器 docker inspect wellaac/wsscr:v1 镜像。</p>
+</blockquote>
+
+<p>16，查看容器中运行的进程信息；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker top
+</code></pre>
+
+<blockquote>
+<p>docker top 容器名字 例：docker top wssc。</p>
+</blockquote>
+
+<p>17，获取容器的日志</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker logs
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-f : 跟踪日志输出；<br/>
+--since :显示某个开始时间的所有日志；<br/>
+-t : 显示时间戳；<br/>
+--tail :仅列出最新N条容器日志；<br/>
+docker logs -f 容器名字；<br/>
+例：docker logs -f wssc 跟踪日志输出。</p>
+</blockquote>
+
+<p>18，列出指定的容器的端口映射；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker port
+</code></pre>
+
+<blockquote>
+<p>docker port 容器名字；例：docker port wssc。</p>
+</blockquote>
+
+<p>19，从容器创建一个新的镜像</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker commit
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-a :提交的镜像作者；<br/>
+-c :使用Dockerfile指令来创建镜像；<br/>
+-m :提交时的说明文字；<br/>
+-p :在commit时，将容器暂停；<br/>
+docker commit -a &#39;nihao.com&#39; -m&#39;xiawang&#39; 容器 新的镜像；<br/>
+例：docker commit -a &#39;nihao.com&#39; -m&#39;xiawang&#39; q8da8ds7ads1 wssc:v1。</p>
+</blockquote>
+
+<p>20，用于容器与主机间的数据拷贝;</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker cp
+</code></pre>
+
+<blockquote>
+<p>docker cp 主机路径 53543d59db8a:容器里面的路径；<br/>
+例：docker cp /home/python/index.html 53543d59db8a:/var/www/html ；<br/>
+docker cp 53543d59db8a:容器里面的路径 主机路径；<br/>
+例：docker cp 53543d59db8a:/var/www/html ./pytho。</p>
+</blockquote>
+
+<p>21，检查容器里文件结构的更改；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker diff
+</code></pre>
+
+<blockquote>
+<p>docker diff 容器名字 例：docker diff wssc。</p>
+</blockquote>
+
+<p>22，列出本地镜像；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker image
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-a :列出本地所有的镜像（含中间映像层，默认情况下，过滤掉中间映像层）；<br/>
+--no-trunc :显示完整的镜像信息；<br/>
+-q :只显示镜像ID；<br/>
+例：docker images -a docker images -q。</p>
+</blockquote>
+
+<p>23，删除本地一个或多少镜像；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker rmi
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-f :强制删除；<br/>
+docker rmi 容器名字 例：docker rmi wssc；<br/>
+docker rmi -f 容器名字 例：docker rmi -f wssc。</p>
+</blockquote>
+
+<p>24，标记本地镜像，将其归入某一仓库[重新命名]</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker tag
+</code></pre>
+
+<blockquote>
+<p>说明：<br/>
+重新命名的可以直接上传到自己的docker仓库里面；<br/>
+docker tag 镜像名字 镜像名字：v1；<br/>
+例：docker tag ubuntu wellqa/web:v1。</p>
+</blockquote>
+
+<p>25，命令用于使用 Dockerfile 创建镜像</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker build
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+--tag, -t: 镜像的名字及标签；<br/>
+最后一点别漏；<br/>
+需要在dockerfile目录下执行；<br/>
+docker -t 镜像名字 . ；<br/>
+例：docker build -t wellass/web:v1. 。</p>
+</blockquote>
+
+<p>26，查看指定镜像的创建历史；</p>
+
+<pre class="line-numbers"><code class="language-bash">docker history
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-H :以可读的格式打印镜像大小和日期，默认为true；<br/>
+--no-trunc :显示完整的提交记录；<br/>
+-q :仅列出提交记录ID；<br/>
+docker history 镜像名字；<br/>
+例：docker history wellass/web:v1。</p>
+</blockquote>
+
+<p>27，将指定镜像保存成 tar.gz</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker save
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-o :输出到的文件；<br/>
+docker save 镜像名字 -o tar.gz文件；<br/>
+例：docker save python:3.6 -o ./wellaas_python.tar.gz。</p>
+</blockquote>
+
+<p>28，将从tar归档文件或者标准输入载入镜像；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker load
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-i :从tar归档文件中读取；<br/>
+docker load -i tar.gz文件；<br/>
+例：docker load -i ./wellaas_python.tar.gz；（CentOS）<br/>
+例：docker image load -i ./wellaas_python.tar.gz。</p>
 </blockquote>
 
                         
@@ -1971,850 +3673,326 @@ git-standup() {
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15838967255217.html">
+                <a class="clearlink" href="16177589969445.html">
                 
-                  <h1>Linux vim 编辑器的神级配置 vimrc</h1>
+                  <h1>docker的28个常用指令</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">使用的配置</h2>
+                        	<p>1，查看Docker的版本详细信息。</p>
 
-<pre class="line-numbers"><code class="language-linux">https://github.com/amix/vimrc
+<pre class="line-numbers"><code class="language-undefined">docker version
 </code></pre>
 
-<h2 id="toc_1">安装很简单</h2>
+<p>2，查看Docker系统信息，包括镜像和容器数。</p>
 
-<pre class="line-numbers"><code class="language-linux">git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-sh ~/.vim_runtime/install_awesome_vimrc.sh
+<pre class="line-numbers"><code class="language-undefined">docker info
 </code></pre>
 
-<h2 id="toc_2">ack 插件</h2>
+<p>3，登陆到一个Docker镜像仓库。</p>
 
-<p>常用命令</p>
-
-<pre class="line-numbers"><code class="language-linux">系统需要安装 ack-grep, ubuntu安装命令：sudo apt-get install ack-grep
+<pre class="line-numbers"><code class="language-undefined">docker login -u 用户名 -p 密码；
 </code></pre>
 
-<ol>
-<li>全局查找文件(ctrlp插件)<br/>
-  <code>ctrl + f</code>  --打开全局文件搜索面板<br/>
-  <code>Esc</code> --退出全局文件搜索面板</li>
-<li>tab(标签)相关<br/>
-  <code>gt</code> --后一个标签<br/>
-  <code>gT</code> --前一个标签<br/>
-  <code>num</code> + gt --跳转至第num个标签<br/>
-  <code>,tl</code> --上一次的标签<br/>
-  <code>:q</code> --关闭标签<br/>
-  <code>:Te</code> --新建标签，并打开当前文件目录<br/>
-  <code>,tn</code> --新建空白标签</li>
-<li>目录树(NERD_tree插件)<br/>
-  <code>,nn</code> --打开目录树<br/>
-  <code>,nn</code> --关闭目录树</li>
-<li>窗口相关<br/>
-  <code>ctrl + w + q</code> --关闭窗口<br/>
-  <code>:q</code> --关闭窗口，窗口只有一个tab的情况<br/>
-  <code>ctrl + w + w</code> --切换窗口<br/>
-  <code>:sp</code> --竖直方向上拆分当前窗口<br/>
-  <code>:vsp</code> --水平方向上拆分当前窗口</li>
-<li>如何打开一个工程<br/>
-  在某个工程的根目录下输入打开vim，则该vim窗口的文件操作默认为整个工程，比如全局搜索文件或字段</li>
-<li>全局搜索字段(ack插件)<br/>
-  <code>,g</code> --打开全局字段搜索面板，默认大小写敏感，-i 不区分大小写，-w 全词匹配<br/>
-  <code>q</code> --退出全局字段搜索面板</li>
-<li>当前文件所在的目录<br/>
-  <code>:E</code> --打开当前目录，一般用于切换当前目录的文件<br/>
-  <code>:Te</code> --新建标签并打开当前目录，一般用于打开当前目录下的其它文件<br/></li>
-<li>查看最近打开的文件列表<br/>
-  <code>,f</code> --打开面板<br/>
-  <code>q</code> --退出面板</li>
-<li>当前文件下搜索<br/>
-  <code>*</code>--按下即可搜索光标所在的单词或当前选中的内容，不区分大小写<br/>
-  <code>gd</code> --光标移动至单词，按下即可搜索该单词，区分大小写<br/>
-  <code>/</code> --输入单词向下搜索<br/>
-  <code>?</code> --输入单词向上搜索，一般用于查log，配合G跳转至文件底部使</li>
-<li>显示行修改标志<br/>
-  <code>,d</code> --显示与不显示逐一切换</li>
-<li>光标停留的位置记录<br/>
-  <code>ctrl + o</code> --上一个时间点光标停留的位置<br/>
-  <code>ctrl + i</code> --下一个时间点光标停留的位置</li>
-<li>文件刷新，即重新载入<br/>
-  <code>:e</code> --重新载入<br/>
-  <code>:e!</code> --放弃当前修改，强制重新载入<br/>
-  <code>:e file_dir</code> --载入 file_dir 路径下的某个文件</li>
-<li>粘贴0号寄存器的内容<br/>
-  <code>ctrl + r + 0</code> --比如y复制选中的内容后粘贴到命令输入框</li>
-<li>折叠命令<br/>
-  <code>za</code> --打开或关闭当前折叠<br/>
-  <code>zM</code> --关闭所有折叠<br/>
-  <code>zR</code> --打开所有折叠</li>
-<li>跳出双引号继续编辑<br/>
-  有些时候输入完字符串需要移动光标至双引号外继续输入<br/>
-  <code>&quot;</code> --在 &quot; 处输入 &quot; ，即可将光标跳转至当前双引号之外</li>
-<li>文件路径<br/>
-  <code>:f</code> --查看当前文件路径</li>
-<li>变量名补全<br/>
-  <code>ctrl + n</code> --自动补全变量名，再次输入匹配下一个</li>
-<li>代码块补全，只需输入部分代码，然后按tab键<br/>
-  lua为例：<br/>
-  <code>if + tab</code> --if代码块<br/>
-  <code>forp + tab</code> --for i,v in pairs() do end 代码块<br/>
-  <code>fori + tab</code> --for i,v in ipairs() do end 代码块<br/>
-  <code>fun + tab</code> --函数模板代码块</li>
-<li>代码检错<br/>
-  <code>:ALEToggle</code> --启动检错</li>
-<li>代码注释<br/>
-  <code>gcc</code> --注释当前行，再次输入则撤销注释<br/>
-  <code>num + gcc</code> --注释num行<br/>
-  <code>gc</code> --注释选中部分</li>
-<li>取消搜索高亮<br/>
-  <code>:nohl</code></li>
-<li>多窗口显示<br/>
-  <code>:sp</code> --水平切分窗口<br/>
-  <code>:vsp</code> --垂直切分窗口<br/>
-## vim 编辑相关</li>
-<li>范围命令
-<code>w</code> --光标所在的位置至单词末尾的部分或一个单词，包括单词后的空格
-<code>iw</code> --光标所在位置的一个单词，不包括单词后的空格
-<code>aw</code> --光标所在位置的一个单词，包括单词后的空格
-<code>b</code> --与 w 相反
-<code>e</code> --end of word，至单词结尾
-<code>$</code> --至当前行结尾
-<code>0</code> --至当前行开头</li>
-<li>操作命令
-<code>d</code>: delete
-<code>dd</code> --删除当前行
-<code>diw</code> --删除光标所在单词
-<code>dw</code> --正向删除一个单词（光标后的部分）
-<code>db</code> --逆向删除一个单词（光标前的部分）
-<code>d$</code> --删除光标所在的位置至本行末尾
-<code>d0</code> --删除光标所在的位置至本行首部
-<code>c</code>: change, 与 d 的区别只在于操作后进入插入状态
-<code>y</code>: yank, 与 d 的区别在于跟范围命令组合后全部为复制操作</li>
-<li>操作命令（少与范围命令组合）
-<code>~</code> --大小写字母转换
-<code>s</code> --删除一个字母，删除后进入插入模式
-<code>x</code> --删除一个字母，删除后处于命令模式
-<code>r</code> --即replace，修改替换一个字母，并且替换过后仍然处于命令模式
-<code>R</code> --修改替换无限多个在字母</li>
-</ol>
+<p>4，退出到一个Docker镜像仓库。</p>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/03/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025628522.html">
-                
-                  <h1>Linux系统/etc目录和文件的介绍</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p><strong>Linux目录结构特点</strong></p>
-
-<ol>
-<li>linux系统的所有目录是一个有层次的倒着的梳妆目录结构。根是所有目录的顶点，linux目录一切从根开始。</li>
-<li>不听目录下的数据可以跨越不同的磁盘分区火不同的磁盘设备，设备可以随意挂载到任意目录上使用。</li>
-<li>所有的目录的是安装一定类型有龟裂的组织和命名的。</li>
-<li>没有挂载到目录上的磁盘，相当于没有门和串户的监狱，不能被使用。磁盘等设备de需要挂载菜能正常使用。</li>
-<li>盖章点是磁盘访问的人口，是一个目录</li>
-<li>相对路径与绝对路径</li>
-</ol>
-
-<p><strong>Linux目录结构</strong></p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# tree -L 1 /
-/
-├── bin             #普通用户的二进制命令
-├── boot            #系统内核及引导程序目录
-├── dev             #设备文件目录
-├── etc             #软件配置和启动程序目录
-├── home            #普通用户家目录
-├── lib             #库文件目录(命令、软件)
-├── lib64           #64位库文件目录(命令、软件)
-├── lost+found      #系统崩溃数据存放的目录
-├── media
-├── mnt             #设备临时挂载目录
-├── opt             #第三方程序
-├── proc            #操作系统进程和内核信息目录
-├── root            #root家目录
-├── sbin            #系统管理员命令
-├── selinux         
-├── srv
-├── sys
-├── tmp             #文件临时存放目录(回收站)
-├── usr             #应用程序目录
-└── var             #日志目录
-#查看命令的路径
-[root@test ~]# which ls
-alias ls=&#39;ls --color=auto&#39;
-    /bin/ls
+<pre class="line-numbers"><code class="language-bash">docker logout
 </code></pre>
 
-<table>
-<thead>
-<tr>
-<th>目录</th>
-<th>说明</th>
-</tr>
-</thead>
+<p>5，从镜像仓库中拉取或者更新指定镜像；</p>
 
-<tbody>
-<tr>
-<td>/bin</td>
-<td>该目录为binaries,是常用二进制命令所在的目录。列入：ls、cp、mkdir、rm等命令；/bin目录和/usr/bin类似</td>
-</tr>
-<tr>
-<td>/boot</td>
-<td>Linux的内核级系统引导程序所需的文件目录，安装系统分区的时候一般单独分一个boot分区。</td>
-</tr>
-<tr>
-<td>/dev</td>
-<td>设备文件目录，比如声卡、磁盘、光驱等等外接设备。</td>
-</tr>
-<tr>
-<td>/etc</td>
-<td>(1)二进制软件安装包(yum,rpm)等的配置文件默认路径，例如:/etc/exports、/etc/fstab、/etc/resolv.conf (2)服务启动命令存放的目录，主要在/etc/init.d/下。例如：/etc/init.d/sshd、/etc/init.d/iptables</td>
-</tr>
-<tr>
-<td>/home</td>
-<td>普通用户家目录默认数据库存放目录</td>
-</tr>
-<tr>
-<td>/lib</td>
-<td>启动系统和运行命令所需要的共享库文件和内核模块存放目录，分为/lib和/lib64两种。</td>
-</tr>
-<tr>
-<td>/lost+found</td>
-<td>在ext3文件系统中，当系统意外崩溃或机器意外关机，会产生一些文件碎片在这里。当系统在开机启动过程中fsck工具会检查这里，并修复已经损坏的文件系统。当系统发生问题，可能会有文件被移到这个目录中，可能需要手工方式修复，移到文件到原来的位置上。</td>
-</tr>
-<tr>
-<td>/mnt</td>
-<td>一般是用于临时挂载存储设备的挂载点，比如有cdrom，u盘等目录。直接插入光驱无法使用，需要先挂载后使用。</td>
-</tr>
-<tr>
-<td>/opt</td>
-<td>表示的是可选择的意思，有邪软件包会被安装在这里，也就是自定义软件包。我们自己编译的软件包，就可以安装在这个目录；通过源码包安装的软件，可以通过./configure --prefix=/opt/指定目录。</td>
-</tr>
-<tr>
-<td>/proc</td>
-<td>操作系统运行时，进程信息及内核信息(cpu、硬盘信息、内存信息)存放在这里。/proc目录是虚拟文件系统的挂载点，proc并不是真正的文件系统，它的定义可以参见/etc/fstab。系统运行很多信息都在这个目录下。 /proc/loadavg #系统负载信息 /proc/meminfo #系统内存信息 /proc/cpuinfo #系统CPU信息 /proc/mounts #系统挂载信息</td>
-</tr>
-<tr>
-<td>/root</td>
-<td>Linux超级权限用户root的加目录:root类似win32管理员admininstrator</td>
-</tr>
-<tr>
-<td>/sbin</td>
-<td>大多是涉及系统管理的命令存放，是超级权限用户root的可执行命令存放地，这个目录和/usr/X11R6/sbin或/usr/loacl/sbin目录是相似的;系统级命令，一般最好要通过sudo让普通用户执行这些命令，常见命令有fdisk、reboot、fsck、halt</td>
-</tr>
-<tr>
-<td>/tmp</td>
-<td>临时文件目录，有时用户运行程序时候，会产生临时文件。/tmp就用来存放临时文件的，权限比较特殊。/var/tmp目录和这个目录相似，这个目录可以被用作Linux系统的回收站使用。</td>
-</tr>
-<tr>
-<td>/usr</td>
-<td>这是系统存放程序的目录，比如命令，帮助文件等。这个目录下有很多的文件和目录。当我们安装一个Linux官方提供的软件包时，安装在这里。 /user/local：默认软件安装目录 /usr/src:长袖源码目录</td>
-</tr>
-<tr>
-<td>/var</td>
-<td>日志目录</td>
-</tr>
-</tbody>
-</table>
-
-<hr/>
-
-<p><strong>Linux系统重要文件</strong></p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align: left">文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td style="text-align: left">/etc/sysconfig/network-scripts/ifcfg-eth0</td>
-<td style="text-align: center">网卡配置文件</td>
-</tr>
-</tbody>
-</table>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0 
-DEVICE=eth0 #第一块网卡逻辑设备名，第二块为eth1
-HWADDR=00:0c:29:6a:a3:b4 #以太网硬件地址MAC地址
-TYPE=Ethernet #上网类型，目前基本上是以太网
-UUID=282f8f61-2b18-4cdb-8ba5-62c8131abd20 #通用唯一识别码
-ONBOOT=yes  #开机启动激活网卡设备yes(启动) no(不启动)
-NM_CONTROLLED=yes #是否通过networkmanager管理网卡设备
-BOOTPROTO=none  #启动协议，获取配置方式，有none|bootp|dhcp 三个选项
-IPADDR=10.0.0.7 #IP地址
-NETMASK=255.255.255.0 #子网掩码
-DNS2=202.106.0.20   #DNS2
-GATEWAY=10.0.0.2    #网关
-DNS1=10.0.0.2       #DNS1
-USERCTL=no          #是否支持用户控制
-PEERDNS=yes         #网卡配置DNS 会覆盖/etc/resolv.conf文件的DNS
-IPV6INIT=no         #是否支持IPv6
-</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/resolv.conf</td>
-<td style="text-align: center">系统DNS客户端配置文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>DNS,全称Domain Name System，一个网站运行中起到至关重要的作用，它的主要作用是负责吧网站域名解析为对应的IP地址。</p>
-
-<p>DNS系统解析功能：</p>
-
-<ul>
-<li> (1)DNS 系统负责A记录解析，就是域名到IP。</li>
-<li> (2)设置CNAME别名记录，这别名解析功能常被CDN加速服务商应用</li>
-<li> (3)设置MX邮件记录，这个记录功能，在购买或搭建邮件服务时会经常被用到</li>
-<li> (4)设置PTR 记录，反向解析，即吧IP地址解析为对应域名和A记录的解析相反，邮寄服务等业务会用到</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/resolv.conf
-
-nameserver 10.0.0.2
-nameserver 202.106.0.20
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th style="text-align: left">文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td style="text-align: left">/etc/sysconfig/network</td>
-<td style="text-align: center">主机名配置文件</td>
-</tr>
-</tbody>
-</table>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/sysconfig/network
-NETWORKING=yes
-HOSTNAME=test
-</code></pre>
-
-<p>修改方法：</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/sysconfig/network
-NETWORKING=yes
-HOSTNAME=test1 #永久修改
-[root@test ~]# hostname test1 临时修改
-#企业环境永久修改生效需要重启服务器基本的是永久加上临时二个方法配合使用需要操作两次，为了不重启
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/rc.local</td>
-<td style="text-align: center">存放开机自启动程序命令文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>/etc/rc.local是用于存放开机自启动程序命令的文件(chkconfig常用来管理yum/rpm安装的程序服务的开机自启动)如果是开发的自己程序需要开机启动命令放入/etc/rc.local来实现开机自启动，Linux开机会吧/etc/rc.local里面的内容全部执行一遍。</p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th style="text-align: center">文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/hosts</td>
-<td style="text-align: center">局域网或者本地DNS解析工具</td>
-</tr>
-</tbody>
-</table>
-
-<p>应用场景：</p>
-
-<ol>
-<li>域名对应服务所在的服务器出现IP变化时候</li>
-<li>进行本地测试</li>
-</ol>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/fstab</td>
-<td>配置开机实现设备自动挂载程序命令的文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>添加新的磁盘后实现开机自动挂载设备：cat /etc/fstab共六列如下：</p>
-
-<p>例：sysfs /sys sysfs defaults 0 0</p>
-
-<ol>
-<li>第一列sysfs (挂载的设备名称)</li>
-<li>第二列/sys(挂载的目录)</li>
-<li>第三列sysfs(挂载的文件系统格式)</li>
-<li>第四列defaults(挂载参数)</li>
-<li>第五列0(是否备份:0为不备份，1为备份)</li>
-<li>第六列0(是否开机做磁盘检测，0为不检测数字1,2的为检测磁盘)，工作场景通常的设为了，为了避免重启无法启动。</li>
-</ol>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/rc.loacl</td>
-<td>存放开机自启动程序命令文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>企业中主要应用：脚本和自主开发程序启动命令存放处，实现开机程序自动启动和运行。</p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/inittab</td>
-<td>系统运行级别的配置文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>0 - halt (Do NOT set initdefault to this)： (<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E5%85%B3%E6%9C%BA%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{关机模式}"/>)</p>
-
-<p>1 - Single user mode：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{单用户模式}"/>)</p>
-
-<p>2 - Multiuser, without NFS (The same as 3, if you do not have networking):(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E6%B2%A1%E6%9C%89%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9FNFS%E7%9A%84%E5%A4%9A%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{没有网络文件系统NFS的多用户模式}"/>)</p>
-
-<p>3 - Full multiuser mode：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E5%AE%8C%E6%95%B4%E7%9A%84%E5%A4%9A%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{完整的多用户模式}"/>)</p>
-
-<p>4 - unused：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E6%9C%AA%E4%BD%BF%E7%94%A8%7D" alt="\color{green}{未使用}"/>)</p>
-
-<p>5 - X11：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E6%A1%8C%E9%9D%A2%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{桌面模式}"/>)</p>
-
-<p>6 - reboot (Do NOT set initdefault to this)：(<img src="https://math.jianshu.com/math?formula=%5Ccolor%7Bgreen%7D%7B%E9%87%8D%E5%90%AF%E6%A8%A1%E5%BC%8F%7D" alt="\color{green}{重启模式}"/>)</p>
-
-<p>查看当前的运行级别：runlevel</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# runlevel 
-N 3
-#N是上一次运行级别，3是当前运行级别
-</code></pre>
-
-<p>切换运行级别：</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# init 5
-[root@test ~]# runlevel 
-3 5
-#init 命令接后面的数字级别
-</code></pre>
-
-<p>开机启动流程图：</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200909234025.png" alt="img"/></p>
-
-<p>Linux系统启动配置文件：</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/grub.conf 
-# grub.conf generated by anaconda
-#
-# Note that you do not have to rerun grub after making changes to this file
-# NOTICE:  You have a /boot partition.  This means that
-#          all kernel and initrd paths are relative to /boot/, eg.
-#          root (hd0,0)
-#          kernel /vmlinuz-version ro root=/dev/sda3
-#          initrd /initrd-[generic-]version.img
-#boot=/dev/sda
-default=0
-timeout=5
-splashimage=(hd0,0)/grub/splash.xpm.gz
-hiddenmenu
-title CentOS (2.6.32-754.30.2.el6.x86_64)
-    root (hd0,0)
-    kernel /vmlinuz-2.6.32-754.30.2.el6.x86_64 ro root=UUID=24219a66-7b4f-477e-b8c4-a008809c45f5 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet
-    initrd /initramfs-2.6.32-754.30.2.el6.x86_64.img
-title CentOS 6 (2.6.32-696.el6.x86_64)
-    root (hd0,0)
-    kernel /vmlinuz-2.6.32-696.el6.x86_64 ro root=UUID=24219a66-7b4f-477e-b8c4-a008809c45f5 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet
-    initrd /initramfs-2.6.32-696.el6.x86_64.img
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/profile及/etc/bashrc(~/.bashrc)</td>
-<td>配置系统的环境变量/别名文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>企业环境设置案例：</p>
-
-<pre class="line-numbers"><code class="language-shell">#环境变量设置：
-vim /etc/profile
-
-#set java environment
-JAVA_HOME=/usr/local/java/jdk1.8.0_161
-JRE_HOME=$JAVA_HOME/jre
-CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib/rt.jar
-PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-export JAVA_HOME JRE_HOME CLASS_PATH PATH
-#重新加载/etc/profile文件，让配置生效
-source /etc/profile
-#测试安装是否成功
-java -version
-
-#系统别名设置:
-# User specific aliases and functions
-
-alias rm=&#39;rm -i&#39;
-alias cp=&#39;cp -i&#39;
-alias mv=&#39;mv -i&#39;
-#让系统别名永久生效，需要配置到的文件
-</code></pre>
-
-<p>环境变量文件生效顺序图：/etc/bashrc &gt; ~/.bashrc &gt; ~/bash_profile &gt; /etc/profile</p>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200909234032.png" alt="img"/></p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/profile.d</td>
-<td>用户登录后执行的脚本所在目录</td>
-</tr>
-</tbody>
-</table>
-
-<ol>
-<li>在/etc/profile.d 目录中存放的是一些应用程序所需的启动脚本，而这些脚本文件是用来设置一些变量和运行一些初始化过程的。其中包括了颜色、语言、less、vim及which等命令的一些附加设置。</li>
-<li>/etc/profile.d 下的脚本之所以能自动执行，是因为在/etc/profile 中有一个for循环语句来调用这些脚本。</li>
-</ol>
-
-<pre class="line-numbers"><code class="language-shell">vi /etc/profile
-# /etc/profile
- 
-for i in /etc/profile.d/*.sh /etc/profile.d/sh.local ; do
-    if [ -r &quot;$i&quot; ]; then
-        if [ &quot;${-#*i}&quot; != &quot;$-&quot; ]; then
-            . &quot;$i&quot;
-        else
-            . &quot;$i&quot; &gt;/dev/null
-        fi
-    fi
-done
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/issue和/etc/issue.net</td>
-<td>配置在用户登录终端前显示信息的文件</td>
-</tr>
-</tbody>
-</table>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/issue
-CentOS release 6.10 (Final)
-Kernel \r on an \m
-.............................................................................
-[root@test ~]# cat /etc/issue.net 
-CentOS release 6.10 (Final)
-Kernel \r on an \m
-</code></pre>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/init.d</td>
-<td>软件启动和程序所在的目录</td>
-</tr>
-</tbody>
-</table>
-
-<p>/etc/init.d目录在Linux系统中可是大名鼎鼎。它只负责一件事情，但却涉及到全系统。它包含系统中各种服务的start/stop脚本，从acpid到x11-common，其重要性可见一斑。在/etc/init.d的可执行程序的优先级会高于/etc/systemd/system/下的service文件，如果同时存在的话。</p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/motd</td>
-<td>配置用户登录系统之后显示提示内容的文件</td>
-</tr>
-</tbody>
-</table>
-
-<p>配置案例：</p>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/motd 
-[root@test ~]# vim /etc/motd
-test computer
-</code></pre>
-
-<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200909234041.png" alt="img"/></p>
-
-<hr/>
-
-<table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>/etc/redhat-release</td>
-<td>声明Red Hat版本和名称信息的文件</td>
-</tr>
-</tbody>
-</table>
-
-<pre class="line-numbers"><code class="language-shell">[root@test ~]# cat /etc/redhat-release 
-CentOS release 6.10 (Final)
-</code></pre>
-
-<p>禁止转载，如需转载请通过简信或评论联系作者。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15839100648693.html">
-                
-                  <h1>MAC 安装好后的一些配置</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h1 id="toc_0">改变vim配色：安装colorscheme</h1>
-
-<blockquote>
-<ol>
-<li>在当前用户目录 ~/ 下的 .vim 目录(如果没有，mkdir ~/.vim进行新建该目录)。在 ~/.vim/ 下新建一个叫 colors 的目录，将配色方案.vim文件便放到该目录下。</li>
-<li>编辑vim的配置文件.vimrc  (vi .vimrc)在其中添加下面2行</li>
-</ol>
-</blockquote>
-
-<pre class="line-numbers"><code class="language-text">set t_Co=256 
-colorscheme desert
-</code></pre>
-
-<h1 id="toc_1">使用 Solarized 配色方案的方法</h1>
-
-<pre class="line-numbers"><code class="language-text">$ git clone git://github.com/altercation/solarized.git
+<pre class="line-numbers"><code class="language-undefined">docker pull 
 </code></pre>
 
 <blockquote>
-<ul>
-<li>Terminal 的话，在 solarized/osx-terminal.app-colors-solarized 下双击 Solarized Dark ansi.terminal 和 Solarized Light ansi.terminal 就会自动导入两种配色方案 Dark 和 Light 到 Terminal.app 里。</li>
-<li>iTerm2 的话，到 solarized/iterm2-colors-solarized 下双击 Solarized Dark.itermcolors 和 Solarized Light.itermcolors 两个文件就可以把配置文件导入到 iTerm 里。</li>
-<li>vim </li>
-</ul>
+<p>说明：<br/>
+-a :拉取所有 tagged 镜像；<br/>
+docker pull 镜像名字 例：docker pull python；<br/>
+docker pull 镜像名字：版本号 例：docker pull python:3.6。</p>
 </blockquote>
 
-<pre class="line-numbers"><code class="language-text">    $ cd solarized
-    $ cd vim-colors-solarized/colors
-    $ mkdir -p ~/.vim/colors
-    $ cp solarized.vim ~/.vim/colors/
-    $ vi ~/.vimrc
-    syntax on
-    set background=dark
-    colorscheme solarized
+<p>6，将本地的镜像上传到镜像仓库,要先登陆到镜像仓库；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker push
 </code></pre>
-
-<h1 id="toc_2">Mac 访达标题栏显示详细目录</h1>
-
-<pre class="line-numbers"><code class="language-text">defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
-killall Finder
-</code></pre>
-
-<h1 id="toc_3">禁止.DS_Store生成</h1>
-
-<p>打开 “终端”，执行下列命令，重启Mac生效：</p>
-
-<pre class="line-numbers"><code class="language-text">defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
-</code></pre>
-
-<h1 id="toc_4">恢复.DS_Store生成</h1>
-
-<pre class="line-numbers"><code class="language-text">defaults delete com.apple.desktopservices DSDontWriteNetworkStores
-</code></pre>
-
-<h1 id="toc_5">删除现有的.DS_Store</h1>
 
 <blockquote>
-<p>对已经生成的文件还需要你手动删除：</p>
+<p>说明：<br/>
+docker push 镜像名字 例：docker push python；<br/>
+docker push 镜像名字：版本号 例：docker push python：v1。</p>
 </blockquote>
 
-<pre class="line-numbers"><code class="language-text">sudo find / -name &quot;.DS_Store&quot; -depth -exec rm {} \;
-</code></pre>
+<p>7，从Docker Hub查找镜像；</p>
 
-<h1 id="toc_6">Mac Launchpad(启动台）图标大小调整</h1>
+<pre class="line-numbers"><code class="language-undefined">docker search
+</code></pre>
 
 <blockquote>
-<p>1 、调整每一列显示图标数量，10表示每一列显示10个，比较不错，可根据个人喜好进行设置。 <br/>
-<code>defaults write com.apple.dock springboard-rows -int 10</code><br/>
-2、调整多少行显示图标数量 <br/>
-<code>defaults write com.apple.dock springboard-rows -int 8</code><br/>
-3、重置Launchpad<br/>
-<code>defaults write com.apple.dock ResetLaunchPad -bool TRUE</code><br/>
-4、重启Dock<br/>
-<code>killall Dock</code><br/>
-恢复默认设置的方法。<br/>
- 以下是恢复默认大小的命令（在Terminal执行即可）：</p>
+<p>--no-trunc :显示完整的镜像描述；<br/>
+-s :列出收藏数不小于指定值的镜像；<br/>
+docker search 镜像名字 例 ：docker search python。</p>
 </blockquote>
 
-<pre class="line-numbers"><code class="language-text">defaults write com.apple.dock springboard-rows Default
-defaults write com.apple.dock springboard-columns Default
-defaults write com.apple.dock ResetLaunchPad -bool TRUE
-killall Dock
+<p>8，创建一个新的容器并运行一个命令；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker run
 </code></pre>
+
+<blockquote>
+<p>说明<br/>
+-d: 后台运行容器，并返回容器ID；<br/>
+-i: 以交互模式运行容器，通常与 -t 同时使用；<br/>
+-p: 端口映射，格式为：主机(宿主)端口:容器端口<br/>
+-t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；<br/>
+-v: 目录映射；<br/>
+--name=&quot;nginx-lb&quot;: 为容器指定一个名称；<br/>
+--env-file=[]: 从指定文件读入环境变量；<br/>
+--restart=[]:重启策略：<br/>
+a、no，默认策略，在容器退出时不重启容器；<br/>
+b、on-failure，在容器非正常退出时（退出状态非0），才会重启容器；<br/>
+c、on-failure:3，在容器非正常退出时重启容器，最多重启3次；<br/>
+d、always，在容器退出时总是重启容器；<br/>
+e、unless-stopped，在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器。<br/>
+例：sudo docker run -itd \ 后台运行进入容器 --name=wssc \ 为容器起一个名字 --restart=always \ 退出时重启 --env-file ./env.list \ 需在当前目录下的env.list运行 -p 8011:80 \ 端口号映射 -v /var/www/project/data:/var/www/project/data \ 挂载 wellaac/wsscr:v1 镜像名字</p>
+</blockquote>
+
+<p>9，启动一个或多个已经被停止的容器；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker start
+</code></pre>
+
+<blockquote>
+<p>docker start 容器名字 例：docker start wssc。</p>
+</blockquote>
+
+<p>10，停止一个运行中的容器；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker stop
+</code></pre>
+
+<blockquote>
+<p>docker stop 容器名字 例：docker wssc；<br/>
+docker stop $(docker ps -a -q) 停止所有容器。</p>
+</blockquote>
+
+<p>11,重启容器；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker restart
+</code></pre>
+
+<blockquote>
+<p>docker restart 容器名字 例：docker restart wssc。</p>
+</blockquote>
+
+<p>12，删除一个或多少容器</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker rm
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-f :强制删除一个运行中的容器；<br/>
+-v :-v 删除与容器关联的卷；<br/>
+docker rm 容器名字 例：docker rm wssc<br/>
+docker rm -f 容器名字 例：docker rm -f wssc。</p>
+</blockquote>
+
+<p>13，在运行的容器中执行命令；</p>
+
+<pre class="line-numbers"><code class="language-bash">docker exec
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-i :即使没有附加也保持STDIN 打开；<br/>
+-t :分配一个伪终端；<br/>
+docker exec -it 容器名字 /bin/bash 例：docker exec -it wssc /bin/bash</p>
+</blockquote>
+
+<p>14，列出容器；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker ps
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-a :显示所有的容器，包括未运行的；<br/>
+--format :指定返回值的模板文件；<br/>
+-l :显示最近创建的容器；<br/>
+-n :列出最近创建的n个容器；<br/>
+--no-trunc :不截断输出；<br/>
+-s :显示总的文件大小；<br/>
+例：docker ps docker ps -a docker ps -n 5 。</p>
+</blockquote>
+
+<p>15， 获取容器/镜像的元数据；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker inspect
+</code></pre>
+
+<blockquote>
+<p>docker inspect 镜像名字/容器名字 例：docker inspect wssc 容器 docker inspect wellaac/wsscr:v1 镜像。</p>
+</blockquote>
+
+<p>16，查看容器中运行的进程信息；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker top
+</code></pre>
+
+<blockquote>
+<p>docker top 容器名字 例：docker top wssc。</p>
+</blockquote>
+
+<p>17，获取容器的日志</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker logs
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-f : 跟踪日志输出；<br/>
+--since :显示某个开始时间的所有日志；<br/>
+-t : 显示时间戳；<br/>
+--tail :仅列出最新N条容器日志；<br/>
+docker logs -f 容器名字；<br/>
+例：docker logs -f wssc 跟踪日志输出。</p>
+</blockquote>
+
+<p>18，列出指定的容器的端口映射；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker port
+</code></pre>
+
+<blockquote>
+<p>docker port 容器名字；例：docker port wssc。</p>
+</blockquote>
+
+<p>19，从容器创建一个新的镜像</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker commit
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-a :提交的镜像作者；<br/>
+-c :使用Dockerfile指令来创建镜像；<br/>
+-m :提交时的说明文字；<br/>
+-p :在commit时，将容器暂停；<br/>
+docker commit -a &#39;nihao.com&#39; -m&#39;xiawang&#39; 容器 新的镜像；<br/>
+例：docker commit -a &#39;nihao.com&#39; -m&#39;xiawang&#39; q8da8ds7ads1 wssc:v1。</p>
+</blockquote>
+
+<p>20，用于容器与主机间的数据拷贝;</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker cp
+</code></pre>
+
+<blockquote>
+<p>docker cp 主机路径 53543d59db8a:容器里面的路径；<br/>
+例：docker cp /home/python/index.html 53543d59db8a:/var/www/html ；<br/>
+docker cp 53543d59db8a:容器里面的路径 主机路径；<br/>
+例：docker cp 53543d59db8a:/var/www/html ./pytho。</p>
+</blockquote>
+
+<p>21，检查容器里文件结构的更改；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker diff
+</code></pre>
+
+<blockquote>
+<p>docker diff 容器名字 例：docker diff wssc。</p>
+</blockquote>
+
+<p>22，列出本地镜像；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker image
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-a :列出本地所有的镜像（含中间映像层，默认情况下，过滤掉中间映像层）；<br/>
+--no-trunc :显示完整的镜像信息；<br/>
+-q :只显示镜像ID；<br/>
+例：docker images -a docker images -q。</p>
+</blockquote>
+
+<p>23，删除本地一个或多少镜像；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker rmi
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-f :强制删除；<br/>
+docker rmi 容器名字 例：docker rmi wssc；<br/>
+docker rmi -f 容器名字 例：docker rmi -f wssc。</p>
+</blockquote>
+
+<p>24，标记本地镜像，将其归入某一仓库[重新命名]</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker tag
+</code></pre>
+
+<blockquote>
+<p>说明：<br/>
+重新命名的可以直接上传到自己的docker仓库里面；<br/>
+docker tag 镜像名字 镜像名字：v1；<br/>
+例：docker tag ubuntu wellqa/web:v1。</p>
+</blockquote>
+
+<p>25，命令用于使用 Dockerfile 创建镜像</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker build
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+--tag, -t: 镜像的名字及标签；<br/>
+最后一点别漏；<br/>
+需要在dockerfile目录下执行；<br/>
+docker -t 镜像名字 . ；<br/>
+例：docker build -t wellass/web:v1. 。</p>
+</blockquote>
+
+<p>26，查看指定镜像的创建历史；</p>
+
+<pre class="line-numbers"><code class="language-bash">docker history
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-H :以可读的格式打印镜像大小和日期，默认为true；<br/>
+--no-trunc :显示完整的提交记录；<br/>
+-q :仅列出提交记录ID；<br/>
+docker history 镜像名字；<br/>
+例：docker history wellass/web:v1。</p>
+</blockquote>
+
+<p>27，将指定镜像保存成 tar.gz</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker save
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-o :输出到的文件；<br/>
+docker save 镜像名字 -o tar.gz文件；<br/>
+例：docker save python:3.6 -o ./wellaas_python.tar.gz。</p>
+</blockquote>
+
+<p>28，将从tar归档文件或者标准输入载入镜像；</p>
+
+<pre class="line-numbers"><code class="language-undefined">docker load
+</code></pre>
+
+<blockquote>
+<p>说明<br/>
+-i :从tar归档文件中读取；<br/>
+docker load -i tar.gz文件；<br/>
+例：docker load -i ./wellaas_python.tar.gz；（CentOS）<br/>
+例：docker image load -i ./wellaas_python.tar.gz。</p>
+</blockquote>
 
                         
                       </div>
@@ -2823,623 +4001,7 @@ killall Dock
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2020/03/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15998025631366.html">
-                
-                  <h1>MWeb + Github Pages 搭建个人博客/静态网站</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">1、打开GitHub Pages</h2>
-
-<p>链接<a href="https://pages.github.com/">https://pages.github.com/</a> ，可以直接按照上面的操作指引来操作</p>
-
-<p>(1)创建 github repository</p>
-
-<p>官网说明如下图，需要先注册登录GitHub，然后创建repository，命名方式为<a href="http://username.github.io/">http://username.github.io</a>，注意用户名(前后两个输入框)保持一致。</p>
-
-<p><img src="media/15998025631366/v2-2a7bdd7a71db76912f5c70db4b8e042e_720w.jpg" alt="img"/></p>
-
-<p>（2）git client</p>
-
-<p>我使用了桌面客户端（下载链接 <a href="https://desktop.github.com/">https://desktop.github.com</a> ）</p>
-
-<p><img src="media/15998025631366/v2-9029512a20bea6a74ff6e661b1ed554c_720w.jpg" alt="img"/></p>
-
-<p>（3）下载 GitHub desktop 并登录，选择你创建的repository，并点击clone按钮。然后就可以看到本地的克隆文件的路径。</p>
-
-<p><img src="media/15998025631366/v2-416a3d6414b387d21ea3dcc584960298_720w.jpg" alt="img"/></p>
-
-<p><img src="media/15998025631366/v2-02f99763a4d07e5120d6b16e0943756b_720w.jpg" alt="img"/></p>
-
-<h2 id="toc_1">2、下面先转到MWeb这里，下载并使用MWeb创建静态网页</h2>
-
-<p>MWeb是一个简单易用的markdown工具，还可以生成静态网站，不过要付费。</p>
-
-<p>（1）首先左下角新增静态网站分类</p>
-
-<p><img src="media/15998025631366/v2-f0d346f5cce89cfc883f55608ce7d9e5_720w.jpg" alt="img"/></p>
-
-<p>（2）对这个站点的名称、模版等进行设置</p>
-
-<p><img src="media/15998025631366/v2-f802de2a62db871c817d2e8206ff095e_720w.jpg" alt="img"/></p>
-
-<p>（3）在里面写一篇文章，然后选择生成网站</p>
-
-<p><img src="media/15998025631366/v2-47cbf01ada99ca1f078774154bef5dc5_720w.jpg" alt="img"/></p>
-
-<p>(4)生成网站后，还是在这个下拉菜单中选择“在finder中显示网站生成位置”，就会定位到本地文稿所在位置。</p>
-
-<p><img src="media/15998025631366/v2-186318f6b291d3874d16b8da45b575a1_720w.jpg" alt="img"/></p>
-
-<p>(5)将这里的所有文件复制到 github在本地的克隆文件中</p>
-
-<h2 id="toc_2">3、最后一步，文件上传与同步</h2>
-
-<p>打开GitHub desktop，左边栏中就是我们要同步的新增文件。点击左下的commit，然后点击右上角的push按钮。这样就OK了，你可以访问一下你的网站（<a href="http://username.github.io/">http://username.github.io</a>）看看效果了～</p>
-
-<p><img src="media/15998025631366/v2-89721201dd82fec5937c581099a43303_720w.jpg" alt="img"/></p>
-
-<p><img src="media/15998025631366/v2-d2dede1032356af70fa032dd52076aa3_720w.jpg" alt="img"/></p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/09/11</span>
-                    
-          				   
-                    
-
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15845003776446.html">
-                
-                  <h1>Mac下find命令常用语法总结</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>Mac的文件管理是很难用，所以有些时候搜索东西我宁愿用命令的方式，便在此总结一下常用的。<br/>
-首先，可以用</p>
-
-<pre class="line-numbers"><code class="language-text">man find
-</code></pre>
-
-<p>查看find命令的种种选项和用法。全英文的，我知道绝大多数人肯定不爱看。于是我看了这个之后，结合自己的一些实践，总结了一些常用的方法。并且把全文附在了本文末尾。</p>
-
-<h4 id="toc_0">概述：</h4>
-
-<p>find命令递归地为列出的每个路径下拉目录树，根据树中的每个文件计算表达式(由下面列出的&#39;&#39; primary &#39;和&#39;&#39; operands&#39;组成)。</p>
-
-<h4 id="toc_1">基本操作：</h4>
-
-<pre class="line-numbers"><code class="language-text">find 文件路径 参数
-</code></pre>
-
-<h4 id="toc_2">例子：</h4>
-
-<ol>
-<li> 在当前目录下(包含子目录)搜索文件名包含cynthia的文件。</li>
-</ol>
-
-<pre class="line-numbers"><code class="language-text">find . -name &quot;cynthia&quot;
-</code></pre>
-
-<ol>
-<li> 搜索文件后缀不是.py的文件并打印出来。注意这里!的用法，用了转义符\</li>
-</ol>
-
-<pre class="line-numbers"><code class="language-text">find ~/Cynthia/ \! -name &quot;*.py&quot; -print
-</code></pre>
-
-<ol>
-<li> 类似的，上面是搜索文件后缀是.py的文件</li>
-</ol>
-
-<pre class="line-numbers"><code class="language-text">find ~/Cynthia/ -name &quot;*.py&quot; -print
-</code></pre>
-
-<ol>
-<li> 在当前目录下，搜索属于用户cynthia，且比文件190505demo的时间新的文件。</li>
-</ol>
-
-<pre class="line-numbers"><code class="language-text">find . -newer 190505demo -user cynthia -print
-</code></pre>
-
-<ol>
-<li> 类似的，下面这个命令就是搜索既不属于用户cynthia也不比文件190505demo的时间新的文件。</li>
-</ol>
-
-<pre class="line-numbers"><code class="language-text">find . \! \( -newer 190505demo -user cynthia \) -print
-</code></pre>
-
-<ol>
-<li> 打印出当前目录下的所有文件</li>
-</ol>
-
-<pre class="line-numbers"><code class="language-text">find . -type f -exec echo {} \;
-</code></pre>
-
-<h4 id="toc_3">附录</h4>
-
-<p>man find命令给出的全文。</p>
-
-<pre class="line-numbers"><code class="language-text">Cynthias-MacBook-Pro:/ cynthia$ man find
-NAME
-     find -- walk a file hierarchy
-
-SYNOPSIS
-     find [-H | -L | -P] [-EXdsx] [-f path] path ... [expression]
-     find [-H | -L | -P] [-EXdsx] -f path [path ...] [expression]
-
-DESCRIPTION
-     The find utility recursively descends the directory tree for each path listed, evaluating an expression (composed of the ``primaries&#39;&#39; and ``operands&#39;&#39; listed below) in terms of each file in the tree.
-
-     The options are as follows:
-
-     -E      Interpret regular expressions followed by -regex and -iregex primaries as extended (modern) regular expressions rather than basic regular expressions (BRE&#39;s).  The re_format(7) manual page fully describes both formats.
-
-     -H      Cause the file information and file type (see stat(2)) returned for each symbolic link specified on the command line to be those of the file referenced by the link, not the link itself.  If the referenced file does not exist, the file information and type will be for the link itself.  File information of all symbolic links not on the command line is that of the link itself.
-
-     -L      Cause the file information and file type (see stat(2)) returned for each symbolic link to be those of the file referenced by the link, not the link itself.  If the referenced ile does not exist, the file information and type will be for the link itself.
-
-             This option is equivalent to the deprecated -follow primary.
-
-     -P      Cause the file information and file type (see stat(2)) returned for each symbolic link to be those of the link itself.  This is the default.
-
-     -X      Permit find to be safely used in conjunction with xargs(1).  If a file name contains any of the delimiting characters used by xargs(1), a diagnostic message is displayed on standard error, and the file is skipped.  The delimiting characters include single (`` &#39; &#39;&#39;) and double (`` &quot; &#39;&#39;) quotes, backslash (``\&#39;&#39;), space, tab and newline characters.
-
-             However, you may wish to consider the -print0 primary in conjunction with ``xargs -0&#39;&#39; as an effective alternative.
-
-     -d      Cause find to perform a depth-first traversal, i.e., directories are visited in postorder and all entries in a directory will be acted on before the directory itself.  By default, find visits directories in pre-order, i.e., before their contents.  Note, the default is not a breadth-first traversal.
-
-             This option is equivalent to the -depth primary of IEEE Std 1003.1-2001 (``POSIX.1&#39;&#39;).
-             The -d option can be useful when find is used with cpio(1) to process files that are contained in directories with unusual permissions.  It ensures that you have write permission while you are placing files in a directory, then sets the directory&#39;s permissions as the last thing.
-
-     -f      Specify a file hierarchy for find to traverse.  File hierarchies may also be specified as the operands immediately following the options.
-
-     -s      Cause find to traverse the file hierarchies in lexicographical order, i.e., alphabetical order within each directory.  Note: `find -s&#39; and `find | sort&#39; may give different results.
-
-     -x      Prevent find from descending into directories that have a device number different than that of the file from which the descent began.
-
-             This option is equivalent to the deprecated -xdev primary.
-
-PRIMARIES
-     All primaries which take a numeric argument allow the number to be preceded by a plus sign (``+&#39;&#39;) or a minus sign (``-&#39;&#39;).  A preceding plus sign means ``more than n&#39;&#39;, a preceding minus sign means ``less than n&#39;&#39; and neither means ``exactly n&#39;&#39;.
-
-     -Bmin n
-             True if the difference between the time of a file&#39;s inode creation and the time find was started, rounded up to the next full minute, is n minutes.
-
-     -Bnewer file
-             Same as -newerBm.
-
-     -Btime n[smhdw]
-             If no units are specified, this primary evaluates to true if the difference between the time of a file&#39;s inode creation and the time find was started, rounded up to the next full 24-hour period, is n 24-hour periods.
-
-             If units are specified, this primary evaluates to true if the difference between the time of a file&#39;s inode creation and the time find was started is exactly n units.
-             Please refer to the -atime primary description for information on supported time units.
-
-     -acl    May be used in conjunction with other primaries to locate files with extended ACLs.
-             See acl(3) for more information.
-
-     -amin n
-             True if the difference between the file last access time and the time find was started, rounded up to the next full minute, is n minutes.
-
-     -anewer file
-             Same as -neweram.
-
-     -atime n[smhdw]
-             If no units are specified, this primary evaluates to true if the difference between the file last access time and the time find was started, rounded up to the next full 24-hour period, is n 24-hour periods.
-
-             If units are specified, this primary evaluates to true if the difference between the file last access time and the time find was started is exactly n units.  Possible time units are as follows:
-
-             s       second
-             m       minute (60 seconds)
-             h       hour (60 minutes)
-             d       day (24 hours)
-             w       week (7 days)
-
-             Any number of units may be combined in one -atime argument, for example, ``-atime -1h30m&#39;&#39;.  Units are probably only useful when used in conjunction with the + or - modfier.
-
-     -cmin n
-             True if the difference between the time of last change of file status information and the time find was started, rounded up to the next full minute, is n minutes.
-
-     -cnewer file
-             Same as -newercm.
-
-     -ctime n[smhdw]
-             If no units are specified, this primary evaluates to true if the difference between the ime of last change of file status information and the time find was started, rounded up to the next full 24-hour period, is n 24-hour periods.
-
-             If units are specified, this primary evaluates to true if the difference between the time of last change of file status information and the time find was started is exactly n units.  Please refer to the -atime primary description for information on supported time units.
-
-     -d      Same as depth.  GNU find implements this as a primary in mistaken emulation of FreeBSD
-             find(1).
-
-     -delete
-             Delete found files and/or directories.  Always returns true.  This executes from the current working directory as find recurses down the tree.  It will not attempt to delete a filename with a ``/&#39;&#39; character in its pathname relative to ``.&#39;&#39; for security reasons.  Depth-first traversal processing is implied by this option.  Following syminks is incompatible with this option.
-
-     -depth  Always true; same as the -d option.
-
-     -depth n
-             True if the depth of the file relative to the starting point of the traversal is n.
-
-     -empty  True if the current file or directory is empty.
-
-     -exec utility [argument ...] ;
-             True if the program named utility returns a zero value as its exit status.  Optional arguments may be passed to the utility.  The expression must be terminated by a semicolon (``;&#39;&#39;).  If you invoke find from a shell you may need to quote the semicolon if
-             the shell would otherwise treat it as a control operator.  If the string ``{}&#39;&#39; appears anywhere in the utility name or the arguments it is replaced by the pathname of the current file.  Utility will be executed from the directory from which find was executed.  Utility and arguments are not subject to the further expansion of shell patterns and constructs.
-
-     -exec utility [argument ...] {} +
-             Same as -exec, except that ``{}&#39;&#39; is replaced with as many pathnames as possible for each invocation of utility.  This behaviour is similar to that of xargs(1).
-
-     -execdir utility [argument ...] ;
-             The -execdir primary is identical to the -exec primary with the exception that utility will be executed from the directory that holds the current file.  The filename substituted for the string ``{}&#39;&#39; is not qualified.
-
-     -execdir utility [argument ...] {} +
-             Same as -execdir, except that ``{}&#39;&#39; is replaced with as many pathnames as possible for each invocation of utility.  This behaviour is similar to that of xargs(1).
-
-     -flags [-|+]flags,notflags
-             The flags are specified using symbolic names (see chflags(1)).  Those with the &quot;no&quot; refix (except &quot;nodump&quot;) are said to be notflags.  Flags in flags are checked to be set, and flags in notflags are checked to be not set.  Note that this is different from
-             -perm, which only allows the user to specify mode bits that are set.
-
-             If flags are preceded by a dash (``-&#39;&#39;), this primary evaluates to true if at least all of the bits in flags and none of the bits in notflags are set in the file&#39;s flags bits.
-             If flags are preceded by a plus (``+&#39;&#39;), this primary evaluates to true if any of the bits in flags is set in the file&#39;s flags bits, or any of the bits in notflags is not set in the file&#39;s flags bits.  Otherwise, this primary evaluates to true if the bits in flags exactly match the file&#39;s flags bits, and none of the flags bits match those of
-             notflags.
-
-     -fstype type
-             True if the file is contained in a file system of type type.  The lsvfs(1) command can
-             be used to find out the types of file systems that are available on the system.  In
-             addition, there are two pseudo-types, ``local&#39;&#39; and ``rdonly&#39;&#39;.  The former matches any
-             file system physically mounted on the system where the find is being executed and the
-             latter matches any file system which is mounted read-only.
-
-     -gid gname
-             The same thing as -group gname for compatibility with GNU find.  GNU find imposes a
-             restriction that gname is numeric, while find(1) does not.
-
-     -group gname
-             True if the file belongs to the group gname.  If gname is numeric and there is no such
-             group name, then gname is treated as a group ID.
-
-     -ignore_readdir_race
-             This option is for GNU find compatibility and is ignored.
-
-     -ilname pattern
-             Like -lname, but the match is case insensitive.  This is a GNU find extension.
-
-     -iname pattern
-             Like -name, but the match is case insensitive.
-
-     -inum n
-             True if the file has inode number n.
-
-     -ipath pattern
-             Like -path, but the match is case insensitive.
-
-     -iregex pattern
-             Like -regex, but the match is case insensitive.
-
-     -iwholename pattern
-             The same thing as -ipath, for GNU find compatibility.
-
-     -links n
-             True if the file has n links.
-
-     -lname pattern
-             Like -name, but the contents of the symbolic link are matched instead of the file name.
-             Note that this only matches broken symbolic links if symbolic links are being followed.
-             This is a GNU find extension.
-
-     -ls     This primary always evaluates to true.  The following information for the current file
-             is written to standard output: its inode number, size in 512-byte blocks, file permis-
-             sions, number of hard links, owner, group, size in bytes, last modification time, and
-             pathname.  If the file is a block or character special file, the device number will be
-             displayed instead of the size in bytes.  If the file is a symbolic link, the pathname
-             of the linked-to file will be displayed preceded by ``-&gt;&#39;&#39;.  The format is identical to
-             that produced by ``ls -dgils&#39;&#39;.
-
-     -maxdepth n
-             Always true; descend at most n directory levels below the command line arguments.  If
-             any -maxdepth primary is specified, it applies to the entire expression even if it
-             would not normally be evaluated.  ``-maxdepth 0&#39;&#39; limits the whole search to the com-
-             mand line arguments.
-
-     -mindepth n
-             Always true; do not apply any tests or actions at levels less than n.  If any -mindepth
-             primary is specified, it applies to the entire expression even if it would not normally
-             be evaluated.  ``-mindepth 1&#39;&#39; processes all but the command line arguments.
-
-     -mmin n
-             True if the difference between the file last modification time and the time find was
-             started, rounded up to the next full minute, is n minutes.
-
-     -mnewer file
-             Same as -newer.
-
-     -mount  The same thing as -xdev, for GNU find compatibility.
-
-     -mtime n[smhdw]
-             If no units are specified, this primary evaluates to true if the difference between the
-             file last modification time and the time find was started, rounded up to the next full
-             24-hour period, is n 24-hour periods.
-
-             If units are specified, this primary evaluates to true if the difference between the
-             file last modification time and the time find was started is exactly n units.  Please
-             refer to the -atime primary description for information on supported time units.
-
-     -name pattern
-             True if the last component of the pathname being examined matches pattern.  Special
-             shell pattern matching characters (``[&#39;&#39;, ``]&#39;&#39;, ``*&#39;&#39;, and ``?&#39;&#39;) may be used as part
-             of pattern.  These characters may be matched explicitly by escaping them with a back-
-             slash (``\&#39;&#39;).
-
-     -newer file
-             True if the current file has a more recent last modification time than file.
-
-     -newerXY file
-             True if the current file has a more recent last access time (X=a), inode creation time
-             (X=B), change time (X=c), or modification time (X=m) than the last access time (Y=a),
-             inode creation time (Y=B), change time (Y=c), or modification time (Y=m) of file.  In
-             addition, if Y=t, then file is instead interpreted as a direct date specification of
-             the form understood by cvs(1).  Note that -newermm is equivalent to -newer.
-
-     -nogroup
-             True if the file belongs to an unknown group.
-
-     -noignore_readdir_race
-             This option is for GNU find compatibility and is ignored.
-
-     -noleaf
-             This option is for GNU find compatibility.  In GNU find it disables an optimization not
-             relevant to find(1), so it is ignored.
-
-     -nouser
-             True if the file belongs to an unknown user.
-
-     -ok utility [argument ...] ;
-             The -ok primary is identical to the -exec primary with the exception that find requests
-             user affirmation for the execution of the utility by printing a message to the terminal
-             and reading a response.  If the response is not affirmative (`y&#39; in the ``POSIX&#39;&#39;
-             locale), the command is not executed and the value of the -ok expression is false.
-
-     -okdir utility [argument ...] ;
-             The -okdir primary is identical to the -execdir primary with the same exception as
-             described for the -ok primary.
-
-     -path pattern
-             True if the pathname being examined matches pattern.  Special shell pattern matching
-             characters (``[&#39;&#39;, ``]&#39;&#39;, ``*&#39;&#39;, and ``?&#39;&#39;) may be used as part of pattern.  These
-             characters may be matched explicitly by escaping them with a backslash (``\&#39;&#39;).
-             Slashes (``/&#39;&#39;) are treated as normal characters and do not have to be matched explic-
-             itly.
-
-     -perm [-|+]mode
-             The mode may be either symbolic (see chmod(1)) or an octal number.  If the mode is sym-
-             bolic, a starting value of zero is assumed and the mode sets or clears permissions
-             without regard to the process&#39; file mode creation mask.  If the mode is octal, only
-             bits 07777 (S_ISUID | S_ISGID | S_ISTXT | S_IRWXU | S_IRWXG | S_IRWXO) of the file&#39;s
-             mode bits participate in the comparison.  If the mode is preceded by a dash (``-&#39;&#39;),
-             this primary evaluates to true if at least all of the bits in the mode are set in the
-             file&#39;s mode bits.  If the mode is preceded by a plus (``+&#39;&#39;), this primary evaluates to
-             true if any of the bits in the mode are set in the file&#39;s mode bits.  Otherwise, this
-             primary evaluates to true if the bits in the mode exactly match the file&#39;s mode bits.
-             Note, the first character of a symbolic mode may not be a dash (``-&#39;&#39;).
-
-     -print  This primary always evaluates to true.  It prints the pathname of the current file to
-             standard output.  If none of -exec, -ls, -print, -print0, or -ok is specified, the
-             given expression shall be effectively replaced by ( given expression ) -print.
-
-     -print0
-             This primary always evaluates to true.  It prints the pathname of the current file to
-             standard output, followed by an ASCII NUL character (character code 0).
-
-     -prune  This primary always evaluates to true.  It causes find to not descend into the current
-             file.  Note, the -prune primary has no effect if the -d option was specified.
-
-     -regex pattern
-             True if the whole path of the file matches pattern using regular expression.  To match
-             a file named ``./foo/xyzzy&#39;&#39;, you can use the regular expression ``.*/[xyz]*&#39;&#39; or
-             ``.*/foo/.*&#39;&#39;, but not ``xyzzy&#39;&#39; or ``/foo/&#39;&#39;.
-
-     -samefile name
-             True if the file is a hard link to name.  If the command option -L is specified, it is
-             also true if the file is a symbolic link and points to name.
-
-     -size n[ckMGTP]
-             True if the file&#39;s size, rounded up, in 512-byte blocks is n.  If n is followed by a c,
-             then the primary is true if the file&#39;s size is n bytes (characters).  Similarly if n is
-             followed by a scale indicator then the file&#39;s size is compared to n scaled as:
-
-             k       kilobytes (1024 bytes)
-             M       megabytes (1024 kilobytes)
-             G       gigabytes (1024 megabytes)
-             T       terabytes (1024 gigabytes)
-             P       petabytes (1024 terabytes)
-
-     -type t
-             True if the file is of the specified type.  Possible file types are as follows:
-
-             b       block special
-             c       character special
-             d       directory
-             f       regular file
-             l       symbolic link
-             p       FIFO
-             s       socket
-
-     -uid uname
-             The same thing as -user uname for compatibility with GNU find.  GNU find imposes a
-             restriction that uname is numeric, while find(1) does not.
-
-     -user uname
-             True if the file belongs to the user uname.  If uname is numeric and there is no such
-             user name, then uname is treated as a user ID.
-
-     -wholename pattern
-             The same thing as -path, for GNU find compatibility.
-
-     -xattr  True if the file has any extended attributes.
-
-     -xattrname name
-             True if the file has an extended attribute with the specified name.
-
-OPERATORS
-     The primaries may be combined using the following operators.  The operators are listed in order
-     of decreasing precedence.
-
-     ( expression )
-             This evaluates to true if the parenthesized expression evaluates to true.
-
-     ! expression
-     -not expression
-             This is the unary NOT operator.  It evaluates to true if the expression is false.
-
-     -false  Always false.
-     -true   Always true.
-
-     expression -and expression
-     expression expression
-             The -and operator is the logical AND operator.  As it is implied by the juxtaposition
-             of two expressions it does not have to be specified.  The expression evaluates to true
-             if both expressions are true.  The second expression is not evaluated if the first
-             expression is false.
-
-     expression -or expression
-             The -or operator is the logical OR operator.  The expression evaluates to true if
-             either the first or the second expression is true.  The second expression is not evalu-
-             ated if the first expression is true.
-
-     All operands and primaries must be separate arguments to find.  Primaries which themselves take
-     arguments expect each argument to be a separate argument to find.
-
-ENVIRONMENT
-     The LANG, LC_ALL, LC_COLLATE, LC_CTYPE, LC_MESSAGES and LC_TIME environment variables affect
-     the execution of the find utility as described in environ(7).
-
-EXAMPLES
-     The following examples are shown as given to the shell:
-
-     find / \! -name &quot;*.c&quot; -print
-             Print out a list of all the files whose names do not end in .c.
-
-     find / -newer ttt -user wnj -print
-             Print out a list of all the files owned by user ``wnj&#39;&#39; that are newer than the file
-             ttt.
-     find / \! \( -newer ttt -user wnj \) -print
-             Print out a list of all the files which are not both newer than ttt and owned by
-             ``wnj&#39;&#39;.
-
-     find / \( -newer ttt -or -user wnj \) -print
-             Print out a list of all the files that are either owned by ``wnj&#39;&#39; or that are newer
-             than ttt.
-
-     find / -newerct &#39;1 minute ago&#39; -print
-             Print out a list of all the files whose inode change time is more recent than the cur-
-             rent time minus one minute.
-
-     find / -type f -exec echo {} \;
-             Use the echo(1) command to print out a list of all the files.
-
-     find -L /usr/ports/packages -type l -exec rm -- {} +
-             Delete all broken symbolic links in /usr/ports/packages.
-
-     find /usr/src -name CVS -prune -o -depth +6 -print
-             Find files and directories that are at least seven levels deep in the working directory
-             /usr/src.
-
-     find /usr/src -name CVS -prune -o -mindepth 7 -print
-             Is not equivalent to the previous example, since -prune is not evaluated below level
-             seven.
-
-COMPATIBILITY
-     The -follow primary is deprecated; the -L option should be used instead.  See the STANDARDS
-     section below for details.
-
-SEE ALSO
-     chflags(1), chmod(1), cvs(1), locate(1), lsvfs(1), whereis(1), which(1), xargs(1), stat(2),
-     acl(3), fts(3), getgrent(3), getpwent(3), strmode(3), re_format(7), symlink(7)
-
-STANDARDS
-     The find utility syntax is a superset of the syntax specified by the IEEE Std 1003.1-2001
-     (``POSIX.1&#39;&#39;) standard.
-
-     All the single character options except -H and -L as well as -amin, -anewer, -cmin, -cnewer, -delete, -empty, -fstype, -iname, -inum, -iregex, -ls, -maxdepth, -mindepth, -mmin, -path,
-     -print0, -regex and all of the -B* birthtime related primaries are extensions to IEEE Std
-     1003.1-2001 (``POSIX.1&#39;&#39;).
-
-     Historically, the -d, -L and -x options were implemented using the primaries -depth, -follow,
-     and -xdev.  These primaries always evaluated to true.  As they were really global variables
-     that took effect before the traversal began, some legal expressions could have unexpected
-     results.  An example is the expression -print -o -depth.  As -print always evaluates to true,
-     the standard order of evaluation implies that -depth would never be evaluated.  This is not the
-     case.
-
-     The operator -or was implemented as -o, and the operator -and was implemented as -a.
-
-     Historic implementations of the -exec and -ok primaries did not replace the string ``{}&#39;&#39; in
-     the utility name or the utility arguments if it had preceding or following non-whitespace char-
-     acters.  This version replaces it no matter where in the utility name or arguments it appears.
-
-     The -E option was inspired by the equivalent grep(1) and sed(1) options.
-
-HISTORY
-     A find command appeared in Version 1 AT&amp;T UNIX.
-
-BUGS
-     The special characters used by find are also special characters to many shell programs.  In
-     particular, the characters ``*&#39;&#39;, ``[&#39;&#39;, ``]&#39;&#39;, ``?&#39;&#39;, ``(&#39;&#39;, ``)&#39;&#39;, ``!&#39;&#39;, ``\&#39;&#39; and ``;&#39;&#39; may
-     have to be escaped from the shell.
-
-     As there is no delimiter separating options and file names or file names and the expression, it
-     is difficult to specify files named -xdev or !.  These problems are handled by the -f option
-     and the getopt(3) ``--&#39;&#39; construct.
-
-     The -delete primary does not interact well with other options that cause the file system tree
-     traversal options to be changed.
-
-     The -mindepth and -maxdepth primaries are actually global options (as documented above).  They
-     should probably be replaced by options which look like options.
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2020/03/18</span>
+                    <span class="date">2021/04/07</span>
                     
           				   
                     
@@ -3522,31 +4084,31 @@ BUGS
 	      
 		      
 			      <li class="post">
+			        <a href="16177589969532.html">**用好VSCode这13款插件和8个快捷键**</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025628475.html">Anaconda + VSCode 最详细教程</a>
+			        <a href="16177587144586.html">[Chrome浏览器F12开发者工具简单使用]</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15838967255194.html">Docker 必备可视化工具 Portainer</a>
+			        <a href="15998025629001.html">[Pycharm 常用快捷键]</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15998025631446.html">Git 常用技巧 （高级用法）</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15998025629044.html">Git版本管理完全指南（包含常见头疼错误解决方案）</a>
+			        <a href="16177587144704.html">[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</a>
 			      </li>
 		     
 		  
