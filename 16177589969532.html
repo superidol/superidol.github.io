@@ -1,0 +1,646 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  **用好VSCode这13款插件和8个快捷键** - 
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; </span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>**用好VSCode这13款插件和8个快捷键**</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2021/04/07</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>VsCode 远程开发环境相对其他 IDE 的远程开发环境，实现了真正的远程开发，在本地主机（一般是Windows或MAC）上的操作的对象直接就是远程机（Linux），所有本地主机上的修改直接基于远端文件，摆脱了传统开发流程在本地编辑文件，利用FTP工具上传到远程编译机调试编译，这一套繁琐的操作，因此非常的方便。</p>
+
+<p><strong>接着上篇VsCode教程，这篇文章我会结合日常工作使用经验，教你打造一个体验流畅的 C/C++ 开发环境</strong>，这份配置指南可能不是面面俱到，也不会详细的教你一步步怎么配置插件，这些太细节的工作留给你自己去完成，实际上插件下载页都会有详细的说明。</p>
+
+<p>不少新手可能会觉得 VsCode 编辑文本还好，看代码和写代码太难用，那是没有掌握正确的打开方式，<strong>VsCode 精髓是丰富的插件体系支持，相信看完这篇文章配置好环境之后，就只剩一句「真香」能形容</strong>。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200322" alt="img"/></p>
+
+<p>为了有个直观的印象，先来看下我的 VsCode 插件列表，因为我用VsCode 开发 C/C++/Go/Python 程序，插件比较多，有些可能和本文无关的插件可以忽略掉。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200340" alt="img"/></p>
+
+<h2 id="toc_0"><strong>基础开发插件</strong></h2>
+
+<p>既然是配置支持C/C++环境下开发，<strong>那首先推荐的基础 C/C++ 开发插件</strong>，以下两个是必须要装的插件，主要提供一些基础的代码调试和查看功能，安装以后 VsCode 就能支持智能化代码补全、类型填充和联想、符号和函数定义跳转、引用查找等 C/C++ 程序开发和源码管理必备能力，让你的 VsCode 从编辑器进化成 IDE 的基础插件。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200049" alt="img"/><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200100" alt="img"/></p>
+
+<h2 id="toc_1"><strong>源码阅读</strong></h2>
+
+<p>程序员日常工作有两大内容，一个是写自己的代码，一个是阅读别人写的代码，下面这两个插件让你在 VsCode 优雅看代码。</p>
+
+<p><strong>首先推荐的是下面的这个懒人神器 TODO Tree，自己写的 TODO 哭着也要补充实现。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200118" alt="img"/>TODO Tree</p>
+
+<p>这个插件的使用场景是，你看完代码加了下面这个注释 ：<code>// TODO 以后会扩展这部分功能</code> 当然，不知道这个「以后」是什么时候，一不小心以后变成遥遥无期，一部分原因是不想改，另一部分原因是写下这段注释的人时间久了就忘记了，这时候你需要「 TODO Tree 插件」，我们可以更方便的管理代码中的此类注释。</p>
+
+<p>这个插件能帮你组织和管理TODO 注释，你在代码中注释的带 TODO 的标签会统一在侧边栏显示出来，当然不限于 TODO 注释，可以自定义管理标签比如 <code>FIXME</code> 等，可以基于标签过滤和筛选。</p>
+
+<p><strong>另一个推荐的源码阅读插件是 Bookmarks</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200127" alt="img"/>「书签」这个插件的功能就和它名字一样直接，没错它就是一个你的源码书签，当我们看大工程源码的时候，往往需要在成千上万个源文件之间跳转，<strong>此外， Bookmarks 能帮你方便的创建和管理书签</strong>，看到哪个位置想加个书签就按快捷键 <code>Ctrl + Alt + K</code> ，多按一次就是删除，不仅如此他还提供了在书签之前跳跃和查看管理的功能，更多功能可以自己体验，反正我看大工程源码用这个很爽。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200134" alt="img"/></p>
+
+<h2 id="toc_2"><strong>代码管理</strong></h2>
+
+<p><strong>下面介绍两个 Git 版本控制相关的插件</strong>，项目中我们用的最多的版本控制工具是 Git ，当然 VsCode 自身提供了比较丰富的 Git 版本控制功能，基本上可以通过在界面点点点完成一些了Git 操作，但我今天要介绍的这两个插件能让你的 Git 更惊艳，算是对功能的增强，让你的 Git 操作更直观好用，好看的东西谁不喜欢呢？</p>
+
+<p><strong>第一个出场的是Git Graph 插件，可视化Git仓库，让你的提交记录看起来美观大方，并且基于图中提交点提供了丰富的Git 操作。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200140" alt="img"/>GitGraph</p>
+
+<p>如图中你所见到的样子，提交记录变成一条条时间线，分支也能清晰的用不同颜色时间线区分出来，并且点开提交线上的提交点可以查看当时的提交动作，可以在提交动作上查看做了哪些改动，也可以方便的跳转到改动文件，更多功能自行体验，这个插件 lemon 强烈推荐！</p>
+
+<p><strong>下面介绍的这个GitLens 插件也是Git功能增强工具。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200147" alt="img"/>GitLens</p>
+
+<p>我最喜欢它的一个功能是，它可以在文件中改动的位置后面直接显示出本次改动的提交信息，然后你可以直接通过显示的提交信息跳转到提交文件对比，其实还有其他丰富的功能，不过这个功能我用的最多。</p>
+
+<h2 id="toc_3"><strong>小而美的工具</strong></h2>
+
+<p>下面这几个插件是我在日常使用中积累的工具插件，非必须，但是拥有了之后编码幸福感倍增，下面一一介绍给大家。</p>
+
+<p><strong>第一个是下面这个Bracket Pair Colorizer插件，我管它叫彩虹括号插件。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200151" alt="img"/>彩虹括号</p>
+
+<p>你是否为经常为写的大括号、花括号、小括号没有匹配而烦恼？是否经常找匹配括号看瞎了眼？现在不要 888 也不要 998，只需一键下载安装这个插件就再也不用担心啦。这个插件让你写的每一个括号都能找到他自己的颜色，成双成对，点一下其中一半括号自动匹配另一半，拯救了广大程序员的近视眼睛度数。</p>
+
+<p><strong>再来介绍下面这个koroFileHeader插件，这个插件主要用于自动的插入头文件开头的说明和函数的说明。</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200156" alt="img"/>koroFileHHeader</p>
+
+<p>比如我们经常看到别人的头文件开头是这样的模板：</p>
+
+<pre class="line-numbers"><code class="language-text">/******************************************************************************
+*  FILENAME:    niu_bi_head_file.h
+*  DESCRIPTION: 非常厉害的头文件
+*  HISTORY:     Date        Author      Comment
+*               2020/09/05  lemon
+*******************************************************************************/
+</code></pre>
+
+<p>这个可不是别人一个个字打出来的，安装插件之后你只需要简单配置想要的格式，然后按下快捷键<code>Ctrl + Alt +i</code> 即可自动即可自动生成这样一个模板。</p>
+
+<p>类似的对函数的说明注释模板，只需按下快捷键<code>Ctrl + Alt +t</code> 即可完成，非常的方便。</p>
+
+<p><strong>下面这个插件Switcher，这个插件能在头文件和 C/C++ 文件之间跳转。</strong><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200202" alt="img"/></p>
+
+<p>这个插件完全是因为我太懒想省力，才找的一个辅助工具，我们经常需要通过头文件跳到对应的源文件，或者从源文件跳转到对应的头文件，当然可以在侧边栏的文件管理器中选择打开，但是多了一个步骤有点繁琐，所以我找了这个插件，其实按插件的说明文档，它是能在不同的文件类型之间跳转，不仅仅局限于头文件和源文件，懒人福音，你值得拥有。</p>
+
+<h2 id="toc_4"><strong>实用工具</strong></h2>
+
+<p>下面这几个插件是比较实用的工具插件，各取所需。</p>
+
+<p><strong>第一个是官方提供的 VsCode 中文汉化包</strong>。虽然lemon提倡并鼓励大家多多实用英语，但若你不想折腾，那咱们家汉语博大精深，好优美的中国话，那就让VsCode也来说汉语吧，Microsoft 官方直供，兼容性好，放心食用。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200207" alt="img"/>中文语言包</p>
+
+<p><strong>下面这个是 Markdown 预览增强插件</strong>。对于经常写博客或文章的人来说，Markdown 肯定是少不了的，这个插件支持分屏预览，各种丰富的Markdwon 增强功能。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200215" alt="img"/>markdown增强</p>
+
+<p>最后这个 shellman 插件是 Linux shell 脚本辅助工具。在 Linux 下工作难免随手写一个脚本，这个插件能提供了便捷的shell script 自动补全和联想等功能，提高你的脚本编写速度和准确性。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200225" alt="img"/></p>
+
+<p>shellman</p>
+
+<p><strong>以上就是我开发环境中配置的常用插件，快来抄作业，跟着配置起来你就拥有了一个流畅的C/C++开发环境</strong>。搭配下面讲的插件部分内容服用，效果更佳。</p>
+
+<h2 id="toc_5"><strong>最常用快捷键</strong></h2>
+
+<p><strong>快捷键太多，没必要完全记下来，只需记住一些常用的快捷键即可，一些不常用的快捷键在使用的时候加强记忆就好</strong>。列举出我自己常用的快捷键，不多，但够用！应付日常开发工作绰绰有余。</p>
+
+<p><code>Ctrl + Shift + P</code> 这个必须要放在第一位，这个命令是所有「命令之母」。这么说一点也不过分，它会打开 VsCode 命令窗口，在这个窗口下输入上述的插件名称就能知道这个插件支持哪些特性了，顺带还会说明特性快捷键。</p>
+
+<p>下面举个例子，先输入<code>Ctrl + Shift + P</code> 打开命令查找输入框，然后输入 <code>bookmarks</code> 就能知道这个插件的支持的所有特性，顺便记下快捷键。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200231" alt="img"/></p>
+
+<p><code>Ctrl + P</code> 文件查找。快速打开文件列表，输入关键字匹配文件，优先显示最新打开过的文件，方便的在指定文件之间跳转。</p>
+
+<p><code>F12</code> 跳转到定义，这个没啥好说的，跳转到函数或符号的定义，这是高频操作。</p>
+
+<p><code>Alt + F12</code> 以预览方式在当前页面显示定义，都是查看定义，相对 <code>F12</code> 的优点是不会跳出当前文件到定义文件，而是在当前文件打开一个小窗口预览，如下图：<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200236" alt="img"/></p>
+
+<p><code>Shift + F12</code> 查看光标所在函数或变量的引用，就像 <code>Alt +F12</code> 一样以预览方式在当前文件打开引用的文件列表。如下图：<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200243" alt="img"/></p>
+
+<p><code>Alt + 左/右箭头</code> 前进或者后退到光标所在源码的上一个位置。</p>
+
+<p><code>Ctrl + Shift + O</code> 查看当前文件的符号，可以用关键字过滤符号，当然你也可以在左侧的大纲视图中查找符号，不过大纲视图不能查找匹配符号，所以我更习惯用快捷键方式查找符号。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200248" alt="img"/>符号和函数查找</p>
+
+<p>快捷键讲完了吗？没有，太多快捷键了；其他的快捷键不重要吗？因人而异吧，高频使用的快捷键就是重要的，而上面我说的这几个是超高频使用，记住这几个差不多就行了，剩下快捷键你如果用的多了自然就记住了，<strong>但是我上面说的这几个快捷键请务必先记在脑子里，这会大大降低你的使用成本，尽早享受 VsCode Coding 的乐趣</strong>！</p>
+
+<h2 id="toc_6"><strong>最后说几句</strong></h2>
+
+<p>想起我上大学的时候，大一学习C语言课必须安装VC++ 6.0才行，那时候也有 Visual studio 这样的 IDE，不过老师没推荐其他 IDE，都是凭借自己对编程的兴趣发现了更多比VC++ 6.0 更加 &#39;现代化&#39; 的 IDE，比如Jetbrain 系列和Visual studio系列，爱不释手各种尝试。<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20200911200254" alt="img"/></p>
+
+<p>现在主流的 IDE 已经非常丰富，其实编辑器或者 IDE 只是一个工具，没有最好自己用的顺手就行，就像 Vim 党和 Emacs 党谁也说服不了谁一样，自己喜欢就好。</p>
+
+<p><strong>大家更应该关注编程这件事本身，提高自身硬实力才是最紧要的，不过好的工具能让你事半功倍</strong>，这点我也是完全赞成的，希望这篇文章也能够让你事半功倍。</p>
+
+<p><strong>如果文章对你有帮助，请不吝点击「在看、分享」激励我持续创作。</strong></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15998025628955.html" 
+          title="Next Post: 1000行MySQL学习笔记">1000行MySQL学习笔记 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1></h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="16177589969532.html">**用好VSCode这13款插件和8个快捷键**</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144586.html">[Chrome浏览器F12开发者工具简单使用]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025629001.html">[Pycharm 常用快捷键]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144704.html">[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>

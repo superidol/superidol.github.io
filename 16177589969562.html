@@ -1,0 +1,1674 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Python3 如何优雅地使用正则表达式（完整版） - 
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; </span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Python3 如何优雅地使用正则表达式（完整版）</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2021/04/07</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>正则表达式介绍</p>
+
+<p>正则表达式（Regular expressions 也称为 REs，或 regexes 或 regex patterns）本质上是一个微小的且高度专业化的编程语言。它被嵌入到 Python 中，并通过 re 模块提供给程序猿使用。使用正则表达式，你需要指定一些规则来描述那些你希望匹配的字符串集合。这些字符串集合可能包含英语句子、 e-mail 地址、TeX 命令，或任何你想要的东东。</p>
+
+<p>正则表达式模式被编译成一系列的字节码，然后由一个 C 语言写的匹配引擎所执行。对于高级的使用，你可能需要更关注匹配引擎是如何执行给定的 RE，并通过一定的方式来编写 RE，以便产生一个可以运行得更快的字节码。本文暂不讲解优化的细节，因为这需要你对匹配引擎的内部机制有一个很好的理解。但本文的例子均是符合标准的正则表达式语法。</p>
+
+<p><em>小甲鱼注释：Python 的正则表达式引擎是用 C 语言写的，所以效率是极高的。另，所谓的正则表达式，这里说的 RE，就是上文我们提到的“一些规则”。</em></p>
+
+<p>正则表达式语言相对较小，并且受到限制，所以不是所有可能的字符串处理任务都可以使用正则表达式来完成。还有一些特殊的任务，可以使用正则表达式来完成，但是表达式会因此而变得非常复杂。在这种情况下，你可能通过自己编写 Python 代码来处理会更好些；尽管 Python 代码比一个精巧的正则表达式执行起来会慢一些，但可能会更容易理解。</p>
+
+<p><em>小甲鱼注释：这可能是大家常说的“丑话说在前”吧，大家别管他，正则表达式非常优秀，她可以处理你 98.3% 的文本任务，一定要好好学哦~~~~~</em></p>
+
+<p>简单的模式</p>
+
+<p>我们将从最简单的正则表达式学习开始。由于正则表达式常用于操作字符串的，因此我们从最常见的任务下手：字符匹配。</p>
+
+<p>字符匹配</p>
+
+<p>大多数字母和字符会匹配它们自身。举个例子，正则表达式 FishC 将完全匹配字符串 &quot;FishC&quot;。（你可以启用不区分大小写模式，这将使得 FishC 可以匹配 &quot;FISHC&quot; 或 &quot;fishc&quot;，我们会在后边讨论这个话题。）</p>
+
+<p>当然这个规则也有例外。有少数特殊的字符我们称之为元字符（metacharacter），它们并不能匹配自身，它们定义了字符类、子组匹配和模式重复次数等。本文用很大的篇幅专门讨论了各种元字符及其作用。</p>
+
+<p>下边是元字符的完整列表（我们将在后边逐一讲解）：</p>
+
+<p>.  ^  $  *  +  ?  { }  [ ]  \  |  ( )</p>
+
+<p><em>小甲鱼注释：如果没有这些元字符，正则表达式就变得跟字符串的 find() 方法一样平庸了......</em></p>
+
+<p>我们先来看下方括号 [ ]，它们指定一个字符类用于存放你需要匹配的字符集合。可以单独列出需要匹配的字符，也可以通过两个字符和一个横杆 - 指定匹配的范围。例如 [abc] 会匹配字符 a，b 或 c；[a-c] 可以实现相同的功能。后者使用范围来表示与前者相同的字符集合。如果你想只匹配小写字母，你的 RE 可以写成 [a-z]。</p>
+
+<p>需要注意的一点是：元字符在方括号中不会触发“特殊功能”，在字符类中，它们只匹配自身。例如 [akm\(] 会匹配任何字符 &#39;a&#39;，&#39;k&#39;，&#39;m&#39; 或 &#39;\)&#39;，&#39;\(&#39; 是一个元字符，但在方括号中它不表示特殊含义，它只匹配 &#39;\)&#39;字符本身。</p>
+
+<p>你还可以匹配方括号中未列出的所有其他字符。做法是在类的开头添加一个脱字符号 ^ ，例如 [<sup>5]</sup> 会匹配除了 &#39;5&#39; 之外的任何字符。</p>
+
+<p>或许最重要的元字符当属反斜杠 \ 了。跟 Python 的字符串规则一样，如果在反斜杠后边紧跟着一个元字符，那么元字符的“特殊功能”也不会被触发。例如你需要匹配符号 [ 或 \，你可以在它们前面加上一个反斜杠，以消除它们的特殊功能：[，\。</p>
+
+<p>反斜杠后边跟一些字符还可以表示特殊的意义，例如表示十进制数字，表示所有的字母或者表示非空白的字符集合。</p>
+
+<p><em>小甲鱼解释：反斜杠真牛逼，反斜杠后边跟元字符去除特殊功能，反斜杠后边跟普通字符实现特殊功能。</em></p>
+
+<p>让我们来举个例子：\w 匹配任何单词字符。如果正则表达式以字节的形式表示，这相当于字符类 [a-zA-Z0-9_]；如果正则表达式是一个字符串，\w 会匹配所有 Unicode 数据库（unicodedata 模块提供）中标记为字母的字符。你可以在编译正则表达式的时候，通过提供 re.ASCII 表示进一步限制 \w 的定义。</p>
+
+<p><em>小甲鱼解释：re.ASCII 标志使得 \w 只能匹配 ASCII 字符，不要忘了，Python3 是 Unicode 的。</em></p>
+
+<p>下边列举一些反斜杠加字符构成的特殊含义：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>特殊字符</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>\d</td>
+<td>匹配任何十进制数字；相当于类 [0-9]</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>与 \d 相反，匹配任何非十进制数字的字符；相当于类 [<sup>0-9]</sup></td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符（包含空格、换行符、制表符等）；相当于类 [ \t\n\r\f\v]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>与 \s 相反，匹配任何非空白字符；相当于类 [^ \t\n\r\f\v]</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配任何单词字符，见上方解释</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>于 \w 相反</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>与 \b 相反</td>
+</tr>
+</tbody>
+</table>
+
+<p>它们可以包含在一个字符类中，并且一样拥有特殊含义。例如 [\s,.] 是一个字符类，它将匹配任何空白字符（/s 的特殊含义），&#39;,&#39; 或 &#39;.&#39;。 </p>
+
+<p>最后我们要讲的一个元字符是 .，它匹配除了换行符以外的任何字符。如果设置了 re.DOTALL 标志，. 将匹配包括换行符在内的任何字符。</p>
+
+<p>重复的事情</p>
+
+<p>使用正则表达式能够轻松的匹配不同的字符集合，但 Python 字符串现有的方法却无法实现。然而，如果你认为这是正则表达式的唯一优势，那你就 too young too native 了。正则表达式有另一个强大的功能，就是你可以指定 RE 部分被重复的次数。</p>
+
+<p>我们来看看 * 这个元字符，当然它不是匹配 &#39;*&#39; 字符本身（我们说过元字符都是有特殊能力的），它用于指定前一个字符匹配零次或者多次。</p>
+
+<p>例如 ca*t 将匹配 ct（0 个字符 a），cat（1 个字符 a），caaat（3 个字符 a），等等。需要注意的是，由于受到 C 语言的 int 类型大小的内部限制，正则表达式引擎会限制字符 &#39;a&#39; 的重复个数不超过 20 亿个；不过，通常我们工作中也用不到那么大的数据。</p>
+
+<p>正则表达式默认的重复规则是贪婪的，当你重复匹配一个 RE 时，匹配引擎会尝试尽可能多的去匹配。直到 RE 不匹配或者到了结尾，匹配引擎就会回退一个字符，然后再继续尝试匹配。</p>
+
+<p>我们通过例子一步步的给大家讲解什么叫“贪婪”：先考虑一下表达式 a[bcd]*b，首先需要匹配字符 &#39;a&#39;，然后是零个到多个 [bcd]，最后以 &#39;b&#39; 结尾。那现在想象一下，这个 RE 匹配字符串 abcbd 会怎样？</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>步骤</strong></th>
+<th><strong>匹配</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>a</td>
+<td>匹配 RE 的第一个字符 &#39;a&#39;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>abcbd</td>
+<td>引擎在符合规则的情况下尽可能地匹配 [bcd]*，直到该字符串的结尾</td>
+</tr>
+<tr>
+<td>3</td>
+<td>失败</td>
+<td>引擎尝试匹配 RE 最后一个字符 &#39;b&#39;，但当前位置已经是字符串的结尾，所以失败告终</td>
+</tr>
+<tr>
+<td>4</td>
+<td>abcb</td>
+<td>回退，所以 [bcd]* 匹配少一个字符</td>
+</tr>
+<tr>
+<td>5</td>
+<td>失败</td>
+<td>再一次尝试匹配 RE 最后一个字符 &#39;b&#39;，但字符串最后一个字符是 &#39;d&#39;，所以失败告终</td>
+</tr>
+<tr>
+<td>6</td>
+<td>abc</td>
+<td>再次回退，所以 [bcd]* 这次只匹配 &#39;bc&#39;</td>
+</tr>
+<tr>
+<td>7</td>
+<td>abcb</td>
+<td>再一次尝试匹配字符 &#39;b&#39;，这一次字符串当前位置指向的字符正好是 &#39;b&#39;，匹配成功</td>
+</tr>
+</tbody>
+</table>
+
+<p>最终，RE 匹配的结果是 abcb。</p>
+
+<p><em>小甲鱼解释：正则表达式默认的匹配规则是贪婪的，后边有教你如何使用非贪婪的方法匹配。</em></p>
+
+<p>另一个实现重复的元字符是 +，用于指定前一个字符匹配一次或者多次。</p>
+
+<p>要特别注意 * 和 + 的区别：* 匹配的是零次或者多次，所以被重复的内容可能压根儿不会出现；+ 至少需要出现一次。例如 ca+t 会匹配 cat 和 caaat，但不会匹配 ct。</p>
+
+<p>还有两个表示重复的元字符，其中一个是问号 ?，用于指定前一个字符匹配零次或者一次。你可以这么想，它的作用就是把某种东西标志位可选的。例如 小?甲鱼 可以匹配 小甲鱼，也可以匹配 甲鱼。</p>
+
+<p>最灵活的应该是元字符 {m,n}（m 和 n 都是十进制整数），上边讲到的几个元字符都可以使用它来表达，它的含义是前一个字符必须匹配 m 次到 n 次之间。例如 a/{1,3}b 会匹配 a/b，a//b 和 a///b。但不会匹配 ab（没有斜杠）；也不会匹配 ab（斜杠超过三个）。</p>
+
+<p>你可以省略 m 或者 n，这样的话，引擎会假定一个合理的值代替。省略 m，将被解释为下限 0；省略 n 则会被解释为无穷大（事实上是上边我们提到的 20 亿）。</p>
+
+<p><em>小甲鱼解释：如果是 {,n} 相当于 {0,n}；如果是 {m,} 相当于 {m,+无穷}；如果是 {n}，则是重复前一个字符 n 次。另外还有一个超容易出错的是写成 {m, n}，看着挺美，但注意，正则表达式里边不能随意添加空格，不然会改变原来的含义。</em></p>
+
+<p>聪明的鱼油应该已经发现了，其实 *、+ 和 ? 都可以使用 {m,n} 来代替。{0,} 跟 * 是一样的；{1,} 跟 + 是一样的；{0,1} 跟 ? 是一样的。不过还是鼓励大家记住并使用 *、+ 和 ?，因为这些字符更短并且更容易阅读。</p>
+
+<p><em>小甲鱼解释：还有一个原因是匹配引擎对 * + ? 做了优化，效率要更高些。</em></p>
+
+<p>使用正则表达式</p>
+
+<p>现在我们开始来写一些简单的正则表达式吧。Python 通过 re 模块为正则表达式引擎提供一个接口，同时允许你将正则表达式编译成模式对象，并用它们来进行匹配。</p>
+
+<p><em>小甲鱼解释：re 模块是使用 C 语言编写，所以效率比你用普通的字符串方法要高得多；将正则表达式进行编译（compile）也是为了进一步提高效率；后边我们会经常提到“模式”，指的就是正则表达式被编译成的模式对象。</em></p>
+
+<p>编译正则表达式</p>
+
+<p>正则表达式被编译为模式对象，该对象拥有各种方法供你操作字符串，如查找模式匹配或者执行字符串替换。</p>
+
+<ol>
+<li>&gt;&gt;&gt; import re</li>
+<li>&gt;&gt;&gt; p = re.compile(&#39;ab*&#39;)</li>
+<li>&gt;&gt;&gt; p </li>
+<li>&lt;_sre.SRE_Pattern object at 0x...&gt;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>re.compile() 也可以接受 flags 参数，用于开启各种特殊功能和语法变化，我们会在后边一一介绍。</p>
+
+<p>现在我们先来看个简单的例子：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;ab*&#39;, re.IGNORECASE)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>正则表达式作为一个字符串参数传给 re.compile()。由于正则表达式并不是 Python 的核心部分，因此没有为它提供特殊的语法支持，所以正则表达式只能以字符串的形式表示。（有些应用根本就不需要使用到正则表达式，所以 Python 社区的小伙伴们认为没有必要将其纳入 Python 的核心。）相反，re 模块仅仅是作为 C 的扩展模块包含在 Python 中，就像 socket 模块和 zlib 模块。</p>
+
+<p>使用字符串来表示正则表达式保持了 Python 简洁的一贯风格，但也因此有一些负面影响，下边我们就来谈一谈。</p>
+
+<p>麻烦的反斜杠</p>
+
+<p>上一篇中我们已经提到了，正则表达式使用 &#39;\&#39; 字符来使得一些普通的字符拥有特殊的能力（例如 \d 表示匹配任何十进制数字），或者剥夺一些特殊字符的能力（例如 [ 表示匹配左方括号 &#39;[&#39;）。这会跟 Python 字符串中实现相同功能的字符发生冲突。</p>
+
+<p><em>小甲鱼解释：挺拗口，接着看例子你就懂了~</em></p>
+
+<p>现在的情况是，你需要在 LaTeX 文件中使用正则表达式匹配字符串 &#39;\section&#39;。因为反斜杠作为需要匹配的特殊字符，所以你需要再它前边加多一个反斜杠来剥夺它的特殊功能。所以我们会把正则表达式的字符写成 &#39;\section&#39;。</p>
+
+<p>但不要忘了，Python 在字符串中同样使用反斜杠来表示特殊意义。因此，如果我们想将 &#39;\section&#39; 完整地传给 re.compile()，我们需要再次添加两个反斜杠......</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>匹配字符</strong></th>
+<th><strong>匹配阶段</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>\section</td>
+<td>需要匹配的字符串</td>
+</tr>
+<tr>
+<td>\section</td>
+<td>正则表达式使用 &#39;\&#39; 表示匹配字符 &#39;\&#39;</td>
+</tr>
+<tr>
+<td>&quot;\\section&quot;</td>
+<td>不巧，Python 字符串也使用 &#39;\&#39; 表示字符 &#39;\&#39;</td>
+</tr>
+</tbody>
+</table>
+
+<p>简而言之，为了匹配反斜杠这个字符，我们需要在字符串中使用四个反斜杠才行。所以，在正则表达式中频繁地使用反斜杠，会造成反斜杠风暴，进而导致你的字符串极其难懂。</p>
+
+<p>解决方法是使用 Python 的原始字符串来表示正则表达式（就是在字符串前边加上 r，大家还记得吧...）：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>正则字符串</strong></th>
+<th><strong>原始字符串</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>&quot;ab*&quot;</td>
+<td>r&quot;ab*&quot;</td>
+</tr>
+<tr>
+<td>&quot;\\section&quot;</td>
+<td>r&quot;\section&quot;</td>
+</tr>
+<tr>
+<td>&quot;\w+\s+\1&quot;</td>
+<td>r&quot;\w+\s+\1&quot;</td>
+</tr>
+</tbody>
+</table>
+
+<p><em>小甲鱼解释：强烈建议使用原始字符串来表达正则表达式。</em></p>
+
+<p>实现匹配</p>
+
+<p>当你将正则表达式编译之后，你就得到一个模式对象。那你拿他可以用来做什么呢？模式对象拥有很多方法和属性，我们下边列举最重要的几个来讲：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>match()</td>
+<td>判断一个正则表达式是否从开始处匹配一个字符串</td>
+</tr>
+<tr>
+<td>search()</td>
+<td>遍历字符串，找到正则表达式匹配的第一个位置</td>
+</tr>
+<tr>
+<td>findall()</td>
+<td>遍历字符串，找到正则表达式匹配的所有位置，并以列表的形式返回</td>
+</tr>
+<tr>
+<td>finditer()</td>
+<td>遍历字符串，找到正则表达式匹配的所有位置，并以迭代器的形式返回</td>
+</tr>
+</tbody>
+</table>
+
+<p>如果没有找到任何匹配的话，match() 和 search() 会返回 None；如果匹配成功，则会返回一个匹配对象（<a href="https://docs.python.org/3.4/library/re.html#match-objects">match object</a>），包含所有匹配的信息：例如从哪儿开始，到哪儿结束，匹配的子字符串等等。</p>
+
+<p>接下来我们一步步讲解：</p>
+
+<ol>
+<li>&gt;&gt;&gt; import re</li>
+<li>&gt;&gt;&gt; p = re.compile(&#39;[a-z]+&#39;)</li>
+<li>&gt;&gt;&gt; p</li>
+<li>re.compile(&#39;[a-z]+&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>现在，你可以尝试使用正则表达式 [a-z]+ 去匹配各种字符串。</p>
+
+<p>例如：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p.match(&quot;&quot;)</li>
+<li>&gt;&gt;&gt; print(p.match(&quot;&quot;))</li>
+<li>None</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>因为 + 表示匹配一次或者多次，所以空字符串不能被匹配。因此，match() 返回 None。</p>
+
+<p>我们再尝试一个可以匹配的字符串：</p>
+
+<ol>
+<li>&gt;&gt;&gt; m = p.match(&#39;fishc&#39;)</li>
+<li>&gt;&gt;&gt; m </li>
+<li>&lt;_sre.SRE_Match object; span=(0, 5), match=&#39;fishc&#39;&gt;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>在这个例子中，match() 返回一个匹配对象，我们将其存放在变量 m 中，以便日后使用。</p>
+
+<p>接下来让我们来看看匹配对象里边有哪些信息吧。匹配对象包含了很多方法和属性，以下几个是最重要的：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>group()</td>
+<td>返回匹配的字符串</td>
+</tr>
+<tr>
+<td>start()</td>
+<td>返回匹配的开始位置</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回匹配的结束位置</td>
+</tr>
+<tr>
+<td>span()</td>
+<td>返回一个元组表示匹配位置（开始，结束）</td>
+</tr>
+</tbody>
+</table>
+
+<p>大家看：</p>
+
+<ol>
+<li>&gt;&gt;&gt; m.group()</li>
+<li>&#39;fishc&#39;</li>
+<li>&gt;&gt;&gt; m.start()</li>
+<li>0</li>
+<li>&gt;&gt;&gt; m.end()</li>
+<li>5</li>
+<li>&gt;&gt;&gt; m.span()</li>
+<li>(0, 5)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>由于 match() 只检查正则表达式是否在字符串的起始位置匹配，所以 start() 总是返回 0。</p>
+
+<p>然而，search() 方法可就不一样咯：</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(p.match(&#39;<sup>_<sup>fishc&#39;))</sup></sup></li>
+<li>None</li>
+<li>&gt;&gt;&gt; m = p.search(&#39;<sup>_<sup>fishc&#39;)</sup></sup></li>
+<li>&gt;&gt;&gt; print(m)</li>
+<li>&lt;_sre.SRE_Match object; span=(3, 8), match=&#39;fishc&#39;&gt;</li>
+<li>&gt;&gt;&gt; m.group()</li>
+<li>&#39;fishc&#39;</li>
+<li>&gt;&gt;&gt; m.span()</li>
+<li>(3, 8)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>在实际应用中，最常用的方式是将匹配对象存放在一个局部变量中，并检查其返回值是否为 None。</p>
+
+<p>形式通常如下：</p>
+
+<ol>
+<li>p = re.compile( ... )</li>
+<li>m = p.match( &#39;string goes here&#39; )</li>
+<li>if m:</li>
+<li>  print(&#39;Match found: &#39;, m.group())</li>
+<li>else:</li>
+<li>  print(&#39;No match&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>有两个方法可以返回所有的匹配结果，一个是 findall()，另一个是 finditer()。</p>
+
+<p>findall() 返回的是一个列表：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;\d+&#39;)</li>
+<li>&gt;&gt;&gt; p.findall(&#39;3只小甲鱼，15条腿，多出的3条在哪里？&#39;)</li>
+<li>[&#39;3&#39;, &#39;15&#39;, &#39;3&#39;]</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>findall() 需要在返回前先创建一个列表，而 finditer() 则是将匹配对象作为一个迭代器返回：</p>
+
+<ol>
+<li>&gt;&gt;&gt; iterator = p.finditer(&#39;3只小甲鱼，15条腿，还有3条去了哪里？&#39;)</li>
+<li>&gt;&gt;&gt; iterator</li>
+<li><callable_iterator object at 0x10511b588></li>
+<li>&gt;&gt;&gt; for match in iterator:</li>
+<li>​     print(match.span())</li>
+<li>​<br/></li>
+<li>(0, 1)</li>
+<li>(6, 8)</li>
+<li>(13, 14)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：如果列表很大，那么返回迭代器的效率要高很多。迭代器的相关知识请看：<a href="http://blog.fishc.com/3560.html">《零基础入门学习Python》048 | 魔法方法：迭代器</a></em></p>
+
+<p>模块级别的函数</p>
+
+<p>使用正则表达式也并非一定要创建模式对象，然后调用它的匹配方法。因为，re 模块同时还提供了一些全局函数，例如 match()，search()，findall()，sub() 等等。这些函数的第一个参数是正则表达式字符串，其他参数跟模式对象同名的方法采用一样的参数；返回值也一样，同样是返回 None 或者匹配对象。</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.match(r&#39;From\s+&#39;, &#39;From_FishC.com&#39;))</li>
+<li>None</li>
+<li>&gt;&gt;&gt; re.match(r&#39;From\s+&#39;, &#39;From FishC.com&#39;)</li>
+<li>&lt;_sre.SRE_Match object; span=(0, 5), match=&#39;From &#39;&gt;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>其实，这些函数只是帮你自动创建一个模式对象，并调用相关的函数（上一篇的内容，还记得吗？）。它们还将编译好的模式对象存放在缓存中，以便将来可以快速地直接调用。</p>
+
+<p>那我们到底是应该直接使用这些模块级别的函数呢，还是先编译一个模式对象，再调用模式对象的方法呢？这其实取决于正则表达式的使用频率，如果说我们这个程序只是偶尔使用到正则表达式，那么全局函数是比较方便的；如果我们的程序是大量的使用正则表达式（例如在一个循环中使用），那么建议你使用后一种方法，因为预编译的话可以节省一些函数调用。但如果是在循环外部，由于得益于内部缓存机制，两者效率相差无几。</p>
+
+<p>编译标志</p>
+
+<p>编译标志让你可以修改正则表达式的工作方式。在 re 模块下，编译标志均有两个名字：完整名和简写，例如 IGNORECASE 简写是 I（如果你是 Perl 的粉丝，那么你有福了，因为这些简写跟 Perl 是一样的，例如 re.VERBOSE 的简写是 re.X）。另外，多个标志还可以同时使用（通过“|”），如：re.I | re.M 就是同时设置 I 和 M 标志。</p>
+
+<p>下边列举一些支持的编译标志：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>标志</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>ASCII, A</td>
+<td>使得转义符号如 \w，\b，\s 和 \d 只能匹配 ASCII 字符</td>
+</tr>
+<tr>
+<td>DOTALL, S</td>
+<td>使得 . 匹配任何符号，包括换行符</td>
+</tr>
+<tr>
+<td>IGNORECASE, I</td>
+<td>匹配的时候不区分大小写</td>
+</tr>
+<tr>
+<td>LOCALE, L</td>
+<td>支持当前的语言（区域）设置</td>
+</tr>
+<tr>
+<td>MULTILINE, M</td>
+<td>多行匹配，影响 ^ 和 $</td>
+</tr>
+<tr>
+<td>VERBOSE, X (for &#39;extended&#39;)</td>
+<td>启用详细的正则表达式</td>
+</tr>
+</tbody>
+</table>
+
+<p>下面我们来详细讲解一下它们的含义：</p>
+
+<p>A<br/>
+ASCII<br/>
+使得 \w，\W，\b，\B，\s 和 \S 只匹配 ASCII 字符，而不匹配完整的 Unicode 字符。这个标志仅对 Unicode 模式有意义，并忽略字节模式。</p>
+
+<p>S<br/>
+DOTALL<br/>
+使得 . 可以匹配任何字符，包括换行符。如果不使用这个标志，. 将匹配除了换行符的所有字符。</p>
+
+<p>I<br/>
+IGNORECASE<br/>
+字符类和文本字符串在匹配的时候不区分大小写。举个例子，正则表达式 [A-Z] 也将会匹配对应的小写字母，像 FishC 可以匹配 FishC，fishc 或 FISHC 等。如果你不设置 LOCALE，则不会考虑语言（区域）设置这方面的大小写问题。</p>
+
+<p>L<br/>
+LOCALE<br/>
+使得 \w，\W，\b 和 \B 依赖当前的语言（区域）环境，而不是 Unicode 数据库。</p>
+
+<p>区域设置是 C 语言的一个功能，主要作用是消除不同语言之间的差异。例如你正在处理的是法文文本，你想使用 \w+ 来匹配单词，但是 \w 只是匹配 [A-Za-z] 中的单词，并不会匹配 &#39;é&#39; 或 &#39;&#231;&#39;。如果你的系统正确的设置了法语区域环境，那么 C 语言的函数就会告诉程序 &#39;é&#39; 或 &#39;&#231;&#39; 也应该被认为是一个字符。当编译正则表达式的时候设置了 LOCALE 的标志，\w+ 就可以识别法文了，但速度多少会受到影响。</p>
+
+<p>M<br/>
+MULTILINE<br/>
+（^ 和 $ 我们还没有提到，别着急，后边我们有细讲...）</p>
+
+<p>通常 ^ 只匹配字符串的开头，而 $ 则匹配字符串的结尾。当这个标志被设置的时候，^ 不仅匹配字符串的开头，还匹配每一行的行首；&amp; 不仅匹配字符串的结尾，还匹配每一行的行尾。</p>
+
+<p>X<br/>
+VERBOSE<br/>
+这个标志使你的正则表达式可以写得更好看和更有条理，因为使用了这个标志，空格会被忽略（除了出现在字符类中和使用反斜杠转义的空格）；这个标志同时允许你在正则表达式字符串中使用注释，# 符号后边的内容是注释，不会递交给匹配引擎（除了出现在字符类中和使用反斜杠转义的 #）。</p>
+
+<p>下边是使用 re.VERBOSE 的例子，大家看下正则表达式的可读性是不是提高了不少：</p>
+
+<ol>
+<li>charref = re.compile(r&quot;&quot;&quot;</li>
+<li>&amp;[#]          # 开始数字引用</li>
+<li>(</li>
+<li>   0[0-7]+      # 八进制格式</li>
+<li>  | [0-9]+      # 十进制格式</li>
+<li>  | x[0-9a-fA-F]+  # 十六进制格式</li>
+<li>)</li>
+<li>;            # 结尾分号</li>
+<li>&quot;&quot;&quot;, re.VERBOSE)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>如果没有设置 VERBOSE 标志，那么同样的正则表达式会写成：</p>
+
+<ol>
+<li>charref = re.compile(&quot;&amp;#(0[0-7]+|[0-9]+|x[0-9a-fA-F]+);&quot;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>哪个可读性更加？相信大家心里有底了。</p>
+
+<p>更多强大的功能</p>
+
+<p>到目前为止，我们只是介绍了正则表达式的一部分功能。在这一篇中，我们会学习到一些新的元字符，然后再教大家如何使用组来获得被匹配的部分文本。</p>
+
+<p>更多元字符</p>
+
+<p>还有一些元字符我们没有讲到，接下来小甲鱼一一为大家讲解。</p>
+
+<p>有些元字符它们不匹配任何字符，只是简单地表示成功或失败，因此这些字符也称之为<strong>零宽断言</strong>。例如 \b 表示当前位置位于一个单词的边界，但 \b 并不能改变位置。因此，零宽断言不应该被重复使用，因为 \b 并不会修改当前位置，所以 \b\b 跟 \b 是没什么两样的。</p>
+
+<p><em>小甲鱼解释：很多人可能不理解“改变位置”和“零宽断言”的意思？我尝试解释下，比如 abc 匹配完 a 之后，咱的当前位置就会移动，才能继续匹配 b，依次类推...但是 \babc 的话，\b 表示当前位置在单词的边界（单词的第一个字母或者最后一个字母），这时候当前位置不会发生改变，接着将 a 与当前位置的字符进行匹配......</em></p>
+
+<p>|</p>
+
+<p>或操作符，对两个正则表达式进行或操作。如果 A 和 B 是正则表达式，A | B 会匹配 A 或 B 中出现的任何字符。为了能够更加合理的工作，| 的优先级非常低。例如 Fish|C 应该匹配 Fish 或 C，而不是匹配 Fis，然后一个 &#39;h&#39; 或 &#39;C&#39;。</p>
+
+<p>同样，我们使用 | 来匹配 &#39;|&#39; 字符本身；或者包含在一个字符类中，像这样 [|]。</p>
+
+<p>^</p>
+
+<p>匹配字符串的起始位置。如果设置了 MULTILINE 标志，就会变成匹配每一行的起始位置。在 MULTILINE 中，每当遇到换行符就会立刻进行匹配。</p>
+
+<p>举个例子，如果你只希望匹配位于字符串开头的单词 From，那么你的正则表达式可以写为 <sup>From：</sup></p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.search(&#39;<sup>From&#39;,</sup> &#39;From Here to Eternity&#39;)) </li>
+<li>&lt;_sre.SRE_Match object; span=(0, 4), match=&#39;From&#39;&gt;</li>
+<li>&gt;&gt;&gt; print(re.search(&#39;<sup>From&#39;,</sup> &#39;Reciting From Memory&#39;))</li>
+<li>None</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>$</p>
+
+<p>匹配字符串的结束位置，每当遇到换行符也会离开进行匹配。</p>
+
+<p>&gt;&gt;&gt; print(re.search(&#39;}\(&#39;, &#39;{block}&#39;)) <br/>
+&lt;_sre.SRE_Match object; span=(6, 7), match=&#39;}&#39;&gt;<br/>
+\&gt;&gt;&gt; print(re.search(&#39;}\)&#39;, &#39;{block} &#39;))<br/>
+None<br/>
+&gt;&gt;&gt; print(re.search(&#39;}$&#39;, &#39;{block}\n&#39;)) <br/>
+&lt;_sre.SRE_Match object; span=(6, 7), match=&#39;}&#39;&gt;</p>
+
+<p>同样，我们使用 $ 来匹配 &#39;\(&#39; 字符本身；或者包含在一个字符类中，像这样 [\)]。</p>
+
+<p>\A</p>
+
+<p>只匹配字符串的起始位置。如果没有设置 MULTILINE 标志的时候，\A 和 ^ 的功能是一样的；但如果设置了 MULTILINE 标志，则会有一些不同：\A 还是匹配字符串的起始位置，但 ^ 会对字符串中的每一行都进行匹配。</p>
+
+<p>\Z</p>
+
+<p>只匹配字符串的结束位置。</p>
+
+<p>\b</p>
+
+<p>单词边界，这是一个只匹配单词的开始和结尾的零宽断言。“单词”定义为一个字母数字的序列，所以单词的结束指的是空格或者非字母数字的字符。</p>
+
+<p>下边例子中，class 只有在出现一个完整的单词 class 时才匹配；如果出现在别的单词中，并不会匹配。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;\bclass\b&#39;)</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;no class at all&#39;)) </li>
+<li>&lt;_sre.SRE_Match object; span=(3, 8), match=&#39;class&#39;&gt;</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;the declassified algorithm&#39;))</li>
+<li>None</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;one subclass is&#39;))</li>
+<li>None</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>在使用这些特殊的序列的时候，有两点是需要注意的：第一点需要注意的是，Python 的字符串跟正则表达式在有些字符上是有冲突的（回忆之前反斜杠的例子）。比如说在 Python 中，\b 表示的是退格符（ASCII 码值是 8）。所以，你如果不使用原始字符串，Python 会将 \b 转换成退格符处理，这样就肯定跟你的预期不一样了。</p>
+
+<p>下边的例子中，我们故意不写表示原始字符串的 &#39;r&#39;，结果确实大相庭径：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;\bclass\b&#39;)</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;no class at all&#39;))</li>
+<li>None</li>
+<li>&gt;&gt;&gt; print(p.search(&#39;\b&#39; + &#39;class&#39; + &#39;\b&#39;)) </li>
+<li>&lt;_sre.SRE_Match object; span=(0, 7), match=&#39;\x08class\x08&#39;&gt;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>第二点需要注意的是，在字符类中不能使用这个断言。跟 Python 一样，在字符类中，\b 只是用来表示退格符。</p>
+
+<p>\B</p>
+
+<p>另一个零宽断言，与 \b 的含义相反，\B 表示非单词边界的位置。</p>
+
+<p>分组</p>
+
+<p>通常在实际的应用过程中，我们除了需要知道一个正则表达式是否匹配之外，还需要更多的信息。对于比较复杂的内容，正则表达式通常使用分组的方式分别对不同内容进行匹配。</p>
+
+<p>下边的例子，我们将 RFC-822 头用“:”号分成名字和值分别匹配：</p>
+
+<ol>
+<li>From: <a href="mailto:author@example.com">author@example.com</a></li>
+<li>User-Agent: Thunderbird 1.5.0.9 (X11/20061227)</li>
+<li>MIME-Version: 1.0</li>
+<li>To: <a href="mailto:editor@example.com">editor@example.com</a></li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>像这种情况，我们就可以写一个正则表达式先来匹配一整个 RFC-822 头，然后利用分组功能，使用一个组来匹配头的名字，另一个组匹配名字对应的值。</p>
+
+<p><em>小甲鱼解释：RFC-822 是电子邮件的标准格式，当然看到这里你还不知道分组要怎么分，不急，请接着往下看......</em></p>
+
+<p>在正则表达式中，使用元字符 ( ) 来划分组。( ) 元字符跟数学表达式中的小括号含义差不多；它们将包含在内部的表达式组合在一起，所以你可以对一个组的内容使用重复操作的元字符，例如 *，+，? 或者 {m,n}。</p>
+
+<p>例如，(ab)* 会匹配零个或者多个 ab：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;(ab)*&#39;)</li>
+<li>&gt;&gt;&gt; print(p.match(&#39;ababababab&#39;).span())</li>
+<li>(0, 10)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>使用 ( ) 表示的子组我们还可以对它进行按层次索引，可以将索引值作为参数传递给这些方法：group()，start()，end() 和 span()。序号 0 表示第一个分组（这个是默认分组，一直存在的，所以不传入参数相当于默认值 0）：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;(a)b&#39;)</li>
+<li>&gt;&gt;&gt; m = p.match(&#39;ab&#39;)</li>
+<li>&gt;&gt;&gt; m.group()</li>
+<li>&#39;ab&#39;</li>
+<li>&gt;&gt;&gt; m.group(0)</li>
+<li>&#39;ab&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：有几对小括号就是分成了几个子组，例如 (a)(b) 和 (a(b)) 都是由两个子组构成的。</em></p>
+
+<p>子组的索引值是从左到右进行编号，子组也允许嵌套，因此我们可以通过从左往右来统计左括号 ( 来确定子组的序号。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;(a(b)c)d&#39;)</li>
+<li>&gt;&gt;&gt; m = p.match(&#39;abcd&#39;)</li>
+<li>&gt;&gt;&gt; m.group(0)</li>
+<li>&#39;abcd&#39;</li>
+<li>&gt;&gt;&gt; m.group(1)</li>
+<li>&#39;abc&#39;</li>
+<li>&gt;&gt;&gt; m.group(2)</li>
+<li>&#39;b&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>group() 方法可以一次传入多个子组的序号：</p>
+
+<ol>
+<li>&gt;&gt;&gt; m.group(2,1,2)</li>
+<li>(&#39;b&#39;, &#39;abc&#39;, &#39;b&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：start() 是获得参数子组的开始位置；end() 是获得对应子组的结束位置；span() 是获得对应子组的范围。</em></p>
+
+<p>我们还特么可以通过 groups() 方法一次性返回所有的子组匹配的字符串：</p>
+
+<ol>
+<li>&gt;&gt;&gt; m.groups()</li>
+<li>(&#39;abc&#39;, &#39;b&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>还有一个反向引用的概念需要介绍。反向引用指的是你可以在后面的位置使用先前匹配过的内容，用法是反斜杠加上数字。例如 \1 表示引用前边成功匹配的序号为 1 的子组。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;(\b\w+)\s+\1&#39;)</li>
+<li>&gt;&gt;&gt; p.search(&#39;Paris in the the spring&#39;).group()</li>
+<li>&#39;the the&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>如果只是搜索字符串，反向引用不会被用到，因为很少有文本格式会这样来重复字符。但是，你很快会发现，在字符串替换的时候，反向引用是非常有用的（深井冰）！</p>
+
+<p><em>小甲鱼注释：注意，在 Python 的字符串中会使用反斜杠加数字的方式来表示数字的值对应的 ASCII 字符，所以在使用反向索引的正则表达式中，我们依然强调要使用原始字符串。</em></p>
+
+<p>非捕获组和命名组</p>
+
+<p>精心设计的正则表达式可能会划分很多组，这些组不仅可以匹配相关的子串，还能够对正则表达式本身进行分组和结构化。在复杂的正则表达式中，由于有太多的组，因此通过组的序号来跟踪和使用会变得困难。有两个新的功能可以帮你解决这个问题——非捕获组和命名组——它们都使用了一个公共的正则表达式扩展语法。我们先来看看这个表达式扩展语法是什么。</p>
+
+<p>正则表达式的扩展语法</p>
+
+<p>众所周知，Perl 5 为标准的正则表达式增加了许多强大的功能。Perl 的开发者们并不能选择一个新的元字符或者通过反斜杠构造一个新的特殊序列来实现扩展的功能。因为这样会和标准的正则表达式发生冲突。比如你想选择 &amp; 作为扩展功能的元字符（在标准正则表达式中，&amp; 没有特殊意义），但这样的话，已经按照标准语法写出来的正则表达式就不得不修改，因为它们中包含的 &#39;&amp;&#39; 意愿上只是把它当做普通字符来匹配而已。</p>
+
+<p><em>小甲鱼解释：看起来很是头疼的兼容性问题，Perl 的开发者们是如何解决的呢？请接着看......</em></p>
+
+<p>最终，Perl 的开发者们决定使用 (?...) 作为扩展语法。问号 ? 紧跟在左小括号 ( 后边，本身是一个语法错误的写法，因为 ? 前边没有东西可以重复，所以这样就解决了兼容性的问题<em>（理由是语法正确的正则表达式肯定不会这么写嘛~）</em>。然后，紧跟在 ? 后边的字符则表示哪些扩展语法会被使用。例如 (?=foo) 表示一种新的扩展功能（前向断言），(?:foo) 则表示另一种扩展功能（一个包含子串 foo 的非捕获组）。</p>
+
+<p>Python 支持 Perl 的一些扩展语法，并且在此基础上还增加了一个扩展语法。如果紧跟在问号 ? 后边的是 P，那么可以肯定这是一个 Python 的扩展语法。</p>
+
+<p>好，既然我们已经知道了如何对正则表达式的标准语法进行扩展，那我们回来看看这些扩展语法在复杂的正则表达式中是如何应用的。</p>
+
+<p>非捕获组</p>
+
+<p>第一个我们要讲的是非捕获组。有时候你知识需要用一个组来表示部分正则表达式，你并不需要这个组去匹配任何东西，这时你可以通过非捕获组来明确表示你的意图。非捕获组的语法是 (?:...)，这个 ... 你可以替换为任何正则表达式。</p>
+
+<ol>
+<li>&gt;&gt;&gt; m = re.match(&quot;([abc])+&quot;, &quot;abc&quot;)</li>
+<li>&gt;&gt;&gt; m.groups()</li>
+<li>(&#39;c&#39;,)</li>
+<li>&gt;&gt;&gt; m = re.match(&quot;(?:[abc])+&quot;, &quot;abc&quot;)</li>
+<li>&gt;&gt;&gt; m.groups()</li>
+<li>()</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：“捕获”就是匹配的意思啦，普通的子组都是捕获组，因为它们能从字符串中匹配到数据。</em></p>
+
+<p>除了你不能从非捕获组获得匹配的内容之外，其他的非捕获组跟普通子组没有什么区别了。你可以在里边放任何东西，使用重复功能的元字符，或者跟其他子组进行嵌套（捕获的或者非捕获的子组都可以）。</p>
+
+<p>当你需要修改一个现有的模式的时候，(?:...) 是非常有用的。原始是添加一个非捕获组并不会影响到其他（捕获）组的序号。值得一提的是，在搜索的速度上，捕获组和非捕获组的速度是没有任何区别的。</p>
+
+<p>命名组</p>
+
+<p>我们再来看另外一个重要功能：命名组。普通子组我们使用序列来访问它们，命名组则可以使用一个有意义的名字来进行访问。</p>
+
+<p>命名组的语法是 Python 特有的扩展语法：(?P<name>)。很明显，&lt; &gt; 里边的 name 就是命名组的名字啦。命名组除了有一个名字标识之外，跟其他捕获组是一样的。</p>
+
+<p>匹配对象的所有方法不仅可以处理那些由数字引用的捕获组，还可以处理通过字符串引用的命名组。除了使用名字访问，命名组仍然可以使用数字序号进行访问：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;(?P<word>\b\w+\b)&#39;)</li>
+<li>&gt;&gt;&gt; m = p.search( &#39;(((( Lots of punctuation )))&#39; )</li>
+<li>&gt;&gt;&gt; m.group(&#39;word&#39;)</li>
+<li>&#39;Lots&#39;</li>
+<li>&gt;&gt;&gt; m.group(1)</li>
+<li>&#39;Lots&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>命名组非常好用，因为它让你可以使用一个好记的名字代替一些毫无意义的数字。下边是来自 imaplib 模块的例子：</p>
+
+<ol>
+<li>InternalDate = re.compile(r&#39;INTERNALDATE &quot;&#39;</li>
+<li>​     r&#39;(?P<day>[ 123][0-9])-(?P<mon>[A-Z][a-z][a-z])-&#39;</li>
+<li>​     r&#39;(?P<year>[0-9][0-9][0-9][0-9])&#39;</li>
+<li>​     r&#39; (?P<hour>[0-9][0-9]):(?P<min>[0-9][0-9]):(?P<sec>[0-9][0-9])&#39;</li>
+<li>​     r&#39; (?P<zonen>[-+])(?P<zoneh>[0-9][0-9])(?P<zonem>[0-9][0-9])&#39;</li>
+<li>​     r&#39;&quot;&#39;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>很明显，使用 m.group(&#39;zonem&#39;) 访问匹配内容要比使用数字 9 更简单明了。</p>
+
+<p>正则表达式中，反向引用的语法像 (...)\1 是使用序号的方式来访问子组；在命名组里，显然也是有对应的变体：使用名字来代替序号。其扩展语法是 (?P=name)，含义是该 name 指向的组需要在当前位置再次引用。那么搜索两个单词的正则表达式可以写成 (\b\w+)\s+\1，也可以写成 (?P<word>\b\w+)\s+(?P=word)：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;(?P<word>\b\w+)\s+(?P=word)&#39;)</li>
+<li>&gt;&gt;&gt; p.search(&#39;Paris in the the spring&#39;).group()</li>
+<li>&#39;the the&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>前向断言</p>
+
+<p>我们要讲解的另一个零宽断言是前向断言，前向断言可以分为前向肯定断言和前向否定断言两种形式。</p>
+
+<p>(?=...)</p>
+
+<p>前向肯定断言。如果当前包含的正则表达式（这里以 ... 表示）在当前位置成功匹配，则代表成功，否则失败。一旦该部分正则表达式被匹配引擎尝试过，就不会继续进行匹配了；剩下的模式在此断言开始的地方继续尝试。</p>
+
+<p>(?!...)</p>
+
+<p>前向否定断言。这跟前向肯定断言相反（不匹配则表示成功，匹配表示失败）。</p>
+
+<p>为了使大家更易懂，我们举个例子来证明这玩意是真的很有用。大家考虑一个简单的正则表达式模式，这个模式的作用是匹配一个文件名。我们都知道，文件名是用 . 将名字和扩展名分隔开的。例如在 fishc.txt 中，fishc 是文件的名字，.txt 是扩展名。</p>
+
+<p>这个正则表达式其实挺简单的：</p>
+
+<p>.<em>[.].</em>$</p>
+
+<p>注意，这里用于分隔的 . 是一个元字符，所以我们使用 [.] 剥夺了它的特殊功能。还有 \(，我们使用 \) 确保字符串剩余的部分都包含在扩展名中。所以这个正则表达式可以匹配 fishc.txt，foo.bar，autoexec.bat，sendmail.cf，printers.conf 等。</p>
+
+<p>现在我们来考虑一种复杂一点的情况，如果你想匹配扩展名不是 bat 的文件，你的正则表达式应该怎么写呢？<br/>
+我们先来看下你有可能写错的尝试：</p>
+
+<p>.<em>[.][<sup>b].</sup></em>$</p>
+
+<p>这里为了排除 bat，我们先尝试排除扩展名的第一个字符为非 b。但这是错误的开始，因为 foo.bar 后缀名的第一个字符也是 b。</p>
+
+<p>为了弥补刚刚的错误，我们试了这一招：</p>
+
+<p>.*<a href="%5B%5Eb%5D..%7C.%5B%5Ea%5D.%7C..%5B%5Et%5D">.</a>$</p>
+
+<p>我们不得不承认，这个正则表达式变得很难看......但这样第一个字符不是 b，第二个字符不是 a，第三个字符不是 t......这样正好可以接受 foo.bar，排除 autoexec.bat。但问题又来了，这样的正则表达式要求扩展名必须是三个字符，比如 sendmail.cf 就会被排除掉。</p>
+
+<p>好吧，我们接着修复问题：</p>
+
+<p>.*<a href="%5B%5Eb%5D.?.?%7C.%5B%5Ea%5D?.?%7C..?%5B%5Et%5D?">.</a>$</p>
+
+<p>在第三次尝试中，我们让第二个和第三个字符变成可选的。这样就可以匹配稍短的扩展名，比如 sendmail.cf。</p>
+
+<p>不得不承认，我们把事情搞砸了，现在的正则表达式变得艰涩难懂外加奇丑无比！！</p>
+
+<p>更惨的是如果需求改变了，例如你想同时排除 bat 和 exe 扩展名，这个正则表达式模式就变得更加复杂了......</p>
+
+<p>当当当当！主角登场，其实，一个前向否定断言就可以解决你的难题：</p>
+
+<p>.<em><a href="?!bat$">.</a>.</em>$</p>
+
+<p>我们来解释一下这个前向否定断言的含义：如果正则表达式 bat 在当前位置不匹配，尝试剩下的部分正则表达式；如果 bat 匹配成功，整个正则表达式将会失败（因为是前向否定断言嘛<sup>_<sup>）。(?!bat$)</sup></sup> 末尾的 $ 是为了确保可以正常匹配像 sample.batch 这种以 bat 开始的扩展名。</p>
+
+<p>同样，有了前向否定断言，要同时排除 bat 和 exe 扩展名，也变得相当容易：</p>
+
+<p>.<em><a href="?!bat$%7Cexe$">.</a>.</em>$</p>
+
+<p>修改字符串</p>
+
+<p>我们已经介绍完如何对字符进行搜索，接下来我们讲讲正则表达式如何修改字符串。</p>
+
+<p>正则表达式使用以下方法修改字符串：</p>
+
+<table>
+<thead>
+<tr>
+<th><strong>方法</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>split()</td>
+<td>在正则表达式匹配的地方进行分割，并返回一个列表</td>
+</tr>
+<tr>
+<td>sub()</td>
+<td>找到所有匹配的子字符串，并替换为新的内容</td>
+</tr>
+<tr>
+<td>subn()</td>
+<td>跟 sub() 干一样的勾当，但返回新的字符串以及替换的数目</td>
+</tr>
+</tbody>
+</table>
+
+<p>分割字符串</p>
+
+<p>正则表达式的 split() 方法将字符串在匹配的地方进行分割，并将分割后的结果作为列表返回。它的做法其实很像字符串的 split() 方法，但这个可以使用更加广泛的分隔符。你猜的没错，它同时提供了一个模块级别的函数：re.split()</p>
+
+<p><strong>.split(*string*[, *maxsplit=0*])</strong></p>
+
+<p>通过正则表达式匹配来分割字符串。如果在 RE 中，你使用了捕获组，那么它们的内容会作为一个列表返回。你可以通过传入一个 <em>maxsplit</em> 参数来设置分割的数量。如果 <em>maxsplit</em> 的值是非 0，表示至多有 <em>maxsplit</em> 个分割会被处理，剩下的内容作为列表的最后一个元素返回。</p>
+
+<p>下边例子中，分隔符是任何非字母数字字符：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;\W+&#39;)</li>
+<li>&gt;&gt;&gt; p.split(&#39;This is a test, short and sweet, of split().&#39;)</li>
+<li>[&#39;This&#39;, &#39;is&#39;, &#39;a&#39;, &#39;test&#39;, &#39;short&#39;, &#39;and&#39;, &#39;sweet&#39;, &#39;of&#39;, &#39;split&#39;, &#39;&#39;]</li>
+<li>&gt;&gt;&gt; p.split(&#39;This is a test, short and sweet, of split().&#39;, 3)</li>
+<li>[&#39;This&#39;, &#39;is&#39;, &#39;a&#39;, &#39;test, short and sweet, of split().&#39;]</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>有时候你可能不仅对分隔符之间的内容感兴趣，你可能对分隔符本身（就是正则表达式匹配的内容）也同样感兴趣。如果使用了捕获组，那么作为分隔符的值也会被返回：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;\W+&#39;)</li>
+<li>&gt;&gt;&gt; p2 = re.compile(r&#39;(\W+)&#39;)</li>
+<li>&gt;&gt;&gt; p.split(&#39;This... is a test.&#39;)</li>
+<li>[&#39;This&#39;, &#39;is&#39;, &#39;a&#39;, &#39;test&#39;, &#39;&#39;]</li>
+<li>&gt;&gt;&gt; p2.split(&#39;This... is a test.&#39;)</li>
+<li>[&#39;This&#39;, &#39;... &#39;, &#39;is&#39;, &#39; &#39;, &#39;a&#39;, &#39; &#39;, &#39;test&#39;, &#39;.&#39;, &#39;&#39;]</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>模块级别的函数 re.split() 除了将 RE 作为第一个参数外，其他参数是一样的：</p>
+
+<ol>
+<li>&gt;&gt;&gt; re.split(&#39;[\W]+&#39;, &#39;Words, words, words.&#39;)</li>
+<li>[&#39;Words&#39;, &#39;words&#39;, &#39;words&#39;, &#39;&#39;]</li>
+<li>&gt;&gt;&gt; re.split(&#39;([\W]+)&#39;, &#39;Words, words, words.&#39;)</li>
+<li>[&#39;Words&#39;, &#39;, &#39;, &#39;words&#39;, &#39;, &#39;, &#39;words&#39;, &#39;.&#39;, &#39;&#39;]</li>
+<li>&gt;&gt;&gt; re.split(&#39;[\W]+&#39;, &#39;Words, words, words.&#39;, 1)</li>
+<li>[&#39;Words&#39;, &#39;words, words.&#39;]</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>搜索和替换</p>
+
+<p>另一个常见的任务就是找到所有的匹配部分，并替换成不同的字符串。sub 方法可以帮你实现这个愿望！sub 方法有一个 <em>replacement</em> 参数，它可以是一个待替换的字符串，或者一个处理字符串的函数。</p>
+
+<p><strong>.sub(*replacement*, *string*[, *count=0*])</strong></p>
+
+<p>返回一个字符串，这个字符串从最左边开始，所有 RE 匹配的地方都替换成 <em>replacement</em>。如果没有找到任何匹配，那么返回原字符串。</p>
+
+<p>可选参数 <em>count</em> 指定最多替换的次数，必须是一个非负值。默认值是 0，意思是替换所有找到的匹配。</p>
+
+<p>下边是使用 sub() 方法的例子，它会将所有的颜色替换成 color：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile( &#39;(blue|white|red)&#39;)</li>
+<li>&gt;&gt;&gt; p.sub( &#39;colour&#39;, &#39;blue socks and red shoes&#39;)</li>
+<li>&#39;colour socks and colour shoes&#39;</li>
+<li>&gt;&gt;&gt; p.sub( &#39;colour&#39;, &#39;blue socks and red shoes&#39;, count=1)</li>
+<li>&#39;colour socks and red shoes&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>subn() 方法跟 sub() 方法干同样的勾当，但区别是返回值为一个包含有两个元素的元组：一个是替换后的字符串，一个是替换的数目。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile( &#39;(blue|white|red)&#39;)</li>
+<li>&gt;&gt;&gt; p.subn( &#39;colour&#39;, &#39;blue socks and red shoes&#39;)</li>
+<li>(&#39;colour socks and colour shoes&#39;, 2)</li>
+<li>&gt;&gt;&gt; p.subn( &#39;colour&#39;, &#39;no colours at all&#39;)</li>
+<li>(&#39;no colours at all&#39;, 0)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>空匹配只有在它们没有紧挨着前一个匹配时才会被替换掉：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;x*&#39;)</li>
+<li>&gt;&gt;&gt; p.sub(&#39;-&#39;, &#39;abxd&#39;)</li>
+<li>&#39;-a-b-d-&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>如果 <em>replacement</em> 参数是一个字符串，那么里边的反斜杠都会被处理。比如 \n 将会被转换成一个换行符，\r 转换成回车，等等。未知的转义如 \j 保持原样。逆向引用如 \6，则被 RE 中相应的捕获组匹配的内容所替换。这使你可以在替换后的字符串中插入一部分原字符串。</p>
+
+<p>下边例子中，将匹配被 { 和 } 括起来的单词 section，并将 section 替换成 subsection：</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;section{ ( [<sup>}]*</sup> ) }&#39;, re.VERBOSE)</li>
+<li>&gt;&gt;&gt; p.sub(r&#39;subsection{\1}&#39;,&#39;section{First} section{second}&#39;)</li>
+<li>&#39;subsection{First} subsection{second}&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p><em>小甲鱼解释：1. 大家还记得吗？这里开启了 re.VERBOSE，空格将被忽略。因为这里一堆符号，用空格隔开看着才不会乱糟糟的......2. 这里</em> <em>r&#39;subsection{\1}&#39; 使用 \1 引用匹配模式中的 ([<sup>}]*)</sup> 匹配的字符串内容。</em></p>
+
+<p>还可以使用 Python 的扩展语法 (?P<name>...) 指定命名组，引用命名组的语法是 \g<name>。\g<name> 会将名字为 name 的组匹配的字符串替换进去。另外，\g&lt;数字&gt; 是通过组的序号进行引用。\g<2>其实就相当于 \2，但我们更提倡使用 \g<2>，因为这样可以避免歧义。例如，\g<2>0 的含义是引用序号为 2 的组，然后后边匹配一个字符 &#39;0&#39;，而你写成 \20 就会被认为是引用序号为 20 的组了。</p>
+
+<ol>
+<li>&gt;&gt;&gt; p = re.compile(&#39;section{ (?P<name> [<sup>}]*</sup> ) }&#39;, re.VERBOSE)</li>
+<li>&gt;&gt;&gt; p.sub(r&#39;subsection{\1}&#39;,&#39;section{First}&#39;)</li>
+<li>&#39;subsection{First}&#39;</li>
+<li>&gt;&gt;&gt; p.sub(r&#39;subsection{\g<1>}&#39;,&#39;section{First}&#39;)</li>
+<li>&#39;subsection{First}&#39;</li>
+<li>&gt;&gt;&gt; p.sub(r&#39;subsection{\g<name>}&#39;,&#39;section{First}&#39;)</li>
+<li>&#39;subsection{First}&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>有时候你可能不满足简单的字符串替换，你可能需要在替换的过程中动点“手脚”......没关系，一样可以满足你！<em>replacement</em> 参数还可以是一个函数，该函数将会在正则表达式模式每次不重复匹配的时候被调用。在每次调用时，函数会收到一个匹配对象的参数，因此你就可以利用这个对象去计算出新的字符串并返回它。</p>
+
+<p>下边的例子中，替换函数将十进制数替换为十六进制数：</p>
+
+<ol>
+<li>&gt;&gt;&gt; def hexrepl(match):</li>
+<li>...   &quot;Return the hex string for a decimal number&quot;</li>
+<li>...   value = int(match.group())</li>
+<li>...   return hex(value)</li>
+<li>...</li>
+<li>&gt;&gt;&gt; p = re.compile(r&#39;\d+&#39;)</li>
+<li>&gt;&gt;&gt; p.sub(hexrepl, &#39;Call 65490 for printing, 49152 for user code.&#39;)</li>
+<li>&#39;Call 0xffd2 for printing, 0xc000 for user code.&#39;</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>当使用模块级的 re.sub() 函数时，正则表达式模式作为第一个参数。该模式可以是一个字符串或一个编译好的对象。如果你需要指定正则表达式标志，那么你必须使用后者；或者使用模式内嵌修正器，例如 sub(&quot;(?i)b+&quot;, &quot;x&quot;, &quot;bbbb BBBB&quot;) 返回 &#39;x x&#39;。</p>
+
+<p>常见问题</p>
+
+<p>正则表达式是一个非常强大的工具，但在有些时候它并不能直观地按照你的意愿来运行。本篇我们将指出一些最常见的错误。</p>
+
+<p>使用字符串方法</p>
+
+<p>有时使用 re 模块是个错误！如果你匹配一个固定的字符串或者单个字符类，并且你没有使用 re 的任何标志（像 IGNORECASE 标志），那么就没有必要使用正则表达式了。字符串有一些方法是对固定字符串进行操作的，并且它们通常比较快。因为它们都是独立优化的 C 语言小循环，目的是在简单的情况下代替功能更加强大、更具通用性的正则表达式引擎。</p>
+
+<p>举个例子，例如你想把字符串中所有的 dead 替换成 word，你会想到使用正则表达式的 re.sub() 方法来实现，但这么简单的替换，还是考虑直接使用字符串的 replace() 方法吧。但有一点你需要注意，就是 replace() 会在单词里边进行替换，像 swordfish 会变成 sdeedfish，这显然不是你想要的！replace() 没办法识别单词的边界，因此你才来考虑使用正则表达式。只需要将 RE 的模式写成 \bword\b 即可胜任此任务。</p>
+
+<p>另一个常见的情况是从一个字符串中删除单个字符或者用另一个字符替代它。你也许会想到用 re.sub(&#39;\n&#39;, &#39; &#39;, S) 这样的正则表达式来实现，但其实字符的 translate() 方法完全能够胜任这个任务，并且比任何正则表达式操作起来更快些。<br/>
+简而言之，在使用 re 模块之前，先考虑一下你的问题是否可以用更快速、简单的字符串自带方法来解决。</p>
+
+<p>match() VS search()</p>
+
+<p>match() 函数只会检查 RE 是否在字符串的开始处匹配，而 search() 会遍历整个字符串搜索匹配的内容。记住这一区别很重要。再次强调一下，match() 只会报告一次成功的匹配，并且匹配的位置必须是从字符串的第一个字符开始：</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.match(&#39;super&#39;, &#39;superstition&#39;).span())</li>
+<li>(0, 5)</li>
+<li>&gt;&gt;&gt; print(re.match(&#39;super&#39;, &#39;insuperable&#39;))</li>
+<li>None</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>另一方面，search() 函数将遍历整个字符串，并报告它找到的第一个匹配：</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.search(&#39;super&#39;, &#39;superstition&#39;).span())</li>
+<li>(0, 5)</li>
+<li>&gt;&gt;&gt; print(re.search(&#39;super&#39;, &#39;insuperable&#39;).span())</li>
+<li>(2, 7)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>有时候你可能会耍点小聪明，使用 re.match() 然后在 RE 的前边加上 .*。但尽量不要这么做，最好采用 re.search() 代替。正则表达式编译器会对 REs 做一些分析，以便可以在搜索匹配时提高速度。一般分析会先找到匹配的第一个字符是什么。举个例子，模式 Crow 必须从字符 &#39;C&#39; 开始匹配，那么匹配引擎分析后会快速遍历字符串，然后在 &#39;C&#39; 被找到之后才开始全部匹配。</p>
+
+<p>按照上面的分析，你添加一个 .* 会导致这个优化失败，这就需要从头到尾扫描一遍，然后再回溯匹配 RE 剩余的部分。所以，请使用 re.search() 代替。</p>
+
+<p>贪婪 VS 非贪婪</p>
+
+<p>当重复一个正则表达式时，如果使用 a*，那么结果是尽可能多地去匹配。当你尝试匹配一对对称的定界符，例如 HTML 标志中的尖括号，默认的贪婪模式会使得你很困扰。</p>
+
+<p>我们来看下例子：</p>
+
+<ol>
+<li>&gt;&gt;&gt; s = &#39;<html><head><title>Title</title>&#39;</li>
+<li>&gt;&gt;&gt; len(s)</li>
+<li>32</li>
+<li>&gt;&gt;&gt; print(re.match(&#39;&lt;.*&gt;&#39;, s).span())</li>
+<li>(0, 32)</li>
+<li>&gt;&gt;&gt; print(re.match(&#39;&lt;.*&gt;&#39;, s).group())</li>
+<li><html><head><title>Title</title></li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>RE 匹配在 <html> 的 &lt; 后，.* 消耗掉字符串的剩余部分。由于正则表达式默认是贪婪的原因，RE 必须从字符串的尾部一个字符一个字符地回溯，直到找到匹配的 &gt;。大家看到，按照这种方法，最后找到匹配内容竟是 <html> 的 &lt; 开始，到 </title> 的 &gt; 结束。显然这不是你想要的结果。</p>
+
+<p>在这种情况下，解决方案是使用非贪婪的限定符 *?、+?、?? 或 {m,n}?，尽可能地匹配小的文本。</p>
+
+<ol>
+<li>&gt;&gt;&gt; print(re.match(&#39;&lt;.*?&gt;&#39;, s).group())</li>
+<li><html></li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>在上边的例子中，&gt; 在第一个 &lt; 被匹配后立刻尝试匹配，如果失败，匹配引擎前进一步，尝试下一个字符，直到第一次匹配 &gt;，这样就得到了我们想要的结果。</p>
+
+<p>注意，使用正则表达式分析 HTML 和 XML 是很痛苦的。当你编写一个正则表达式去处理所有可能的情况时，你会发现 HTML 和 XML 总会打破你的“规则”，这让你很头疼......像这样的话，建议使用 HTML 和 XML 解析器来处理更合适。</p>
+
+<p>使用 re.VERBOSE</p>
+
+<p>现在你应该意识到了，正则表达式的表示非常紧凑。这也带来了一个问题，就是不好阅读。中等复杂的正则表达式可能包含许多反斜杠、圆括号和元字符，以至于难以读懂。</p>
+
+<p>在这些 REs 中，当编译正则表达式时指定 re.VERBOSE 标志是非常有帮助的。因为它允许你可以编辑正则表达式的格式，使之更清楚。</p>
+
+<p>re.VERBOSE 标志有几个作用。在正则表达式中不在字符类中的空白字符将被忽略。这就意味着像 I love FishC 这样的表达式和可读性较差的 IloveFishC 相同。但 [a b] 将匹配字符 &#39;a&#39;、&#39;b&#39; 或 &#39; &#39;；另外，你也可以把注释放到 RE 中，注释是从 # 开始到下一行。当使用三引号字符串时，会使得 REs 的格式更整洁：</p>
+
+<ol>
+<li>pat = re.compile(r&quot;&quot;&quot;</li>
+<li>\s*                   # Skip leading whitespace</li>
+<li>(?P<header>[<sup>:]+)</sup>  # Header name</li>
+<li>\s* :                  # Whitespace, and a colon</li>
+<li>(?P<value>.*?)      # The header&#39;s value -- *? used to</li>
+<li>​                      # lose the following trailing whitespace</li>
+<li>\s*$                  # Trailing whitespace to end-of-line</li>
+<li>&quot;&quot;&quot;, re.VERBOSE)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>同样的内容，下边这个要难读得多：</p>
+
+<ol>
+<li>pat = re.compile(r&quot;\s<em>(?P<header>[<sup>:]+)\s</sup></em>:(?P<value>.<em>?)\s</em>$&quot;)</li>
+</ol>
+
+<p><em>复制代码</em></p>
+
+<p>&lt;完&gt;</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="16177587144466.html" 
+          title="Previous Post: Python 操作OS、Json（内含技巧） 模块">&laquo; Python 操作OS、Json（内含技巧） 模块</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15998025631155.html" 
+          title="Next Post: Python之platform模块">Python之platform模块 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1></h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="16177589969532.html">**用好VSCode这13款插件和8个快捷键**</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144586.html">[Chrome浏览器F12开发者工具简单使用]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025629001.html">[Pycharm 常用快捷键]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144704.html">[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>

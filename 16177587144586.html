@@ -1,0 +1,765 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  [Chrome浏览器F12开发者工具简单使用] - 
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; </span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>[Chrome浏览器F12开发者工具简单使用]</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2021/04/07</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">1.如何调出开发者工具</h2>
+
+<ul>
+<li>按F12调出</li>
+<li>右键检查（或快捷键Ctrl+Shift+i）调出 </li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000830.png" alt="img"/></p>
+
+<h2 id="toc_1">2.开发者工具初步介绍</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000841.png" alt="img"/></p>
+
+<p>chrome开发者工具最常用的四个功能模块：元素（ELements）、控制台（Console）、源代码（Sources），网络（Network）。</p>
+
+<ul>
+<li>元素（Elements）：用于查看或修改HTML元素的属性、CSS属性、监听事件、断点等。css可以即时修改，即时显示。大大方便了开发者调试页面</li>
+<li>控制台（Console）：控制台一般用于执行一次性代码，查看JavaScript对象，查看调试日志信息或异常信息。还可以当作Javascript API查看用。例如我想查看console都有哪些方法和属性，我可以直接在Console中输入&quot;console&quot;并执行~</li>
+<li>源代码（Sources）：该页面用于查看页面的HTML文件源代码、JavaScript源代码、CSS源代码，此外最重要的是可以调试JavaScript源代码，可以给JS代码添加断点等。</li>
+<li>网络（Network）：网络页面主要用于查看header等与网络连接相关的信息。</li>
+</ul>
+
+<h3 id="toc_2">2.1元素（Elements）</h3>
+
+<ul>
+<li><p>查看元素的代码：点击左上角的箭头图标（或按快捷键Ctrl+Shift+C）进入选择元素模式，然后从页面中选择需要查看的元素，然后可以在开发者工具元素（Elements）一栏中定位到该元素源代码的具体位置</p></li>
+<li><p>查看元素的属性：定位到元素的源代码之后，可以从源代码中读出改元素的属性。如下图中的class、src、width等属性的值。</p></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000850.png" alt="img"/></p>
+
+<ul>
+<li>当然从源代码中读到的只是一部分显式声明的属性，要查看该元素的所有属性，可以在右边的侧栏中查看：</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000905.png" alt="img"/></p>
+
+<ul>
+<li>修改元素的代码与属性：点击元素，然查看右键菜单，可以看到chrome提供的可对元素进行的操作：包括编辑元素代码（Edit as HTML）、修改属性（Add attribute、Edit attribute）等。选择Edit as HTML选项时，元素进入编辑模式，可以对元素的代码进行任意的修改。当然，这个修改也仅对当前的页面渲染生效，不会修改服务器的源代码，故而这个功能也是作为调试页面效果而使用。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000915.png" alt="img"/></p>
+
+<ul>
+<li>查看元素的CSS属性：在元素的右边栏中的styles页面可以查看该元素的CSS属性，这个页面展示该元素原始定义的CSS属性以及从父级元素继承的CSS属性。从这个页面还可以查到该元素的某个CSS特性来自于那个CSS文件，使编码调试时修改代码变得非常方便。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000920.png" alt="img"/></p>
+
+<ul>
+<li>在Styles页旁边，有一个Computed页面，这个页面展示该元素经过计算之后的所有CSS属性，即最后浏览器渲染页面时使用的属性。属性的计算由浏览器自动进行，是浏览器渲染页面的一个必不可少的过程。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000942.png" alt="img"/></p>
+
+<ul>
+<li><p>修改元素的CSS属性：在元素的Styles页面，可以对元素的CSS属性进行修改，甚至删除原有、添加新属性。不过，这些修改，仅对当前浏览器的页面展示生效，不会修改CSS源代码。所以在这里进行CSS属性的修改一般用来调整和完善元素的渲染效果。 </p></li>
+<li><p>给元素添加断点：在元素的右键菜单中选择断点选项（Break on…），选中之后，当元素被修改（通常是被JS代码修改）时，页面加载会暂停，然后可以查看该元素的属性。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000951.png" alt="img"/></p></li>
+<li><p>元素断点添加之后，可以在右侧栏的DOM Breakpoints页面中看到，这个页面可以看到当前网页的所有元素断点。</p></li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120000958.png" alt="img"/></p>
+
+<ul>
+<li>查看元素的监听事件：元素的右边栏的Event Listener页面，可以查看到该元素的所有监听事件。在开发中，尤其是维护其他人的代码时，会出现不了解元素对应的监听事件，这个时候，可以在这个页面中找到。这个页面不仅能看到对应的事件函数，还可以定位该函数所在的JS文件以及在该文件中的具体位置（行数），大大提高开发维护的效率。 </li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001004.png" alt="img"/></p>
+
+<h2 id="toc_3">3. 控制台（Console）</h2>
+
+<ul>
+<li><p>查看JS对象的及其属性： <br/>
+<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001012.png" alt="img"/></p></li>
+<li><p>执行JS语句： <br/>
+<img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001017.png" alt="img"/></p></li>
+<li><p>查看控制台日志：当网页的JS代码中使用了console.log()函数时，该函数输出的日志信息会在控制台中显示。日志信息一般在开发调试时启用，而当正式上线后，一般会将该函数去掉</p></li>
+</ul>
+
+<h2 id="toc_4">4. 源代码（Source）</h2>
+
+<ul>
+<li>查看文件：在源代码（Source）页面可以查看到当前网页的所有源文件。在左侧栏中可以看到源文件以树结构进行展示。 <img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001023.png" alt="img"/></li>
+<li>添加断点：在源代码左边有行号，点击对应行的行号，就好给改行添加上一个断点（再次点击可删除断点）。右键点击断点，在弹出的菜单中选择Edit breakpoint可以给该断的添加中断条件。</li>
+</ul>
+
+<p>​     <img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001030.png" alt="img"/></p>
+
+<ul>
+<li><p>中断调试：添加断点后，当JS代码运行到断点时会中断（对于添加了中断条件的断点在符合条件时中断），此时可以将光标放在变量上查看变量的</p></li>
+<li><p>也可以在右边的侧栏上查看： </p></li>
+</ul>
+
+<p>​    <img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001036.png" alt="img"/></p>
+
+<ul>
+<li>在右侧变量上方，有继续运行、单步跳过等按钮，可以在当前断点后，逐行运行代码，或者直接让其继续运行。</li>
+</ul>
+
+<p>​     <em><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001049.png" alt="img"/></em></p>
+
+<h2 id="toc_5">5.Network详细介绍</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001054.png" alt="img"/></p>
+
+<p>那我就按照从左到右的顺序来写啦~</p>
+
+<ul>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001404.png" alt="img"/>：记录按钮 处于打开状态时会在此面板进行网络连接的信息记录，关闭后则不会记录。</li>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001358.png" alt="img"/>：清除按钮 清除当前的网络连接记录信息。（点击一下就能清空）</li>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001354.png" alt="img"/>：捕获截屏 记录页面加载过程中一些时间点的页面渲染情况，截图根据可视窗口截取，如下图所示。</li>
+</ul>
+
+<p><em><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001059.png" alt="img"/></em></p>
+
+<ul>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001345.png" alt="img"/>：过滤器 能够自定义筛选条件，找到自己想要资源信息，如下图所示。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001103.png" alt="img"/></p>
+
+<p>也可以是一些指定条件<br/>
+指定条件有哪些？</p>
+
+<p>domain：资源所在的域，即url中的域名部分。如 domain:api.github.com</p>
+
+<p>has-response-header：资源是否存在响应头，无论其值是什么。如 has-response-header：Access-Control-Allow-Origin</p>
+
+<p>is：当前时间点在执行的请求。当前可用值：running</p>
+
+<p>larger-than：显示大于指定值大小规格的资源。单位是字节(B),但是K(kB)和M(MB)也是可以的~ 如larger-than:150K</p>
+
+<p>method：使用何种HTTP请求方式。如 GET</p>
+
+<p>mime-type：也写作content-type，是资源类型的标识符。如 text/html</p>
+
+<p>scheme：协议规定。如 HTTPS</p>
+
+<p>set-cookie-name：服务器设置的cookies名称</p>
+
+<p>set-cookie-value：服务器设置的cookies的值</p>
+
+<p>set-cookie-domain：服务器设置的cookies的域</p>
+
+<p>status-code：HTTP响应头的状态码</p>
+
+<ul>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001303.png" alt="img"/>：显示详细信息</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001109.png" alt="img"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001114.png" alt="img"/></p>
+
+<ul>
+<li><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001326.png" alt="img"/>：显示时间流</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001120.png" alt="img"/></p>
+
+<p>能够根据时间，查看对应时间下 浏览器请求的资源信息</p>
+
+<ul>
+<li><p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001150.png" alt="img"/>：是否保留日志 </p>
+<p>当选择保留日志，重新加载url当前界面时，之前请求显示的资源信息，会保留下来，不会清空的哟~</p></li>
+<li><p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001136.png" alt="img"/>：是否进行缓存</p>
+<p>当打开开发者工具时生效，打开这个开关，则页面资源不会存入缓存，可以从Status栏的状态码看文件请求状态。</p></li>
+<li><p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001143.png" alt="img"/>：<strong>设置模拟限速，如下图所示。</strong></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001128.png" alt="img"/></p>
+<p>设置限速可以模拟处于各种网络环境下的不同用户访问本页面的情况。</p></li>
+</ul>
+
+<h2 id="toc_6">6.Network主题内容介绍</h2>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001157.png" alt="img"/></p>
+
+<p>下列介绍中，前者为名词解释，后者为举例</p>
+
+<ul>
+<li><p>Name/Pat：资源名称以及URL路径 （main.css）</p></li>
+<li><p>Method：Http请求方法 (GET或者POST)</p></li>
+<li><p>status/Text：Http状态码/文字解释 （200，ok）</p></li>
+<li><p>Type ：请求资源的MIME类型，MIME是Multipurpose Internet Mail Extensions (html,css,js等)</p></li>
+<li><p>Initiator：解释请求是怎么发起的，有四种可能的值</p>
+<pre class="line-numbers"><code class="language-text">     1.Parser  ：请求是由页面的html解析时发送
+     2.Redirect：请求是由页面重定向发送<br/>
+     3.script  ：请求是由script脚本处理发送<br/>
+     4.other   ：请求是由其他过程发送的，比如页面里的Link链接点击
+</code></pre></li>
+<li><p>size/content：size是响应头部和响应体结合的大小，content是请求解码后的大小</p></li>
+</ul>
+
+<h2 id="toc_7">7.请求文件具体说明</h2>
+
+<p>点击某个具体请求后的界面，如下图所示：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001203.png" alt="img"/></p>
+
+<p>一共分为四个模块：</p>
+
+<ul>
+<li>Headers</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001207.png" alt="img"/></p>
+
+<p>Header面板列出资源的请求url、HTTP方法、响应状态码、请求头和响应头及它们各自的值、请求参数等等</p>
+
+<ul>
+<li>Preview：预览面板，用于资源的预览。</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001211.png" alt="img"/></p>
+
+<ul>
+<li>Response：响应信息面板包含资源还未进行格式处理的内容</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001215.png" alt="img"/></p>
+
+<ul>
+<li>Timing：资源请求的详细信息花费时间</li>
+</ul>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001220.png" alt="img"/></p>
+
+<h2 id="toc_8">8.细节补充</h2>
+
+<p>对某请求右键，出现页面如下图所示。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/img/20210120001225.png" alt="img"/></p>
+
+<ul>
+<li><p>Copy Request Headers：复制HTTP请求头到系统剪贴板</p></li>
+<li><p>Copy Response Headers：复制HTTP响应头到系统剪贴板</p></li>
+<li><p>Copy Response：复制HTTP响应内容到系统剪贴板</p></li>
+<li><p>Copy as<br/>
+cURL：将网络请求作为一个curl的命令字符复制到系统剪贴板(curl是一种开源的命令行工具和库，用于配合url语法进行数据传输)</p></li>
+<li><p>Copy All as HAR：将网络请求记录信息以HAR格式复制到系统剪贴板(what is HAR file)</p></li>
+<li><p>Save as HAR with Content：将资源的所有的网络信息保存到HAR文件中(.har文件)</p></li>
+<li><p>Clear Browser Cache：清除浏览器缓存</p></li>
+<li><p>Clear Browser Cookies：清除浏览器cookies</p></li>
+<li><p>Open in Sources Panel：当前选中资源在Sources面板打开</p></li>
+<li><p>Open Link in New Tab：在新tab打开资源链接</p></li>
+<li><p>Copy Link Address：复制资源url到系统剪贴板</p></li>
+</ul>
+
+<p>若将所有的网络信息保存到HAR文件中，点击<a href="https://ericduran.github.io/chromeHAR/">这里</a>，可上传查看</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15998025628955.html" 
+          title="Previous Post: 1000行MySQL学习笔记">&laquo; 1000行MySQL学习笔记</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15998025629001.html" 
+          title="Next Post: [Pycharm 常用快捷键]">[Pycharm 常用快捷键] &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1></h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="16177589969532.html">**用好VSCode这13款插件和8个快捷键**</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144586.html">[Chrome浏览器F12开发者工具简单使用]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025629001.html">[Pycharm 常用快捷键]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144704.html">[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,704 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Surge 把你的 Mac 变成最强路由器 - 
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; </span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Surge 把你的 Mac 变成最强路由器</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2021/01/25</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>2021-01-16 290 words  2 minutes </p>
+
+<p>CONTENTS</p>
+
+<p>最近一两年我用过很多路由器：斐讯 n1、NanoPi r2s、NanoPi r4s、华硕 ax86u 等等都是蛮热门的产品。但在我前俩天买了用了 Mac 的 Surge 当作家里的路由器后，方便和体验真的是回不去了。</p>
+
+<p>关于 surge 4 的教程特别是 DHCP 当做路由器，我看网上的资料教程实在是很少，自己查也废了不少功夫，就写个教程做个视频分享给大家。温馨提示：<strong>首先你得有台放在家里，最好接着网线的 Mac 系统电脑；还有就是你要花几百块买 Surge 这个软件。</strong></p>
+
+<p>Surge 是一个很强大的网络工具，不仅仅是一个代理软件；目前 Surge 是版本买断制度的，你可以直接在<a href="https://nssurge.com/buy_now">官网购买</a>，然后就能一直使用 Surge 4 这个大的版本了。</p>
+
+<h2 id="toc_0">Surge DHCP 接管网络</h2>
+
+<h3 id="toc_1">1 添加 Surge 的配置文件</h3>
+
+<p>你订阅的服务应该会给 Surge 的<strong>订阅链接</strong>，如果没有也没关系，你可以通过第三方 <a href="https://bianyuan.xyz/">订阅转换</a> 生成（推荐用这个，分流会丰富合理很多）：</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211324-20210125161246169.png" alt="https://oss.qust.me/img/20210116211324.png"/></p>
+
+<ol>
+<li> 订阅链接填上你的 v2ray、ss 、trojan 的订阅</li>
+<li> 客户端选择 surge 4</li>
+<li> 选择生成订阅链接就好了</li>
+</ol>
+
+<p>打开 surge 设置中的<strong>配置</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211500.png" alt="https://oss.qust.me/img/20210116211500.png"/></p>
+
+<p>选择从 url 安装配置</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211555.png" alt="https://oss.qust.me/img/20210116211555.png"/></p>
+
+<p>粘贴上你的配置文件订阅地址后选择完成</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211622.png" alt="https://oss.qust.me/img/20210116211622.png"/></p>
+
+<p>选中刚才添加的点击 <strong>应用</strong></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211641.png" alt="https://oss.qust.me/img/20210116211641.png"/></p>
+
+<p>在策略里选择 <strong>规则判定</strong>，这时候你应该就能愉快的上网了。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211714.png" alt="https://oss.qust.me/img/20210116211714.png"/></p>
+
+<p>如果不行可以重新退出打开下 surge，并检查是否打开了 <strong>设置为系统代理</strong> 和 <strong>增强模式</strong>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116211730.png" alt="https://oss.qust.me/img/20210116211730.png"/></p>
+
+<h3 id="toc_2">2 配置 Surge DHCP 接管网络</h3>
+
+<h4 id="toc_3">设置电脑 IP 为静态IP</h4>
+
+<p>打开 <strong>系统偏好设置-网络</strong>，选择以太网（也就是网线接口），配置 IPv4 选择 <strong>使用 DHCP（手动设定地址）</strong>，我的路由器是 192.168.88.1 所以 IP 地址我就填 192.168.88.2，只用修改最后一位在 2-225 之间就行。（如果你的路由器是 192.168.31.1 你的 IP 地址就可以填 192.168.31.2，以此类推）随后选择 <strong>应用</strong>。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116212721.png" alt="https://oss.qust.me/img/20210116212721.png"/></p>
+
+<h4 id="toc_4">关闭路由器 DHCP</h4>
+
+<p>一般都在 <strong>内部网络-DHCP服务器</strong> 选项里，关闭启用 DHCP， 保存并应用。（各家系统的设置位置可能有差别，但基本都是有 DHCP 开关选项的）</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116212428.png" alt="https://oss.qust.me/img/20210116212428.png"/></p>
+
+<h4 id="toc_5">打开 Surge DHCP 选项</h4>
+
+<p>在左侧 <strong>设备</strong> 里，点开后有 <strong>DHCP 服务器</strong> 开关，点开后请认真看下内容，然后选择下一步。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116221722.png" alt="https://oss.qust.me/img/20210116221722.png"/></p>
+
+<p>网络设备和你上面设置固定的 IP 的一致，插网线的选择 <strong>Ethernet</strong> 就行，继续下一步。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116212820.png" alt="https://oss.qust.me/img/20210116212820.png"/></p>
+
+<p>Surge 会检测当前网络环境是否有 DHCP 设置，如果上面你正确关闭了 路由器 DHCP 这里应该能直接过去。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116213020.png" alt="https://oss.qust.me/img/20210116213020.png"/></p>
+
+<p>选择 Surge 默认的设置点击<strong>完成</strong>即可，如果你懂的可以自行修改。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116213337.png" alt="https://oss.qust.me/img/20210116213337.png"/></p>
+
+<p>把你其它设备<strong>重新连接 wifi 或者关闭路由器 wifi 再打开</strong>即可看到 设备里新增设备。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116213153.png" alt="https://oss.qust.me/img/20210116213153.png"/></p>
+
+<p>如果你想你连接的设备通过 Surge 走代理服务，你可以右键选择设备名然后选择 <strong>使用 Surge 作为网关</strong>，再<strong>设备重新连接或者关闭路由器 wifi 再打开</strong>即可。</p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116213225.png" alt="https://oss.qust.me/img/20210116213225.png"/></p>
+
+<h2 id="toc_6">Surge DHCP 使用模块</h2>
+
+<p>我只购买了 Mac 版的 Surge，但我想我的手机也能实现除了能用代理外，也能使用 微博去广告、Netflix 有评分、看 tiktok 不用拔掉 sim 卡。如果你也想使用 Module 的功能可以继续往下看，这部分可能稍微有点麻烦。</p>
+
+<h4 id="toc_7">Mac 创建证书</h4>
+
+<ol>
+<li><p>打开 <strong>钥匙串访问 app</strong>（Keychain Access.app）</p></li>
+<li><p>选择菜单项 钥匙串访问 （Keychain Access） -&gt; 证书助理 （Certificate Assistant） -&gt; 创建证书颁发机构 Create Certificate Authority…</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116221318.png" alt="https://oss.qust.me/img/20210116221318.png"/></p></li>
+<li><p>证书参数（名字邮箱随意填写）点击创建即可，记下倒出的位置，后面要用到。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116222932.png" alt="https://oss.qust.me/img/20210116222932.png"/></p></li>
+<li><p>证书创建后，在左侧选择 <strong>我的证书</strong> （My Certificates），然后在右侧列表中找到该证书，右键点击证书，选择导出，<strong>导出格式选择为 .p12 格式，导出时需要设置 密码 （passphrase），不可设置为空。若不可选择 p12 格式，请确认先切换到我的证书 （My Certificates） 后再进行导出。</strong></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223054.png" alt="https://oss.qust.me/img/20210116223054.png"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223108.png" alt="https://oss.qust.me/img/20210116223108.png"/></p></li>
+<li><p>将证书复制到左侧 Keychains 列表中的 System 中 粘贴 （不做该步骤会使得 Safari 不认该 CA，不过 Chrome 可以正常工作）输入刚才添加的密码完成。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223550.png" alt="https://oss.qust.me/img/20210116223550.png"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223604.png" alt="https://oss.qust.me/img/20210116223604.png"/></p></li>
+<li><p>双击证书，将该证书标记为可信，关闭窗口输入登录密码确认操作。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116223630.png" alt="https://oss.qust.me/img/20210116223630.png"/></p></li>
+<li><p>将得到的 Certificates.p12 文件用在 terminal 中进行 base64 编码，得到结果会用到。</p>
+<table>
+<thead>
+<tr>
+<th><code>1</code></th>
+<th><code>base64 SurgeModule.p12</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224319.png" alt="https://oss.qust.me/img/20210116224319.png"/></p></li>
+<li><p>编辑 Surge 的配置文件（设置-配置-在 Finder 中找到配置；然后用文本编辑器打开），加入 MITM 段。ca-passphrase = 填写你之前的密码，ca-p12 = 填写你刚 base64 出来的结果。</p>
+<table>
+<thead>
+<tr>
+<th><code>1 2 3 4 5 6</code></th>
+<th><code>[MITM] enable = true tcp-connection = true hostname = *facebook.com, *pinboard.in ca-passphrase = 123456 ca-p12 = MIIJtQIBAzCCCXwGCSqGSIb3DQ…..</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224523.png" alt="https://oss.qust.me/img/20210116224523.png"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224533.png" alt="https://oss.qust.me/img/20210116224533.png"/></p></li>
+<li><p>打开再文件里右键刚才编辑好的文件选 Surge 打开，选择覆盖，便会使用新的配置文件。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224637.png" alt="https://oss.qust.me/img/20210116224637.png"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224646.png" alt="https://oss.qust.me/img/20210116224646.png"/></p></li>
+<li><p>在 <strong>解密</strong> 中打开 HTTPS 解密开关。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116224919.png" alt="https://oss.qust.me/img/20210116224919.png"/></p></li>
+</ol>
+
+<h4 id="toc_8">发送证书到手机安装</h4>
+
+<ol>
+<li><p>在 Surge <strong>解密</strong> 中选择为 iOS 模拟器倒出证书</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116225450.png" alt="https://oss.qust.me/img/20210116225450.png"/></p></li>
+<li><p>发送证书到手机（airdrop 或者别的方式发到手机上）。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116231352.png" alt="https://oss.qust.me/img/20210116231352.png"/></p></li>
+<li><p>在手机打开描述文件，设置里选择已下载的描述文件-安装描述文件-选择同意输入密码即可。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116225607.PNG" alt="https://oss.qust.me/img/20210116225607.PNG"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116231010.PNG" alt="https://oss.qust.me/img/20210116231010.PNG"/></p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116231016.PNG" alt="https://oss.qust.me/img/20210116231016.PNG"/></p></li>
+<li><p>最后在 <strong>设置</strong>-<strong>通用</strong>-<strong>关于手机</strong> 打开对证书的信任。</p>
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116231307.PNG" alt="https://oss.qust.me/img/20210116231307.PNG"/></p></li>
+</ol>
+
+<h4 id="toc_9">Surge 安装打开模块</h4>
+
+<p>在<strong>设置</strong>中打开<strong>模块</strong>选择<strong>从 URL 安装模块</strong>，安装这个模块选择开启后应用即可。</p>
+
+<p><a href="https://raw.githubusercontent.com/pengchujin/SurgeMacModule/main/modules.sgmodule">https://raw.githubusercontent.com/pengchujin/SurgeMacModule/main/modules.sgmodule</a></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116232936.png" alt="https://oss.qust.me/img/20210116232936.png"/></p>
+
+<p><img src="https://picbed001.oss-cn-shanghai.aliyuncs.com/uPic/20210116234315.png" alt="https://oss.qust.me/img/20210116234315.png"/></p>
+
+<p>更多模块功能可以看看这里（上面是我做了一个合并的，免拔卡看 tiktok、Netflix 评分、微博去广告 等等）</p>
+
+<ul>
+<li>  <a href="https://github.com/lhie1/Rules/tree/master/Surge/Surge%203/Module">https://github.com/lhie1/Rules/tree/master/Surge/Surge%203/Module</a></li>
+<li>  <a href="https://github.com/Tartarus2014/Surge-Script">https://github.com/Tartarus2014/Surge-Script</a></li>
+<li>  <a href="https://github.com/nzw9314/Surge/tree/master/Module">https://github.com/nzw9314/Surge/tree/master/Module</a></li>
+</ul>
+
+<p>也可以看看这个 module 使用教程：<a href="https://merlinblog.xyz/wiki/surge-module.html">https://merlinblog.xyz/wiki/surge-module.html</a></p>
+
+<h2 id="toc_10">总结</h2>
+
+<p>如果有有问题可以看看 surge 开发者详细的文章：<a href="https://blankwonder.medium.com">https://blankwonder.medium.com</a></p>
+
+<p>surge 官方功能手册：<a href="https://manual.nssurge.com/book/understanding-surge/cn/">https://manual.nssurge.com/book/understanding-surge/cn/</a></p>
+
+<p>如果对这篇教程有疑问也可以发邮件给我 <a href="mailto:pengchujin@hotmail.com">pengchujin@hotmail.com</a></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="16177589969377.html" 
+          title="Previous Post: SSH 用法">&laquo; SSH 用法</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15998025628906.html" 
+          title="Next Post: TCP/IP 解释">TCP/IP 解释 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1></h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="16177589969532.html">**用好VSCode这13款插件和8个快捷键**</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144586.html">[Chrome浏览器F12开发者工具简单使用]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025629001.html">[Pycharm 常用快捷键]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144704.html">[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>

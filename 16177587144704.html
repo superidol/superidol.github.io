@@ -1,0 +1,690 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  [如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）] - 
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; </span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2021/04/07</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>减少/缩小逻辑卷是数据损坏的最高风险。</p>
+
+<p>所以，如果可能的话，尽量避免这种情况，但如果没有其他选择的话，那就继续。</p>
+
+<p>缩减 LVM 之前，建议先做一个备份。</p>
+
+<p>当你在 LVM 中的磁盘空间耗尽时，你可以通过缩小现有的没有使用全部空间的 LVM，而不是增加一个新的物理磁盘，在卷组上腾出一些空闲空间。</p>
+
+<p><strong>需要注意的是：</strong> 在 GFS2 或者 XFS 文件系统上不支持缩小。</p>
+
+<p>如果你是逻辑卷管理 （LVM） 的新手，我建议你从我们之前的文章开始学习。</p>
+
+<ul>
+<li><strong>第一部分：[如何在 Linux 中创建/配置 LVM（逻辑卷管理）]</strong></li>
+<li><strong>第二部分：[如何在 Linux 中扩展/增加 LVM（逻辑卷调整）]</strong></li>
+</ul>
+
+<p><img src="G:%5CSynologyCloud%5CMy%20MarkDown%5Cimages%5C210610kikq1xynfje7hjaa.jpeg" alt="210610kikq1xynfje7hjaa.jpeg"/></p>
+
+<p>减少逻辑卷涉及以下步骤：</p>
+
+<ul>
+<li>卸载文件系统</li>
+<li>检查文件系统是否有任何错误</li>
+<li>缩小文件系统的大小</li>
+<li>缩小逻辑卷的大小</li>
+<li>重新检查文件系统是否存在错误（可选）</li>
+<li>挂载文件系统</li>
+<li>检查减少后的文件系统大小</li>
+</ul>
+
+<p><strong>比如：</strong> 你有一个 <strong>100GB</strong> 的没有使用全部空间的 LVM，你想把它减少到 <strong>80GB</strong>，这样 <strong>20GB</strong> 可以用于其他用途。</p>
+
+<pre class="line-numbers"><code class="language-text"># df -h /testlvm1
+ 
+
+ 
+Filesystem              Size Used Avail Use% Mounted on
+ 
+/dev/mapper/vg01-lv002  100G 15G  85G   12%  /testlvm1
+ 
+</code></pre>
+
+<h3 id="toc_0">卸载文件系统</h3>
+
+<p>使用 <code>umount</code> 命令卸载文件系统：</p>
+
+<pre class="line-numbers"><code class="language-text"># umount /testlvm1
+ 
+</code></pre>
+
+<h3 id="toc_1">检查文件系统是否有任何错误</h3>
+
+<p>使用 <code>e2fsck</code> 命令检查文件系统是否有错误：</p>
+
+<pre class="line-numbers"><code class="language-text"># e2fsck -f /dev/mapper/vg01-lv002
+ 
+
+ 
+e2fsck 1.42.9 (28-Dec-2013)
+ 
+Pass 1: Checking inodes, blocks, and sizes
+ 
+Pass 2: Checking directory structure
+ 
+Pass 3: Checking directory connectivity
+ 
+Pass 4: Checking reference counts
+ 
+Pass 5: Checking group summary information
+ 
+/dev/mapper/vg01-lv002: 13/6553600 files (0.0% non-contiguous), 12231854/26212352 blocks
+ 
+</code></pre>
+
+<h3 id="toc_2">缩小文件系统</h3>
+
+<p>下面的命令将把 <code>testlvm1</code> 文件系统从 <strong>100GB</strong> 缩小到 <strong>80GB</strong>。</p>
+
+<p><strong>文件系统大小调整的常用语法（<code>resize2fs</code>）</strong>：</p>
+
+<pre class="line-numbers"><code class="language-text">resize2fs [现有逻辑卷名] [新的文件系统大小]
+ 
+</code></pre>
+
+<p>实际命令如下：</p>
+
+<pre class="line-numbers"><code class="language-text"># resize2fs /dev/mapper/vg01-lv002 80G
+ 
+
+ 
+resize2fs 1.42.9 (28-Dec-2013)
+ 
+Resizing the filesystem on /dev/mapper/vg01-lv002 to 28321400 (4k) blocks.
+ 
+The filesystem on /dev/mapper/vg01-lv002 is now 28321400 blocks long.
+ 
+</code></pre>
+
+<h3 id="toc_3">减少逻辑卷 （LVM） 容量</h3>
+
+<p>现在使用 <code>lvreduce</code> 命令缩小逻辑卷（LVM） 的大小。通过下面的命令， <code>/dev/mapper/vg01-lv002</code> 将把逻辑卷 （LVM） 从 100GB 缩小到 80GB。</p>
+
+<p><strong>LVM 缩减 （<code>lvreduce</code>） 的常用语法</strong>：</p>
+
+<pre class="line-numbers"><code class="language-text">lvreduce [新的 LVM 大小] [现有逻辑卷名称]
+ 
+</code></pre>
+
+<p>实际命令如下：</p>
+
+<pre class="line-numbers"><code class="language-text"># lvreduce -L 80G /dev/mapper/vg01-lv002
+ 
+
+ 
+WARNING: Reducing active logical volume to 80.00 GiB
+ 
+THIS MAY DESTROY YOUR DATA (filesystem etc.)
+ 
+Do you really want to reduce lv002? [y/n]: y
+ 
+Reducing logical volume lv002 to 80.00 GiB
+ 
+Logical volume lv002 successfully resized
+ 
+</code></pre>
+
+<h3 id="toc_4">可选：检查文件系统是否有错误</h3>
+
+<p>缩减 LVM 后再次检查文件系统是否有错误：</p>
+
+<pre class="line-numbers"><code class="language-text"># e2fsck -f /dev/mapper/vg01-lv002
+ 
+
+ 
+e2fsck 1.42.9 (28-Dec-2013)
+ 
+Pass 1: Checking inodes, blocks, and sizes
+ 
+Pass 2: Checking directory structure
+ 
+Pass 3: Checking directory connectivity
+ 
+Pass 4: Checking reference counts
+ 
+Pass 5: Checking group summary information
+ 
+/dev/mapper/vg01-lv002: 13/4853600 files (0.0% non-contiguous), 1023185/2021235 blocks
+ 
+</code></pre>
+
+<h3 id="toc_5">挂载文件系统并检查缩小后的大小</h3>
+
+<p>最后挂载文件系统，并检查缩小后的文件系统大小。</p>
+
+<p>使用 <code>mount</code> 命令[挂载逻辑卷]：</p>
+
+<pre class="line-numbers"><code class="language-text"># mount /testlvm1
+ 
+</code></pre>
+
+<p>使用 [df 命令]检查挂载的卷。</p>
+
+<pre class="line-numbers"><code class="language-text"># df -h /testlvm1
+ 
+
+ 
+Filesystem              Size Used Avail Use% Mounted on
+ 
+/dev/mapper/vg01-lv002  80G  15G  65G   18%  /testlvm1
+ 
+</code></pre>
+
+<hr/>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15998025629001.html" 
+          title="Previous Post: [Pycharm 常用快捷键]">&laquo; [Pycharm 常用快捷键]</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15998025628475.html" 
+          title="Next Post: Anaconda + VSCode 最详细教程">Anaconda + VSCode 最详细教程 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1></h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="16177589969532.html">**用好VSCode这13款插件和8个快捷键**</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144586.html">[Chrome浏览器F12开发者工具简单使用]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025629001.html">[Pycharm 常用快捷键]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144704.html">[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>

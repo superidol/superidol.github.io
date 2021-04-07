@@ -1,0 +1,923 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  PyQuery常用用法总结 - 
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; </span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>PyQuery常用用法总结</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2021/04/07</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p><strong>什么是PyQuery</strong></p>
+
+<p>PyQuery是一个类似于jQuery的解析网页工具，使用lxml操作xml和html文档，它的语法和jQuery很像。和XPATH，Beautiful Soup比起来，PyQuery更加灵活，提供增加节点的class信息，移除某个节点，提取文本信息等功能。</p>
+
+<p><strong>初始化PyQuery对象</strong></p>
+
+<p>html文档的所有操作都需要PyQuery对象来完成，初始化PyQuery对象主要有三种方式，分别是通过网址、字符串和文件名创建。</p>
+
+<p><strong>方式一：通过网址初始化PyQyery对象</strong><br/>
+先看一段代码：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+s = &#39;&lt;html&gt;&lt;title&gt;PyQuery用法总结&lt;title&gt;&lt;/html&gt;&#39;
+doc = pq(s)
+print(doc(&#39;title&#39;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;title&gt;PyQuery用法总结&lt;/title&gt;
+</code></pre>
+
+<p>首先要import PyQuery类，然后将字符串传递给PyQuery类，这样就生成了一个PyQuery对象，通过该对象就可以访问字符串中的title节点。<br/>
+PyQuery还会将残缺的html文档补全。看下面的代码：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+s = &#39;&lt;html&gt;&lt;title&gt;PyQuery用法总结&lt;/title&gt;&#39;
+doc = pq(s)
+print(doc(&#39;html&#39;))
+</code></pre>
+
+<p>运行的结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;html&gt;&lt;head&gt;&lt;title&gt;PyQuery用法总结&lt;/title&gt;&lt;/head&gt;&lt;/html&gt;
+</code></pre>
+
+<p>可以我们的字符串的html节点是没有闭合的，并且缺少head节点。初始化PyQuery对象之后，会把html文档补全，并且自动加上head节点。</p>
+
+<p><strong>方式二：URL网址初始化PyQyery对象</strong><br/>
+将要解析的URL网址当做参数传递给PyQuery类：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+
+url = &#39;http://www.bigdata17.com&#39;
+doc = pq(url=url,encoding=&#39;utf-8&#39;)
+print(doc(&#39;title&#39;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;title&gt;Home - Summer哥的自留地&lt;/title&gt;
+</code></pre>
+
+<p><strong>方式三：通过文件初始化PyQyery对象</strong><br/>
+这个方式也比较常用，很多时候我们会将网站爬取下来然后保存在本地磁盘：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+
+doc = pq(filename=&#39;test_pyquery.html&#39;,encoding=&#39;utf-8&#39;)
+print(doc(&#39;title&#39;))
+</code></pre>
+
+<p><strong>访问节点属性：</strong><br/>
+使用attr()方法访问节点的属性:</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+li = pq(&#39;&lt;li id=&quot;test1&quot; class=&quot;test1&quot;&gt;&lt;/li&gt;&lt;li id=&quot;test2&quot; class=&quot;test2&quot;&gt;&lt;/li&gt;&#39;)(&#39;li&#39;)
+print(li.attr(&quot;id&quot;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">test1
+</code></pre>
+
+<p>上面的代码中有两个id不同的li节点，但是attr()方法只取第一个li节点的id属性值，而不取第二个，我们把上面的代码修改下，把第一个li节点的id属性去掉，attr方法是否只取第一个复合条件节点的属性值：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+li = pq(&#39;&lt;li class=&quot;test1&quot;&gt;&lt;/li&gt;&lt;li id=&quot;test2&quot; class=&quot;test2&quot;&gt;&lt;/li&gt;&#39;)(&#39;li&#39;)
+print(li.attr(&quot;id&quot;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">None
+</code></pre>
+
+<p>第一个li节点没有id属性，因此返回结果为None，所以可见，attr()方法返回的是第一个节点的属性值。</p>
+
+<p>那要取多个li节点的属性值，要怎么做呢？这就要结合items()方法来实现。items()方法是返回的节点的生成器<code>generator object PyQuery.items</code>：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+li = pq(&#39;&lt;li id=&quot;test1&quot; class=&quot;test1&quot;&gt;&lt;/li&gt;&lt;li id=&quot;test2&quot; class=&quot;test2&quot;&gt;&lt;/li&gt;&#39;)(&#39;li&#39;)
+print(li.items())
+for item in li.items():
+    print(item.attr(&quot;id&quot;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;generator object PyQuery.items at 0x0000027F26082728&gt;
+test1
+test2
+</code></pre>
+
+<p><strong>动态添加节点属性</strong><br/>
+PyQuery有很多方法动态添加节点的属性，我们挑选几个比较常用的方法介绍个大伙。<br/>
+<strong>addClass()</strong>,动态添加节点class属性：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+html = &#39;&lt;li id=&quot;test1&quot; class=&quot;test1&quot;&gt;&lt;/li&gt;&#39;
+li = pq(html)(&#39;li&#39;)
+li.addClass(&quot;addClass&quot;)
+print(li)
+</code></pre>
+
+<p>运行结果：<br/>
+<code>&lt;li id=&quot;test1&quot; class=&quot;test1 addClass&quot;/&gt;</code><br/>
+可见li节点的calss属性值有test1变为test1 addclass。</p>
+
+<p>addClass()方法只能动态添加节点class属性的值，能不能动态添加其他属性呢？答案是当然可以，attr()方法就可以实现：</p>
+
+<pre class="line-numbers"><code class="language-text">
+ 
+
+
+from pyquery import PyQuery as pq
+html = &#39;&lt;li id=&quot;test1&quot; class=&quot;test1&quot;&gt;&lt;/li&gt;&#39;
+li = pq(html)(&#39;li&#39;)
+li.attr(&quot;name&quot;,&quot;li name&quot;)
+print(li)
+li.attr(&quot;type&quot;,&quot;li&quot;)
+print(li)
+print(li.attr(&quot;type&quot;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;li id=&quot;test1&quot; class=&quot;test1&quot; name=&quot;li name&quot;/&gt;
+&lt;li id=&quot;test1&quot; class=&quot;test1&quot; name=&quot;li name&quot; type=&quot;li&quot;/&gt;
+li
+</code></pre>
+
+<p>上面的代码一共执行了3次attr()方法，执行第一次attr()方法时，有两个参数，分别是name和li name。这是给li节点添加name属性及属性值。执行第二次attr()方法也有两个参数，分别是type和li，这是给li几点添加type属性及type属性值。执行第三次方法attr()方法只有一个type参数，根据前面介绍的attr()方法的用法可知，是获取li节点type属性的值。</p>
+
+<p><strong>小结：</strong> attr()方法只有一个参数时，是获取节点的属性值，有两个参数时，是给节点添加属性及属性值，第一个参数时属性，第二个参数时属性值。</p>
+
+<p>removeClass(),动态移除节点的class属性：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+html = &#39;&lt;li id=&quot;test1&quot; class=&quot;test1&quot;&gt;&lt;/li&gt;&#39;
+li = pq(html)(&#39;li&#39;)
+li.removeClass(&quot;test1&quot;)
+print(li)
+</code></pre>
+
+<p>运行结果：<br/>
+<code>&lt;li id=&quot;test1&quot; class=&quot;&quot;/&gt;</code><br/>
+将class节点的属性值有test1变为“”。</p>
+
+<p><strong>动态添加/修改文本值</strong><br/>
+PyQuery支持动态给节点添加文本值：</p>
+
+<pre class="line-numbers"><code class="language-text">
+ 
+
+
+from pyquery import PyQuery as pq
+html = &#39;&lt;li id=&quot;test1&quot; class=&quot;test1&quot;&gt;&lt;/li&gt;&#39;
+li = pq(html)(&#39;li&#39;)
+li.html(&quot;use html() dynamic add text&quot;)
+print(li)
+li.text(&quot;use text() dynamic add text&quot;)
+print(li)
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;li id=&quot;test1&quot; class=&quot;test1&quot;&gt;use html() dynamic add text&lt;/li&gt;
+&lt;li id=&quot;test1&quot; class=&quot;test1&quot;&gt;use text() dynamic add text&lt;/li&gt;
+</code></pre>
+
+<p>可见使用html()和text()方法都可以动态的给节点添加或修改节点的文本值。</p>
+
+<p><strong>获取节点文本值</strong><br/>
+PyQuery提供text()和html()方法获取节点的文本属性值：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+html = &#39;&lt;li id = &quot;test_id&quot;&gt;li text value&lt;/li&gt;&#39;
+li = pq(html)(&#39;li&#39;)
+print(li.text())
+print(li.html())
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">li text value
+li text value
+</code></pre>
+
+<p><strong>小结：</strong> html()和text()如果没参数，则是获取属性的文本值，如果有参数，则是改变或者添加节点的属性值。</p>
+
+<p><strong>移除节点：</strong><br/>
+remove()方法可以动态移除节点：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+html = 
+&lt;ul&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;/li&gt;
+&lt;/ul&gt;
+
+ul = pq(html)(&#39;ul&#39;)
+print(ul.text())
+print(&#39;执行remove()移除节点&#39;)
+ul.find(&#39;li&#39;).remove()
+print(ul.text())
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">hello I am ul tag
+hello I am li tag
+执行remove()移除节点
+hello I am ul tag
+</code></pre>
+
+<p>上述代码的ul节点中有个li节点，执行ul.text()方法会返回包括li节点的文本信息，如果我们不想返回li节点的文本信息，仅仅只需要ul节点的文本信息“hell I am ul tag”，要怎么做呢？这时候remove()方法就派上用场了，它删除掉ul节点内的li节点。</p>
+
+<p><strong>查找节点</strong><br/>
+PyQuery支持使用css的.和#来查找节点：</p>
+
+<pre class="line-numbers"><code class="language-text">from pyquery import PyQuery as pq
+html = 
+&lt;div class=&quot;div_tag&quot;&gt;
+&lt;ul id = &quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+doc = pq(html)
+print(doc(&#39;.div_tag #ul_tag li&#39;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;li&gt;hello I am li tag&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+</code></pre>
+
+<p>上述代码是通过.div_tag获取class为div_tag的节点，然后通过#ul_tag获取id为ul_tag的节点，最后返回所有的li节点。</p>
+
+<p>find()方法查找节点：</p>
+
+<pre class="line-numbers"><code class="language-text">html = 
+&lt;div class=&quot;div_tag&quot;&gt;
+&lt;ul id = &quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+doc = pq(html)
+print(doc(&#39;.div_tag #ul_tag&#39;).find(&quot;li&quot;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+</code></pre>
+
+<p>可见find(“li”)是把所有li节点及子节点都查找出来。</p>
+
+<p>还有一个children()方法，是获取当前节点的所有子节点。该方法可以传入css选择器：children(’.ul_tag’)。</p>
+
+<pre class="line-numbers"><code class="language-text">html = 
+&lt;div class=&quot;div_tag&quot;&gt;
+&lt;ul id = &quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+doc = pq(html)
+print(doc(&#39;.div_tag #ul_tag&#39;).find(&quot;li&quot;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+</code></pre>
+
+<p>使用parent()方法获取当前节点的父亲节点：</p>
+
+<pre class="line-numbers"><code class="language-text">html = 
+&lt;div class=&quot;div_tag&quot;&gt;
+&lt;ul id = &quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+doc = pq(html)
+print(doc(&#39;.div_tag #ul_tag li&#39;).parent())
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;ul id=&quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>上述代码通过.div_tag #ul_tag li css选择器定位到li节点，然后调用parent()方法获取li节点的父节点ul。</p>
+
+<p>parents()返回当前节点的所有祖宗节点：</p>
+
+<pre class="line-numbers"><code class="language-text">html = 
+&lt;div class=&quot;div_tag&quot;&gt;
+&lt;ul id = &quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+doc = pq(html)
+print(doc(&#39;.div_tag #ul_tag li&#39;).parents())
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;html&gt;&lt;body&gt;&lt;div class=&quot;div_tag&quot;&gt;
+&lt;ul id=&quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;&lt;body&gt;&lt;div class=&quot;div_tag&quot;&gt;
+&lt;ul id=&quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;div class=&quot;div_tag&quot;&gt;
+&lt;ul id=&quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;ul id=&quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;hello I am li tag too&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>上面代码返回li节点的所有祖宗节点：html，body,div,ul。</p>
+
+<p>siblings()方法返回当前节点的兄弟节点：</p>
+
+<pre class="line-numbers"><code class="language-text">html = 
+&lt;div class=&quot;div_tag&quot;&gt;
+&lt;ul id = &quot;ul_tag&quot;&gt;
+hello I am ul tag
+&lt;li class=&quot;li_class1&quot;&gt;hello I am li tag&lt;a&gt;www.bigdata17.com&lt;/li&gt;
+&lt;li class=&quot;li_class2&quot;&gt;hello I am li tag too&lt;/li&gt;
+&lt;li class=&quot;li_class3&quot;&gt;hello I am the third li tag&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+doc = pq(html)
+print(doc(&#39;.div_tag #ul_tag .li_class1&#39;).siblings())
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;li class=&quot;li_class2&quot;&gt;hello I am li tag too&lt;/li&gt;
+&lt;li class=&quot;li_class3&quot;&gt;hello I am the third li tag&lt;/li&gt;
+</code></pre>
+
+<p>使用.div_tag #ul_tag .li_class1 CSS节点选择器获取到class为liclassq1的li节点，就是第一个li节点，然后调用siblings()方法获取到子节点，分别是<br/>
+第二和第三个li节点。</p>
+
+<p>sibligs()还支持传入css选择器筛选符合条件的li节点：</p>
+
+<pre class="line-numbers"><code class="language-text">print(doc(&#39;.div_tag #ul_tag .li_class1&#39;).siblings(&#39;.li_class3&#39;))
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre class="line-numbers"><code class="language-text">&lt;li class=&quot;li_class3&quot;&gt;hello I am the third li tag&lt;/li&gt;
+</code></pre>
+
+<p>总结：本文讲述了如何使用PyQuery获取网页节点，节点的文本信息，改变节点属性，删除节点属性，增加节点属性等知识点。</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15998025631194.html" 
+          title="Previous Post: Pycharm的调试功能">&laquo; Pycharm的调试功能</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="16177587144466.html" 
+          title="Next Post: Python 操作OS、Json（内含技巧） 模块">Python 操作OS、Json（内含技巧） 模块 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1></h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="16177589969532.html">**用好VSCode这13款插件和8个快捷键**</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025628955.html">1000行MySQL学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144586.html">[Chrome浏览器F12开发者工具简单使用]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15998025629001.html">[Pycharm 常用快捷键]</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16177587144704.html">[如何在 Linux 中减少/缩小 LVM 大小（逻辑卷调整）]</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>
